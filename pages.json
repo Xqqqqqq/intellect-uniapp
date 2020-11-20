@@ -17,6 +17,12 @@
 				"navigationBarTitleText": "发现更多"
 			}
         }
+		,{
+		    "path" : "pages/discover/discoverDetail",
+		    "style" : {
+				"navigationBarTitleText": "文章详情"
+			}
+		}
         ,{
             "path" : "pages/mine/mine",
             "style" : {
@@ -38,6 +44,36 @@
             "path" : "pages/myData/longestSeries",
             "style" : {
 				"navigationBarTitleText": "最长连续"
+			}
+        }
+        ,{
+            "path" : "pages/myData/login",
+            "style" : {
+				"navigationBarTitleText": ""
+			}
+        }
+        ,{
+            "path" : "pages/train/search",
+            "style" : {
+				"navigationBarTitleText": "搜索"
+			}
+        }
+        ,{
+            "path" : "pages/train/searchResult",
+            "style" : {
+				"navigationBarTitleText": "搜索结果"
+			}
+        }
+        ,{
+            "path" : "pages/train/imageMemory/imageMemory",
+            "style" : {
+				"navigationBarTitleText": "图像记忆术"
+			}
+        }
+        ,{
+            "path" : "pages/train/imageMemory/numImgCard",
+            "style" : {
+				"navigationBarTitleText": "数字图像卡片训练"
 			}
         }
     ],
@@ -77,7 +113,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "超能训练数据",
-		"navigationBarBackgroundColor": "#007aff",
+		"navigationBarBackgroundColor": "#4b95e6",
 		"backgroundColor": "#FFFFFF"
 	}
 }

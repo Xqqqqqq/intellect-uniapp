@@ -99,6 +99,7 @@ page{
 			box-sizing: border-box;
 			display: flex;
 			position: relative;
+			box-shadow:0px 2px 10px 0px rgba(108,143,197,0.14);
 			.content-box-left{
 				width: 180rpx;
 				height: 180rpx;
