@@ -73,13 +73,25 @@
         ,{
             "path" : "pages/train/imageMemory/numImgCard",
             "style" : {
-				"navigationBarTitleText": "数字图像卡片训练"
+				"navigationBarTitleText": "数字图像关联训练"
+			}
+        }
+        ,{
+            "path" : "pages/train/imageMemory/numImgTest",
+            "style" : {
+				"navigationBarTitleText": "数字图像通关考试"
+			}
+        }
+        ,{
+            "path" : "pages/train/imageMemory/numImgPair",
+            "style" : {
+				"navigationBarTitleText": "通关考试"
 			}
         }
     ],
 	"tabBar": {
 		"color": "#8F9091",
-		"selectedColor": "#007aff",
+		"selectedColor": "#4b95e6",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"fontSize": "10px",

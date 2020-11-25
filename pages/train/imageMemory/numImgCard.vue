@@ -116,14 +116,13 @@
 			let vm = this
 			uni.getSystemInfo({
 			    success: function (res) {
-			        // console.log(res.windowHeight);
 					let obj = uni.createSelectorQuery().select('.img-card-btn')
-					obj.boundingClientRect(function (data) { // data - 各种参数
+					obj.boundingClientRect(function (data) {
 						let objSelect = uni.createSelectorQuery().select('.select-box')
-						objSelect.boundingClientRect(function (response) { // data - 各种参数
-							console.log('windowHeight',res.windowHeight)	
-							console.log('data.height',data.height)	
-							console.log('response.height',response.height)	
+						objSelect.boundingClientRect(function (response) {
+							// console.log('windowHeight',res.windowHeight)	
+							// console.log('data.height',data.height)	
+							// console.log('response.height',response.height)	
 							vm.swiperHeight = (res.windowHeight - data.height - response.height-20) *2
 							vm.cloneHeight = data.height *2
 						}).exec()
