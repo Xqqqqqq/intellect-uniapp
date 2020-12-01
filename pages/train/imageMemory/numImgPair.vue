@@ -12,13 +12,15 @@
 		</view>
 		<view class="img-pair-box">
 			<view class="pair-box-left">
-				<view class="box-left-li box-left-li-click"
+				<view class="box-left-li" :class="{'box-left-li-click':clickedLeftList.includes(item.id)}"
 				v-for="(item,index) in leftList" :key="index" @click="clickLeft(item, index)">{{item.num}}</view>
 			</view>
 			<view class="pair-box-right">
 				<view class="box-right-li"
-				v-for="(item,index) in rightList" :key="index">
+				v-for="(item,index) in rightList" :key="index"
+				@click="clickRight(item, index)">
 					<image :src="item.img"></image>
+					<view class="box-right-li-num" v-if="item.leftnum">{{item.leftnum}}</view>
 				</view>
 			</view>
 		</view>
@@ -30,7 +32,7 @@
 	export default {
 		data() {
 			return {
-				resendTime: 25,// 倒计时秒数
+				resendTime: 60,// 倒计时秒数
 				leftList:[{
 					id:1,
 					num:1
@@ -68,7 +70,12 @@
 				},{
 					id:7,
 					img:'../../../static/img/icons/watch.png'
-				},]
+				},],
+				leftInfo:{
+					leftid: '',
+					leftnum: '',
+				}, // 左侧选中数据
+				clickedLeftList: []
 			};
 		},
 		onShow(){
@@ -82,8 +89,28 @@
 		},
 		methods:{
 			clickLeft(item, index){
-				console.log(item)
-				console.log(index)
+				if(this.leftInfo.leftid == ''){
+					//流程：先点击左侧数字，然后选择右侧对应图片，再选择数字，再选择右侧对应图片
+					// 不可以先全部选择完左侧数字再去选择右侧图片，即数字必须一一对应图片
+					this.leftInfo = {
+						leftid: item.id,
+						leftnum: item.num
+					}
+					const newIndex = this.clickedLeftList.indexOf(item.id)
+					this.clickedLeftList.includes(item.id) ? this.clickedLeftList.splice(newIndex, 1) : this.clickedLeftList.push(item.id)
+				}else{
+					console.log(this.leftInfo)
+					console.log('请选择右侧对应图片！')
+				}
+			},
+			clickRight(item, index){
+				// console.log(this.leftInfo, item)
+				this.rightList[index] = {...this.leftInfo, ...item}
+				this.leftInfo = {
+					leftid: '',
+					leftnum: ''
+				}
+				// console.log(this.rightList)
 			}
 		}
 	}
@@ -182,18 +209,30 @@ page{
 		.pair-box-right{
 			width: 60%;
 			overflow: hidden;
-			// display: flex;
-			// flex-wrap: wrap;
-			// flex-direction: row;
 			.box-right-li{
 				width: 200rpx;
 				height: 200rpx;
 				border: 1px solid #D3D3D3;
 				background-color: #FFFFFF;
 				float: left;
+				position: relative;
 				image{
 					width: 100%;
 					height: 100%;
+				}
+				.box-right-li-num{
+					position: absolute;
+					left: 0;
+					top: 0;
+					font-weight: 60rpx;
+					background-color: rgba(75, 149, 230, .5);
+					font-weight: bold;
+					width: 100%;
+					height: 100%;
+					color: #FFFFFF;
+					text-align: center;
+					line-height: 200rpx;
+					font-size: 80rpx;
 				}
 			}
 		}

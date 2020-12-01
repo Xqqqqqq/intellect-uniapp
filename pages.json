@@ -88,6 +88,12 @@
 				"navigationBarTitleText": "通关考试"
 			}
         }
+        ,{
+            "path" : "pages/train/imageMemory/numImgSelect",
+            "style" : {
+				"navigationBarTitleText": "通关考试"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#8F9091",
