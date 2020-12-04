@@ -6,13 +6,13 @@
 		</view>
 		<!-- #endif -->
 		<view class="img-pair-top">
-			<view class="pair-top-blue">数图单选：</view>
+			<view class="pair-top-blue">数图计算：</view>
 			<view class="pair-top-red">{{resendTime}}s</view>
 			<view class="pair-top-blue">第1组 / 共8组</view>
 		</view>
 		<view class="img-select-box">
 			<view class="select-box-top">1</view>
-			<view class="select-box-title">选择对应图片：</view>
+			<view class="select-box-title">选择<text>向后第一张</text>图片：</view>
 			<view class="select-box-content">
 				<view class="box-content-li" :class="{'box-content-li-choose': currentTab == index}"
 				v-for="(item, index) in infoList" :key="index" @click="chooseOne(item, index)">
@@ -166,6 +166,9 @@ page{
 			font-size: 26rpx;
 			color: #333333;
 			margin-bottom: 20rpx;
+			text{
+				color: $uni-color-error;
+			}
 		}
 		.select-box-content{
 			display: flex;

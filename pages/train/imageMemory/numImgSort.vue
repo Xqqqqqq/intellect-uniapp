@@ -6,20 +6,26 @@
 		</view>
 		<!-- #endif -->
 		<view class="img-pair-top">
-			<view class="pair-top-blue">数图单选：</view>
+			<view class="pair-top-blue">数图排序：</view>
 			<view class="pair-top-red">{{resendTime}}s</view>
 			<view class="pair-top-blue">第1组 / 共8组</view>
 		</view>
-		<view class="img-select-box">
-			<view class="select-box-top">1</view>
-			<view class="select-box-title">选择对应图片：</view>
+		<view class="img-sort">
 			<view class="select-box-content">
-				<view class="box-content-li" :class="{'box-content-li-choose': currentTab == index}"
+				<view class="box-content-li"
+				v-for="(item, index) in infoList" :key="index" @click="chooseOne(item, index)">
+					<image :src="item.img"></image>
+				</view>
+			</view>
+			<view class="select-box-title">从大到小排序：</view>
+			<view class="select-box-content">
+				<view class="box-content-li"
 				v-for="(item, index) in infoList" :key="index" @click="chooseOne(item, index)">
 					<image :src="item.img"></image>
 				</view>
 			</view>
 		</view>
+		
 		<view class="img-pair-btn">下一组</view>
 	</view>
 </template>
@@ -53,16 +59,7 @@
 					id:2,
 					num:2,
 					img:'../../../static/img/icons/zhongjiang.png'
-				},{
-					id:1,
-					num:1,
-					img:'../../../static/img/icons/zhongjiang.png'
-				},{
-					id:2,
-					num:2,
-					img:'../../../static/img/icons/zhongjiang.png'
-				},],
-				currentTab:-1,
+				}],
 			};
 		},
 		onShow(){
@@ -76,8 +73,7 @@
 		},
 		methods:{
 			chooseOne(item, index){
-				this.currentTab = index
-			}
+			},
 		}
 	}
 </script>
@@ -145,17 +141,8 @@ page{
 		font-size: 34rpx;
 		font-weight: bold;
 	}
-	.img-select-box{
+	.img-sort{
 		width: 100%;
-		.select-box-top{
-			width: 100%;
-			height: 300rpx;
-			line-height: 300rpx;
-			font-size: 100rpx;
-			color: #333333;
-			text-align: center;
-			font-weight: bolder;
-		}
 		.select-box-title{
 			box-shadow:1px 2px 6px 0px rgba(108,143,197,0.3);
 			background-color: #FFFFFF;

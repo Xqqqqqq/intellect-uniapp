@@ -94,6 +94,24 @@
 				"navigationBarTitleText": "通关考试"
 			}
         }
+        ,{
+            "path" : "pages/train/imageMemory/numImgCount",
+            "style" : {
+				"navigationBarTitleText": "通关考试"
+			}
+        }
+        ,{
+            "path" : "pages/train/imageMemory/numImgSort",
+            "style" : {
+				"navigationBarTitleText": "通关考试"
+			}
+        }
+        ,{
+            "path" : "pages/train/imageMemory/numImgTestOver",
+            "style" : {
+				"navigationBarTitleText": "考试结束"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#8F9091",
