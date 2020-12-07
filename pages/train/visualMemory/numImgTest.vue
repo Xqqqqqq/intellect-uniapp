@@ -1,38 +1,34 @@
 <template>
 	<view class="img-test">
-		<view class="img-test-top">
-			<view class="test-top-li">
-				<view class="test-top-li-title">上次成绩</view>
-				<view class="test-top-li-num">0</view>
-			</view>
-			<view class="test-top-li">
-				<view class="test-top-li-title">平均成绩</view>
-				<view class="test-top-li-num">0</view>
-			</view>
-			<view class="test-top-li">
-				<view class="test-top-li-title">最好成绩</view>
-				<view class="test-top-li-num">0</view>
-			</view>
-		</view>
 		<view class="img-test-box">
-			<view class="img-test-title">考试规则说明</view>
+			<view class="img-test-title">训练规则说明</view>
 			<view class="img-test-content">
-				共1~100个数字及对应的图片，元素选图片和图片选元素两种形式随机出现选出答案，共8组。
+				共1~100个数字或对应的图片按设置内容进行分组视觉记忆可限时训练，稍难于图像元素记忆。共分为两个阶段。
+				<text>（1）训练环节：记忆元素分组视觉训练。\n</text>
+				<text>（2）测试环节：回忆每组的元素及顺序。\n</text>
+				第一阶段可重复查看，进入第二阶段将无法返回第一阶段。
 			</view>
 			
-			<view class="img-test-title">考试设置</view>
+			<view class="img-test-title">训练设置</view>
 			<view class="img-test-content">
-				<picker @change="bindSecondChange" :value="secondIndex" :range="secondArr" range-key="name">
+				<picker @change="bindTypeChange" :value="typeIndex" :range="typeArr" range-key="name">
 					<view class="test-content-picker">
-						<view class="content-picker-left">是否读秒</view>
-						<view class="content-picker-right">{{secondArr[secondIndex].name}} ></view>
+						<view class="content-picker-left">训练组</view>
+						<view class="content-picker-right">{{typeArr[typeIndex].name}} ></view>
 					</view>
 				</picker>
 				<view class="test-content-line"></view>
 				<picker @change="bindTypeChange" :value="typeIndex" :range="typeArr" range-key="name">
 					<view class="test-content-picker">
-						<view class="content-picker-left">考试形式</view>
+						<view class="content-picker-left">每组元素</view>
 						<view class="content-picker-right">{{typeArr[typeIndex].name}} ></view>
+					</view>
+				</picker>
+				<view class="test-content-line"></view>
+				<picker @change="bindSecondChange" :value="secondIndex" :range="secondArr" range-key="name">
+					<view class="test-content-picker">
+						<view class="content-picker-left">训练时限</view>
+						<view class="content-picker-right">{{secondArr[secondIndex].name}} ></view>
 					</view>
 				</picker>
 			</view>
@@ -47,7 +43,7 @@
 					</view>
 					<view class="img-test-ul-li">
 						<view>20200909-13:00</view>
-						<view>答题：100</view>
+						<view>答题：30</view>
 						<view>分数：100</view>
 					</view>
 					<view class="img-test-ul-li">
@@ -66,8 +62,7 @@
 		
 		<view class="img-test-btn-clone"></view>
 		<view class="img-test-btn">
-			<view class="test-btn-li test-btn-li-gray">< 返回训练</view>
-			<view class="test-btn-li test-btn-li-blue">开始考试 ></view>
+			<view class="test-btn-li test-btn-li-blue">开始考试</view>
 		</view>
 	</view>
 </template>
@@ -117,24 +112,6 @@ page{
 }
 .img-test{
 	width: 100%;
-	.img-test-top{
-		display: flex;
-		justify-content: space-around;
-		width: 100%;
-		background-color: $uni-color-primary;
-		padding: 50rpx 0;
-		box-sizing: border-box;
-		.test-top-li{
-			text-align: center;
-			color: #FFFFFF;
-			font-size: 34rpx;
-			.test-top-li-title{
-				font-weight: bold;
-				font-size: 32rpx;
-				margin-bottom: 30rpx;
-			}
-		}
-	}
 	.img-test-box{
 		width: 100%;
 		padding: 50rpx 24rpx;
@@ -158,6 +135,9 @@ page{
 			line-height: 45rpx;
 			font-size: 26rpx;
 			margin-bottom: 40rpx;
+			text{
+				color: $uni-color-error;
+			}
 			.test-content-line{
 				height: 1rpx;
 				width: 100%;
@@ -214,7 +194,7 @@ page{
 		bottom: 0;
 		z-index: 999;
 		.test-btn-li{
-			width: 49.8%;
+			width: 100%;
 			height: 100rpx;
 			line-height: 100rpx;
 			text-align: center;

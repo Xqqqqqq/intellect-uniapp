@@ -112,6 +112,18 @@
 				"navigationBarTitleText": "考试结束"
 			}
         }
+        ,{
+            "path" : "pages/train/visualMemory/visualMemory",
+            "style" : {
+				"navigationBarTitleText": "视觉记忆术"
+			}
+        }
+		,{
+		    "path" : "pages/train/visualMemory/numImgTest",
+		    "style" : {
+				"navigationBarTitleText": "数字图像视觉训练"
+			}
+		}
     ],
 	"tabBar": {
 		"color": "#8F9091",
