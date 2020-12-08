@@ -3,24 +3,31 @@
 		<view class="img-test-box">
 			<view class="img-test-title">训练规则说明</view>
 			<view class="img-test-content">
-				共1~100个数字或对应的图片按设置内容进行分组视觉记忆可限时训练，稍难于图像元素记忆。共分为两个阶段。
-				<text>\n（1）训练环节：记忆元素分组视觉训练。\n</text>
-				<text>（2）测试环节：回忆每组的元素及顺序。\n</text>
-				第一阶段可重复查看，进入第二阶段将无法返回第一阶段。
+				记忆元素混入对应的文章里，在阅读的同时集中注意力记忆相关元素，练习后参与测试的环节有相关的记忆元素问题提问。
+				<text>\n（1）训练环节：阅读记忆环节。\n</text>
+				<text>（2）测试环节：答题回忆环节。\n</text>
+				第一阶段有限时，进入第二阶段将无法返回第一阶段。
 			</view>
 			
 			<view class="img-test-title">训练设置</view>
 			<view class="img-test-content">
 				<picker @change="bindTypeChange" :value="typeIndex" :range="typeArr" range-key="name">
 					<view class="test-content-picker">
-						<view class="content-picker-left">训练组</view>
+						<view class="content-picker-left">训练文章</view>
 						<view class="content-picker-right">{{typeArr[typeIndex].name}} ></view>
 					</view>
 				</picker>
 				<view class="test-content-line"></view>
 				<picker @change="bindTypeChange" :value="typeIndex" :range="typeArr" range-key="name">
 					<view class="test-content-picker">
-						<view class="content-picker-left">每组元素</view>
+						<view class="content-picker-left">文章难度</view>
+						<view class="content-picker-right">{{typeArr[typeIndex].name}} ></view>
+					</view>
+				</picker>
+				<view class="test-content-line"></view>
+				<picker @change="bindTypeChange" :value="typeIndex" :range="typeArr" range-key="name">
+					<view class="test-content-picker">
+						<view class="content-picker-left">问题个数</view>
 						<view class="content-picker-right">{{typeArr[typeIndex].name}} ></view>
 					</view>
 				</picker>
@@ -41,21 +48,25 @@
 						<view>答题：100</view>
 						<view>分数：100</view>
 					</view>
+					<view class="img-test-ul-title">超级记忆片段节选</view>
 					<view class="img-test-ul-li">
 						<view>20200909-13:00</view>
 						<view>答题：30</view>
 						<view>分数：100</view>
 					</view>
+					<view class="img-test-ul-title">超级记忆片段节选</view>
 					<view class="img-test-ul-li">
 						<view>20200909-13:00</view>
 						<view>答题：100</view>
 						<view>分数：100</view>
 					</view>
+					<view class="img-test-ul-title">超级记忆片段节选</view>
 					<view class="img-test-ul-li">
 						<view>20200909-13:00</view>
 						<view>答题：100</view>
 						<view>分数：100</view>
 					</view>
+					<view class="img-test-ul-title">超级记忆片段节选</view>
 				</view>
 			</view>
 		</view>
@@ -176,6 +187,14 @@ page{
 				// .img-test-ul-li:nth-child(2n){
 				// 	color: $uni-color-primary;
 				// }
+				.img-test-ul-title{
+					font-size: 40rpx;
+					text-align: center;
+					width: 100%;
+					line-height: 80rpx;
+					color: #333333;
+					font-weight: bold;
+				}
 			}
 		}
 	}
