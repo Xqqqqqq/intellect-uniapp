@@ -166,6 +166,24 @@
 				"navigationBarTitleText": "兰盾超级会员"
 			}
         }
+        ,{
+            "path" : "pages/mine/commonMember",
+            "style" : {
+				"navigationBarTitleText": "普通会员"
+			}
+        }
+        ,{
+            "path" : "pages/mine/energy",
+            "style" : {
+				"navigationBarTitleText": "能量"
+			}
+        }
+        ,{
+            "path" : "pages/mine/cardVoucher",
+            "style" : {
+				"navigationBarTitleText": "卡券"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#8F9091",
