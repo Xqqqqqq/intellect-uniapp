@@ -1,7 +1,7 @@
 <template>
 	<view class="login">
 		<view class="login-text">超能训练</view>
-		<view class="login-btn">手机验证码登录</view>
+		<view class="login-btn" @click="gotoUrl">手机验证码登录</view>
 		<view class="login-btn">微信账号登录</view>
 	</view>
 </template>
@@ -12,6 +12,13 @@
 			return {
 				
 			};
+		},
+		methods:{
+			gotoUrl(){
+				uni.navigateTo({
+					url:'/pages/myData/loginCode'
+				})
+			}
 		}
 	}
 </script>

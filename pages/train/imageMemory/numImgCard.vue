@@ -44,7 +44,7 @@
 			<view class="card-btn-li bg-gradual-red padding radius text-center shadow-blur">自定义备注</view>
 			<view class="card-btn-li bg-gradual-orange padding radius text-center shadow-blur" @click="changeType">切换列表</view>
 			<view class="card-btn-li bg-gradual-green padding radius text-center shadow-blur">自定义图片</view>
-			<view class="card-btn-li bg-gradual-blue padding radius text-center shadow-blur">前往测试</view>
+			<view class="card-btn-li bg-gradual-blue padding radius text-center shadow-blur" @click="gotoUrl">前往测试</view>
 		</view>
 	</view>
 </template>
@@ -139,6 +139,11 @@
 			},
 			changeType(){
 				this.showCard = !this.showCard
+			},
+			gotoUrl(){
+				uni.navigateTo({
+					url: '/pages/train/imageMemory/numImgTest'
+				})
 			}
 		}
 	}

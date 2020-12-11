@@ -71,7 +71,7 @@
 			<view class="calcendar-rule-text">1.就腐蚀雕刻路径飞升渡劫飞升渡劫副教授副教授的假分数带分数考虑到金粉世家风尚大奖</view>
 			<view class="calcendar-rule-text">1.就腐蚀雕刻路径飞升渡劫飞升渡劫副教授副教授的假分数带分数考虑到金粉世家风尚大奖</view>
 		</view>
-		<view class="calcendar-pos animated">
+		<view class="calcendar-pos animated" @click="gotoUrl('/pages/myData/share')">
 			<image src="../../static/img/icons/zhongjiang.png"></image>
 			<view>分享获能量</view>
 		</view>
@@ -126,6 +126,11 @@
 			dataSource: 'onResChange',
 		},
 		methods: {
+			gotoUrl(url){
+				uni.navigateTo({
+					url: url
+				})
+			},
 			// 获取当月共多少天
 			getThisMonthDays(year, month) {
 				return new Date(year, month, 0).getDate()
@@ -331,6 +336,7 @@
 				justify-content: space-between;
 				padding: 20rpx 40rpx;
 				margin: 20rpx;
+				margin-bottom: 0;
 				view{
 					color: #333333;
 					font-weight: bold;
@@ -406,7 +412,8 @@
 		.calcendar-rule{
 			width: 90%;
 			margin: auto;
-			margin-bottom: 30rpx;
+			padding-bottom: 30rpx;
+			box-sizing: border-box;
 			.train-title{
 				width: 100%;
 				padding: 30rpx 20rpx;

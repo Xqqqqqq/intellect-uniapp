@@ -66,8 +66,8 @@
 		
 		<view class="img-test-btn-clone"></view>
 		<view class="img-test-btn">
-			<view class="test-btn-li test-btn-li-gray">< 返回训练</view>
-			<view class="test-btn-li test-btn-li-blue">开始考试 ></view>
+			<view class="test-btn-li test-btn-li-gray" @click="goBack">< 返回训练</view>
+			<view class="test-btn-li test-btn-li-blue" @click="gotoUrl">开始考试 ></view>
 		</view>
 	</view>
 </template>
@@ -86,16 +86,20 @@
 				secondIndex: 0,
 				typeArr:[{
 					id: 1,
-					name: '数图配对'
+					name: '数图配对',
+					path:'/pages/train/imageMemory/numImgPair'
 				},{
 					id: 2,
-					name: '数图单选'
+					name: '数图单选',
+					path:'/pages/train/imageMemory/numImgSelect'
 				},{
 					id: 3,
-					name: '数图计算'
+					name: '数图计算',
+					path:'/pages/train/imageMemory/numImgCount'
 				},{
 					id: 4,
-					name: '数图排序'
+					name: '数图排序',
+					path:'/pages/train/imageMemory/numImgSort'
 				},],
 				typeIndex: 0,
 			};
@@ -106,6 +110,16 @@
 			},
 			bindTypeChange(e){
 				this.typeIndex = e.detail.value
+			},
+			goBack(){
+				uni.navigateBack({
+					delta:1
+				})
+			},
+			gotoUrl(){
+				uni.navigateTo({
+					url: this.typeArr[this.typeIndex].path
+				})
 			}
 		}
 	}

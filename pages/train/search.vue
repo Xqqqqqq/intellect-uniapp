@@ -58,6 +58,9 @@
 					this.historyList = this.unique(newHistoryList).slice(0,8)
 					uni.setStorageSync('historyList', this.historyList)
 				}
+				uni.navigateTo({
+					url: '/pages/train/searchResult'
+				})
 			},
 			// 数组去重
 			unique (arr) {

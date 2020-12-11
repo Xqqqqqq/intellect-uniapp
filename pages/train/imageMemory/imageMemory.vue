@@ -1,8 +1,8 @@
 <template>
 	<view class="memory">
 		<view class="memory-top">
-			<view class="wrap-select">
-			  <input @input="bindNameInput" v-model="goodsName" 
+			<view class="wrap-select" @click="gotoUrl('/pages/train/search')">
+			  <input @input="bindNameInput" v-model="goodsName" :disabled="disabled"
 			  type="text" placeholder="请输入搜索内容" placeholder-class="input-placeholder" class="input-length"/>
 			  <view class="search-icon" @click="clickSearch">
 			    <image src="../../../static/img/icons/search.png"></image>
@@ -20,19 +20,7 @@
 			v-for="(item, index) in scrollBottomList" :key="index">{{item.name}}</view>
 		</scroll-view>
 		<view class="memory-ul">
-			<view class="memory-ul-li">
-				<image class="memory-ul-li-img" src='../../../static/img/icons/zhongjiang.png'></image>
-				<view class="memory-ul-li-text">数字图像关联训练</view>
-			</view>
-			<view class="memory-ul-li">
-				<image class="memory-ul-li-img" src='../../../static/img/icons/zhongjiang.png'></image>
-				<view class="memory-ul-li-text">数字图像</view>
-			</view>
-			<view class="memory-ul-li">
-				<image class="memory-ul-li-img" src='../../../static/img/icons/zhongjiang.png'></image>
-				<view class="memory-ul-li-text">数字图像关联训练</view>
-			</view>
-			<view class="memory-ul-li">
+			<view class="memory-ul-li" @click="gotoUrl('/pages/train/imageMemory/numImgCard')">
 				<image class="memory-ul-li-img" src='../../../static/img/icons/zhongjiang.png'></image>
 				<view class="memory-ul-li-text">数字图像关联训练</view>
 			</view>
@@ -45,6 +33,7 @@
 		data() {
 			return {
 				goodsName:'',
+				disabled: true,
 				scrollTopList:[{
 					id:0,
 					name: '常用专题',
@@ -82,6 +71,11 @@
 			},
 			clickSearch(){
 			},
+			gotoUrl(url){
+				uni.navigateTo({
+					url: url
+				})
+			},
 			// 导航切换
 			clickTopTab(index) {
 				if (this.currentTopTab == index) {
@@ -114,7 +108,7 @@
 		  width: 100%;
 		  height:70rpx;
 		  line-height: 70rpx;
-		  background:rgba(245,245,245,1);
+		  background:#FFFFFF;
 		  border-radius:34rpx;
 		  position: relative;
 		  padding: 0 37rpx;

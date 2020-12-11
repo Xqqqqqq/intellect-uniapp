@@ -24,7 +24,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="img-pair-btn">下一组</view>
+		<view class="img-pair-btn" @click="gotoUrl">下一组</view>
 	</view>
 </template>
 
@@ -111,6 +111,11 @@
 					leftnum: ''
 				}
 				// console.log(this.rightList)
+			},
+			gotoUrl(){
+				uni.navigateTo({
+					url: '/pages/train/imageMemory/numImgTestOver'
+				})
 			}
 		}
 	}

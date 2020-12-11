@@ -2,15 +2,15 @@
 	<view class="wrap">
 		<view class="wrap-top">
 			<view class="wrap-top-box">
-				<view class="top-box-li">
+				<view class="top-box-li" @click="gotoUrl('/pages/myData/calendar')">
 					<view class="top-box-li-title">本月签到</view>
 					<view class="top-box-li-num">0</view>
 				</view>
-				<view class="top-box-li">
+				<view class="top-box-li" @click="gotoUrl('/pages/myData/train')">
 					<view class="top-box-li-title">本月训练</view>
 					<view class="top-box-li-num">0</view>
 				</view>
-				<view class="top-box-li">
+				<view class="top-box-li" @click="gotoUrl('/pages/myData/longestSeries')">
 					<view class="top-box-li-title">最长连续</view>
 					<view class="top-box-li-num">0</view>
 				</view>
@@ -19,7 +19,7 @@
 		</view>
 		
 		<view class="wrap-content">
-			<view class="wrap-content-box">
+			<view class="wrap-content-box" @click="gotoUrl('/pages/train/imageMemory/imageMemory')">
 				<view class="content-box-left">
 					<image src=""></image>
 				</view>
@@ -40,6 +40,13 @@
 			return {
 				
 			};
+		},
+		methods:{
+			gotoUrl(url){
+				uni.navigateTo({
+					url: url
+				})
+			}
 		}
 	}
 </script>

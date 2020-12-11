@@ -26,7 +26,7 @@
 			</view>
 		</view>
 		
-		<view class="img-pair-btn">下一组</view>
+		<view class="img-pair-btn" @click="gotoUrl">下一组</view>
 	</view>
 </template>
 
@@ -74,6 +74,11 @@
 		methods:{
 			chooseOne(item, index){
 			},
+			gotoUrl(){
+				uni.navigateTo({
+					url: '/pages/train/imageMemory/numImgTestOver'
+				})
+			}
 		}
 	}
 </script>

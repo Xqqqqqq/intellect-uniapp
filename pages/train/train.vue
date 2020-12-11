@@ -4,19 +4,19 @@
 			<view class="train-title-box">记忆力</view>
 		</view>
 		<view class="train-box">
-			<view class="train-box-li">
+			<view class="train-box-li" @click="gotoUrl('/pages/train/imageMemory/imageMemory')">
 				<view class="box-li-img">
 					<image src="../../static/img/tabs/data-blue.png"></image>
 				</view>
 				<view class="box-li-text">图像记忆术</view>
 			</view>
-			<view class="train-box-li">
+			<view class="train-box-li" @click="gotoUrl('/pages/train/visualMemory/visualMemory')">
 				<view class="box-li-img">
 					<image src="../../static/img/tabs/data-blue.png"></image>
 				</view>
 				<view class="box-li-text">视觉记忆术</view>
 			</view>
-			<view class="train-box-li">
+			<view class="train-box-li" @click="gotoUrl('/pages/train/methodTraining/methodTraining')">
 				<view class="box-li-img">
 					<image src="../../static/img/tabs/data-blue.png"></image>
 				</view>
@@ -124,6 +124,13 @@
 			return {
 				
 			};
+		},
+		methods:{
+			gotoUrl(url) {
+				uni.navigateTo({
+					url: url
+				})
+			}
 		}
 	}
 </script>

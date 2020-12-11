@@ -56,7 +56,7 @@
 		border-radius: 15rpx;
 		padding: 25rpx;
 		box-sizing: border-box;
-		color: #666666;
+		color: #333333;
 		line-height: 45rpx;
 		font-size: 26rpx;
 		margin-bottom: 40rpx;

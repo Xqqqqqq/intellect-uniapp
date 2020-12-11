@@ -8,25 +8,7 @@
 			<top-input :placeholderText="placeholderText" @changeInput="changeInput"></top-input>
 		</view>
 		<view class="wrap-box">
-			<view class="wrap-box-li">
-				<view class="box-li-img">
-					<image src="../../static/img/tabs/faxian-blue.png"></image>
-				</view>
-				<view class="box-li-text">数字图像关联训练数字图像关联训练数字图像关联训练数字图像关联训练</view>
-			</view>
-			<view class="wrap-box-li">
-				<view class="box-li-img">
-					<image src="../../static/img/tabs/faxian-blue.png"></image>
-				</view>
-				<view class="box-li-text">数字图像关联训练</view>
-			</view>
-			<view class="wrap-box-li">
-				<view class="box-li-img">
-					<image src="../../static/img/tabs/faxian-blue.png"></image>
-				</view>
-				<view class="box-li-text">数字图像关联训练</view>
-			</view>
-			<view class="wrap-box-li">
+			<view class="wrap-box-li" @click="gotoUrl">
 				<view class="box-li-img">
 					<image src="../../static/img/tabs/faxian-blue.png"></image>
 				</view>
@@ -72,6 +54,11 @@
 			changeInput(value){
 				this.changeValue = value
 			},
+			gotoUrl(){
+				uni.navigateTo({
+					url: '/pages/train/imageMemory/numImgCard'
+				})
+			}
 		}
 	}
 </script>

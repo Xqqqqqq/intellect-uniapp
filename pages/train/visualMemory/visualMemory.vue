@@ -1,8 +1,8 @@
 <template>
 	<view class="memory">
 		<view class="memory-top">
-			<view class="wrap-select">
-			  <input @input="bindNameInput" v-model="goodsName" 
+			<view class="wrap-select" @click="gotoUrl('/pages/train/search')">
+			  <input @input="bindNameInput" v-model="goodsName" :disabled="disabled"
 			  type="text" placeholder="请输入搜索内容" placeholder-class="input-placeholder" class="input-length"/>
 			  <view class="search-icon" @click="clickSearch">
 			    <image src="../../../static/img/icons/search.png"></image>
@@ -45,6 +45,7 @@
 		data() {
 			return {
 				goodsName:'',
+				disabled: true,
 				scrollTopList:[{
 					id:0,
 					name: '常用专题',
@@ -82,6 +83,11 @@
 			},
 			clickSearch(){
 			},
+			gotoUrl(url){
+				uni.navigateTo({
+					url: url
+				})
+			},
 			// 导航切换
 			clickTopTab(index) {
 				if (this.currentTopTab == index) {
@@ -114,7 +120,7 @@
 		  width: 100%;
 		  height:70rpx;
 		  line-height: 70rpx;
-		  background:rgba(245,245,245,1);
+		  background:#FFFFFF;
 		  border-radius:34rpx;
 		  position: relative;
 		  padding: 0 37rpx;

@@ -184,6 +184,18 @@
 				"navigationBarTitleText": "卡券"
 			}
         }
+        ,{
+            "path" : "pages/myData/loginCode",
+            "style" : {
+				"navigationBarTitleText": "登录"
+			}
+        }
+        ,{
+            "path" : "pages/myData/share",
+            "style" : {
+				"navigationBarTitleText": "分享"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#8F9091",

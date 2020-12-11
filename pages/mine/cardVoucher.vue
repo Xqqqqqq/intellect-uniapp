@@ -13,11 +13,15 @@
 		
 		<view class="card-ul">
 			<view class="card-ul-li">
-				<view class="card-ul-li-left"></view>
+				<view class="card-ul-li-left">3<text>点</text></view>
 				<view class="card-ul-li-content">
 					<image src='../../static/img/icons/red.png'></image>
 				</view>
-				<view class="card-ul-li-right"></view>
+				<view class="card-ul-li-right">
+					<view class="ul-li-right-title">新人能量券</view>
+					<view class="ul-li-right-status">未使用</view>
+				</view>
+				<view class="card-ul-li-btn">领取</view>
 			</view>
 		</view>
 	</view>
@@ -102,14 +106,23 @@
 			width: 100%;
 			margin-bottom: 20rpx;
 			display: flex;
-			border: 2rpx solid #F24F52;
+			border: 2rpx solid $uni-color-error;
 			border-radius: 10rpx;
 			background-color: #FFFFFF;
-			height: 130rpx;
+			height: 150rpx;
+			position: relative;
 			.card-ul-li-left{
-				width: 150rpx;
+				width: 200rpx;
 				height: 100%;
-				background-color: #F24F52;
+				background-color: $uni-color-error;
+				text-align: center;
+				line-height: 150rpx;
+				color: #FFFFFF;
+				font-size: 70rpx;
+				text{
+					font-size: 26rpx;
+					font-weight: normal;
+				}
 			}
 			.card-ul-li-content{
 				width: 5rpx;
@@ -121,6 +134,34 @@
 			}
 			.card-ul-li-right{
 				flex: 1;
+				padding: 20rpx 40rpx;
+				box-sizing: border-box;
+				display: flex;
+				justify-content: space-around;
+				flex-direction: column;
+				.ul-li-right-title{
+					color: #333333;
+					font-size: 30rpx;
+					font-weight: bold;
+				}
+				.ul-li-right-status{
+					font-size: 26rpx;
+					color: #666;
+				}
+			}
+			.card-ul-li-btn{
+				width: 130rpx;
+				height: 55rpx;
+				background: $uni-color-error;
+				border-radius: 10rpx;
+				line-height: 55rpx;
+				color: #FFFFFF;
+				text-align: center;
+				position: absolute;
+				right: 24rpx;
+				top: 50%;
+				transform: translateY(-50%);
+				font-size: 26rpx;
 			}
 		}
 	}
