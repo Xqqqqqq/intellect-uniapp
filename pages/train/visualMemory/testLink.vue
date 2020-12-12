@@ -17,6 +17,9 @@
 				<image :src="item"></image>
 			</view>
 		</view>
+		<view class="img-test-btn">
+			<view class="test-btn-li test-btn-li-blue" @click="gotoUrl">查看结果</view>
+		</view>
 	</view>
 </template>
 
@@ -32,6 +35,13 @@
 					"../../../static/img/icons/blue-arrow.png",
 				]
 			};
+		},
+		methods:{
+			gotoUrl(){
+				uni.navigateTo({
+					url:'/pages/train/visualMemory/numImgTestOver'
+				})
+			}
 		}
 	}
 </script>
@@ -39,7 +49,7 @@
 <style lang="scss">
 .test-link{
 	width: 100%;
-	padding: 80rpx 0 0rpx 0;
+	padding: 80rpx 0 100rpx 0;
 	box-sizing: border-box;
 	.status_bar {
 		height: var(--status-bar-height);
@@ -107,6 +117,31 @@
 		&:after{
 			content: '';
 			width: 33%;
+		}
+	}
+	.img-test-btn{
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		height: 100rpx;
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		z-index: 999;
+		.test-btn-li{
+			width: 100%;
+			height: 100rpx;
+			line-height: 100rpx;
+			text-align: center;
+			color: #FFFFFF;
+			font-size: 30rpx;
+		}
+		.test-btn-li-gray{
+			background-color: #D3D3D3;
+			color: #666666;
+		}
+		.test-btn-li-blue{
+			background-color: $uni-color-primary;
 		}
 	}
 }

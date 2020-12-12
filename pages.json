@@ -160,6 +160,12 @@
 				"navigationBarTitleText": "训练环节"
 			}
 		}
+		,{
+		    "path" : "pages/train/methodTraining/testLink",
+		    "style" : {
+				"navigationBarTitleText": "测试环节"
+			}
+		}
         ,{
             "path" : "pages/mine/superMember",
             "style" : {

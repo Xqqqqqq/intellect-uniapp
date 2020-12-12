@@ -6,21 +6,9 @@
 		</view>
 		<view class="img-test-title">记忆训练及测试</view>
 		<view class="memory-ul">
-			<view class="memory-ul-li">
+			<view class="memory-ul-li" @click="gotoUrl">
 				<image class="memory-ul-li-img" src='../../../static/img/icons/zhongjiang.png'></image>
-				<view class="memory-ul-li-text">数字图像关联训练</view>
-			</view>
-			<view class="memory-ul-li">
-				<image class="memory-ul-li-img" src='../../../static/img/icons/zhongjiang.png'></image>
-				<view class="memory-ul-li-text">数字图像</view>
-			</view>
-			<view class="memory-ul-li">
-				<image class="memory-ul-li-img" src='../../../static/img/icons/zhongjiang.png'></image>
-				<view class="memory-ul-li-text">数字图像关联训练</view>
-			</view>
-			<view class="memory-ul-li">
-				<image class="memory-ul-li-img" src='../../../static/img/icons/zhongjiang.png'></image>
-				<view class="memory-ul-li-text">数字图像关联训练</view>
+				<view class="memory-ul-li-text">快速阅读回忆训练</view>
 			</view>
 		</view>
 	</view>
@@ -32,6 +20,13 @@
 			return {
 				
 			};
+		},
+		methods:{
+			gotoUrl(){
+				uni.navigateTo({
+					url:'/pages/train/methodTraining/numImgTest'
+				})
+			}
 		}
 	}
 </script>

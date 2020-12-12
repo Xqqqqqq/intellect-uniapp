@@ -11,9 +11,18 @@
 			<view class="pair-top-blue">第1组 / 共5组</view>
 		</view>
 		
+		<view class="train-link-content">
+			<view class="link-content-top">题目一： ipsum dolor sit amet, consectetur adipiscing elit. 
+			Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.</view>
+			
+			<view class="link-content-btn" :class="{'link-content-btn-active': currentTab == index}"
+			v-for="(item, index) in btnList" :key="index"
+			@click="clickTab(index)">{{index+1}}.{{item}}</view>
+		</view>
+		
 		<view class="img-test-btn">
 			<view class="test-btn-li test-btn-li-gray">< 上一条</view>
-			<view class="test-btn-li test-btn-li-blue" @click="gotoUrl">下一条 ></view>
+			<view class="test-btn-li test-btn-li-blue">下一条 ></view>
 		</view>
 	</view>
 </template>
@@ -23,6 +32,8 @@
 		data() {
 			return {
 				resendTime: 60,// 倒计时秒数
+				btnList:['答案1','答案2','答案3','答案4','答案5'],
+				currentTab: -1,
 			};
 		},
 		onShow(){
@@ -35,10 +46,8 @@
 			}, 1000);
 		},
 		methods:{
-			gotoUrl(){
-				uni.navigateTo({
-					url: '/pages/train/methodTraining/testLink'
-				})
+			clickTab(index){
+				this.currentTab = index
 			}
 		}
 	}
@@ -115,6 +124,31 @@
 			color: #666666;
 		}
 		.test-btn-li-blue{
+			background-color: $uni-color-primary;
+		}
+	}
+	.train-link-content{
+		width: 100%;
+		padding: 50rpx;
+		box-sizing: border-box;
+		.link-content-top{
+			margin-bottom: 50rpx;
+		}
+		.link-content-btn{
+			width: 100%;
+			border-radius: 50rpx;
+			height: 80rpx;
+			line-height: 80rpx;
+			text-align: left;
+			font-size: 32rpx;
+			background-color: #D3D3D3;
+			padding: 0 40rpx;
+			box-sizing: border-box;
+			margin-bottom: 20rpx;
+		}
+		.link-content-btn-active{
+			color: #FFFFFF;
+			font-weight: bold;
 			background-color: $uni-color-primary;
 		}
 	}

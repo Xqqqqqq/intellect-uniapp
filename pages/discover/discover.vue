@@ -17,7 +17,7 @@
 		</swiper>
 		
 		<view class="discover-ul">
-			<view class="discover-ul-li">
+			<view class="discover-ul-li" @click="gotoUrl">
 				<view class="ul-li-left">
 					<image src="../../static/img/tabs/faxian-blue.png"></image>
 					<view class="ul-li-left-pos">记忆</view>
@@ -59,6 +59,11 @@
 			},
 			clickSearch(){
 			},
+			gotoUrl(){
+				uni.navigateTo({
+					url: '/pages/discover/discoverDetail'
+				})
+			}
 		}
 	}
 </script>

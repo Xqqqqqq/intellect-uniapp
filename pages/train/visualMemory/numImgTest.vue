@@ -62,7 +62,7 @@
 		
 		<view class="img-test-btn-clone"></view>
 		<view class="img-test-btn">
-			<view class="test-btn-li test-btn-li-blue">开始考试</view>
+			<view class="test-btn-li test-btn-li-blue" @click="gotoUrl">开始训练</view>
 		</view>
 	</view>
 </template>
@@ -101,6 +101,11 @@
 			},
 			bindTypeChange(e){
 				this.typeIndex = e.detail.value
+			},
+			gotoUrl(){
+				uni.navigateTo({
+					url:'/pages/train/visualMemory/trainingLink'
+				})
 			}
 		}
 	}
