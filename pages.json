@@ -25,8 +25,14 @@
 		}
         ,{
             "path" : "pages/mine/mine",
-            "style" : {
-				"navigationBarTitleText": "我的"
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationBarBackgroundColor": "#4b95e6",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": false
+				}
 			}
         },{
             "path" : "pages/myData/calendar",
