@@ -29,12 +29,13 @@
 				"navigationBarTitleText": "我的",
 				"navigationBarBackgroundColor": "#4b95e6",
 				"navigationBarTextStyle": "white",
-				"enablePullDownRefresh": true,
+				"navigationStyle": "custom",
 				"app-plus": {
 					"titleNView": false
 				}
 			}
-        },{
+        }
+		,{
             "path" : "pages/myData/calendar",
             "style" : {
             	"navigationBarTitleText": "本月签到"
@@ -227,14 +228,14 @@
 				"iconPath": "static/img/tabs/xunlian-gray.png",
 				"selectedIconPath": "static/img/tabs/xunlian-blue.png",
 				"text": "训练"
-			},
-			{
+			}
+			,{
 				"pagePath": "pages/discover/discover",
 				"iconPath": "static/img/tabs/faxian-gray.png",
 				"selectedIconPath": "static/img/tabs/faxian-blue.png",
 				"text": "发现"
-			},
-			{
+			}
+			,{
 				"pagePath": "pages/mine/mine",
 				"iconPath": "static/img/tabs/wode-gray.png",
 				"selectedIconPath": "static/img/tabs/wode-blue.png",

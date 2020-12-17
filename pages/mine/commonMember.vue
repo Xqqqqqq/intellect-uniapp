@@ -1,7 +1,7 @@
 <template>
 	<view class="common">
 		<view class="common-banner">
-			<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607407961314&di=904e6ce443dce24ba434840420ba8fea&imgtype=0&src=http%3A%2F%2Fdealer0.autoimg.cn%2Fdl%2F12558%2Fnewsimg%2F130543857228022184.jpg"></image>
+			<image src="../../static/img/icons/common.jpg"></image>
 		</view>
 		<view class="member-price-detail">
 			<view class="price-detail-title bg-gradual-orange shadow-blur">会员权益</view>

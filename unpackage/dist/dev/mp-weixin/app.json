@@ -1,0 +1,81 @@
+{
+  "pages": [
+    "pages/myData/myData",
+    "pages/train/train",
+    "pages/discover/discover",
+    "pages/discover/discoverDetail",
+    "pages/mine/mine",
+    "pages/myData/calendar",
+    "pages/myData/train",
+    "pages/myData/longestSeries",
+    "pages/myData/login",
+    "pages/train/search",
+    "pages/train/searchResult",
+    "pages/train/imageMemory/imageMemory",
+    "pages/train/imageMemory/numImgCard",
+    "pages/train/imageMemory/numImgTest",
+    "pages/train/imageMemory/numImgPair",
+    "pages/train/imageMemory/numImgSelect",
+    "pages/train/imageMemory/numImgCount",
+    "pages/train/imageMemory/numImgSort",
+    "pages/train/imageMemory/numImgTestOver",
+    "pages/train/visualMemory/visualMemory",
+    "pages/train/visualMemory/numImgTest",
+    "pages/train/visualMemory/trainingLink",
+    "pages/train/visualMemory/numImgTestOver",
+    "pages/train/visualMemory/testLink",
+    "pages/train/methodTraining/methodTraining",
+    "pages/train/methodTraining/numImgTest",
+    "pages/train/methodTraining/trainingLink",
+    "pages/train/methodTraining/testLink",
+    "pages/mine/superMember",
+    "pages/mine/commonMember",
+    "pages/mine/energy",
+    "pages/mine/cardVoucher",
+    "pages/myData/loginCode",
+    "pages/myData/share"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "超能训练数据",
+    "navigationBarBackgroundColor": "#4b95e6",
+    "backgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "color": "#8F9091",
+    "selectedColor": "#4b95e6",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "fontSize": "10px",
+    "iconWidth": "18px",
+    "list": [
+      {
+        "pagePath": "pages/myData/myData",
+        "iconPath": "static/img/tabs/data-gray.png",
+        "selectedIconPath": "static/img/tabs/data-blue.png",
+        "text": "数据"
+      },
+      {
+        "pagePath": "pages/train/train",
+        "iconPath": "static/img/tabs/xunlian-gray.png",
+        "selectedIconPath": "static/img/tabs/xunlian-blue.png",
+        "text": "训练"
+      },
+      {
+        "pagePath": "pages/discover/discover",
+        "iconPath": "static/img/tabs/faxian-gray.png",
+        "selectedIconPath": "static/img/tabs/faxian-blue.png",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "static/img/tabs/wode-gray.png",
+        "selectedIconPath": "static/img/tabs/wode-blue.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap54.json"
+}

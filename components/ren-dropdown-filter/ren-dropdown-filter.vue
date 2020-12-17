@@ -5,8 +5,8 @@
             <view class="navs">
                 <view class="c-flex-align" :class="{ 'c-flex-center': index > 0, actNav: index === actNav }" v-for="(item, index) in navData" :key="index" @click="navClick(index)">
                     <view v-for="(child, childx) in item" :key="childx" v-if="child.select">{{ child.text }}</view>
-                    <image src="https://i.loli.net/2020/07/15/QsHxlr1gbSImvWt.png" mode="" class="icon-triangle" v-if="index === actNav"></image>
-                    <image src="https://i.loli.net/2020/07/15/xjVSvzWcH9NO7al.png" mode="" class="icon-triangle" v-else></image>
+                    <image src='../../static/img/icons/down-blue.png' mode="" class="icon-triangle" v-if="index === actNav"></image>
+                    <image src='../../static/img/icons/down-gray.png' mode="" class="icon-triangle" v-else></image>
                 </view>
 
                 <!-- <view class="date-wrapper">

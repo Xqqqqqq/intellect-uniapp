@@ -19,8 +19,8 @@
 		</view>
 		<view class="train-link-tip">提示：将他们串联成故事</view>
 		<view class="img-test-btn">
-			<view class="test-btn-li test-btn-li-gray">< 上一条</view>
-			<view class="test-btn-li test-btn-li-blue" @click="gotoUrl">下一条 ></view>
+			<view class="test-btn-li test-btn-li-gray">上一条</view>
+			<view class="test-btn-li test-btn-li-blue" @click="gotoUrl">下一条</view>
 		</view>
 	</view>
 </template>

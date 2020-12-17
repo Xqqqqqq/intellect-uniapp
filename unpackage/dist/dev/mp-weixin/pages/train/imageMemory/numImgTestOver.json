@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "考试结束",
+  "usingComponents": {
+    "cmd-progress": "/components/cmd-progress/cmd-progress"
+  }
+}

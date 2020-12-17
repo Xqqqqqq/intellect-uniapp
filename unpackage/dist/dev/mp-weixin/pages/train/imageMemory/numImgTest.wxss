@@ -1,0 +1,162 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page {
+  background-color: #FFFFFF;
+}
+.img-test {
+  width: 100%;
+}
+.img-test .img-test-top {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+  width: 100%;
+  background-color: #4b95e6;
+  padding: 50rpx 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.img-test .img-test-top .test-top-li {
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 34rpx;
+}
+.img-test .img-test-top .test-top-li .test-top-li-title {
+  font-weight: bold;
+  font-size: 32rpx;
+  margin-bottom: 30rpx;
+}
+.img-test .img-test-box {
+  width: 100%;
+  padding: 50rpx 24rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.img-test .img-test-box .img-test-title {
+  width: 100%;
+  padding-left: 15rpx;
+  border-left: 5rpx solid #4b95e6;
+  color: #4b95e6;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+}
+.img-test .img-test-box .img-test-content {
+  width: 100%;
+  background-color: rgba(75, 149, 230, 0.2);
+  -webkit-border-radius: 15rpx;
+          border-radius: 15rpx;
+  padding: 25rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #666666;
+  line-height: 45rpx;
+  font-size: 26rpx;
+  margin-bottom: 40rpx;
+}
+.img-test .img-test-box .img-test-content .test-content-line {
+  height: 1rpx;
+  width: 100%;
+  border-bottom: 1rpx dashed #FFFFFF;
+}
+.img-test .img-test-box .img-test-content .test-content-picker {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  padding: 0 10rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+.img-test .img-test-box .img-test-content .test-content-picker .content-picker-left {
+  color: #333333;
+}
+.img-test .img-test-box .img-test-content .test-content-picker .content-picker-right {
+  color: #4b95e6;
+  font-weight: bold;
+}
+.img-test .img-test-box .img-test-content .img-test-ul {
+  width: 100%;
+}
+.img-test .img-test-box .img-test-content .img-test-ul .img-test-ul-li {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  color: #666666;
+  font-size: 26rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+.img-test .img-test-box .img-test-content .img-test-ul .img-test-ul-li view:nth-child(2n) {
+  width: 20%;
+}
+.img-test .img-test-btn-clone {
+  width: 100%;
+  height: 50rpx;
+}
+.img-test .img-test-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  background-color: #FFFFFF;
+  height: 100rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 999;
+}
+.img-test .img-test-btn .test-btn-li {
+  width: 49.8%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 30rpx;
+}
+.img-test .img-test-btn .test-btn-li-gray {
+  background-color: #D3D3D3;
+  color: #666666;
+}
+.img-test .img-test-btn .test-btn-li-blue {
+  background-color: #4b95e6;
+}
+

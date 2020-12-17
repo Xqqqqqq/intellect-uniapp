@@ -66,8 +66,8 @@
 		
 		<view class="img-test-btn-clone"></view>
 		<view class="img-test-btn">
-			<view class="test-btn-li test-btn-li-gray" @click="goBack">< 返回训练</view>
-			<view class="test-btn-li test-btn-li-blue" @click="gotoUrl">开始考试 ></view>
+			<view class="test-btn-li test-btn-li-gray" @click="goBack">返回训练</view>
+			<view class="test-btn-li test-btn-li-blue" @click="gotoUrl">开始考试</view>
 		</view>
 	</view>
 </template>

@@ -42,7 +42,7 @@
 					</view>
 					<view v-else>
 						<!-- 已签到日期 -->
-						<view v-if="item.isSign == true" class='cell greenColor bgWhite  '>
+						<view v-if="item.isSign == true" class='cell greenColor bgWhite'>
 							<text>{{item.date}}</text>
 						</view>
 						<!-- 漏签 -->
@@ -141,7 +141,7 @@
 			},
 			// 计算当月1号前空了几个格子，把它填充在days数组的前面
 			calculateEmptyGrids(year, month) {
-				//计算每个月时要清零
+				//计算每个月时要清零 此处调接口获取days数组
 				this.days = [];
 				const firstDayOfWeek = this.getFirstDayOfWeek(year, month);
 				if (firstDayOfWeek > 0) {
@@ -154,10 +154,8 @@
 					}
 				}
 			},
-
 			// 绘制当月天数占的格子，并把它放到days数组中
 			calculateDays(year, month) {
-
 				const thisMonthDays = this.getThisMonthDays(year, month);
 				// this.columnsLen=Math.ceil(thisMonthDays/7);
 				// console.log(this.columnsLen);
@@ -168,10 +166,9 @@
 					}
 					this.days.push(obj);
 				}
-				//console.log(this.days);
-
+				// console.log(this.days);
 			},
-
+			// 监听已签到的数据源，如有改变，则赋值
 			onResChange(newD, oldD) {
 				this.SignUp = newD;
 				this.onJudgeSign();
@@ -196,7 +193,6 @@
 				}
 				this.days = daysArr;
 			},
-
 			// 切换控制年月，上一个月，下一个月
 			handleCalendar(type) {
 				const cur_year = parseInt(this.cur_year);
@@ -219,14 +215,11 @@
 				console.log(newYear, newMonth)// 2020 9
 				this.calculateEmptyGrids(newYear, newMonth);
 				this.calculateDays(newYear, newMonth);
-
 				this.cur_year = newYear;
 				this.cur_month = newMonth;
-
 				this.SignUp = []; //先清空
 				this.$emit('dateChange', this.cur_year+"-"+this.cur_month); //传给调用模板页面去拿新数据				
 			},
-
 			clickSignUp(date, type) { //type=0补签，type=1当日签到		
 				console.log('date',date)
 				var str = "签到";
@@ -238,17 +231,12 @@
 					icon: 'success',
 					duration: 2000
 				});
-				
 				// this.SignUp.push(this.cur_year + "-" + this.cur_month + "-" + date); //自动加假数据，写了接口就不用了
-				
 				// console.log(this.SignUp);
 				// this.$forceUpdate();
-				
 				this.$emit('clickChange', this.cur_year + "-" + this.cur_month + "-" + date); //传给调用模板页面
-
 				//refresh
 				this.onJudgeSign();
-
 			}
 		}
 	}

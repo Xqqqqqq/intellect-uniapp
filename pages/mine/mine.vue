@@ -134,7 +134,7 @@
 	}
 	.mine-top{
 		width: 100%;
-		padding:130rpx 80rpx;
+		padding:150rpx 80rpx;
 		box-sizing: border-box;
 		background: linear-gradient(to right, rgb(40,148,253), rgb(94, 92, 216));
 		position: relative;

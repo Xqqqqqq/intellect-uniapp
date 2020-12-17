@@ -21,8 +21,8 @@
 		</view>
 		
 		<view class="img-test-btn">
-			<view class="test-btn-li test-btn-li-gray">< 上一条</view>
-			<view class="test-btn-li test-btn-li-blue">下一条 ></view>
+			<view class="test-btn-li test-btn-li-gray">上一条</view>
+			<view class="test-btn-li test-btn-li-blue">下一条</view>
 		</view>
 	</view>
 </template>

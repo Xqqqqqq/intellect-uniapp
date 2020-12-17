@@ -1,0 +1,41 @@
+{
+  "description": "项目配置文件。",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.9.2",
+  "appid": "touristappid",
+  "projectname": "intellect-uniapp",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/train/imageMemory/numImgTest",
+          "pathName": "pages/train/imageMemory/numImgTest",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/myData/myData",
+          "pathName": "pages/myData/myData",
+          "scene": null
+        }
+      ]
+    }
+  }
+}
