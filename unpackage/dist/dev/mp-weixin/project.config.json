@@ -25,14 +25,20 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/train/imageMemory/numImgTest",
-          "pathName": "pages/train/imageMemory/numImgTest",
+          "name": "pages/train/imageMemory/numImgPair",
+          "pathName": "pages/train/imageMemory/numImgPair",
           "query": "",
           "scene": null
         },
         {
           "name": "pages/myData/myData",
           "pathName": "pages/myData/myData",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/train/imageMemory/numImgCard",
+          "pathName": "pages/train/imageMemory/numImgCard",
           "scene": null
         }
       ]

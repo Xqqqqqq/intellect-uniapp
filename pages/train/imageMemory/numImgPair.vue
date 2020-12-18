@@ -1,11 +1,6 @@
 <template>
 	<view class="img-pair">
-		<!-- #ifdef APP-PLUS -->
-		<view class="status_bar">
-			<view class="top_view"></view>
-		</view>
-		<!-- #endif -->
-		<view class="img-pair-top">
+		<view class="img-pair-top" :style="{top: showH5 ? '88rpx' : '0rpx'}">
 			<view class="pair-top-blue">数图配对：</view>
 			<view class="pair-top-red">{{resendTime}}s</view>
 			<view class="pair-top-blue">第1组 / 共8组</view>
@@ -75,10 +70,16 @@
 					leftid: '',
 					leftnum: '',
 				}, // 左侧选中数据
-				clickedLeftList: []
+				clickedLeftList: [],
+				showH5: true,
 			};
 		},
 		onShow(){
+			if(navigator){
+				this.showH5 = true
+			}else{
+				this.showH5 = false
+			}
 			// 计时器
 			const timer = setInterval(() => {
 				this.resendTime = this.resendTime - 1;
@@ -124,11 +125,11 @@
 <style lang="scss">
 page{
 	width: 100%;
-	// height: 100%;
+	height: 100%;
 }
 .img-pair{
 	width: 100%;
-	// height: 100%;
+	height: 100%;
 	padding: 80rpx 0 100rpx 0;
 	box-sizing: border-box;
 	.status_bar {
@@ -151,7 +152,7 @@ page{
 	.img-pair-top{
 		position: fixed;
 		left: 0;
-		top: 88rpx;
+		top: 0;
 		z-index: 99;
 		box-shadow:1px 2px 6px 0px rgba(108,143,197,0.3);
 		display: flex;

@@ -41,21 +41,28 @@
 			<view class="img-card-btn-clone" :style="{height: cloneHeight+'rpx'}"></view>
 		</view>
 		<view class="img-card-btn">
-			<view class="card-btn-li bg-gradual-red padding radius text-center shadow-blur">自定义备注</view>
+			<view class="card-btn-li bg-gradual-red padding radius text-center shadow-blur" @click="openPop('remark')">自定义备注</view>
 			<view class="card-btn-li bg-gradual-orange padding radius text-center shadow-blur" @click="changeType">切换列表</view>
 			<view class="card-btn-li bg-gradual-green padding radius text-center shadow-blur">自定义图片</view>
 			<view class="card-btn-li bg-gradual-blue padding radius text-center shadow-blur" @click="gotoUrl">前往测试</view>
 		</view>
+		<l-modal :isShowModal="isShowModal" :modalTitle="modalTitle" @onClickChange="changeMsk" @onClickCancel="cancel" @onClickConfirm="confirm">
+			<template>
+				<view style="text-align: center;">确认充值<text style="color: red;">100元</text>？</view>
+			</template>
+		</l-modal>
 	</view>
 </template>
 
 <script>
 	import RenDropdownFilter from '@/components/ren-dropdown-filter/ren-dropdown-filter.vue'
 	import uniSwiperDot from "@/components/uni-swiper-dot/uni-swiper-dot.vue"
+	import lModal from '@/components/l-modal/l-modal.vue'
 	export default {
 		components:{
 			RenDropdownFilter,
-			uniSwiperDot
+			uniSwiperDot,
+			lModal
 		},
 		data() {
 			return {
@@ -110,6 +117,8 @@
 				swiperHeight: '',// swpier的高度
 				cloneHeight:'',
 				showCard: false, // 是否展示card格式
+				isShowModal: false,//弹窗部分
+				modalTitle: '提示',
 			}
 		},
 		mounted() {
@@ -144,6 +153,19 @@
 				uni.navigateTo({
 					url: '/pages/train/imageMemory/numImgTest'
 				})
+			},
+			openPop(type){
+				console.log(type)
+				this.isShowModal = true
+			},
+			cancel() {
+				// do sth
+			},
+			confirm() {
+				// do sth
+			},
+			changeMsk(e){
+				this.isShowModal = !this.isShowModal
 			}
 		}
 	}

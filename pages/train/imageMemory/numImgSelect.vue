@@ -1,11 +1,6 @@
 <template>
 	<view class="img-pair">
-		<!-- #ifdef APP-PLUS -->
-		<view class="status_bar">
-			<view class="top_view"></view>
-		</view>
-		<!-- #endif -->
-		<view class="img-pair-top">
+		<view class="img-pair-top" :style="{top: showH5 ? '88rpx' : '0rpx'}">
 			<view class="pair-top-blue">数图单选：</view>
 			<view class="pair-top-red">{{resendTime}}s</view>
 			<view class="pair-top-blue">第1组 / 共8组</view>
@@ -63,9 +58,15 @@
 					img:'../../../static/img/icons/zhongjiang.png'
 				},],
 				currentTab:-1,
+				showH5: true,
 			};
 		},
 		onShow(){
+			if(navigator){
+				this.showH5 = true
+			}else{
+				this.showH5 = false
+			}
 			// 计时器
 			const timer = setInterval(() => {
 				this.resendTime = this.resendTime - 1;

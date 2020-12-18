@@ -1,11 +1,6 @@
 <template>
 	<view class="train-link">
-		<!-- #ifdef APP-PLUS -->
-		<view class="status_bar">
-			<view class="top_view"></view>
-		</view>
-		<!-- #endif -->
-		<view class="img-pair-top">
+		<view class="img-pair-top" :style="{top: showH5 ? '88rpx' : '0rpx'}">
 			<view class="pair-top-blue">当前组号：1</view>
 			<view class="pair-top-blue">第1组 / 共5组</view>
 		</view>
@@ -36,8 +31,16 @@
 					"../../../static/img/icons/blue-arrow.png",
 					"../../../static/img/icons/blue-arrow.png",
 					"../../../static/img/icons/blue-arrow.png",
-				]
+				],
+				showH5:true,
 			};
+		},
+		onShow(){
+			if(navigator){
+				this.showH5 = true
+			}else{
+				this.showH5 = false
+			}
 		},
 		methods:{
 			gotoUrl(){
