@@ -43,6 +43,10 @@
 				changeValue: '',
 			};
 		},
+		onLoad(options){
+			console.log(options)
+			this.changeValue = options.name
+		},
 		methods:{
 			clickTab(index){
 				if (this.currentTab == index) {

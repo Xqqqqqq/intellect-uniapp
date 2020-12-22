@@ -179,6 +179,10 @@ __webpack_require__.r(__webpack_exports__);
       changeValue: '' };
 
   },
+  onLoad: function onLoad(options) {
+    console.log(options);
+    this.changeValue = options.name;
+  },
   methods: {
     clickTab: function clickTab(index) {
       if (this.currentTab == index) {

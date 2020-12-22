@@ -163,24 +163,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
       goodsName: '',
-      historyList: [],
-      currentHistoryTab: -1 };
-
+      commonList: [],
+      // currentCommonTab:-1,
+      historyList: []
+      // currentHistoryTab:-1,
+    };
   },
-  mounted: function mounted() {
-    this.currentHistoryTab = -1;
+  onShow: function onShow() {
+    // this.currentHistoryTab = -1
+    // this.currentCommonTab = -1
     this.goodsName = '';
     this.historyList = uni.getStorageSync('historyList');
   },
   methods: {
     bindNameInput: function bindNameInput(e) {
       this.goodsName = e.target.value;
-      console.log(e.target.value);
     },
     clickSearch: function clickSearch() {
       if (this.goodsName) {
@@ -191,7 +197,7 @@ var _default =
         uni.setStorageSync('historyList', this.historyList);
       }
       uni.navigateTo({
-        url: '/pages/train/searchResult' });
+        url: "/pages/train/searchResult?name=".concat(this.goodsName) });
 
     },
     // 数组去重
@@ -199,14 +205,23 @@ var _default =
       return Array.from(new Set(arr));
     },
     clickDelete: function clickDelete() {
+      uni.clearStorageSync('historyList');
+      this.historyList = [];
+      this.currentHistoryTab = -1;
+    },
+    clickHistoryTab: function clickHistoryTab(index, item) {
+      // this.currentHistoryTab = index
+      this.goodsName = item;
+      uni.navigateTo({
+        url: "/pages/train/searchResult?name=".concat(this.goodsName) });
 
     },
-    clickHistoryTab: function clickHistoryTab(index) {
-      if (this.currentHistoryTab == index) {
-        return false;
-      } else {
-        this.currentHistoryTab = index;
-      }
+    clickCommonTab: function clickCommonTab(index, item) {
+      // this.currentCommonTab = index
+      this.goodsName = item;
+      uni.navigateTo({
+        url: "/pages/train/searchResult?name=".concat(this.goodsName) });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -8,13 +8,15 @@
 	    </view>
 	  </view>
 	  <!-- 常用搜索 -->
-	  <view class="wrap-name" v-if="historyList.length >0">
+	  <view class="wrap-name" v-if="commonList.length >0">
 	    常用搜索
 	  </view>
-	  <view class="history" v-if="historyList.length >0">
-	    <view v-for="(item, index) in historyList" :key="index" @click="clickHistoryTab(index)"
+	  <view class="history" v-if="commonList.length >0">
+	    <!-- <view v-for="(item, index) in commonList" :key="index" @click="clickCommonTab(index)"
 		class="tab-li"
-	    :class="{'tab-li-ture':currentHistoryTab == index}">{{item}}</view>
+	    :class="{'tab-li-ture':currentCommonTab == index}">{{item}}</view> -->
+		<view v-for="(item, index) in commonList" :key="index" @click="clickCommonTab(index,item)"
+		class="tab-li">{{item}}</view>
 	  </view>
 	  <!-- 历史记录 -->
 	  <view class="wrap-name" v-if="historyList.length >0">
@@ -24,9 +26,11 @@
 	    </view>
 	  </view>
 	  <view class="history" v-if="historyList.length >0">
-	    <view v-for="(item, index) in historyList" :key="index" @click="clickHistoryTab(index)"
+	    <!-- <view v-for="(item, index) in historyList" :key="index" @click="clickHistoryTab(index)"
 	    class="tab-li"
-	    :class="{'tab-li-ture':currentHistoryTab == index}">{{item}}</view>
+	    :class="{'tab-li-ture':currentHistoryTab == index}">{{item}}</view> -->
+		<view v-for="(item, index) in historyList" :key="index" @click="clickHistoryTab(index,item)"
+		class="tab-li">{{item}}</view>
 	  </view>
 	</view>
 </template>
@@ -36,19 +40,21 @@
 		data() {
 			return {
 				goodsName: '',
+				commonList:[],
+				// currentCommonTab:-1,
 				historyList:[],
-				currentHistoryTab:-1,
+				// currentHistoryTab:-1,
 			};
 		},
-		mounted(){
-			this.currentHistoryTab = -1
+		onShow(){
+			// this.currentHistoryTab = -1
+			// this.currentCommonTab = -1
 			this.goodsName = ''
 			this.historyList = uni.getStorageSync('historyList')
 		},
 		methods:{
 			bindNameInput(e){
 				this.goodsName = e.target.value
-				console.log(e.target.value)
 			},
 			clickSearch(){
 				if(this.goodsName){
@@ -59,7 +65,7 @@
 					uni.setStorageSync('historyList', this.historyList)
 				}
 				uni.navigateTo({
-					url: '/pages/train/searchResult'
+					url: `/pages/train/searchResult?name=${this.goodsName}`
 				})
 			},
 			// 数组去重
@@ -67,14 +73,23 @@
 				return Array.from(new Set(arr))
 			},
 			clickDelete(){
-				
+				uni.clearStorageSync('historyList')
+				this.historyList = []
+				this.currentHistoryTab = -1
 			},
-			clickHistoryTab(index){
-				if (this.currentHistoryTab == index) {
-					return false
-				} else {
-					this.currentHistoryTab = index
-				}
+			clickHistoryTab(index,item){
+				// this.currentHistoryTab = index
+				this.goodsName = item
+				uni.navigateTo({
+					url: `/pages/train/searchResult?name=${this.goodsName}`
+				})
+			},
+			clickCommonTab(index,item){
+				// this.currentCommonTab = index
+				this.goodsName = item
+				uni.navigateTo({
+					url: `/pages/train/searchResult?name=${this.goodsName}`
+				})
 			}
 		}
 	}

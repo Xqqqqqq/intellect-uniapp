@@ -16,10 +16,13 @@
 				type: String,
 				default: ''
 			},
+			changeValue: {
+				type: String,
+				default: ''
+			}
 		},
 		data() {
 			return {
-				changeValue:''
 			};
 		},
 		methods:{

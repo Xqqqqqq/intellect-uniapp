@@ -186,4 +186,12 @@ page {
   -webkit-border-radius: 15rpx;
           border-radius: 15rpx;
 }
+.img-card .modal-img {
+  width: 250rpx;
+  height: 250rpx;
+  display: block;
+  margin: auto;
+  -webkit-border-radius: 15rpx;
+          border-radius: 15rpx;
+}
 

@@ -130,12 +130,15 @@ var _default =
   props: {
     placeholderText: {
       type: String,
+      default: '' },
+
+    changeValue: {
+      type: String,
       default: '' } },
 
 
   data: function data() {
-    return {
-      changeValue: '' };
+    return {};
 
   },
   methods: {

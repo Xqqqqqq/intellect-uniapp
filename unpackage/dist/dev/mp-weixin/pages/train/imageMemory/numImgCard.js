@@ -140,7 +140,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var RenDropdownFilter = function RenDropdownFilter() {__webpack_require__.e(/*! require.ensure | components/ren-dropdown-filter/ren-dropdown-filter */ "components/ren-dropdown-filter/ren-dropdown-filter").then((function () {return resolve(__webpack_require__(/*! @/components/ren-dropdown-filter/ren-dropdown-filter.vue */ 287));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniSwiperDot = function uniSwiperDot() {__webpack_require__.e(/*! require.ensure | components/uni-swiper-dot/uni-swiper-dot */ "components/uni-swiper-dot/uni-swiper-dot").then((function () {return resolve(__webpack_require__(/*! @/components/uni-swiper-dot/uni-swiper-dot.vue */ 294));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var lModal = function lModal() {__webpack_require__.e(/*! require.ensure | components/l-modal/l-modal */ "components/l-modal/l-modal").then((function () {return resolve(__webpack_require__(/*! @/components/l-modal/l-modal.vue */ 301));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var RenDropdownFilter = function RenDropdownFilter() {__webpack_require__.e(/*! require.ensure | components/ren-dropdown-filter/ren-dropdown-filter */ "components/ren-dropdown-filter/ren-dropdown-filter").then((function () {return resolve(__webpack_require__(/*! @/components/ren-dropdown-filter/ren-dropdown-filter.vue */ 287));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniSwiperDot = function uniSwiperDot() {__webpack_require__.e(/*! require.ensure | components/uni-swiper-dot/uni-swiper-dot */ "components/uni-swiper-dot/uni-swiper-dot").then((function () {return resolve(__webpack_require__(/*! @/components/uni-swiper-dot/uni-swiper-dot.vue */ 294));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var lModal = function lModal() {__webpack_require__.e(/*! require.ensure | components/l-modal/l-modal */ "components/l-modal/l-modal").then((function () {return resolve(__webpack_require__(/*! @/components/l-modal/l-modal.vue */ 301));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var avatar = function avatar() {Promise.all(/*! require.ensure | components/yq-avatar/yq-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/yq-avatar/yq-avatar")]).then((function () {return resolve(__webpack_require__(/*! ../../../components/yq-avatar/yq-avatar.vue */ 308));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
 
 
 
@@ -206,15 +208,43 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     RenDropdownFilter: RenDropdownFilter,
     uniSwiperDot: uniSwiperDot,
-    lModal: lModal },
+    lModal: lModal,
+    avatar: avatar },
 
   data: function data() {
     return {
       filterData: [
-      [{ text: '1-10', value: 1 }, { text: '11-20', value: 2 }],
-      [{ text: '系统图片', value: 1 }, { text: '用户上传图片', value: 2 }],
-      [{ text: '系统备注', value: 1 }, { text: '用户上传备注', value: 2 }],
-      [{ text: '顺序', value: 1 }, { text: '倒叙', value: 2 }, { text: '乱序', value: 3 }]],
+      [{
+        text: '1-10',
+        value: 1 },
+      {
+        text: '11-20',
+        value: 2 }],
+
+      [{
+        text: '系统图片',
+        value: 1 },
+      {
+        text: '用户上传图片',
+        value: 2 }],
+
+      [{
+        text: '系统备注',
+        value: 1 },
+      {
+        text: '用户上传备注',
+        value: 2 }],
+
+      [{
+        text: '顺序',
+        value: 1 },
+      {
+        text: '倒叙',
+        value: 2 },
+      {
+        text: '乱序',
+        value: 3 }]],
+
 
       defaultIndex: [0, 0, 0, 0],
       indicatorDots: true,
@@ -225,8 +255,7 @@ __webpack_require__.r(__webpack_exports__);
       dotsStyles: {
         color: 'black' },
 
-      swiperList: [
-      {
+      swiperList: [{
         imgSrc: '../../../static/img/icons/zhongjiang.png',
         title: '一件衣服',
         num: 1 },
@@ -264,8 +293,10 @@ __webpack_require__.r(__webpack_exports__);
       isShowModal: false, //弹窗部分
       modalTitle: '提示',
       userRemark: '', //自定义备注
-      btnType: 'remark' // 判断点击的是备注还是图片
-    };
+      btnType: 'remark', // 判断点击的是备注还是图片
+      modalImg: '',
+      avatarShow: false };
+
   },
   mounted: function mounted() {
     var vm = this;
@@ -275,9 +306,9 @@ __webpack_require__.r(__webpack_exports__);
         obj.boundingClientRect(function (data) {
           var objSelect = uni.createSelectorQuery().select('.select-box');
           objSelect.boundingClientRect(function (response) {
-            // console.log('windowHeight',res.windowHeight)	
-            // console.log('data.height',data.height)	
-            // console.log('response.height',response.height)	
+            // console.log('windowHeight',res.windowHeight) 
+            // console.log('data.height',data.height) 
+            // console.log('response.height',response.height) 
             vm.swiperHeight = (res.windowHeight - data.height - response.height - 20) * 2;
             vm.cloneHeight = data.height * 2;
           }).exec();
@@ -301,7 +332,6 @@ __webpack_require__.r(__webpack_exports__);
 
     },
     openPop: function openPop(type) {
-      console.log(type);
       this.btnType = type;
       if (this.btnType == 'remark') {
         this.modalTitle = '自定义备注';
@@ -315,16 +345,34 @@ __webpack_require__.r(__webpack_exports__);
       if (this.btnType == 'remark') {
         this.userRemark = '';
       } else {
-
+        this.modalImg = '';
+        this.avatarShow = false;
       }
     },
     confirm: function confirm() {
       if (this.btnType == 'remark') {
         this.userRemark = '';
       } else {
-
+        this.avatarShow = false;
+        this.modalImg = '';
       }
       this.isShowModal = false;
+    },
+    myUpload: function myUpload(rsp) {
+      // this.url = rsp.path; //更新头像方式一
+      //rsp.avatar.imgSrc = rsp.path; //更新头像方式二
+      // console.log('00000000000000', rsp)
+      this.avatarShow = false;
+      this.modalImg = rsp.base64;
+    },
+    openavatar: function openavatar(index) {
+      this.avatarShow = true;
+      this.$refs.avatar.fChooseImg(index, {
+        selWidth: "300upx",
+        selHeight: "300upx",
+        expWidth: '260upx',
+        expHeight: '260upx' });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
