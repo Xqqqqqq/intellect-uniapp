@@ -1,5 +1,5 @@
 <template>
-	<view v-if="isShowModal" @click="changeMask">
+	<view v-if="isShowModal">
 		<view class="masking" v-if="showMasking" :style="{'background-color': bgColor}"></view>
 		<view class="model-wraper">
 			<view class="modal-title" v-if="modalTitle !== ''">
@@ -73,12 +73,12 @@
 				this.isShowModal = true
 			},
 			handleCancel() {
-				this.isShowModal = false
-				this.$emit('onClickCancel', 'cancel')
+				// this.isShowModal = false
+				this.$emit('onClickCancel', false)
 			},
 			handleConfirm() {
-				this.isShowModal = false
-				this.$emit('onClickConfirm', 'confirm')
+				// this.isShowModal = false
+				this.$emit('onClickConfirm', false)
 			}
 		}
 	}
@@ -113,7 +113,8 @@
 		color: #666;
 	}
 	.modal-body {
-		padding: 60rpx 30rpx 80rpx 30rpx;
+		padding: 0 30rpx 30rpx 30rpx;
+		box-sizing: border-box;
 	}
 	.btn {
 		width: 300rpx;

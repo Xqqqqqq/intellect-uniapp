@@ -43,12 +43,14 @@
 		<view class="img-card-btn">
 			<view class="card-btn-li bg-gradual-red padding radius text-center shadow-blur" @click="openPop('remark')">自定义备注</view>
 			<view class="card-btn-li bg-gradual-orange padding radius text-center shadow-blur" @click="changeType">切换列表</view>
-			<view class="card-btn-li bg-gradual-green padding radius text-center shadow-blur">自定义图片</view>
+			<view class="card-btn-li bg-gradual-green padding radius text-center shadow-blur" @click="openPop('img')">自定义图片</view>
 			<view class="card-btn-li bg-gradual-blue padding radius text-center shadow-blur" @click="gotoUrl">前往测试</view>
 		</view>
-		<l-modal :isShowModal="isShowModal" :modalTitle="modalTitle" @onClickChange="changeMsk" @onClickCancel="cancel" @onClickConfirm="confirm">
-			<template>
-				<view style="text-align: center;">确认充值<text style="color: red;">100元</text>？</view>
+		<l-modal :isShowModal="isShowModal" :modalTitle="modalTitle" @onClickCancel="cancel" @onClickConfirm="confirm">
+			<template v-if="btnType == 'remark'">
+				 <textarea focus placeholder="请输入自定义备注" v-model="userRemark" class="modal-text"/>
+			</template>
+			<template v-else>
 			</template>
 		</l-modal>
 	</view>
@@ -62,7 +64,7 @@
 		components:{
 			RenDropdownFilter,
 			uniSwiperDot,
-			lModal
+			lModal,
 		},
 		data() {
 			return {
@@ -115,10 +117,12 @@
 				],
 				current: 0,
 				swiperHeight: '',// swpier的高度
-				cloneHeight:'',
+				cloneHeight:'', //站位标签高度
 				showCard: false, // 是否展示card格式
 				isShowModal: false,//弹窗部分
 				modalTitle: '提示',
+				userRemark:'', //自定义备注
+				btnType: 'remark', // 判断点击的是备注还是图片
 			}
 		},
 		mounted() {
@@ -156,17 +160,30 @@
 			},
 			openPop(type){
 				console.log(type)
+				this.btnType = type
+				if(this.btnType == 'remark') {
+					this.modalTitle = '自定义备注'
+				}else{
+					this.modalTitle = '自定义图片'
+				}
 				this.isShowModal = true
 			},
 			cancel() {
-				// do sth
+				this.isShowModal = false
+				if(this.btnType == 'remark'){
+					this.userRemark = ''
+				}else{
+					
+				}
 			},
 			confirm() {
-				// do sth
+				if(this.btnType == 'remark'){
+					this.userRemark = ''
+				}else{
+					
+				}
+				this.isShowModal = false
 			},
-			changeMsk(e){
-				this.isShowModal = !this.isShowModal
-			}
 		}
 	}
 </script>
@@ -290,6 +307,14 @@ page{
 		.card-btn-li:nth-child(2n){
 			margin-right: 0%;
 		}
+	}
+	.modal-text{
+		border: 1px solid #dcdcdc;
+		width: 100%;
+		padding: 24rpx;
+		box-sizing: border-box;
+		font-size: 30rpx;
+		border-radius: 15rpx;
 	}
 }
 </style>

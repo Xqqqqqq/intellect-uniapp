@@ -30,7 +30,9 @@
 	color: #666;
 }
 .modal-body.data-v-d9cdde1a {
-	padding: 60rpx 30rpx 80rpx 30rpx;
+	padding: 0 30rpx 30rpx 30rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .btn.data-v-d9cdde1a {
 	width: 300rpx;

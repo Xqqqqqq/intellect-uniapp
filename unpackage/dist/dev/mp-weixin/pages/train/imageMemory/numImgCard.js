@@ -100,7 +100,7 @@ var components = {
     return __webpack_require__.e(/*! import() | components/uni-swiper-dot/uni-swiper-dot */ "components/uni-swiper-dot/uni-swiper-dot").then(__webpack_require__.bind(null, /*! @/components/uni-swiper-dot/uni-swiper-dot.vue */ 294))
   },
   lModal: function() {
-    return __webpack_require__.e(/*! import() | components/l-modal/l-modal */ "components/l-modal/l-modal").then(__webpack_require__.bind(null, /*! @/components/l-modal/l-modal.vue */ 361))
+    return __webpack_require__.e(/*! import() | components/l-modal/l-modal */ "components/l-modal/l-modal").then(__webpack_require__.bind(null, /*! @/components/l-modal/l-modal.vue */ 301))
   }
 }
 var render = function() {
@@ -140,7 +140,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var RenDropdownFilter = function RenDropdownFilter() {__webpack_require__.e(/*! require.ensure | components/ren-dropdown-filter/ren-dropdown-filter */ "components/ren-dropdown-filter/ren-dropdown-filter").then((function () {return resolve(__webpack_require__(/*! @/components/ren-dropdown-filter/ren-dropdown-filter.vue */ 287));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniSwiperDot = function uniSwiperDot() {__webpack_require__.e(/*! require.ensure | components/uni-swiper-dot/uni-swiper-dot */ "components/uni-swiper-dot/uni-swiper-dot").then((function () {return resolve(__webpack_require__(/*! @/components/uni-swiper-dot/uni-swiper-dot.vue */ 294));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var lModal = function lModal() {__webpack_require__.e(/*! require.ensure | components/l-modal/l-modal */ "components/l-modal/l-modal").then((function () {return resolve(__webpack_require__(/*! @/components/l-modal/l-modal.vue */ 361));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var RenDropdownFilter = function RenDropdownFilter() {__webpack_require__.e(/*! require.ensure | components/ren-dropdown-filter/ren-dropdown-filter */ "components/ren-dropdown-filter/ren-dropdown-filter").then((function () {return resolve(__webpack_require__(/*! @/components/ren-dropdown-filter/ren-dropdown-filter.vue */ 287));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniSwiperDot = function uniSwiperDot() {__webpack_require__.e(/*! require.ensure | components/uni-swiper-dot/uni-swiper-dot */ "components/uni-swiper-dot/uni-swiper-dot").then((function () {return resolve(__webpack_require__(/*! @/components/uni-swiper-dot/uni-swiper-dot.vue */ 294));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var lModal = function lModal() {__webpack_require__.e(/*! require.ensure | components/l-modal/l-modal */ "components/l-modal/l-modal").then((function () {return resolve(__webpack_require__(/*! @/components/l-modal/l-modal.vue */ 301));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
 
 
 
@@ -257,11 +259,13 @@ __webpack_require__.r(__webpack_exports__);
 
       current: 0,
       swiperHeight: '', // swpier的高度
-      cloneHeight: '',
+      cloneHeight: '', //站位标签高度
       showCard: false, // 是否展示card格式
       isShowModal: false, //弹窗部分
-      modalTitle: '提示' };
-
+      modalTitle: '提示',
+      userRemark: '', //自定义备注
+      btnType: 'remark' // 判断点击的是备注还是图片
+    };
   },
   mounted: function mounted() {
     var vm = this;
@@ -298,16 +302,29 @@ __webpack_require__.r(__webpack_exports__);
     },
     openPop: function openPop(type) {
       console.log(type);
+      this.btnType = type;
+      if (this.btnType == 'remark') {
+        this.modalTitle = '自定义备注';
+      } else {
+        this.modalTitle = '自定义图片';
+      }
       this.isShowModal = true;
     },
     cancel: function cancel() {
-      // do sth
+      this.isShowModal = false;
+      if (this.btnType == 'remark') {
+        this.userRemark = '';
+      } else {
+
+      }
     },
     confirm: function confirm() {
-      // do sth
-    },
-    changeMsk: function changeMsk(e) {
-      this.isShowModal = !this.isShowModal;
+      if (this.btnType == 'remark') {
+        this.userRemark = '';
+      } else {
+
+      }
+      this.isShowModal = false;
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
