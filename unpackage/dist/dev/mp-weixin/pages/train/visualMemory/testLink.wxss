@@ -113,6 +113,20 @@
   content: '';
   width: 33%;
 }
+.test-link .train-link-input {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.test-link .train-link-input .link-input-li {
+  width: 20%;
+  border: 1rpx solid #F0F0F0;
+  background-color: #FFFFFF;
+  height: 150rpx;
+  text-align: center;
+  font-size: 36rpx;
+}
 .test-link .img-test-btn {
   width: 100%;
   display: -webkit-box;

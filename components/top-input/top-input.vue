@@ -37,12 +37,11 @@
 .top-input{
 	width: 100%;
 	background-color: #FFFFFF;
-	padding: 30rpx 24rpx;
-	box-sizing: border-box;
+	border-radius:25rpx;
+	overflow: hidden;
 	.top-input-box{
 		width: 100%;
 		background:rgba(247,247,247,1);
-		border-radius:35px;
 		height: 70rpx;
 		position: relative;
 		padding-left: 78rpx;
@@ -65,6 +64,7 @@
 			line-height: 1;
 			width: 74%;
 			font-size: 28rpx;
+			border: none;
 		}
 	}
 }

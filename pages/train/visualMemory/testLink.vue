@@ -12,6 +12,13 @@
 				<image :src="item"></image>
 			</view>
 		</view>
+		<view class="train-link-input">
+			<input type="number" class="link-input-li"/>
+			<input type="number" class="link-input-li"/>
+			<input type="number" class="link-input-li"/>
+			<input type="number" class="link-input-li"/>
+			<input type="number" class="link-input-li"/>
+		</view>
 		<view class="img-test-btn">
 			<view class="test-btn-li test-btn-li-blue" @click="gotoUrl">查看结果</view>
 		</view>
@@ -120,6 +127,18 @@
 		&:after{
 			content: '';
 			width: 33%;
+		}
+	}
+	.train-link-input{
+		width: 100%;
+		display: flex;
+		.link-input-li{
+			width: 20%;
+			border: 1rpx solid #F0F0F0;
+			background-color: #FFFFFF;
+			height: 150rpx;
+			text-align: center;
+			font-size: 36rpx;
 		}
 	}
 	.img-test-btn{

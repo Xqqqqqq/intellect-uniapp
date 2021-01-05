@@ -1564,7 +1564,7 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
-/***/ 10:
+/***/ 11:
 /*!**********************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
   \**********************************************************************************************************/
@@ -7754,18 +7754,18 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 313:
+/***/ 314:
 /*!*********************************************************************************************!*\
   !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 314);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 315);
 
 /***/ }),
 
-/***/ 314:
+/***/ 315:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -7796,7 +7796,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 315);
+module.exports = __webpack_require__(/*! ./runtime */ 316);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -7813,7 +7813,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 315:
+/***/ 316:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -8556,7 +8556,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 63:
+/***/ 64:
 /*!******************************************************************!*\
   !*** F:/项目总文件夹/intellect-uniapp/components/u-charts/u-charts.js ***!
   \******************************************************************/
@@ -14227,6 +14227,49 @@ if ( true && typeof module.exports === "object") {
   //export default Charts;//建议使用nodejs的module导出方式，如报错请使用export方式导出
 }
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 8:
+/*!************************************************!*\
+  !*** F:/项目总文件夹/intellect-uniapp/common/fun.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  getPlatform: function getPlatform() {
+    var platform = undefined;
+
+
+
+
+
+
+
+
+
+
+    platform = "MP-WEIXIN";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    return platform;
+  } };exports.default = _default;
 
 /***/ })
 

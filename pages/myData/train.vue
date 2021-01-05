@@ -1,58 +1,77 @@
 <template>
 	<view class="train">
+		<view class="wrap-top">
+			<view class="wrap-top-box">
+				<view class="top-box-li">
+					<view class="top-box-li-title">本月</view>
+					<view class="top-box-li-num">30次</view>
+				</view>
+			</view>
+			<view class="wrap-top-tip">碎片化时间训练方向</view>
+		</view>
+		<view class="charts-title">关键字前5分析</view>
 		<view class="qiun-charts" >
 			<canvas canvas-id="canvasRadar" id="canvasRadar" class="charts"></canvas>
 		</view>
 		<view class="train-line"></view>
+		<view class="charts-title" style="background-color: #F5F5F5;">月度训练排行</view>
 		<view class="train-content">
-			<view class="train-content-li">
-				<view class="content-li-left" style="color: #dd524d; font-size: 30rpx;">总训练</view>
-				<view class="content-li-right" style="color: #dd524d; font-size: 30rpx;">17次</view>
-			</view>
-			<view class="train-content-li">
-				<view class="content-li-left">记忆力</view>
-				<view class="content-li-right">3次</view>
-			</view>
-			<view class="train-content-li">
-				<view class="content-li-left">注意力</view>
-				<view class="content-li-right">5次</view>
-			</view>
+			<my-list :myList="listdetial" @gotoUrl="gotoListDetail"></my-list>
 		</view>
-		<view class="train-btn">切换展示项</view>
-		<view class="train-btn-clone"></view>
 	</view>
 </template>
 
 <script>
 	import uCharts from '@/components/u-charts/u-charts.js';
+	import MyList from '@/components/my-list/my-list.vue'
 	var _self;
 	var canvaRadar=null;
 	export default {
+		components: {
+			MyList,
+		},
 		data() {
 			return {
 				cWidth:'',
 				cHeight:'',
 				pixelRatio:1,
 				chartData: {
-					categories: ['记忆力', '注意力', '观察力', '思维力', '想象力'],
+					categories: ['英语词根', '少儿基础', '法律元素', '数字图像', '英文前缀'],
 					series: [{
-						name: '记忆力',
+						name: '英语词根',
 						// color: '#ffffff',
 						data: [90, 110, 165, 195, 187]
 					}, {
-						name: '注意力',
+						name: '少儿基础',
 						data: [190, 210, 105, 35, 27]
 					}, {
-						name: '观察力',
+						name: '法律元素',
 						data: [10, 20, 100, 35, 27]
 					}, {
-						name: '思维力',
+						name: '数字图像',
 						data: [101, 220, 140, 39, 50]
 					}, {
-						name: '想象力',
+						name: '英文前缀',
 						data: [122, 320, 70, 300, 200]
 					}]
-				}
+				},
+				listdetial:[{
+					src:'../../static/img/icons/common.jpg',
+					title: '数字图像记忆',
+					source: '官方',
+					person: '100',
+					detail: '简介：针对0~100的数字进行图像',
+					date: '2020-10-10',
+					num: 20
+				},{
+					src:'../../static/img/icons/common.jpg',
+					title: '数字图像记忆',
+					source: '官方',
+					person: '100',
+					detail: '简介：针对0~100的数字进行图像',
+					date: '2020-10-10',
+					num: 20
+				}],
 			}
 		},
 		onLoad() {
@@ -105,6 +124,9 @@
 						}
 					}
 				});
+			},
+			gotoListDetail(item){
+				console.log(item)
 			}
 		}
 	}
@@ -119,10 +141,69 @@ page{
 .train{
 	width: 100%;
 	background-color: $uni-color-bg;
+	.wrap-top{
+		width: 100%;
+		background-color: $uni-color-primary;
+		padding: 30rpx 0;
+		box-sizing: border-box;
+		margin-top: -10rpx;
+		.wrap-top-box{
+			padding: 20rpx 0;
+			box-sizing: border-box;
+			width: 100%;
+			display: flex;
+			justify-content: space-around;
+			margin-bottom: 10rpx;
+			.top-box-li{
+				text-align: center;
+				color: #FFFFFF;
+				.top-box-li-title{
+					font-size: 36rpx;
+					font-weight: bold;
+					margin-bottom: 10rpx;
+				}
+				.top-box-li-num{
+					font-size: 30rpx;
+				}
+			}
+		}
+		.wrap-top-tip{
+			text-align: center;
+			color: #FFFFFF;
+			padding-bottom: 30rpx;
+			box-sizing: border-box;
+			font-size: 28rpx;
+			font-weight: bold;
+		}
+	}
 	.train-line{
 		width: 100%;
 		height: 40rpx;
 		background-color: $uni-color-bg;
+	}
+	.charts-title{
+		position: relative;
+		color: #666;
+		font-size: 32rpx;
+		font-weight: bold;
+		background-color: #FFFFFF;
+		text-align: center;
+		line-height: 100rpx;
+		&:before, &:after{
+			content: '';
+			position: absolute;
+			width: 80rpx;
+			height: 3rpx;
+			background-color: #666666;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		&:before{
+			left: 23%;
+		}
+		&:after{
+			right: 23%;
+		}
 	}
 	.qiun-charts {
 		width: 100%;
@@ -137,50 +218,9 @@ page{
 		}
 	}
 	.train-content{
-		background-color: #FFFFFF;
-		padding: 0 50rpx;
-		box-sizing: border-box;
-		.train-content-li{
-			height: 100rpx;
-			line-height: 100rpx;
-			display: flex;
-			justify-content: space-between;
-			border-bottom: 1px dashed rgba(86, 86, 86, .3);
-			padding: 0 10rpx;
-			box-sizing: border-box;
-			&:last-child{
-				border-bottom: none;
-			}
-			.content-li-left{
-				color: $uni-text-color;
-				font-size: 26rpx;
-				font-weight: bold;
-			}
-			.content-li-right{
-				color: $uni-color-primary;
-				font-size: 28rpx;
-			}
-		}
-	}
-	.train-btn{
-		width: 80%;
-		height: 90rpx;
-		line-height: 90rpx;
-		background: linear-gradient(90deg, #378DFF,#5BC0FF);
-		border-radius: 45rpx;
-		color: #FFFFFF;
-		font-size: 30rpx;
-		position: fixed;
-		left: 50%;
-		transform: translateX(-50%);
-		bottom: 3%;
-		text-align: center;
-		font-weight: bold;
-	}
-	.train-btn-clone{
 		width: 100%;
-		height: 90rpx;
-		margin-bottom: 8%;
+		padding: 24rpx;
+		box-sizing: border-box;
 	}
 }
 </style>

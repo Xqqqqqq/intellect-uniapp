@@ -1,8 +1,14 @@
 {
 	"pages": [{
+            "path" : "pages/myData/loadPage",
+            "style" : {
+				"navigationBarTitleText": ""
+			}
+        }
+		,{
             "path" : "pages/myData/myData",
             "style": {
-            	"navigationBarTitleText": "超能训练数据"
+            	"navigationBarTitleText": "武装大脑"
             }
         }
         ,{
@@ -50,7 +56,7 @@
         ,{
             "path" : "pages/myData/longestSeries",
             "style" : {
-				"navigationBarTitleText": "最长连续"
+				"navigationBarTitleText": "本月连续"
 			}
         }
         ,{
@@ -209,6 +215,12 @@
 				"navigationBarTitleText": "分享"
 			}
         }
+        ,{
+            "path" : "pages/myData/groupManage",
+            "style" : {
+				"navigationBarTitleText": "分组管理"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#8F9091",
@@ -245,7 +257,7 @@
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "超能训练数据",
+		"navigationBarTitleText": "武装大脑",
 		"navigationBarBackgroundColor": "#4b95e6",
 		"backgroundColor": "#FFFFFF"
 	}

@@ -11,37 +11,96 @@
 					<view class="top-box-li-num">0</view>
 				</view>
 				<view class="top-box-li" @click="gotoUrl('/pages/myData/longestSeries')">
-					<view class="top-box-li-title">最长连续</view>
+					<view class="top-box-li-title">本月连续</view>
 					<view class="top-box-li-num">0</view>
 				</view>
 			</view>
-			<view class="wrap-top-tip animated">大脑越用越灵活！</view>
+			<view class="wrap-top-tip animated">决胜于碎片化时间的利用</view>
+		</view>
+		
+		<view class="wrap-bottom">
+			<view class="wrap-bottom-title">
+				<text>我的训练</text>
+				<text>分组管理 ></text>
+			</view>
+			<top-input class="top-input" :placeholderText="placeholderText" @changeInput="changeInput"></top-input>
+			<my-scrollX 
+			:scrollList="scrollTopList" :currentTab="currentTopTab"
+			:beforeColor="beforeColor" :afterColor="afterColor" @tabChange="tabChange"></my-scrollX>
 		</view>
 		
 		<view class="wrap-content">
-			<view class="wrap-content-box" @click="gotoUrl('/pages/train/imageMemory/imageMemory')">
-				<view class="content-box-left">
-					<image src=""></image>
-				</view>
-				<view class="content-box-right">
-					<view class="box-right-title">图像记忆术</view>
-					<view class="box-right-tip">数字图像关联训练</view>
-					<view class="box-right-tip">上次训练：2020-09-10</view>
-				</view>
-				<view class="content-box-num">89次</view>
-			</view>
+			<my-list :myList="listdetial" @gotoUrl="gotoListDetail"></my-list>
 		</view>
 	</view>
 </template>
 
 <script>
+	import myScrollX from '@/components/my-scrollX/my-scrollX.vue'
+	import TopInput from '@/components/top-input/top-input.vue'
+	import MyList from '@/components/my-list/my-list.vue'
 	export default {
+		components: {
+			myScrollX,
+			TopInput,
+			MyList,
+		},
 		data() {
 			return {
-				
+				scrollTopList:[{
+					id:0,
+					name: '无分类',
+				},{
+					id:1,
+					name: '英语',
+				},{
+					id:2,
+					name: '记忆',
+				},{
+					id:3,
+					name: '医疗',
+				},{
+					id:4,
+					name: '法律',
+				},{
+					id:3,
+					name: '少儿',
+				},],
+				currentTopTab: 0,
+				beforeColor: '#666666',
+				afterColor: '#4b95e6',
+				placeholderText: '请输入搜索内容',
+				changeValue: '',
+				listdetial:[{
+					src:'../../static/img/icons/common.jpg',
+					title: '数字图像记忆',
+					source: '官方',
+					person: '100',
+					detail: '简介：针对0~100的数字进行图像',
+					date: '2020-10-10',
+					num: 20
+				},{
+					src:'../../static/img/icons/common.jpg',
+					title: '数字图像记忆',
+					source: '官方',
+					person: '100',
+					detail: '简介：针对0~100的数字进行图像',
+					date: '2020-10-10',
+					num: 20
+				}],
 			};
 		},
 		methods:{
+			tabChange(item, index){
+				this.currentTopTab = index
+				console.log(item, index)
+			},
+			changeInput(value){
+				this.changeValue = value
+			},
+			gotoListDetail(item){
+				console.log(item)
+			},
 			gotoUrl(url){
 				uni.navigateTo({
 					url: url
@@ -61,15 +120,16 @@ page{
 	.wrap-top{
 		width: 100%;
 		background-color: $uni-color-primary;
-		padding: 50rpx 0;
+		padding: 30rpx 0;
 		box-sizing: border-box;
+		margin-top: -10rpx;
 		.wrap-top-box{
-			padding: 50rpx 0;
+			padding: 40rpx 0;
 			box-sizing: border-box;
 			width: 100%;
 			display: flex;
 			justify-content: space-around;
-			margin-bottom: 20rpx;
+			margin-bottom: 10rpx;
 			.top-box-li{
 				text-align: center;
 				color: #FFFFFF;
@@ -98,54 +158,25 @@ page{
 		padding: 0 24rpx;
 		box-sizing: border-box;
 		margin-top: 30rpx;
-		.wrap-content-box{
+	}
+	.wrap-bottom{
+		background-color: #fff;
+		padding: 30rpx 24rpx;
+		padding-bottom: 0rpx;
+		box-sizing: border-box;
+		box-shadow:0px 2px 10px 0px rgba(108,143,197,0.14);
+		.top-input{
+			margin-bottom: 40rpx;
+			border: 1px solid $uni-border-color;
+		}
+		.wrap-bottom-title{
 			width: 100%;
-			background-color: #FFFFFF;
-			border-radius: 15rpx;
-			padding: 30rpx;
-			box-sizing: border-box;
 			display: flex;
-			position: relative;
-			box-shadow:0px 2px 10px 0px rgba(108,143,197,0.14);
-			.content-box-left{
-				width: 180rpx;
-				height: 180rpx;
-				border-radius: 30rpx;
-				overflow: hidden;
-				background-color: red;
-				margin-right: 30rpx;
-				image{
-					width: 100%;
-					height: 100%;
-				}
-			}
-			.content-box-right{
-				width: 66%;
-				height: 180rpx;
-				display: flex;
-				flex-direction: column;
-				justify-content: space-around;
-				.box-right-title{
-					color: #333333;
-					font-weight: bold;
-					font-size: 36rpx;
-					width: 83%;
-					overflow: hidden;
-					text-overflow:ellipsis;
-					white-space: nowrap;
-				}
-				.box-right-tip{
-					color: #666;
-					font-size: 28rpx;
-				}
-			}
-			.content-box-num{
-				position: absolute;
-				top:40rpx;
-				right: 30rpx;
-				color: $uni-color-primary;
-				font-size: 32rpx;
-			}
+			justify-content: space-between;
+			color: $uni-text-color;
+			font-size: 28rpx;
+			margin-bottom: 30rpx;
+			font-weight: bold;
 		}
 	}
 }

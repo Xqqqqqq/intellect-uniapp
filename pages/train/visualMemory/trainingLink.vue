@@ -1,21 +1,22 @@
 <template>
 	<view class="train-link">
 		<view class="img-pair-top" :style="{top: showH5 ? '88rpx' : '0rpx'}">
-			<view class="pair-top-blue">当前组号：1</view>
-			<view class="pair-top-blue">第1组 / 共5组</view>
+			<view class="pair-top-blue">当前组号：{{pageNum}}</view>
+			<view class="pair-top-blue">第{{pageNum}}组 / 共{{totalPage}}组</view>
 		</view>
 		<view class="train-link-num">
-			<view class="link-num-li" v-for="(item, index) in numList" :key="index">{{item}}</view>
+			<view class="link-num-li" v-for="(item, index) in trainList[pageNum-1].numList" :key="index">{{item}}</view>
 		</view>
 		<view class="train-link-img">
-			<view class="link-img-li" v-for="(item, index) in imgList" :key="index">
+			<view class="link-img-li" v-for="(item, index) in trainList[pageNum-1].imgList" :key="index">
 				<image :src="item"></image>
 			</view>
 		</view>
 		<view class="train-link-tip">提示：将他们串联成故事</view>
 		<view class="img-test-btn">
-			<view class="test-btn-li test-btn-li-gray">上一条</view>
-			<view class="test-btn-li test-btn-li-blue" @click="gotoUrl">下一条</view>
+			<view class="test-btn-li test-btn-li-gray" @click="returnPrev">上一条</view>
+			<view class="test-btn-li test-btn-li-blue" @click="gotoNext" v-if="pageNum != totalPage">下一条</view>
+			<view class="test-btn-li test-btn-li-blue" @click="gotoUrl" v-else>开始测试</view>
 		</view>
 	</view>
 </template>
@@ -24,15 +25,62 @@
 	export default {
 		data() {
 			return {
-				numList:[2,4,6,7,43],
-				imgList:[
-					"../../../static/img/icons/blue-arrow.png",
-					"../../../static/img/icons/blue-arrow.png",
-					"../../../static/img/icons/blue-arrow.png",
-					"../../../static/img/icons/blue-arrow.png",
-					"../../../static/img/icons/blue-arrow.png",
+				trainList:[
+					{
+						numList:[2,4,6,7,43],
+						imgList:[
+							"../../../static/img/icons/blue-arrow.png",
+							"../../../static/img/icons/common.jpg",
+							"../../../static/img/icons/blue-arrow.png",
+							"../../../static/img/icons/blue-arrow.png",
+							"../../../static/img/icons/blue-arrow.png",
+						]
+					},
+					{
+						numList:[1,3,4,6,7],
+						imgList:[
+							"../../../static/img/icons/blue-arrow.png",
+							"../../../static/img/icons/blue-arrow.png",
+							"../../../static/img/icons/vip.png",
+							"../../../static/img/icons/blue-arrow.png",
+							"../../../static/img/icons/blue-arrow.png",
+						]
+					},
+					{
+						numList:[54,57,87,3,6],
+						imgList:[
+							"../../../static/img/icons/blue-arrow.png",
+							"../../../static/img/icons/blue-arrow.png",
+							"../../../static/img/icons/blue-arrow.png",
+							"../../../static/img/icons/解决方法.png",
+							"../../../static/img/icons/blue-arrow.png",
+						]
+					},
+					{
+						numList:[29,45,3,6,46],
+						imgList:[
+							"../../../static/img/icons/blue-arrow.png",
+							"../../../static/img/icons/blue-arrow.png",
+							"../../../static/img/icons/排名.png",
+							"../../../static/img/icons/解决方法.png",
+							"../../../static/img/icons/blue-arrow.png",
+						]
+					},
+					{
+						numList:[54,57,87,3,6],
+						imgList:[
+							"../../../static/img/icons/视觉智能＊.png",
+							"../../../static/img/icons/blue-arrow.png",
+							"../../../static/img/icons/blue-arrow.png",
+							"../../../static/img/icons/解决方法.png",
+							"../../../static/img/icons/blue-arrow.png",
+						]
+					},
 				],
 				showH5:true,
+				totalPage: 5,//总共条数
+				pageNum: 1, //当前显示页数
+				btnName: '下一条',
 			};
 		},
 		onShow(){
@@ -41,8 +89,28 @@
 			}else{
 				this.showH5 = false
 			}
+			console.log(this.trainList[0])
 		},
 		methods:{
+			returnPrev(){
+				if(this.pageNum == 1){
+					uni.showToast({
+					    title: '已返回至第一页！',
+					    duration: 2000
+					});
+				}else{
+					this.pageNum -= 1
+				}
+				this.btnName = '下一条'
+			},
+			gotoNext(){
+				if(this.pageNum+1 == this.totalPage){
+					this.btnName = '开始测试'
+				}
+				if(this.pageNum != this.totalPage){
+					this.pageNum += 1
+				}
+			},
 			gotoUrl(){
 				uni.navigateTo({
 					url:'/pages/train/visualMemory/testLink'

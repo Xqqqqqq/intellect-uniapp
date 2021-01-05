@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/myData/loadPage",
     "pages/myData/myData",
     "pages/train/train",
     "pages/discover/discover",
@@ -38,7 +39,7 @@
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "超能训练数据",
+    "navigationBarTitleText": "武装大脑",
     "navigationBarBackgroundColor": "#4b95e6",
     "backgroundColor": "#FFFFFF"
   },
@@ -76,5 +77,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap28.json"
 }

@@ -1,13 +1,33 @@
 <script>
+import fun from 'common/fun.js'
 export default {
+	data(){
+		return{
+			platformName:'',
+		}
+	},
 	onLaunch: function() {
 		console.log('App Launch');
 	},
 	onShow: function() {
-		console.log('App Show');
+		this.platformName = fun.getPlatform()
+		switch(this.platformName) {
+		     case "MP-WEIXIN":
+				uni.switchTab({
+					url:'/pages/myData/myData'
+				})
+		        break;
+		     default:
+		        uni.switchTab({
+		        	url:'/pages/myData/loadPage'
+		        })
+		} 
 	},
 	onHide: function() {
 		console.log('App Hide');
+	},
+	methods:{
+
 	}
 };
 </script>
