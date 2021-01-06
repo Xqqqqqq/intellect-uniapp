@@ -365,7 +365,7 @@
 			}
 			.bgBlue {
 				font-size: 28rpx;
-				background-color: #4b95e6;
+				background-color: #2E3B67;
 				color: #FFFFFF;
 			}
 			.redColor {

@@ -33,7 +33,7 @@
             "path" : "pages/mine/mine",
 			"style": {
 				"navigationBarTitleText": "我的",
-				"navigationBarBackgroundColor": "#4b95e6",
+				"navigationBarBackgroundColor": "#2E3B67",
 				"navigationBarTextStyle": "white",
 				"navigationStyle": "custom",
 				"app-plus": {
@@ -224,7 +224,7 @@
     ],
 	"tabBar": {
 		"color": "#8F9091",
-		"selectedColor": "#4b95e6",
+		"selectedColor": "#2E3B67",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"fontSize": "10px",
@@ -258,7 +258,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "武装大脑",
-		"navigationBarBackgroundColor": "#4b95e6",
+		"navigationBarBackgroundColor": "#2E3B67",
 		"backgroundColor": "#FFFFFF"
 	}
 }

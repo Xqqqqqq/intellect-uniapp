@@ -21,7 +21,7 @@
 		<view class="wrap-bottom">
 			<view class="wrap-bottom-title">
 				<text>我的训练</text>
-				<text>分组管理 ></text>
+				<text @click="gotoUrl('/pages/myData/groupManage')">分组管理 ></text>
 			</view>
 			<top-input class="top-input" :placeholderText="placeholderText" @changeInput="changeInput"></top-input>
 			<my-scrollX 
@@ -68,7 +68,7 @@
 				},],
 				currentTopTab: 0,
 				beforeColor: '#666666',
-				afterColor: '#4b95e6',
+				afterColor: '#2E3B67',
 				placeholderText: '请输入搜索内容',
 				changeValue: '',
 				listdetial:[{

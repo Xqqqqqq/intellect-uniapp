@@ -57,7 +57,7 @@
 			// 确定按钮文字颜色
 			confirmTextColor: {
 				type: String,
-				default: '#4b95e6'
+				default: '#2E3B67'
 			}
 		},
 		data() {
