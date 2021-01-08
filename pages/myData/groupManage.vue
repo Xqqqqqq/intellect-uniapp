@@ -23,7 +23,15 @@
 			</view>
 		</view>
 		<l-modal :isShowModal="isShowModal" :modalTitle="modalTitle" @onClickCancel="cancel" @onClickConfirm="confirm">
-			
+			<view class="modal-input" v-if="type == 'add'">
+				<input placeholder="请输入分类名称" v-model="operatName"/>
+			</view>
+			<view class="modal-input" v-if="type == 'edit'">
+				<input placeholder="请修改分类名称" v-model="operatName"/>
+			</view>
+			<view class="modal-text" v-if="type == 'delete'">
+				是否确定删除分组？
+			</view>
 		</l-modal>
 	</view>
 </template>
@@ -51,6 +59,7 @@
 				type: '', // 弹框类型
 				modalTitle: '',// 标题
 				chooseItem: {}, // 所选内容
+				operatName: ""
 			};
 		},
 		mounted(){
@@ -72,21 +81,26 @@
 						break
 					case 'edit':
 						this.modalTitle = '编辑分组'
+						this.operatName = item.title
+						break
 					case 'delete':
-						this.modalTitle = '删除分组'
+						this.modalTitle = '提示'
+						break
+				}
+				if(item) {
+					this.chooseItem = item
 				}
 			},
 			cancel(){
 				this.isShowModal = false
-				switch(this.type) {
-					case 'add':
-						break
-					case 'edit':
-						this.modalTitle = '编辑分组'
-					case 'delete':
-						this.modalTitle = '删除分组'
-				}
-			}
+				this.modalTitle = ''
+				this.chooseItem = {}
+				this.operatName = ''
+			},
+			confirm() {
+				this.isShowModal = false
+				console.log(this.operatName)
+			},
 		}
 	}
 </script>
@@ -162,6 +176,29 @@
 				}
 			}
 		}
+	}
+	.modal-input{
+		border: 1rpx solid #D3D3D3;
+		width: 100%;
+		height: 80rpx;
+		border-radius: 15rpx;
+		margin-top: 20rpx;
+		margin-bottom: 20rpx;
+		input{
+			width: 100%;
+			height: 100%;
+			line-height: 80rpx;
+			padding-left: 15rpx;
+			box-sizing: border-box;
+		}
+	}
+	.modal-text{
+		width: 100%;
+		font-weight: bold;
+		text-align: center;
+		margin-top: 20rpx;
+		margin-bottom: 20rpx;
+		font-size: 32rpx;
 	}
 }
 </style>

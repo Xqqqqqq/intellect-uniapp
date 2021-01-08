@@ -52,7 +52,7 @@
 		margin-right: 45rpx;
 		padding-bottom: 10rpx;
 		box-sizing: border-box;
-		border-bottom: 5rpx solid #FFFFFF;
+		// border-bottom: 5rpx solid #FFFFFF;
 	}
 	.my-scroll-li-active{
 		font-weight: bold;
