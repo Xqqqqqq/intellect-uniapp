@@ -6,20 +6,12 @@
 		</view>
 		<view class="energy-content">
 			<view class="energy-content-title">消耗记录</view>
-			<view class="energy-content-li">
-				<view>20200909-13:00</view>
-				<view>答题：100</view>
-				<view>分数：100</view>
-			</view>
-			<view class="energy-content-li">
-				<view>20200909-13:00</view>
-				<view>答题：100</view>
-				<view>分数：100</view>
-			</view>
-			<view class="energy-content-li">
-				<view>20200909-13:00</view>
-				<view>答题：100</view>
-				<view>分数：100</view>
+			<view class="history-li" v-for="(item, index) in historyList" :key="index" @click="gotoDetail(item)">
+				<view class="history-li-top">
+					<view class="li-top-left">{{item.title}}</view>
+					<view class="li-top-right">能量+{{item.money}}</view>
+				</view>
+				<view class="history-li-bottom">使用时间：{{item.time}}</view>
 			</view>
 		</view>
 	</view>
@@ -29,7 +21,19 @@
 	export default {
 		data() {
 			return {
-				
+				historyList:[{
+					time:'2020-01-01 13:00',
+					title:'数字元素测试',
+					money: 19.90,
+				},{
+					time:'2020-01-01 13:00',
+					title:'数字元素测试',
+					money: 19.90,
+				},{
+					time:'2020-01-01 13:00',
+					title:'数字元素测试',
+					money: 19.90,
+				},]
 			};
 		}
 	}
@@ -67,22 +71,41 @@
 		border-radius: 15rpx;
 		padding: 24rpx;
 		box-sizing: border-box;
+		padding-top: 40rpx;
 		.energy-content-title{
 			padding-left: 20rpx;
 			box-sizing: border-box;
 			border-left: 8rpx solid $uni-color-primary;
-			font-size: 30rpx;
+			font-size: 36rpx;
 			font-weight: bold;
 			margin-bottom: 20rpx;
+			line-height: 1;
 		}
-		.energy-content-li{
-			display: flex;
-			justify-content: space-between;
-			line-height: 70rpx;
-			font-size: 28rpx;
-		}
-		.energy-content-li:nth-child(even){
-			background-color: rgba(75, 149, 230, 0.5);
+		.history-li{
+			width: 100%;
+			background-color: #FFFFFF;
+			border-bottom: 1px solid #D3D3D3;
+			padding: 24rpx 0;
+			box-sizing: border-box;
+			.history-li-top{
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				margin-bottom: 20rpx;
+				.li-top-left{
+					font-size: 32rpx;
+					font-weight: bold;
+				}
+				.li-top-right{
+					font-size: 30rpx;
+					font-weight: bold;
+					color: $uni-color-error;
+				}
+			}
+			.history-li-bottom{
+				color: #666666;
+				font-size: 26rpx;
+			}
 		}
 	}
 }

@@ -52,27 +52,27 @@
 		</view>
 		<view class="mine-bottom">
 			<view class="mine-bottom-li">
-				<view class="bottom-li-left">链化排名</view>
+				<view class="bottom-li-left">我的训练(3)</view>
 				<view class="bottom-li-right">></view>
 			</view>
 			<view class="mine-bottom-li">
-				<view class="bottom-li-left">账号关联</view>
+				<view class="bottom-li-left">奖励兑换</view>
 				<view class="bottom-li-right">></view>
 			</view>
 			<view class="mine-bottom-li">
-				<view class="bottom-li-left">完善数据</view>
+				<view class="bottom-li-left">账号管理</view>
 				<view class="bottom-li-right">></view>
 			</view>
 			<view class="mine-bottom-li">
-				<view class="bottom-li-left">意见反馈</view>
-				<view class="bottom-li-right">></view>
-			</view>
-			<view class="mine-bottom-li">
-				<view class="bottom-li-left">安全设置</view>
+				<view class="bottom-li-left">意见建议</view>
 				<view class="bottom-li-right">></view>
 			</view>
 			<view class="mine-bottom-li">
 				<view class="bottom-li-left">关于我们</view>
+				<view class="bottom-li-right">></view>
+			</view>
+			<view class="mine-bottom-li">
+				<view class="bottom-li-left">退出登录</view>
 				<view class="bottom-li-right">></view>
 			</view>
 		</view>
@@ -84,7 +84,7 @@
 		data() {
 			return {
 				userLogin: true, // 用户是否登录
-				isVip: false, // 是否是vip
+				isVip: true, // 是否是vip
 			}
 		},
 		methods: {
@@ -122,7 +122,7 @@
 		z-index: 999;
 		top: 0;
 		left: 0;
-		background: linear-gradient(to right, rgb(40,148,253), rgb(94, 92, 216));;
+		background: linear-gradient(to right, rgb(94, 92, 216), $uni-color-primary);
 		.title-box-name{
 			font-size:32rpx;
 			color:rgba(255,255,255,1);
@@ -136,7 +136,7 @@
 		width: 100%;
 		padding:150rpx 80rpx;
 		box-sizing: border-box;
-		background: linear-gradient(to right, rgb(40,148,253), rgb(94, 92, 216));
+		background: linear-gradient(to right, rgb(94, 92, 216), $uni-color-primary);
 		position: relative;
 		display: flex;
 		color: #FFFFFF;

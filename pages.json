@@ -221,6 +221,30 @@
 				"navigationBarTitleText": "分组管理"
 			}
         }
+        ,{
+            "path" : "pages/mine/editUserInfo",
+            "style" : {
+				"navigationBarTitleText": "编辑信息"
+			}
+        }
+        ,{
+            "path" : "pages/mine/editNickname",
+            "style" : {
+				"navigationBarTitleText": "昵称修改"
+			}
+        }
+        ,{
+            "path" : "pages/mine/historyRecharge",
+            "style" : {
+				"navigationBarTitleText": "历史充值"
+			}
+        }
+        ,{
+            "path" : "pages/mine/historyDetail",
+            "style" : {
+				"navigationBarTitleText": "充值详情"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#8F9091",
