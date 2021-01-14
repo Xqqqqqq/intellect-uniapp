@@ -1,7 +1,7 @@
 <template>
 	<view class="discover">
 		<view class="discover-top">
-			<view class="discover-top-group">
+			<view class="discover-top-group" @click="gotoGroup">
 				<text>我的文章</text>
 				<text>分类管理 ></text>
 			</view>
@@ -93,6 +93,11 @@
 			gotoUrl(){
 				uni.navigateTo({
 					url: '/pages/discover/discoverDetail'
+				})
+			},
+			gotoGroup(){
+				uni.navigateTo({
+					url: '/pages/discover/groupManage'
 				})
 			}
 		}

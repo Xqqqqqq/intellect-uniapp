@@ -257,6 +257,30 @@
 				"navigationBarTitleText": "分类管理"
 			}
         }
+        ,{
+            "path" : "pages/mine/aboutUs",
+            "style" : {
+				"navigationBarTitleText": "关于我们"
+			}
+        }
+        ,{
+            "path" : "pages/mine/accountRelation",
+            "style" : {
+				"navigationBarTitleText": "账号管理"
+			}
+        }
+        ,{
+            "path" : "pages/mine/activityExchange",
+            "style" : {
+				"navigationBarTitleText": "奖励兑换"
+			}
+        }
+        ,{
+            "path" : "pages/mine/feedback",
+            "style" : {
+				"navigationBarTitleText": "意见建议"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#8F9091",

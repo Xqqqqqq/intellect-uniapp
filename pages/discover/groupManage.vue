@@ -1,7 +1,7 @@
 <template>
 	<view class="group">
 		<view class="group-top">
-			<view class="group-top-left">我的分组（4）</view>
+			<view class="group-top-left">我的分类（4）</view>
 			<view class="group-top-right" @click="clickOperation('add')">+</view>
 		</view>
 		<view class="group-content">
@@ -77,10 +77,10 @@
 				this.type = type
 				switch(this.type) {
 					case 'add':
-						this.modalTitle = '新增分组'
+						this.modalTitle = '新增分类'
 						break
 					case 'edit':
-						this.modalTitle = '编辑分组'
+						this.modalTitle = '编辑分类'
 						this.operatName = item.title
 						break
 					case 'delete':

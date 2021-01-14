@@ -51,40 +51,51 @@
 			</view>
 		</view>
 		<view class="mine-bottom">
-			<view class="mine-bottom-li">
+			<view class="mine-bottom-li" @click="gotoTab('/pages/myData/myData')">
 				<view class="bottom-li-left">我的训练(3)</view>
 				<view class="bottom-li-right">></view>
 			</view>
-			<view class="mine-bottom-li">
+			<view class="mine-bottom-li" @click="gotoUrl('/pages/mine/activityExchange')">
 				<view class="bottom-li-left">奖励兑换</view>
 				<view class="bottom-li-right">></view>
 			</view>
-			<view class="mine-bottom-li">
+			<view class="mine-bottom-li" @click="gotoUrl('/pages/mine/accountRelation')">
 				<view class="bottom-li-left">账号管理</view>
 				<view class="bottom-li-right">></view>
 			</view>
-			<view class="mine-bottom-li">
+			<view class="mine-bottom-li" @click="gotoUrl('/pages/mine/feedback')">
 				<view class="bottom-li-left">意见建议</view>
 				<view class="bottom-li-right">></view>
 			</view>
-			<view class="mine-bottom-li">
+			<view class="mine-bottom-li" @click="gotoUrl('/pages/mine/aboutUs')">
 				<view class="bottom-li-left">关于我们</view>
 				<view class="bottom-li-right">></view>
 			</view>
-			<view class="mine-bottom-li">
+			<view class="mine-bottom-li" @click="gotoReturn">
 				<view class="bottom-li-left">退出登录</view>
 				<view class="bottom-li-right">></view>
 			</view>
 		</view>
+		<l-modal :isShowModal="isShowModal" :modalTitle="modalTitle" @onClickCancel="cancel" @onClickConfirm="confirm">
+			<view class="modal-text">
+				是否确定退出登录？
+			</view>
+		</l-modal>
 	</view>
 </template>
 
 <script>
+	import lModal from '@/components/l-modal/l-modal.vue'
 	export default {
+		components: {
+			lModal,
+		},
 		data() {
 			return {
 				userLogin: true, // 用户是否登录
 				isVip: true, // 是否是vip
+				isShowModal: false,
+				modalTitle: '提示',
 			}
 		},
 		methods: {
@@ -92,7 +103,33 @@
 				uni.navigateTo({
 					url:url
 				})
-			}
+			},
+			gotoTab(url){
+				uni.switchTab({
+					url: url
+				})
+			},
+			gotoReturn(){
+				this.isShowModal = true
+			},
+			cancel(){
+				this.isShowModal = false
+				this.modalTitle = ''
+			},
+			confirm() {
+				this.isShowModal = false
+				uni.clearStorage();
+				uni.showToast({
+					icon: 'success',
+					title: '退出登录成功！',
+					duration: 2000
+				})
+				setTimeout(() => {
+					uni.navigateTo({
+						url: '/pages/myData/loadPage'
+					})
+				}, 1500)
+			},
 		}
 	}
 </script>
@@ -100,6 +137,14 @@
 <style lang="scss">
 .mine{
 	width: 100%;
+	.modal-text{
+		width: 100%;
+		font-weight: bold;
+		text-align: center;
+		margin-top: 20rpx;
+		margin-bottom: 20rpx;
+		font-size: 32rpx;
+	}
 	.status_bar {
 		height: var(--status-bar-height);
 		width: 100%;
