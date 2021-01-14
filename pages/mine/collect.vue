@@ -1,6 +1,10 @@
 <template>
 	<view class="discover">
 		<view class="discover-top">
+			<view class="discover-top-group">
+				<text>我的文章</text>
+				<text>分类管理 ></text>
+			</view>
 			<view class="wrap-select">
 			  <input @input="bindNameInput" v-model="goodsName" 
 			  type="text" placeholder="请输入搜索内容" placeholder-class="input-placeholder" class="input-length"/>
@@ -71,8 +75,8 @@
 					name: '少儿',
 				},],
 				currentTopTab: 0,
-				beforeColor: '#999999',
-				afterColor: '#ffffff',
+				beforeColor: '#666',
+				afterColor: '#2E3B67',
 			}
 		},
 		methods:{
@@ -104,10 +108,18 @@ page{
 	margin-top: -5rpx;
 	.discover-top{
 		width: 100%;
-		background-color: $uni-color-primary;
-		padding: 40rpx 24rpx;
+		background-color: #FFFFFF;
+		padding: 30rpx 24rpx;
 		padding-bottom: 24rpx;
 		box-sizing: border-box;
+		.discover-top-group{
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			font-size: 28rpx;
+			color: $uni-color-primary;
+			margin-bottom: 20rpx;
+		}
 		.wrap-select{
 		  width: 100%;
 		  height:70rpx;
@@ -117,7 +129,7 @@ page{
 		  position: relative;
 		  padding: 0 37rpx;
 		  box-sizing: border-box;
-		  margin-bottom: 40rpx;
+		  margin-bottom: 30rpx;
 		  .input-length{
 		    width: 90%;
 		    height: 100%;

@@ -60,7 +60,7 @@
 			}
         }
         ,{
-            "path" : "pages/myData/login",
+            "path" : "pages/loginAll/login",
             "style" : {
 				"navigationBarTitleText": ""
 			}
@@ -204,7 +204,7 @@
 			}
         }
         ,{
-            "path" : "pages/myData/loginCode",
+            "path" : "pages/loginAll/loginCode",
             "style" : {
 				"navigationBarTitleText": "登录"
 			}
@@ -243,6 +243,18 @@
             "path" : "pages/mine/historyDetail",
             "style" : {
 				"navigationBarTitleText": "充值详情"
+			}
+        }
+        ,{
+            "path" : "pages/mine/collect",
+            "style" : {
+				"navigationBarTitleText": "收藏"
+			}
+        }
+		,{
+            "path" : "pages/discover/groupManage",
+            "style" : {
+				"navigationBarTitleText": "分类管理"
 			}
         }
     ],

@@ -45,7 +45,7 @@
 				<view class="content-li-title">我的卡券</view>
 				<view class="content-li-num">0</view>
 			</view>
-			<view class="mine-content-li">
+			<view class="mine-content-li" @click="gotoUrl('/pages/mine/collect')">
 				<view class="content-li-title">我的收藏</view>
 				<view class="content-li-num">0</view>
 			</view>

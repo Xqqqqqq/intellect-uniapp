@@ -16,7 +16,7 @@
 		methods:{
 			gotoUrl(){
 				uni.navigateTo({
-					url:'/pages/myData/loginCode'
+					url:'/pages/loginAll/loginCode'
 				})
 			}
 		}

@@ -26,6 +26,20 @@
 				</view>
 				<view class="card-ul-li-btn">立即领取</view>
 			</view>
+			<view class="card-ul-li">
+				<view class="card-ul-li-left">3<text>元</text></view>
+				<view class="card-ul-li-content">
+					<image src='../../static/img/icons/red.png'></image>
+				</view>
+				<view class="card-ul-li-right">
+					<view class="ul-li-right-title">
+						<image src="../../static/img/icons/leiji.png"></image>
+						新人能量券
+					</view>
+					<view class="ul-li-right-status">到期时间：2020-10-10</view>
+				</view>
+				<view class="card-ul-li-btn card-ul-li-btn-other">已兑换</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -36,17 +50,11 @@
 			return {
 				tabList:[{
 					id:1,
-					name:'全部'
+					name:'我的卡券'
 				},{
 					id:2,
-					name:'未使用'
-				},{
-					id:3,
-					name:'已使用'
-				},{
-					id:4,
-					name:'已失效'
-				},],
+					name:'历史卡券'
+				}],
 				currentTab:0,
 			};
 		},
@@ -171,6 +179,9 @@
 				top: 50%;
 				transform: translateY(-50%);
 				font-size: 26rpx;
+			}
+			.card-ul-li-btn-other{
+				background: $uni-text-color-disable;
 			}
 		}
 	}
