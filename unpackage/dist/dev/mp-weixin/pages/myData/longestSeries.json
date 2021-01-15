@@ -1,4 +1,6 @@
 {
-  "navigationBarTitleText": "最长连续",
-  "usingComponents": {}
+  "navigationBarTitleText": "本月连续",
+  "usingComponents": {
+    "my-list": "/components/my-list/my-list"
+  }
 }

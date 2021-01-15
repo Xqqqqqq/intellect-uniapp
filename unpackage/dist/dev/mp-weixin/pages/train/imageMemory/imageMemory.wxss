@@ -29,7 +29,7 @@
 }
 .memory .memory-top {
   width: 100%;
-  background-color: #4b95e6;
+  background-color: #2E3B67;
   padding: 24rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;

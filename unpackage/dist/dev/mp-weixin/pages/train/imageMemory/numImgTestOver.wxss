@@ -73,7 +73,7 @@
   margin-top: 40rpx;
 }
 .test-over .test-over-content .over-content-title {
-  color: #4b95e6;
+  color: #2E3B67;
   font-size: 26rpx;
   margin-bottom: 30rpx;
   text-align: center;

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "分组管理",
+  "usingComponents": {
+    "l-modal": "/components/l-modal/l-modal"
+  }
+}

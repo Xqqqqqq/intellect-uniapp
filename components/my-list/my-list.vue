@@ -7,8 +7,8 @@
 			<view class="content-box-right">
 				<view class="box-right-title">{{item.title}}</view>
 				<view class="box-right-tip">
-					<text>出题：{{item.source}}</text>
-					<text><image src="../../static/img/icons/shoucang.png"></image>{{item.person}}人收藏</text>
+					<view>出题：{{item.source}}</view>
+					<view><image src="../../static/img/icons/shoucang.png"></image>{{item.person}}人收藏</view>
 				</view>
 				<view class="box-right-line"></view>
 				<view class="box-right-tip">简介：{{item.detail}}</view>

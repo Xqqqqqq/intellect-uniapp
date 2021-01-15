@@ -179,7 +179,7 @@
 }
 .all .all-calendar .bgBlue {
   font-size: 28rpx;
-  background-color: #4b95e6;
+  background-color: #2E3B67;
   color: #FFFFFF;
 }
 .all .all-calendar .redColor {
@@ -231,7 +231,7 @@
   padding-left: 15rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  border-left: 6rpx solid #4b95e6;
+  border-left: 6rpx solid #2E3B67;
 }
 .all .calcendar-rule .calcendar-rule-text {
   line-height: 40rpx;

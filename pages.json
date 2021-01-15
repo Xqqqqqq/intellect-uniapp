@@ -281,6 +281,12 @@
 				"navigationBarTitleText": "意见建议"
 			}
         }
+        ,{
+            "path" : "pages/train/trainCenter",
+            "style" : {
+				"navigationBarTitleText": "训练中心"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#8F9091",
@@ -296,7 +302,7 @@
 				"text": "数据"
 			},
 			{
-				"pagePath": "pages/train/train",
+				"pagePath": "pages/train/trainCenter",
 				"iconPath": "static/img/tabs/xunlian-gray.png",
 				"selectedIconPath": "static/img/tabs/xunlian-blue.png",
 				"text": "训练"

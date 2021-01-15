@@ -2,7 +2,6 @@
 	<view class="img-card">
 		<ren-dropdown-filter :filterData='filterData' :defaultIndex='defaultIndex' @onSelected='onSelected'></ren-dropdown-filter>
 		<view class="img-card-swiper">
-			<view class="card-swiper-block select-box"></view>
 			<!-- <swiper class="swiper" :circular="circular" :style="{height: swiperHeight+'rpx'}" v-if="showCard"
 		   :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
 			<swiper-item v-for="(item, index) in swiperList" :key="index">
@@ -36,75 +35,68 @@
 					</view>
 				</view>
 			</view>
-			<view class="img-card-btn-clone" :style="{height: cloneHeight+'rpx'}"></view>
 		</view>
 		<view class="img-card-btn">
-			<view class="card-btn-li bg-gradual-red padding radius text-center shadow-blur" @click="openPop('remark')">自定义备注</view>
-			<view class="card-btn-li bg-gradual-orange padding radius text-center shadow-blur" @click="changeType">切换列表</view>
-			<view class="card-btn-li bg-gradual-green padding radius text-center shadow-blur" @click="openPop('img')">自定义图片</view>
-			<view class="card-btn-li bg-gradual-blue padding radius text-center shadow-blur" @click="gotoUrl">前往测试</view>
+			<view class="card-btn-li card-btn-li-orange" @click="changeType">切换列表形式</view>
+			<view class="card-btn-li card-btn-li-blue" @click="gotoUrl">前往测试</view>
 		</view>
-		<avatar v-show="avatarShow" selWidth="200px" selHeight="200upx" @upload="myUpload" ref="avatar" avatarStyle="width: 200upx; height: 200upx; border-radius: 100%;">
-		</avatar>
-		<l-modal :isShowModal="isShowModal" :modalTitle="modalTitle" @onClickCancel="cancel" @onClickConfirm="confirm">
-			<template v-if="btnType == 'remark'">
-				<textarea focus placeholder="请输入自定义备注" v-model="userRemark" class="modal-text" />
-			</template>
-		   <template v-else>
-				<image :src="modalImg ? modalImg : '../../../static/img/icons/add-img.png'" class="modal-img" @click="openavatar"></image>
-		   </template>
-		</l-modal>
 	</view>
 </template>
 
 <script>
 	import RenDropdownFilter from '@/components/ren-dropdown-filter/ren-dropdown-filter.vue'
 	import uniSwiperDot from "@/components/uni-swiper-dot/uni-swiper-dot.vue"
-	import lModal from '@/components/l-modal/l-modal.vue'
-	import avatar from "../../../components/yq-avatar/yq-avatar.vue";
 	export default {
 		components: {
 			RenDropdownFilter,
 			uniSwiperDot,
-			lModal,
-			avatar
 		},
 		data() {
 			return {
 				filterData: [
 					[{
-						text: '1-10',
+						text: '1/10',
 						value: 1
 					}, {
-						text: '11-20',
+						text: '2/10',
 						value: 2
-					}],
-					[{
-						text: '系统图片',
-						value: 1
 					}, {
-						text: '用户上传图片',
-						value: 2
-					}],
-					[{
-						text: '系统备注',
-						value: 1
+						text: '3/10',
+						value: 3
 					}, {
-						text: '用户上传备注',
-						value: 2
+						text: '4/10',
+						value: 4
+					}, {
+						text: '5/10',
+						value: 5
+					}, {
+						text: '6/10',
+						value: 6
+					}, {
+						text: '7/10',
+						value: 7
+					}, {
+						text: '8/10',
+						value: 8
+					}, {
+						text: '9/10',
+						value: 9
+					}, {
+						text: '10/10',
+						value: 10
 					}],
 					[{
 						text: '顺序',
 						value: 1
 					}, {
-						text: '倒叙',
+						text: '乱序',
 						value: 2
 					}, {
-						text: '乱序',
+						text: '倒叙',
 						value: 3
 					}]
 				],
-				defaultIndex: [0, 0, 0, 0],
+				defaultIndex: [0, 0],
 				indicatorDots: true,
 				autoplay: false,
 				circular: true,
@@ -189,49 +181,6 @@
 					url: '/pages/train/imageMemory/numImgTest'
 				})
 			},
-			openPop(type) {
-				this.btnType = type
-				if (this.btnType == 'remark') {
-					this.modalTitle = '自定义备注'
-				} else {
-					this.modalTitle = '自定义图片'
-				}
-				this.isShowModal = true
-			},
-			cancel() {
-				this.isShowModal = false
-				if (this.btnType == 'remark') {
-					this.userRemark = ''
-				} else {
-					this.modalImg = ''
-					this.avatarShow = false
-				}
-			},
-			confirm() {
-				if (this.btnType == 'remark') {
-					this.userRemark = ''
-				} else {
-					this.avatarShow = false
-					this.modalImg = ''
-				}
-				this.isShowModal = false
-			},
-			myUpload(rsp) {
-				// this.url = rsp.path; //更新头像方式一
-				//rsp.avatar.imgSrc = rsp.path; //更新头像方式二
-				// console.log('00000000000000', rsp)
-				this.avatarShow = false
-				this.modalImg = rsp.base64
-			},
-			openavatar(index) {
-				this.avatarShow = true
-				this.$refs.avatar.fChooseImg(index, {
-					selWidth: "300upx",
-					selHeight: "300upx",
-					expWidth: '260upx',
-					expHeight: '260upx'
-				});
-			}
 		}
 	}
 </script>
@@ -247,20 +196,18 @@
 		display: flex;
 		flex-direction: column;
 		overflow-y: scroll;
+		padding-bottom: 120rpx;
+		box-sizing: border-box;
 
 		.img-card-swiper {
 			width: 100%;
-			padding: 0 24rpx;
+			padding: 24rpx;
 			box-sizing: border-box;
 			height: 100%;
 
 			.card-swiper-block {
 				width: 100%;
 				height: 160rpx;
-			}
-
-			.img-card-btn-clone {
-				width: 100%;
 			}
 
 			.swiper {
@@ -355,41 +302,25 @@
 		.img-card-btn {
 			width: 100%;
 			display: flex;
-			padding-left: 10%;
-			box-sizing: border-box;
-			flex-wrap: wrap;
+			justify-content: space-between;
 			position: fixed;
 			left: 0;
 			bottom: 0;
-			z-index: 9999;
+			z-index: 999;
+			height: 100rpx;
+			line-height: 100rpx;
 
 			.card-btn-li {
-				width: 40%;
-				border-radius: 15rpx;
+				width: 49.9%;
 				text-align: center;
-				margin-right: 10%;
-				margin-bottom: 5%;
+				color: #FFFFFF;
 			}
-
-			.card-btn-li:nth-child(2n) {
-				margin-right: 0%;
+			.card-btn-li-orange{
+				background-color: $uni-color-warning;
 			}
-		}
-
-		.modal-text {
-			border: 1px solid #dcdcdc;
-			width: 100%;
-			padding: 24rpx;
-			box-sizing: border-box;
-			font-size: 30rpx;
-			border-radius: 15rpx;
-		}
-		.modal-img{
-			width: 250rpx;
-			height: 250rpx;
-			display: block;
-			margin: auto;
-			border-radius: 15rpx;
+			.card-btn-li-blue{
+				background-color: $uni-color-primary;
+			}
 		}
 	}
 </style>

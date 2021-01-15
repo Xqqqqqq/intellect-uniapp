@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "本月训练",
-  "usingComponents": {}
+  "usingComponents": {
+    "my-list": "/components/my-list/my-list"
+  }
 }

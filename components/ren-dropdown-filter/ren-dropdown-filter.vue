@@ -151,10 +151,16 @@ page {
     flex-direction: column;
 }
 .filter-wrapper {
-    position: fixed;
+	// 注释掉了此处
+	// position: fixed;
+	// left: 0;
+	// width: 750rpx;
+	// z-index: 999;
+	
+    position: relative;
     left: 0;
-    width: 750rpx;
-    z-index: 999;
+    width: 100%;
+    z-index: 99;
     .inner-wrapper {
         // position: relative;
         .navs {
@@ -163,7 +169,7 @@ page {
             padding: 0 40rpx;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-around;
             background-color: #fff;
             border-bottom: 2rpx solid #f5f6f9;
             color: #8b9aae;

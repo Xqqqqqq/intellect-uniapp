@@ -1,1 +1,1 @@
-<view></view>
+<view class="share" style="{{'background:'+('url('+bgUrl+') no-repeat')+';'+('background-size:'+('100% 100%')+';')}}"><view class="share-btn">保存海报并分享</view></view>

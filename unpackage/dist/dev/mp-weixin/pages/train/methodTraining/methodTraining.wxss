@@ -33,8 +33,8 @@
 .method-train .img-test-title {
   width: 100%;
   padding-left: 15rpx;
-  border-left: 5rpx solid #4b95e6;
-  color: #4b95e6;
+  border-left: 5rpx solid #2E3B67;
+  color: #2E3B67;
   font-size: 32rpx;
   font-weight: bold;
   margin-bottom: 30rpx;

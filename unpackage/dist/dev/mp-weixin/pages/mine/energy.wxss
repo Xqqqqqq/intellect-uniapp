@@ -60,27 +60,47 @@
   padding: 24rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  padding-top: 40rpx;
 }
 .energy .energy-content .energy-content-title {
   padding-left: 20rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  border-left: 8rpx solid #4b95e6;
-  font-size: 30rpx;
+  border-left: 8rpx solid #2E3B67;
+  font-size: 36rpx;
   font-weight: bold;
   margin-bottom: 20rpx;
+  line-height: 1;
 }
-.energy .energy-content .energy-content-li {
+.energy .energy-content .history-li {
+  width: 100%;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #D3D3D3;
+  padding: 24rpx 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.energy .energy-content .history-li .history-li-top {
+  width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
           justify-content: space-between;
-  line-height: 70rpx;
-  font-size: 28rpx;
+  margin-bottom: 20rpx;
 }
-.energy .energy-content .energy-content-li:nth-child(even) {
-  background-color: rgba(75, 149, 230, 0.5);
+.energy .energy-content .history-li .history-li-top .li-top-left {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.energy .energy-content .history-li .history-li-top .li-top-right {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #dd524d;
+}
+.energy .energy-content .history-li .history-li-bottom {
+  color: #666666;
+  font-size: 26rpx;
 }
 

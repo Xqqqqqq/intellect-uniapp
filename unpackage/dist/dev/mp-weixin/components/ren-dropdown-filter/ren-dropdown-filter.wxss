@@ -51,7 +51,7 @@ page.data-v-61c13d5f {
           flex-direction: column;
 }
 .filter-wrapper.data-v-61c13d5f {
-  position: fixed;
+  position: relative;
   left: 0;
   width: 750rpx;
   z-index: 999;
@@ -90,7 +90,7 @@ page.data-v-61c13d5f {
           justify-content: flex-end;
 }
 .filter-wrapper .inner-wrapper .navs .actNav.data-v-61c13d5f {
-  color: #4b95e6;
+  color: #2E3B67;
   font-weight: bold;
 }
 .filter-wrapper .inner-wrapper .mask.data-v-61c13d5f {
@@ -132,7 +132,7 @@ page.data-v-61c13d5f {
   border-bottom: 2rpx solid #f5f6f9;
 }
 .filter-wrapper .inner-wrapper .popup .actOpt.data-v-61c13d5f {
-  color: #4b95e6;
+  color: #2E3B67;
   font-weight: bold;
   position: relative;
 }

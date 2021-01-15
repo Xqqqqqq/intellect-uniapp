@@ -1,4 +1,8 @@
 {
-  "navigationBarTitleText": "超能训练数据",
-  "usingComponents": {}
+  "navigationBarTitleText": "武装大脑",
+  "usingComponents": {
+    "top-input": "/components/top-input/top-input",
+    "my-scroll-x": "/components/my-scrollX/my-scrollX",
+    "my-list": "/components/my-list/my-list"
+  }
 }

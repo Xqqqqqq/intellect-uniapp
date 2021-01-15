@@ -25,68 +25,34 @@
 /* 透明度 */
 /* 文章场景相关 */
 page {
-  background-color: #FFFFFF;
-}
-.code {
   width: 100%;
+  background-color: #2E3B67;
 }
-.code .code-logo {
-  width: 144rpx;
-  height: 144rpx;
-  background: #FFFFFF;
-  -webkit-border-radius: 20rpx;
-          border-radius: 20rpx;
-  margin: auto;
-  margin-top: 20%;
-  -webkit-box-shadow: 1px 2px 6px 0px rgba(108, 143, 197, 0.6);
-          box-shadow: 1px 2px 6px 0px rgba(108, 143, 197, 0.6);
-}
-.code .code-logo image {
+.login {
   width: 100%;
-  height: 100%;
-}
-.code .code-ul {
-  width: 85%;
-  margin: auto;
-  margin-top: 20%;
-}
-.code .code-ul .code-ul-li {
-  width: 100%;
-  margin-bottom: 30rpx;
-  position: relative;
-  height: 100rpx;
-}
-.code .code-ul .code-ul-li input {
-  width: 100%;
-  height: 100%;
-  padding-bottom: 20rpx;
+  padding-top: 30%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-size: 32rpx;
-  border-bottom: 1px solid #E6E6E6;
 }
-.code .code-ul .code-ul-li .code-ul-sms {
-  position: absolute;
-  top: 43%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  right: 10rpx;
-  font-size: 28rpx;
-  color: #666;
+.login .login-text {
   text-align: center;
-  width: 180rpx;
-}
-.code .code-ul .code-ul-btn {
-  width: 100%;
-  height: 90rpx;
-  line-height: 90rpx;
-  background-color: #4b95e6;
   color: #FFFFFF;
-  text-align: center;
-  font-size: 34rpx;
   font-weight: bold;
-  -webkit-border-radius: 50rpx;
-          border-radius: 50rpx;
-  margin-top: 20%;
+  font-size: 54rpx;
+  margin-bottom: 30%;
+}
+.login .login-btn {
+  -webkit-border-radius: 60rpx;
+          border-radius: 60rpx;
+  text-align: center;
+  background-color: #FFFFFF;
+  width: 55%;
+  margin: auto;
+  margin-top: 13%;
+  font-size: 34rpx;
+  color: #2E3B67;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-weight: bold;
 }
 

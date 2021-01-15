@@ -45,7 +45,7 @@
 		methods:{
 			openavatar(){
 				this.avatarShow = true
-				this.$refs.avatar.fChooseImg(0, {
+				this.$refs.avatar.fChooseImg(1, {
 					selWidth: "300upx",
 					selHeight: "300upx",
 					expWidth: '260upx',

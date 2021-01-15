@@ -10,20 +10,36 @@
   "libVersion": "2.9.2",
   "appid": "touristappid",
   "projectname": "intellect-uniapp",
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
+    "plugin": {
       "list": []
     },
     "game": {
       "list": []
     },
-    "miniprogram": {
+    "gamePlugin": {
       "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/train/imageMemory/numImgCard",
+          "pathName": "pages/train/imageMemory/numImgCard",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/train/imageMemory/numImgCard",
+          "pathName": "pages/train/imageMemory/numImgCard",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/mine",
+          "pathName": "pages/mine/mine",
+          "scene": null
+        }
+      ]
     }
   }
 }

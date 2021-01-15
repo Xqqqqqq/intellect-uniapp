@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "收藏",
+  "usingComponents": {
+    "my-scroll-x": "/components/my-scrollX/my-scrollX"
+  }
+}

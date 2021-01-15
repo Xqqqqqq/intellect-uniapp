@@ -13,7 +13,7 @@
 				<view class="mine-top-left">
 					<image src="../../static/img/icons/zhongjiang.png"></image>
 				</view>
-				<view class="mine-top-right">
+				<view class="mine-top-right" @click="gotoUrl('/pages/mine/editUserInfo')">
 					<view class="top-right-name">哈哈哈</view>
 					<view class="top-right-date" v-if="isVip">兰盾会员剩余时间：180天</view>
 					<view class="top-right-btn bg-gradual-orange text-center shadow-blur" 

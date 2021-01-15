@@ -42,7 +42,7 @@
   padding-left: 15rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  border-left: 6rpx solid #4b95e6;
+  border-left: 6rpx solid #2E3B67;
 }
 .train .train-box {
   width: 100%;

@@ -9,7 +9,7 @@
     "pages/myData/calendar",
     "pages/myData/train",
     "pages/myData/longestSeries",
-    "pages/myData/login",
+    "pages/loginAll/login",
     "pages/train/search",
     "pages/train/searchResult",
     "pages/train/imageMemory/imageMemory",
@@ -33,19 +33,31 @@
     "pages/mine/commonMember",
     "pages/mine/energy",
     "pages/mine/cardVoucher",
-    "pages/myData/loginCode",
-    "pages/myData/share"
+    "pages/loginAll/loginCode",
+    "pages/myData/share",
+    "pages/myData/groupManage",
+    "pages/mine/editUserInfo",
+    "pages/mine/editNickname",
+    "pages/mine/historyRecharge",
+    "pages/mine/historyDetail",
+    "pages/mine/collect",
+    "pages/discover/groupManage",
+    "pages/mine/aboutUs",
+    "pages/mine/accountRelation",
+    "pages/mine/activityExchange",
+    "pages/mine/feedback",
+    "pages/train/trainCenter"
   ],
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "武装大脑",
-    "navigationBarBackgroundColor": "#4b95e6",
+    "navigationBarBackgroundColor": "#2E3B67",
     "backgroundColor": "#FFFFFF"
   },
   "tabBar": {
     "color": "#8F9091",
-    "selectedColor": "#4b95e6",
+    "selectedColor": "#2E3B67",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "fontSize": "10px",
@@ -58,7 +70,7 @@
         "text": "数据"
       },
       {
-        "pagePath": "pages/train/train",
+        "pagePath": "pages/train/trainCenter",
         "iconPath": "static/img/tabs/xunlian-gray.png",
         "selectedIconPath": "static/img/tabs/xunlian-blue.png",
         "text": "训练"
@@ -77,6 +89,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap28.json"
+  "usingComponents": {}
 }

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "训练中心",
+  "usingComponents": {
+    "my-scroll-x": "/components/my-scrollX/my-scrollX",
+    "ren-dropdown-filter": "/components/ren-dropdown-filter/ren-dropdown-filter",
+    "my-list": "/components/my-list/my-list"
+  }
+}
