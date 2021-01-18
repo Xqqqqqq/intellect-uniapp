@@ -1,30 +1,26 @@
 <template>
 	<view class="img-card">
-		<ren-dropdown-filter :filterData='filterData' :defaultIndex='defaultIndex' @onSelected='onSelected'></ren-dropdown-filter>
+		<ren-dropdown-filter class="card-filter" :filterData='filterData' :defaultIndex='defaultIndex' @onSelected='onSelected'></ren-dropdown-filter>
 		<view class="img-card-swiper">
-			<!-- <swiper class="swiper" :circular="circular" :style="{height: swiperHeight+'rpx'}" v-if="showCard"
+			<swiper class="swiper" :circular="circular" v-if="showCard"
 		   :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
-			<swiper-item v-for="(item, index) in swiperList" :key="index">
-			 <view class="swiper-item">
-			  <view class="swiper-item-num">{{item.num}}</view>
-			  <image :src="item.imgSrc" class="swiper-item-img"></image>
-			  <view class="swiper-item-text">{{item.title}}</view>
-			 </view>
-			</swiper-item>
-		   </swiper> -->
-			<uni-swiper-dot :info="swiperList" :dotsStyles="dotsStyles" v-if="showCard" :current="current" field="title" mode="nav">
-				<swiper class="swiper" @change="change" :style="{height: swiperHeight+'rpx'}">
-					<swiper-item v-for="(item ,index) in swiperList" :key="index">
-						<view class="swiper-item">
-							<view class="swiper-item-num">{{item.num}}</view>
-							<image :src="item.imgSrc" mode='widthFix' class="swiper-item-img"></image>
-						</view>
-					</swiper-item>
-				</swiper>
-			</uni-swiper-dot>
+				<swiper-item v-for="(item, index) in swiperList" :key="index">
+					<view class="swiper-item">
+					  <view class="swiper-item-num">
+							{{item.num}}
+							<text class="item-num-tip">元素</text>
+					  </view>
+					  <image :src="item.imgSrc" class="swiper-item-img" mode="widthFix"></image>
+					  <view class="swiper-item-text">
+							{{item.title}}
+							<text class="item-num-tip">备注</text>
+					  </view>
+					 </view>
+				</swiper-item>
+		   </swiper>
 
 			<!-- 列表 -->
-			<view class="img-card-ul" :style="{height: swiperHeight+'rpx'}" v-if="!showCard">
+			<view class="img-card-ul" v-if="!showCard">
 				<view class="card-ul-li" v-for="(item ,index) in swiperList" :key="index">
 					<view class="card-ul-li-left">
 						<image :src="item.imgSrc"></image>
@@ -45,11 +41,9 @@
 
 <script>
 	import RenDropdownFilter from '@/components/ren-dropdown-filter/ren-dropdown-filter.vue'
-	import uniSwiperDot from "@/components/uni-swiper-dot/uni-swiper-dot.vue"
 	export default {
 		components: {
 			RenDropdownFilter,
-			uniSwiperDot,
 		},
 		data() {
 			return {
@@ -97,7 +91,7 @@
 					}]
 				],
 				defaultIndex: [0, 0],
-				indicatorDots: true,
+				indicatorDots: false,
 				autoplay: false,
 				circular: true,
 				interval: 2000,
@@ -137,34 +131,10 @@
 					},
 				],
 				current: 0,
-				swiperHeight: '', // swpier的高度
-				cloneHeight: '', //站位标签高度
-				showCard: false, // 是否展示card格式
-				isShowModal: false, //弹窗部分
-				modalTitle: '提示',
-				userRemark: '', //自定义备注
-				btnType: 'remark', // 判断点击的是备注还是图片
-				modalImg:'',
-				avatarShow: false
+				showCard: true, // 是否展示card格式
 			}
 		},
 		mounted() {
-			let vm = this
-			uni.getSystemInfo({
-				success: function(res) {
-					let obj = uni.createSelectorQuery().select('.img-card-btn')
-					obj.boundingClientRect(function(data) {
-						let objSelect = uni.createSelectorQuery().select('.select-box')
-						objSelect.boundingClientRect(function(response) {
-							// console.log('windowHeight',res.windowHeight) 
-							// console.log('data.height',data.height) 
-							// console.log('response.height',response.height) 
-							vm.swiperHeight = (res.windowHeight - data.height - response.height - 20) * 2
-							vm.cloneHeight = data.height * 2
-						}).exec()
-					}).exec()
-				}
-			});
 		},
 		methods: {
 			onSelected(res) {
@@ -188,33 +158,37 @@
 <style lang="scss">
 	page {
 		width: 100%;
+		height: 100%;
 	}
 
 	.img-card {
 		width: 100%;
-		height: calc(100vh-var(--status-bar-height));
+		height: calc(100% - var(--status-bar-height));
 		display: flex;
 		flex-direction: column;
 		overflow-y: scroll;
-		padding-bottom: 120rpx;
 		box-sizing: border-box;
+		
+		.card-filter {
+			position: fixed;
+			left: 0;
+			top: 0;
+		}
 
 		.img-card-swiper {
 			width: 100%;
 			padding: 24rpx;
+			padding-top: 135rpx;
 			box-sizing: border-box;
-			height: 100%;
-
-			.card-swiper-block {
-				width: 100%;
-				height: 160rpx;
-			}
+			height: calc(100% - var(--status-bar-height) - 110rpx);
+			overflow-y: scroll;
 
 			.swiper {
 				width: 100%;
 				background-color: #FFFFFF;
 				border-radius: 15rpx;
 				overflow: hidden;
+				height: 100%;
 
 				.swiper-item {
 					width: 100%;
@@ -230,6 +204,7 @@
 						text-align: center;
 						font-size: 80rpx;
 						font-weight: bold;
+						position: relative;
 					}
 
 					.swiper-item-img {
@@ -244,8 +219,18 @@
 						text-align: center;
 						font-size: 34rpx;
 						background-color: #DDDDDD;
-						height: 150rpx;
-						line-height: 150rpx;
+						height: 250rpx;
+						line-height: 250rpx;
+						position: relative;
+					}
+					.item-num-tip{
+						position: absolute;
+						left: 24rpx;
+						top: 40rpx;
+						font-size: 26rpx;
+						font-weight: bold;
+						color: #333333;
+						line-height: 1;
 					}
 				}
 			}
@@ -306,7 +291,7 @@
 			position: fixed;
 			left: 0;
 			bottom: 0;
-			z-index: 999;
+			z-index: 9;
 			height: 100rpx;
 			line-height: 100rpx;
 

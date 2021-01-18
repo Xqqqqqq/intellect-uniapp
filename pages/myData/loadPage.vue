@@ -1,7 +1,7 @@
 <template>
 	<view class="load">
 		<view class="load-img">
-			<image src='../../static/img/icons/common.jpg'></image>
+			<image src="../../static/img/icons/logo.png"></image>
 		</view>
 		<view class="load-title">武装大脑</view>
 		<view class="load-tip">碎片化时间学习训练工具</view>

@@ -65,6 +65,12 @@
 				"navigationBarTitleText": ""
 			}
         }
+		,{
+		    "path" : "pages/loginAll/useragreement",
+		    "style" : {
+				"navigationBarTitleText": "武装大脑用户协议"
+			}
+		}
         ,{
             "path" : "pages/train/search",
             "style" : {
