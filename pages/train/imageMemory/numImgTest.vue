@@ -6,7 +6,7 @@
 				<view class="test-top-li-num">0</view>
 			</view>
 			<view class="test-top-li">
-				<view class="test-top-li-title">平均成绩</view>
+				<view class="test-top-li-title">参与次数</view>
 				<view class="test-top-li-num">0</view>
 			</view>
 			<view class="test-top-li">
@@ -15,7 +15,7 @@
 			</view>
 		</view>
 		<view class="img-test-box">
-			<view class="img-test-title">考试规则说明</view>
+			<view class="img-test-title">测试规则说明</view>
 			<view class="img-test-content">
 				共1~100个数字及对应的图片，元素选图片和图片选元素两种形式随机出现选出答案，共8组。
 			</view>
@@ -31,43 +31,26 @@
 				<view class="test-content-line"></view>
 				<picker @change="bindTypeChange" :value="typeIndex" :range="typeArr" range-key="name">
 					<view class="test-content-picker">
-						<view class="content-picker-left">考试形式</view>
+						<view class="content-picker-left">测试形式</view>
 						<view class="content-picker-right">{{typeArr[typeIndex].name}} ></view>
 					</view>
 				</picker>
-			</view>
-			
-			<view class="img-test-title">历史成绩</view>
-			<view class="img-test-content">
-				<view class="img-test-ul">
-					<view class="img-test-ul-li">
-						<view>20200909-13:00</view>
-						<view>答题：100</view>
-						<view>分数：100</view>
+				<view class="test-content-line"></view>
+				<picker @change="bindTypeChange" :value="typeIndex" :range="typeArr" range-key="name">
+					<view class="test-content-picker">
+						<view class="content-picker-left">题目个数</view>
+						<view class="content-picker-right">{{typeArr[typeIndex].name}} ></view>
 					</view>
-					<view class="img-test-ul-li">
-						<view>20200909-13:00</view>
-						<view>答题：100</view>
-						<view>分数：100</view>
-					</view>
-					<view class="img-test-ul-li">
-						<view>20200909-13:00</view>
-						<view>答题：100</view>
-						<view>分数：100</view>
-					</view>
-					<view class="img-test-ul-li">
-						<view>20200909-13:00</view>
-						<view>答题：100</view>
-						<view>分数：100</view>
-					</view>
-				</view>
+				</picker>
 			</view>
 		</view>
 		
 		<view class="img-test-btn-clone"></view>
 		<view class="img-test-btn">
-			<view class="test-btn-li test-btn-li-gray" @click="goBack">返回训练</view>
-			<view class="test-btn-li test-btn-li-blue" @click="gotoUrl">开始考试</view>
+			<view class="test-btn-li test-btn-li-blue" @click="gotoUrl">
+				开始测试
+				<view class="test-btn-li-text">(首次开通需消耗1点能量)</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -111,11 +94,6 @@
 			bindTypeChange(e){
 				this.typeIndex = e.detail.value
 			},
-			goBack(){
-				uni.navigateBack({
-					delta:1
-				})
-			},
 			gotoUrl(){
 				uni.navigateTo({
 					url: this.typeArr[this.typeIndex].path
@@ -131,6 +109,7 @@ page{
 }
 .img-test{
 	width: 100%;
+	margin-top: -5rpx;
 	.img-test-top{
 		display: flex;
 		justify-content: space-around;
@@ -228,12 +207,15 @@ page{
 		bottom: 0;
 		z-index: 999;
 		.test-btn-li{
-			width: 49.8%;
-			height: 100rpx;
-			line-height: 100rpx;
+			width: 100%;
 			text-align: center;
 			color: #FFFFFF;
 			font-size: 30rpx;
+			display: flex;
+			justify-content: space-around;
+			flex-direction: column;
+			padding: 10rpx 0;
+			box-sizing: border-box;
 		}
 		.test-btn-li-gray{
 			background-color: #D3D3D3;
@@ -241,6 +223,9 @@ page{
 		}
 		.test-btn-li-blue{
 			background-color: $uni-color-primary;
+			.test-btn-li-text{
+					font-size: 26rpx;
+			}
 		}
 	}
 }

@@ -7,7 +7,7 @@
 		</view>
 		<view class="img-select-box">
 			<view class="select-box-top">1</view>
-			<view class="select-box-title">选择<text>向后第一张</text>图片：</view>
+			<view class="select-box-title">选择上面元素的<text>向后第一张</text>图片：</view>
 			<view class="select-box-content">
 				<view class="box-content-li" :class="{'box-content-li-choose': currentTab == index}"
 				v-for="(item, index) in infoList" :key="index" @click="chooseOne(item, index)">

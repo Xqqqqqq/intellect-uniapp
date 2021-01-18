@@ -98,7 +98,7 @@
         ,{
             "path" : "pages/train/imageMemory/numImgTest",
             "style" : {
-				"navigationBarTitleText": "数字图像通关考试"
+				"navigationBarTitleText": "数字元素测试"
 			}
         }
         ,{
@@ -291,6 +291,12 @@
             "path" : "pages/train/trainCenter",
             "style" : {
 				"navigationBarTitleText": "训练中心"
+			}
+        }
+        ,{
+            "path" : "pages/train/imageMemory/numEleEntry",
+            "style" : {
+				"navigationBarTitleText": "数字元素训练"
 			}
         }
     ],

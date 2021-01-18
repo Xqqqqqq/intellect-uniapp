@@ -126,6 +126,11 @@
 			onSelected(res) {
 				console.log(res)
 			},
+			gotoListDetail(){
+				uni.navigateTo({
+					url:'/pages/train/imageMemory/numEleEntry'
+				})
+			}
 		}
 	}
 </script>

@@ -216,8 +216,8 @@ page{
 			width: 60%;
 			overflow: hidden;
 			.box-right-li{
-				width: 200rpx;
-				height: 200rpx;
+				width: 50%;
+				height: 220rpx;
 				border: 1px solid #D3D3D3;
 				background-color: #FFFFFF;
 				float: left;

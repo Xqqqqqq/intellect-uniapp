@@ -12,7 +12,7 @@
 					</view>
 					<view class="over-top-li-box">
 						<view class="top-li-box-num">100</view>
-						<view class="top-li-box-title">答题数</view>
+						<view class="top-li-box-title">题目</view>
 					</view>
 				</view>
 			</view>
@@ -63,9 +63,9 @@
 		</view>
 		
 		<view class="test-over-bottom">
-			<view class="over-bottom-li bottom-li-green">重新开始</view>
+			<view class="over-bottom-li bottom-li-green">重新测试</view>
 			<view class="over-bottom-li bottom-li-yellow">前往训练</view>
-			<view class="over-bottom-li bottom-li-red">立即结束</view>
+			<view class="over-bottom-li bottom-li-red">回看过程</view>
 		</view>
 		<view class="test-over-bottom-clone"></view>
 	</view>
@@ -211,10 +211,10 @@
 			text-align: center;
 		}
 		.bottom-li-green{
-			background-color: $uni-color-success;
+			background-color: $uni-text-color-grey;
 		}
 		.bottom-li-yellow{
-			background-color: $uni-color-warning;
+			background-color: $uni-color-primary;
 		}
 		.bottom-li-red{
 			background-color: #ED926E;

@@ -7,7 +7,7 @@
 		</view>
 		<view class="img-select-box">
 			<view class="select-box-top">1</view>
-			<view class="select-box-title">选择对应图片：</view>
+			<view class="select-box-title">选择元素对应图片：</view>
 			<view class="select-box-content">
 				<view class="box-content-li" :class="{'box-content-li-choose': currentTab == index}"
 				v-for="(item, index) in infoList" :key="index" @click="chooseOne(item, index)">
