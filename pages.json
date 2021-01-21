@@ -215,6 +215,12 @@
 				"navigationBarTitleText": "数字元素训练"
 			}
         }
+        ,{
+            "path" : "pages/train/imageMemory/historyTest",
+            "style" : {
+				"navigationBarTitleText": "历史测试"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#8F9091",
