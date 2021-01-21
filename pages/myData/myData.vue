@@ -23,7 +23,7 @@
 				<text>我的训练</text>
 				<text @click="gotoUrl('/pages/myData/groupManage')">分组管理 ></text>
 			</view>
-			<top-input class="top-input" :placeholderText="placeholderText" @changeInput="changeInput"></top-input>
+			<top-input class="top-input" :changeValue="changeValue" :placeholderText="placeholderText" @changeInput="changeInput"></top-input>
 			<my-scrollX 
 			:scrollList="scrollTopList" :currentTab="currentTopTab"
 			:beforeColor="beforeColor" :afterColor="afterColor" @tabChange="tabChange"></my-scrollX>
@@ -96,10 +96,14 @@
 				console.log(item, index)
 			},
 			changeInput(value){
+				console.log(value)
 				this.changeValue = value
 			},
 			gotoListDetail(item){
 				console.log(item)
+				uni.navigateTo({
+					url: '/pages/train/imageMemory/numEleEntry'
+				})
 			},
 			gotoUrl(url){
 				uni.navigateTo({

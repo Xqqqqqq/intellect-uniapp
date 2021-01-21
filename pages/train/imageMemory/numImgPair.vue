@@ -24,6 +24,7 @@
 </template>
 
 <script>
+	import myData from '@/common/json/numImgPair.json'
 	export default {
 		data() {
 			return {

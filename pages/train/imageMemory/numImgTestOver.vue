@@ -63,9 +63,9 @@
 		</view>
 		
 		<view class="test-over-bottom">
-			<view class="over-bottom-li bottom-li-green">重新测试</view>
-			<view class="over-bottom-li bottom-li-yellow">前往训练</view>
-			<view class="over-bottom-li bottom-li-red">回看过程</view>
+			<view class="over-bottom-li bottom-li-green" @click="goBack">重新测试</view>
+			<view class="over-bottom-li bottom-li-yellow" @click="gotoTest">前往训练</view>
+			<view class="over-bottom-li bottom-li-red" @click="goBack">回看过程</view>
 		</view>
 		<view class="test-over-bottom-clone"></view>
 	</view>
@@ -81,6 +81,18 @@
 			return {
 				
 			};
+		},
+		methods:{
+			goBack(){
+				uni.navigateBack({
+					delta:1
+				})
+			},
+			gotoTest(){
+				uni.navigateTo({
+					url: '/pages/train/imageMemory/numImgTest'
+				})
+			}
 		}
 	}
 </script>

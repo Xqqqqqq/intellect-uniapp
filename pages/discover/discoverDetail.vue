@@ -77,6 +77,11 @@
 					num: 20
 				}],
 			};
+		},
+		methods:{
+			gotoListDetail(item){
+				console.log(item)
+			}
 		}
 	}
 </script>
