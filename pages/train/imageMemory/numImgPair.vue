@@ -7,15 +7,16 @@
 		</view>
 		<view class="img-pair-box">
 			<view class="pair-box-left">
-				<view class="box-left-li" :class="{'box-left-li-click':clickedLeftList.includes(item.id)}"
-				v-for="(item,index) in leftList" :key="index" @click="clickLeft(item, index)">{{item.num}}</view>
+				<view class="box-left-li" :class="{'box-left-li-click':problemList.filter(it => it.problemId === item.id).length > 0}" v-for="(item,index) in leftList"
+				 :key="index" @click="clickLeft(item, index)">
+					<view v-if="item.problemType == '1'">{{item.problemName}}</view>
+					<image v-if="item.problemType != '1'" :src="item.problemPic"></image>
+				</view>
 			</view>
 			<view class="pair-box-right">
-				<view class="box-right-li"
-				v-for="(item,index) in rightList" :key="index"
-				@click="clickRight(item, index)">
-					<image :src="item.img"></image>
-					<view class="box-right-li-num" v-if="item.leftnum">{{item.leftnum}}</view>
+				<view class="box-right-li" v-for="(item,index) in rightList" :key="index" @click="clickRight(item, index)">
+					<image v-if="leftList[0].problemType == '1'" :src="item.answerPic"></image>
+					<view v-if="problemList.length > 0 && problemList.filter(it => it.answerId === item.id).length > 0" class="box-right-li-num">{{problemList.find(it => it.answerId === item.id).problemName}}</view>
 				</view>
 			</view>
 		</view>
@@ -29,49 +30,35 @@
 		data() {
 			return {
 				resendTime: 60,// 倒计时秒数
-				leftList:[{
-					id:1,
-					num:1
-				},{
-					id:2,
-					num:2
-				},{
-					id:4,
-					num:4
-				},{
-					id:7,
-					num:7
-				}],
+				leftList:[],
 				rightList:[{
 					id:1,
-					img:'../../../static/img/tabs/data-blue.png'
+					answerPic:'../../../static/img/tabs/data-blue.png'
 				},{
 					id:2,
-					img:'../../../static/img/tabs/faxian-blue.png'
+					answerPic:'../../../static/img/tabs/faxian-blue.png'
 				},{
 					id:3,
-					img:'../../../static/img/icons/delete.png'
+					answerPic:'../../../static/img/icons/delete.png'
 				},{
 					id:4,
-					img:'../../../static/img/icons/zhongjiang.png'
+					answerPic:'../../../static/img/icons/zhongjiang.png'
 				},{
 					id:5,
-					img:'../../../static/img/tabs/wode-blue.png'
+					answerPic:'../../../static/img/tabs/wode-blue.png'
 				},{
 					id:6,
-					img:'../../../static/img/tabs/xunlian-blue.png'
+					answerPic:'../../../static/img/tabs/xunlian-blue.png'
 				},{
 					id:7,
-					img:'../../../static/img/icons/shandian.png'
+					answerPic:'../../../static/img/icons/shandian.png'
 				},{
-					id:7,
-					img:'../../../static/img/icons/watch.png'
+					id:8,
+					answerPic:'../../../static/img/icons/watch.png'
 				},],
-				leftInfo:{
-					leftid: '',
-					leftnum: '',
-				}, // 左侧选中数据
-				clickedLeftList: [],
+				leftInfo:{}, // 左侧选中数据
+				rightInfo: {}, // 右侧选中数据
+				problemList: [],
 				showH5: true,
 			};
 		},
@@ -88,31 +75,61 @@
 					clearInterval(timer);
 				}
 			}, 1000);
+			this.leftList = myData.data.startGroupVoList[0].startProblemVoList
 		},
 		methods:{
 			clickLeft(item, index){
-				if(this.leftInfo.leftid == ''){
-					//流程：先点击左侧数字，然后选择右侧对应图片，再选择数字，再选择右侧对应图片
-					// 不可以先全部选择完左侧数字再去选择右侧图片，即数字必须一一对应图片
-					this.leftInfo = {
-						leftid: item.id,
-						leftnum: item.num
+				if (this.problemList.length > 0) {
+					const lastProblemItem = this.problemList[this.problemList.length - 1]
+					if (lastProblemItem.answerId === '' && lastProblemItem.problemId !== item.id) {
+						console.log('没选答案')
+						return
+					}	
+				}
+				const problemIdList = this.problemList.map(it => it.problemId)
+				if (problemIdList.includes(item.id)) {
+					this.problemList = this.problemList.filter(it => it.problemId !== item.id)
+					
+				} else {
+					const newProblem = {
+						answerId: '',
+						problemId: item.id,
+						problemName: item.problemName
 					}
-					const newIndex = this.clickedLeftList.indexOf(item.id)
-					this.clickedLeftList.includes(item.id) ? this.clickedLeftList.splice(newIndex, 1) : this.clickedLeftList.push(item.id)
-				}else{
-					console.log(this.leftInfo)
-					console.log('请选择右侧对应图片！')
+					this.problemList.push(newProblem)
 				}
 			},
 			clickRight(item, index){
-				// console.log(this.leftInfo, item)
-				this.rightList[index] = {...this.leftInfo, ...item}
-				this.leftInfo = {
-					leftid: '',
-					leftnum: ''
+				if (this.problemList.length > 0) {
+					if (this.problemList.length === 1 && this.problemList[0].answerId === item.id) {
+						this.problemList = []
+					}
+					
+					// 不切换
+					if (this.problemList.find(it => it.answerId === item.id)) {
+						this.problemList = this.problemList.filter(it => it.answerId !== item.id)
+					} else {
+						this.problemList.forEach((it, ind) => {
+							if (ind === this.problemList.length - 1) {
+								if (it.answerId === '') {
+									it.answerId = item.id
+								}
+							}
+						})
+					}
+					
+					// 切换
+					// this.problemList.forEach((it, ind) => {
+					// 	if (it.answerId === item.id) {
+					// 		it.answerId = ''
+					// 	}
+					// 	if (ind === this.problemList.length - 1) {
+					// 		it.answerId = item.id
+					// 	}
+						
+					// })
+					// this.problemList = this.problemList.filter(it => it.answerId !== '')
 				}
-				// console.log(this.rightList)
 			},
 			gotoUrl(){
 				uni.navigateTo({
