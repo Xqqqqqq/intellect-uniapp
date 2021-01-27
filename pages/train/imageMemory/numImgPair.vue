@@ -2,21 +2,25 @@
 	<view class="img-pair">
 		<view class="img-pair-top" :style="{top: showH5 ? '88rpx' : '0rpx'}">
 			<view class="pair-top-blue">数图配对：</view>
-			<view class="pair-top-red">{{resendTime}}s</view>
-			<view class="pair-top-blue">第1组 / 共8组</view>
+			<view class="pair-top-red">{{page.examTime}}s</view>
+			<view class="pair-top-blue">第{{page.pageNum+1}}组 / 共{{page.examNum}}组</view>
 		</view>
 		<view class="img-pair-box">
 			<view class="pair-box-left">
-				<view class="box-left-li" :class="{'box-left-li-click':problemList.filter(it => it.problemId === item.id).length > 0}" v-for="(item,index) in leftList"
-				 :key="index" @click="clickLeft(item, index)">
-					<view v-if="item.problemType == '1'">{{item.problemName}}</view>
-					<image v-if="item.problemType != '1'" :src="item.problemPic"></image>
+				<view class="box-left-title" v-html="allData.startGroupVoList[page.pageNum].problemType == '1' ? '元素' : '图片'"></view>
+				<view class="box-left-li" :class="{'box-left-li-click':problemList.filter(it => it.problemId === item.id).length > 0}"
+				 v-for="(item,index) in leftList" :key="index" @click="clickLeft(item, index)">
+					<view v-if="allData.startGroupVoList[page.pageNum].problemType == '1'">{{item.problemName}}</view>
+					<image v-else :src="item.problemPic"></image>
 				</view>
 			</view>
 			<view class="pair-box-right">
+				<view class="box-right-title" v-html="allData.startGroupVoList[page.pageNum].problemType == '1' ? '图片' : '元素'"></view>
 				<view class="box-right-li" v-for="(item,index) in rightList" :key="index" @click="clickRight(item, index)">
-					<image v-if="leftList[0].problemType == '1'" :src="item.answerPic"></image>
-					<view v-if="problemList.length > 0 && problemList.filter(it => it.answerId === item.id).length > 0" class="box-right-li-num">{{problemList.find(it => it.answerId === item.id).problemName}}</view>
+					<image v-if="allData.startGroupVoList[page.pageNum].problemType == '1'" :src="item.answerPic"></image>
+					<view v-else>{{item.answerName}}</view>
+					<image v-if="allData.startGroupVoList[page.pageNum].problemType != '1' && problemList.length > 0 && problemList.filter(it => it.answerId === item.id).length > 0" class="box-right-li-img" :src="problemList.find(it => it.answerId === item.id).problemPic"></image>
+					<view v-if="allData.startGroupVoList[page.pageNum].problemType == '1' && problemList.length > 0 && problemList.filter(it => it.answerId === item.id).length > 0" class="box-right-li-num">{{problemList.find(it => it.answerId === item.id).problemName}}</view>
 				</view>
 			</view>
 		</view>
@@ -29,37 +33,18 @@
 	export default {
 		data() {
 			return {
-				resendTime: 60,// 倒计时秒数
+				allData:{},
 				leftList:[],
-				rightList:[{
-					id:1,
-					answerPic:'../../../static/img/tabs/data-blue.png'
-				},{
-					id:2,
-					answerPic:'../../../static/img/tabs/faxian-blue.png'
-				},{
-					id:3,
-					answerPic:'../../../static/img/icons/delete.png'
-				},{
-					id:4,
-					answerPic:'../../../static/img/icons/zhongjiang.png'
-				},{
-					id:5,
-					answerPic:'../../../static/img/tabs/wode-blue.png'
-				},{
-					id:6,
-					answerPic:'../../../static/img/tabs/xunlian-blue.png'
-				},{
-					id:7,
-					answerPic:'../../../static/img/icons/shandian.png'
-				},{
-					id:8,
-					answerPic:'../../../static/img/icons/watch.png'
-				},],
+				rightList:[],
 				leftInfo:{}, // 左侧选中数据
 				rightInfo: {}, // 右侧选中数据
-				problemList: [],
+				problemList: [], //保存左侧菜单所有已选中的数据
 				showH5: true,
+				page:{
+					pageNum: 0,
+					examNum: 10,
+					examTime: null,
+				}
 			};
 		},
 		onShow(){
@@ -69,32 +54,44 @@
 				this.showH5 = false
 			}
 			// 计时器
+			console.log(myData)
+			this.allData = myData.data
+			this.leftList = myData.data.startGroupVoList[0].startProblemVoList
+			this.rightList = myData.data.startGroupVoList[0].startAnsweroList
+			this.page.examTime = myData.data.examTime
+			this.page.examNum = myData.data.examNum
 			const timer = setInterval(() => {
-				this.resendTime = this.resendTime - 1;
-				if (this.resendTime === 0) {
+				this.page.examTime = this.page.examTime - 1;
+				if (this.page.examTime === 0) {
 					clearInterval(timer);
 				}
 			}, 1000);
-			this.leftList = myData.data.startGroupVoList[0].startProblemVoList
 		},
 		methods:{
 			clickLeft(item, index){
 				if (this.problemList.length > 0) {
-					const lastProblemItem = this.problemList[this.problemList.length - 1]
+					const lastProblemItem = this.problemList[this.problemList.length - 1] 
+					// 获取最后点击的元素，判断是否未选择右侧答案，如漏选则弹出提示
 					if (lastProblemItem.answerId === '' && lastProblemItem.problemId !== item.id) {
-						console.log('没选答案')
+						uni.showToast({
+						    title: '请选择答案！',
+							icon: 'none',
+						    duration: 2000
+						});
 						return
 					}	
 				}
+				// 获取已选中的左侧元素id
 				const problemIdList = this.problemList.map(it => it.problemId)
+				// 如果已经有则将其过滤，没有则添加新的选中
 				if (problemIdList.includes(item.id)) {
 					this.problemList = this.problemList.filter(it => it.problemId !== item.id)
-					
 				} else {
 					const newProblem = {
 						answerId: '',
 						problemId: item.id,
-						problemName: item.problemName
+						problemName: item.problemName,
+						problemPic: item.problemPic
 					}
 					this.problemList.push(newProblem)
 				}
@@ -104,31 +101,29 @@
 					if (this.problemList.length === 1 && this.problemList[0].answerId === item.id) {
 						this.problemList = []
 					}
+					// 情况1：不切换
+					// if (this.problemList.find(it => it.answerId === item.id)) {
+					// 	this.problemList = this.problemList.filter(it => it.answerId !== item.id)
+					// } else {
+					// 	this.problemList.forEach((it, ind) => {
+					// 		if (ind === this.problemList.length - 1) {
+					// 			if (it.answerId === '') {
+					// 				it.answerId = item.id
+					// 			}
+					// 		}
+					// 	})
+					// }
 					
-					// 不切换
-					if (this.problemList.find(it => it.answerId === item.id)) {
-						this.problemList = this.problemList.filter(it => it.answerId !== item.id)
-					} else {
-						this.problemList.forEach((it, ind) => {
-							if (ind === this.problemList.length - 1) {
-								if (it.answerId === '') {
-									it.answerId = item.id
-								}
-							}
-						})
-					}
-					
-					// 切换
-					// this.problemList.forEach((it, ind) => {
-					// 	if (it.answerId === item.id) {
-					// 		it.answerId = ''
-					// 	}
-					// 	if (ind === this.problemList.length - 1) {
-					// 		it.answerId = item.id
-					// 	}
-						
-					// })
-					// this.problemList = this.problemList.filter(it => it.answerId !== '')
+					// 情况2：切换
+					this.problemList.forEach((it, ind) => {
+						if (it.answerId === item.id) {
+							it.answerId = ''
+						}
+						if (ind === this.problemList.length - 1) {
+							it.answerId = item.id
+						}
+					})
+					this.problemList = this.problemList.filter(it => it.answerId !== '')
 				}
 			},
 			gotoUrl(){
@@ -208,38 +203,59 @@ page{
 	.img-pair-box{
 		width: 100%;
 		display: flex;
-		margin-top: 30rpx;
-		// height: 100%;
 		.pair-box-left{
-			width: 40%;
-			.box-left-li{
-				width: 200rpx;
-				height: 200rpx;
-				box-shadow:0px 2px 10px 0px rgba(108,143,197,0.14);
-				margin: auto;
-				margin-bottom: 30rpx;
-				background-color: #FFFFFF;
-				border-radius: 15rpx;
+			width: 34%;
+			.box-left-title{
+				width: 100%;
+				background-color:$uni-color-primary;
+				color: #FFFFFF;
+				font-size: 36rpx;
 				text-align: center;
-				line-height: 200rpx;
+				line-height: 80rpx;
+			}
+			.box-left-li{
+				width: 100%;
+				height: 230rpx;
+				background-color: #FFFFFF;
+				text-align: center;
 				color: #333333;
 				font-weight: bold;
 				font-size: 70rpx;
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				border-bottom: 1px solid #D3D3D3;
 			}
 			.box-left-li-click{
 				background-color: rgba(0,0,0,.3);
+				opacity: 0.5;
 			}
 		}
 		.pair-box-right{
-			width: 60%;
+			width: 66%;
 			overflow: hidden;
+			.box-right-title{
+				width: 100%;
+				background-color:$uni-text-color-disable;
+				color: $uni-color-primary;
+				font-size: 36rpx;
+				text-align: center;
+				line-height: 80rpx;
+			}
 			.box-right-li{
 				width: 50%;
-				height: 220rpx;
+				height: 230rpx;
 				border: 1px solid #D3D3D3;
 				background-color: #FFFFFF;
 				float: left;
 				position: relative;
+				text-align: center;
+				color: #333333;
+				font-weight: bold;
+				font-size: 70rpx;
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
 				image{
 					width: 100%;
 					height: 100%;
@@ -257,6 +273,14 @@ page{
 					text-align: center;
 					line-height: 200rpx;
 					font-size: 80rpx;
+				}
+				.box-right-li-img{
+					position: absolute;
+					left: 0;
+					top: 0;
+					width: 100%;
+					height: 100%;
+					opacity: 0.6;
 				}
 			}
 		}

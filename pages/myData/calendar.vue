@@ -247,7 +247,8 @@
 		.all-banner{
 			width: 100%;
 			height:300rpx;
-			background-color: $uni-color-primary;
+			// background-color: $uni-color-primary;
+			background: url(../../static/img/icons/bj.jpg) no-repeat;
 			background-size: 100% 100%;
 			box-shadow:0px 1px 5rpx 0px rgba(145,160,221,0.75);
 			padding:40rpx 24rpx;
@@ -288,7 +289,7 @@
 			    // margin-top: -18rpx;
 			    font-size:34rpx;
 			    font-weight:bold;
-			    color:rgba(62,119,240,1);
+			    color:$uni-color-primary;
 			    text-align: center;
 			    line-height: 144rpx;
 			    padding-top: 11rpx;
@@ -297,7 +298,7 @@
 				    width:144rpx;
 				    height:144rpx;
 				    background:rgba(255,255,255,1);
-				    box-shadow:4rpx 9rpx 23rpx 2rpx rgba(50,78,218,0.61);
+				    box-shadow:4rpx 9rpx 23rpx 2rpx rgba(46,59,103,0.61);
 				    border-radius:50%;
 				    margin: 0 auto;
 				    position: relative;

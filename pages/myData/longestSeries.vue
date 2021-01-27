@@ -106,6 +106,7 @@
 		background-color: #FFFFFF;
 		padding: 24rpx;
 		box-sizing: border-box;
+		box-shadow:1px 2px 6px 0px rgba(108,143,197,0.3);
 		.longer-top-total{
 			width: 100%;
 			display: flex;

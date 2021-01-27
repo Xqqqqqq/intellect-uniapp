@@ -40,7 +40,7 @@
 			</view>
 		</view>
 		<view class="ele-btn">
-			<view class="ele-btn-li ele-btn-li-gray">历史测试</view>
+			<view class="ele-btn-li ele-btn-li-gray" @click="gotoUrl('/pages/train/imageMemory/historyTest')">历史测试</view>
 			<view class="ele-btn-li ele-btn-li-blue" @click="gotoUrl('/pages/train/imageMemory/numImgTest')">前往测试</view>
 			<view class="ele-btn-li ele-btn-li-green" @click="gotoUrl('/pages/train/imageMemory/numImgCard')">进入训练</view>
 		</view>
