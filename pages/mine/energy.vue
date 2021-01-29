@@ -92,6 +92,7 @@
 				display: flex;
 				justify-content: space-between;
 				margin-bottom: 20rpx;
+				line-height: 1;
 				.li-top-left{
 					font-size: 32rpx;
 					font-weight: bold;

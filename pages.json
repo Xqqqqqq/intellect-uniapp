@@ -221,6 +221,18 @@
 				"navigationBarTitleText": "历史测试"
 			}
         }
+        ,{
+            "path" : "pages/loginAll/changePhone",
+            "style" : {
+				"navigationBarTitleText": "更换手机号"
+			}
+        }
+        ,{
+            "path" : "pages/train/imageMemory/numImgAll",
+            "style" : {
+				"navigationBarTitleText": "数字元素测试"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#8F9091",

@@ -442,7 +442,7 @@
   }
 
   .cmd-progress-circle-path {
-    stroke: #1890ff;
+    stroke: #2E3B67;
     animation: appear 0.3s;
   }
 

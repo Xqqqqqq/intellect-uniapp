@@ -114,7 +114,6 @@
 			},
 			cancel(){
 				this.isShowModal = false
-				this.modalTitle = ''
 			},
 			confirm() {
 				this.isShowModal = false

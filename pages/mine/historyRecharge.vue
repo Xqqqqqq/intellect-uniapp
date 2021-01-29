@@ -88,7 +88,7 @@
 			justify-content: space-between;
 			margin-bottom: 20rpx;
 			.li-top-left{
-				font-size: 34rpx;
+				font-size: 32rpx;
 				font-weight: bold;
 			}
 			.li-top-right{
