@@ -170,10 +170,10 @@
   text-align: center;
 }
 .test-over .test-over-bottom .bottom-li-green {
-  background-color: #4cd964;
+  background-color: #999;
 }
 .test-over .test-over-bottom .bottom-li-yellow {
-  background-color: #f0ad4e;
+  background-color: #2E3B67;
 }
 .test-over .test-over-bottom .bottom-li-red {
   background-color: #ED926E;

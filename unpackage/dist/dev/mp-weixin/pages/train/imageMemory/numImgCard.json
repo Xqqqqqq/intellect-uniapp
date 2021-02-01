@@ -1,9 +1,6 @@
 {
   "navigationBarTitleText": "数字图像关联训练",
   "usingComponents": {
-    "ren-dropdown-filter": "/components/ren-dropdown-filter/ren-dropdown-filter",
-    "uni-swiper-dot": "/components/uni-swiper-dot/uni-swiper-dot",
-    "l-modal": "/components/l-modal/l-modal",
-    "avatar": "/components/yq-avatar/yq-avatar"
+    "ren-dropdown-filter": "/components/ren-dropdown-filter/ren-dropdown-filter"
   }
 }

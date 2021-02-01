@@ -206,7 +206,7 @@
         ,{
             "path" : "pages/loginAll/changePhone",
             "style" : {
-				"navigationBarTitleText": "更换手机号"
+				"navigationBarTitleText": "更换手机号码"
 			}
         }
         ,{

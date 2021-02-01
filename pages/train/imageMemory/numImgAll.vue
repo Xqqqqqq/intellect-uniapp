@@ -81,11 +81,12 @@
 				console.log(arr)
 			},
 			clickNext(){
-				this.page.pageNum += 1
 				if(Number(this.page.pageNum)+ 1 == Number(this.page.examNum)){
 					console.log('所有题都答完了')
 					this.btnName = '结束答题'
 					return
+				}else{
+					this.page.pageNum += 1
 				}
 			}
 		}

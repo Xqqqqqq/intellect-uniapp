@@ -89,6 +89,7 @@
   -webkit-justify-content: space-between;
           justify-content: space-between;
   margin-bottom: 20rpx;
+  line-height: 1;
 }
 .energy .energy-content .history-li .history-li-top .li-top-left {
   font-size: 32rpx;

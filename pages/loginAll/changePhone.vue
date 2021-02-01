@@ -46,7 +46,7 @@
 				}
 			};
 		},
-		mounted(){
+		onReady(){
 			uni.setNavigationBarTitle({
 			　　title:'当前手机号码'
 			})

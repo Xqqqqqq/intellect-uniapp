@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "搜索结果",
-  "usingComponents": {
-    "top-input": "/components/top-input/top-input"
-  }
-}

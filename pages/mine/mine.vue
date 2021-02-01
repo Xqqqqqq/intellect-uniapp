@@ -1,10 +1,5 @@
 <template>
 	<view class="mine">
-		<!-- #ifdef APP-PLUS -->
-		<view class="status_bar">
-			<view class="top_view"></view>
-		</view>
-		<!-- #endif -->
 		<view class="title-box">
 			<view class="title-box-name">我的</view>
 		</view>

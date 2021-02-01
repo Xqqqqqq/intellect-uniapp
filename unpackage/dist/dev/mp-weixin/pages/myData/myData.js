@@ -94,13 +94,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   topInput: function() {
-    return __webpack_require__.e(/*! import() | components/top-input/top-input */ "components/top-input/top-input").then(__webpack_require__.bind(null, /*! @/components/top-input/top-input.vue */ 381))
+    return __webpack_require__.e(/*! import() | components/top-input/top-input */ "components/top-input/top-input").then(__webpack_require__.bind(null, /*! @/components/top-input/top-input.vue */ 294))
   },
   myScrollX: function() {
-    return __webpack_require__.e(/*! import() | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then(__webpack_require__.bind(null, /*! @/components/my-scrollX/my-scrollX.vue */ 388))
+    return __webpack_require__.e(/*! import() | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then(__webpack_require__.bind(null, /*! @/components/my-scrollX/my-scrollX.vue */ 301))
   },
   myList: function() {
-    return __webpack_require__.e(/*! import() | components/my-list/my-list */ "components/my-list/my-list").then(__webpack_require__.bind(null, /*! @/components/my-list/my-list.vue */ 395))
+    return __webpack_require__.e(/*! import() | components/my-list/my-list */ "components/my-list/my-list").then(__webpack_require__.bind(null, /*! @/components/my-list/my-list.vue */ 308))
   }
 }
 var render = function() {
@@ -140,7 +140,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var myScrollX = function myScrollX() {__webpack_require__.e(/*! require.ensure | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then((function () {return resolve(__webpack_require__(/*! @/components/my-scrollX/my-scrollX.vue */ 388));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var TopInput = function TopInput() {__webpack_require__.e(/*! require.ensure | components/top-input/top-input */ "components/top-input/top-input").then((function () {return resolve(__webpack_require__(/*! @/components/top-input/top-input.vue */ 381));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 395));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var myScrollX = function myScrollX() {__webpack_require__.e(/*! require.ensure | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then((function () {return resolve(__webpack_require__(/*! @/components/my-scrollX/my-scrollX.vue */ 301));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var TopInput = function TopInput() {__webpack_require__.e(/*! require.ensure | components/top-input/top-input */ "components/top-input/top-input").then((function () {return resolve(__webpack_require__(/*! @/components/top-input/top-input.vue */ 294));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 308));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -238,10 +238,14 @@ __webpack_require__.r(__webpack_exports__);
       console.log(item, index);
     },
     changeInput: function changeInput(value) {
+      console.log(value);
       this.changeValue = value;
     },
     gotoListDetail: function gotoListDetail(item) {
       console.log(item);
+      uni.navigateTo({
+        url: '/pages/train/imageMemory/numEleEntry' });
+
     },
     gotoUrl: function gotoUrl(url) {
       uni.navigateTo({

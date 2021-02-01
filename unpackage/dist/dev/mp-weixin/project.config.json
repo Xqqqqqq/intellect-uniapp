@@ -11,35 +11,21 @@
   "appid": "touristappid",
   "projectname": "intellect-uniapp",
   "condition": {
-    "plugin": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
       "list": []
     },
     "game": {
-      "list": []
-    },
-    "gamePlugin": {
+      "current": -1,
       "list": []
     },
     "miniprogram": {
-      "list": [
-        {
-          "name": "pages/train/imageMemory/numImgCard",
-          "pathName": "pages/train/imageMemory/numImgCard",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/train/imageMemory/numImgCard",
-          "pathName": "pages/train/imageMemory/numImgCard",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/mine/mine",
-          "pathName": "pages/mine/mine",
-          "scene": null
-        }
-      ]
+      "current": -1,
+      "list": []
     }
   }
 }

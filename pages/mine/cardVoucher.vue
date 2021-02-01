@@ -1,11 +1,6 @@
 <template>
 	<view class="card">
-		<!-- #ifdef APP-PLUS -->
-		<view class="status_bar">
-			<view class="top_view"></view>
-		</view>
-		<!-- #endif -->
-		<view class="card-tab">
+		<view class="card-tab" :style="{top: showH5 ? '88rpx' : '0rpx'}">
 			<view class="card-tab-li" @click="clickTab(index)"
 			:class="{'card-tab-li-click': currentTab == index}"
 			v-for="(item, index) in tabList" :key="index">{{item.name}}</view>
@@ -56,7 +51,15 @@
 					name:'历史卡券'
 				}],
 				currentTab:0,
+				showH5: true,
 			};
+		},
+		onShow(){
+			if(navigator){
+				this.showH5 = true
+			}else{
+				this.showH5 = false
+			}
 		},
 		methods:{
 			clickTab(index){

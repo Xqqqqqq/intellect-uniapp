@@ -74,7 +74,7 @@
   margin-bottom: 20rpx;
 }
 .history .history-li .history-li-top .li-top-left {
-  font-size: 34rpx;
+  font-size: 32rpx;
   font-weight: bold;
 }
 .history .history-li .history-li-top .li-top-right {

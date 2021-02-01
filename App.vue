@@ -18,7 +18,7 @@ export default {
 				})
 		        break;
 		     default:
-		        uni.switchTab({
+		        uni.navigateTo({
 		        	url:'/pages/myData/loadPage'
 		        })
 		} 

@@ -26,10 +26,11 @@
 /* 文章场景相关 */
 page {
   width: 100%;
+  height: 100%;
 }
 .img-card {
   width: 100%;
-  height: calc(100vh-var(--status-bar-height));
+  height: calc(100% - 25px);
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -38,20 +39,22 @@ page {
   -webkit-flex-direction: column;
           flex-direction: column;
   overflow-y: scroll;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.img-card .card-filter {
+  position: fixed;
+  left: 0;
+  top: 0;
 }
 .img-card .img-card-swiper {
   width: 100%;
-  padding: 0 24rpx;
+  padding: 24rpx;
+  padding-top: 135rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  height: 100%;
-}
-.img-card .img-card-swiper .card-swiper-block {
-  width: 100%;
-  height: 160rpx;
-}
-.img-card .img-card-swiper .img-card-btn-clone {
-  width: 100%;
+  height: calc(100% - 25px - 110rpx);
+  overflow-y: scroll;
 }
 .img-card .img-card-swiper .swiper {
   width: 100%;
@@ -59,6 +62,7 @@ page {
   -webkit-border-radius: 15rpx;
           border-radius: 15rpx;
   overflow: hidden;
+  height: 100%;
 }
 .img-card .img-card-swiper .swiper .swiper-item {
   width: 100%;
@@ -81,6 +85,7 @@ page {
   text-align: center;
   font-size: 80rpx;
   font-weight: bold;
+  position: relative;
 }
 .img-card .img-card-swiper .swiper .swiper-item .swiper-item-img {
   width: 60%;
@@ -93,8 +98,18 @@ page {
   text-align: center;
   font-size: 34rpx;
   background-color: #DDDDDD;
-  height: 150rpx;
-  line-height: 150rpx;
+  height: 250rpx;
+  line-height: 250rpx;
+  position: relative;
+}
+.img-card .img-card-swiper .swiper .swiper-item .item-num-tip {
+  position: absolute;
+  left: 24rpx;
+  top: 40rpx;
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #333333;
+  line-height: 1;
 }
 .img-card .img-card-swiper .img-card-ul {
   width: 100%;
@@ -155,43 +170,25 @@ page {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  padding-left: 10%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-flex-wrap: wrap;
-          flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
   position: fixed;
   left: 0;
   bottom: 0;
-  z-index: 9999;
+  z-index: 9;
+  height: 100rpx;
+  line-height: 100rpx;
 }
 .img-card .img-card-btn .card-btn-li {
-  width: 40%;
-  -webkit-border-radius: 15rpx;
-          border-radius: 15rpx;
+  width: 49.9%;
   text-align: center;
-  margin-right: 10%;
-  margin-bottom: 5%;
+  color: #FFFFFF;
 }
-.img-card .img-card-btn .card-btn-li:nth-child(2n) {
-  margin-right: 0%;
+.img-card .img-card-btn .card-btn-li-orange {
+  background-color: #f0ad4e;
 }
-.img-card .modal-text {
-  border: 1px solid #dcdcdc;
-  width: 100%;
-  padding: 24rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  font-size: 30rpx;
-  -webkit-border-radius: 15rpx;
-          border-radius: 15rpx;
-}
-.img-card .modal-img {
-  width: 250rpx;
-  height: 250rpx;
-  display: block;
-  margin: auto;
-  -webkit-border-radius: 15rpx;
-          border-radius: 15rpx;
+.img-card .img-card-btn .card-btn-li-blue {
+  background-color: #2E3B67;
 }
 

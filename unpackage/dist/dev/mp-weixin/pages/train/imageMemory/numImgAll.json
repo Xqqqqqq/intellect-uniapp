@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "数字元素测试",
+  "usingComponents": {
+    "num-img-pair": "/pages/train/imageMemory/imgComponents/numImgPair",
+    "num-img-select": "/pages/train/imageMemory/imgComponents/numImgSelect",
+    "num-img-count": "/pages/train/imageMemory/imgComponents/numImgCount",
+    "num-img-sort": "/pages/train/imageMemory/imgComponents/numImgSort"
+  }
+}

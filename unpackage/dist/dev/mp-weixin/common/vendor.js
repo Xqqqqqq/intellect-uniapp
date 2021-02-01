@@ -1693,6 +1693,17 @@ function normalizeComponent (
 
 /***/ }),
 
+/***/ 115:
+/*!**************************************************************!*\
+  !*** F:/项目总文件夹/intellect-uniapp/common/json/numImgPair.json ***!
+  \**************************************************************/
+/*! exports provided: data, info, code, default */
+/***/ (function(module) {
+
+module.exports = {"data":{"id":"4028d85677243c0f0177243d1eb40000","createDate":"2021-01-21 17:18:41","memberId":"4028d8567714df27017714e21ef60000","examType":1,"examTime":30,"examScore":0,"examMode":1,"collectsId":"402aa38151aef50c0151aef50c2600cc","examState":0,"examNum":4,"startGroupVoList":[{"startProblemVoList":[{"id":"4028d85677243c0f0177243d1ed20002","score":0,"groupNum":1,"problemContent":"","examId":"4028d85677243c0f0177243d1eb40000","correctAnswer":"","sore":"1","examMode":"1","problemName":"on13","problemType":"1","problemPic":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3363295869,2467511306&fm=26&gp=0.jpg","problemAnswer":""},{"id":"4028d85677243c0f0177243d1ed50004","score":0,"groupNum":1,"problemContent":"","examId":"4028d85677243c0f0177243d1eb40000","correctAnswer":"","sore":"2","examMode":"1","problemName":"on11","problemType":"1","problemPic":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2853553659,1775735885&fm=26&gp=0.jpg","problemAnswer":""},{"id":"4028d85677243c0f0177243d1ed50006","score":0,"groupNum":1,"problemContent":"","examId":"4028d85677243c0f0177243d1eb40000","correctAnswer":"","sore":"3","examMode":"1","problemName":"on5","problemType":"1","problemPic":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1963304009,2816364381&fm=26&gp=0.jpg","problemAnswer":""},{"id":"4028d85677243c0f0177243d1ed6000a","score":0,"groupNum":1,"problemContent":"","examId":"4028d85677243c0f0177243d1eb40000","correctAnswer":"","sore":"4","examMode":"1","problemName":"on10","problemType":"1","problemPic":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1091405991,859863778&fm=26&gp=0.jpg","problemAnswer":""}],"startAnsweroList":[{"id":"4028d85677243c0f0177243d1ec90001","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on1","answerPic":"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2989832003,2963819663&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"0","sore":"1"},{"id":"4028d85677243c0f0177243d1ed50003","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on13","answerPic":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2033921778,648007645&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"1","sore":"2"},{"id":"4028d85677243c0f0177243d1ed50005","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on11","answerPic":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3848402655,92542552&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"1","sore":"3"},{"id":"4028d85677243c0f0177243d1ed60007","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on5","answerPic":"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2980445260,41238050&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"1","sore":"4"},{"id":"4028d85677243c0f0177243d1ed60008","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on2","answerPic":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1694681277,1453280371&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"0","sore":"5"},{"id":"4028d85677243c0f0177243d1ed60009","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on9","answerPic":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=188173295,510375359&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"0","sore":"6"},{"id":"4028d85677243c0f0177243d1ed6000b","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on10","answerPic":"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3621987426,796514073&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"1","sore":"7"},{"id":"4028d85677243c0f0177243d1ed6000c","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on8","answerPic":"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2612816471,1892359600&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"0","sore":"8"}],"problemType":2,"sore":"1","groupType":1},{"startAnsweroList":[{"id":"4028d85677243c0f0177243d1ed7000d","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on3","answerPic":"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2612816471,1892359600&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"0","sore":"1"},{"id":"4028d85677243c0f0177243d1ed7000e","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on15","answerPic":"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3621987426,796514073&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"0","sore":"2"},{"id":"4028d85677243c0f0177243d1edb0010","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on7","answerPic":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=188173295,510375359&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"1","sore":"3"},{"id":"4028d85677243c0f0177243d1edb0011","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on6","answerPic":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1694681277,1453280371&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"0","sore":"4"},{"id":"4028d85677243c0f0177243d1edb0013","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on13","answerPic":"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2980445260,41238050&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"1","sore":"5"},{"id":"4028d85677243c0f0177243d1edb0015","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on4","answerPic":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3848402655,92542552&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"1","sore":"6"}],"startProblemVoList":[{"id":"4028d85677243c0f0177243d1eda000f","score":0,"groupNum":2,"problemContent":"","examId":"4028d85677243c0f0177243d1eb40000","correctAnswer":"","sore":"1","examMode":"1","problemName":"on7","problemType":"1","problemPic":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3848402655,92542552&fm=26&gp=0.jpg","problemAnswer":""}],"problemType":1,"groupType":2,"sore":"2"},{"startAnsweroList":[{"id":"4028d85677243c0f0177243d1ee9001a","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on3","answerPic":"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2989832003,2963819663&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"1","sore":"1"},{"id":"4028d85677243c0f0177243d1ee9001b","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on6","answerPic":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2033921778,648007645&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"0","sore":"2"},{"id":"4028d85677243c0f0177243d1ee9001c","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on7","answerPic":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3848402655,92542552&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"0","sore":"3"},{"id":"4028d85677243c0f0177243d1eea001e","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on8","answerPic":"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2980445260,41238050&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"1","sore":"4"},{"id":"4028d85677243c0f0177243d1eea0020","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on11","answerPic":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1694681277,1453280371&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"1","sore":"5"},{"id":"4028d85677243c0f0177243d1eea0021","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on9","answerPic":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=188173295,510375359&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"0","sore":"6"}],"startProblemVoList":[{"id":"4028d85677243c0f0177243d1ee90019","score":0,"groupNum":3,"problemContent":"","examId":"4028d85677243c0f0177243d1eb40000","correctAnswer":"","sore":"1","examMode":"1","problemName":"on3","problemType":"1","problemPic":"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3621987426,796514073&fm=26&gp=0.jpg","problemAnswer":""}],"problemType":2,"groupType":3,"sore":"3"},{"startAnsweroList":[{"id":"4028d85677243c0f0177243d1eeb0026","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on9","answerPic":"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2989832003,2963819663&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"1","sore":"1"},{"id":"4028d85677243c0f0177243d1eeb0027","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on14","answerPic":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2033921778,648007645&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"0","sore":"2"},{"id":"4028d85677243c0f0177243d1eeb0028","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on12","answerPic":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3848402655,92542552&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"0","sore":"3"},{"id":"4028d85677243c0f0177243d1eec002a","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on7","answerPic":"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2980445260,41238050&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"1","sore":"4"},{"id":"4028d85677243c0f0177243d1eed002b","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on1","answerPic":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1694681277,1453280371&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"0","sore":"5"},{"id":"4028d85677243c0f0177243d1eee002d","memberId":"4028d8567714df27017714e21ef60000","examId":"4028d85677243c0f0177243d1eb40000","answerName":"on8","answerPic":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=188173295,510375359&fm=26&gp=0.jpg","memberAnswer":"","correctAnswer":"1","sore":"6"}],"startProblemVoList":[{"id":"4028d85677243c0f0177243d1eeb0025","score":0,"groupNum":4,"problemContent":"","examId":"4028d85677243c0f0177243d1eb40000","correctAnswer":"","sore":"1","examMode":"1","problemName":"on9","problemType":"1","problemPic":"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2989832003,2963819663&fm=26&gp=0.jpg","problemAnswer":""},{"id":"4028d85677243c0f0177243d1eeb0029","score":0,"groupNum":4,"problemContent":"","examId":"4028d85677243c0f0177243d1eb40000","correctAnswer":"","sore":"2","examMode":"1","problemName":"on7","problemType":"1","problemPic":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2033921778,648007645&fm=26&gp=0.jpg","problemAnswer":""},{"id":"4028d85677243c0f0177243d1eee002c","score":0,"groupNum":4,"problemContent":"","examId":"4028d85677243c0f0177243d1eb40000","correctAnswer":"","sore":"3","examMode":"1","problemName":"on8","problemType":"1","problemPic":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3848402655,92542552&fm=26&gp=0.jpg","problemAnswer":""},{"id":"4028d85677243c0f0177243d1eee002f","score":0,"groupNum":4,"problemContent":"","examId":"4028d85677243c0f0177243d1eb40000","correctAnswer":"","sore":"4","examMode":"1","problemName":"on6","problemType":"1","problemPic":"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2980445260,41238050&fm=26&gp=0.jpg","problemAnswer":""},{"id":"4028d85677243c0f0177243d1eee002h","score":0,"groupNum":4,"problemContent":"","examId":"4028d85677243c0f0177243d1eb40000","correctAnswer":"","sore":"3","examMode":"1","problemName":"on8","problemType":"1","problemPic":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1694681277,1453280371&fm=26&gp=0.jpg","problemAnswer":""},{"id":"4028d85677243c0f0177243d1eee002r","score":0,"groupNum":4,"problemContent":"","examId":"4028d85677243c0f0177243d1eb40000","correctAnswer":"","sore":"4","examMode":"1","problemName":"on6","problemType":"1","problemPic":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=188173295,510375359&fm=26&gp=0.jpg","problemAnswer":""}],"problemType":2,"groupType":4,"sore":"4"}]},"info":"成功!","code":"0"};
+
+/***/ }),
+
 /***/ 2:
 /*!******************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js ***!
@@ -7754,29 +7765,18 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 4:
-/*!*********************************************!*\
-  !*** F:/项目总文件夹/intellect-uniapp/pages.json ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
-/***/ 428:
+/***/ 341:
 /*!*********************************************************************************************!*\
   !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 429);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 342);
 
 /***/ }),
 
-/***/ 429:
+/***/ 342:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -7807,7 +7807,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 430);
+module.exports = __webpack_require__(/*! ./runtime */ 343);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -7824,7 +7824,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 430:
+/***/ 343:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -8556,7 +8556,18 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 74:
+/***/ 4:
+/*!*********************************************!*\
+  !*** F:/项目总文件夹/intellect-uniapp/pages.json ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ 66:
 /*!******************************************************************!*\
   !*** F:/项目总文件夹/intellect-uniapp/components/u-charts/u-charts.js ***!
   \******************************************************************/

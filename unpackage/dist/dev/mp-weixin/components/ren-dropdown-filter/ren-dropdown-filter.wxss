@@ -53,8 +53,8 @@ page.data-v-61c13d5f {
 .filter-wrapper.data-v-61c13d5f {
   position: relative;
   left: 0;
-  width: 750rpx;
-  z-index: 999;
+  width: 100%;
+  z-index: 99;
 }
 .filter-wrapper .inner-wrapper .navs.data-v-61c13d5f {
   position: relative;
@@ -66,9 +66,8 @@ page.data-v-61c13d5f {
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
   background-color: #fff;
   border-bottom: 2rpx solid #f5f6f9;
   color: #8b9aae;
