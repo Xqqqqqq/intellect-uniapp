@@ -1,27 +1,38 @@
 <template>
 	<view class="img-pair">
 		<view class="img-pair-top" :style="{top: showH5 ? '88rpx' : '0rpx'}">
-			<view class="pair-top-blue">数图配对：</view>
+			<view class="pair-top-blue">{{topLeftName}}：</view>
 			<view class="pair-top-red">{{page.examTime}}s</view>
 			<view class="pair-top-blue">第{{page.pageNum+1}}组 / 共{{page.examNum}}组</view>
 		</view>
-		<numImgPair :page="page" :allData="allData" :problemList="problemList" @clickPairLeft="clickPairLeft" @clickPairRight="clickPairRight"></numImgPair>
-		<view class="img-pair-btn" @click="gotoUrl">下一组</view>
+		<numImgPair v-if="allData.startGroupVoList[page.pageNum].groupType == 1" :page="page" :allData="allData" :problemList="problemList" @clickPairLeft="clickProblemList" @clickPairRight="clickProblemList"></numImgPair>
+		<numImgSelect v-if="allData.startGroupVoList[page.pageNum].groupType == 2" :page="page" :allData="allData" :problemList="problemList" @clickSelectBottom="clickProblemList"></numImgSelect>
+		<numImgCount v-if="allData.startGroupVoList[page.pageNum].groupType == 3" :page="page" :allData="allData" :problemList="problemList" @clickCountBottom="clickProblemList"></numImgCount>
+		<numImgSort v-if="allData.startGroupVoList[page.pageNum].groupType == 4" :page="page" :allData="allData" :problemList="problemList" @clickSortTop="clickProblemList" @clickSortBottom="clickProblemList"></numImgSort>
+		<view class="img-pair-btn" @click="clickNext">{{btnName}}</view>
 	</view>
 </template>
 
 <script>
 	import myData from '@/common/json/numImgPair.json'
 	import numImgPair from './imgComponents/numImgPair.vue'
+	import numImgSelect from './imgComponents/numImgSelect.vue'
+	import numImgCount from './imgComponents/numImgCount.vue'
+	import numImgSort from './imgComponents/numImgSort.vue'
 	export default {
 		components: {
-			numImgPair
+			numImgPair,
+			numImgSelect,
+			numImgCount,
+			numImgSort
 		},
 		data() {
 			return {
 				allData:{},
 				problemList: [], //保存所有已选中的数据
 				showH5: true,
+				topLeftName: '数图配对',
+				btnName: '下一组',
 				page:{
 					pageNum: 0,
 					examNum: 10,
@@ -35,10 +46,28 @@
 			}else{
 				this.showH5 = false
 			}
-			// 计时器
 			this.allData = myData.data
 			this.page.examTime = myData.data.examTime
 			this.page.examNum = myData.data.examNum
+			switch(this.allData.examType) {
+				case 1:
+					this.topLeftName = '数图配对'
+					break;
+				case 2:
+					this.topLeftName = '数图单选'
+					break;
+				case 3:
+					this.topLeftName = '数图计算'
+					break;
+				case 4:
+					this.topLeftName = '数图排序'
+					break;
+				case 5:
+					this.topLeftName = '混合模式'
+					break;
+			     default:
+			        break
+			} 
 			const timer = setInterval(() => {
 				this.page.examTime = this.page.examTime - 1;
 				if (this.page.examTime === 0) {
@@ -47,14 +76,18 @@
 			}, 1000);
 		},
 		methods:{
-			clickPairLeft(arr){
+			clickProblemList(arr){
 				this.problemList = arr
-				console.log('left',arr)
+				console.log(arr)
 			},
-			clickPairRight(arr){
-				this.problemList = arr
-				console.log('right',arr)
-			},
+			clickNext(){
+				this.page.pageNum += 1
+				if(Number(this.page.pageNum)+ 1 == Number(this.page.examNum)){
+					console.log('所有题都答完了')
+					this.btnName = '结束答题'
+					return
+				}
+			}
 		}
 	}
 </script>

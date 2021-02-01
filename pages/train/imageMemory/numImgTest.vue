@@ -70,19 +70,18 @@
 				typeArr:[{
 					id: 1,
 					name: '数图配对',
-					path:'/pages/train/imageMemory/numImgPair'
 				},{
 					id: 2,
 					name: '数图单选',
-					path:'/pages/train/imageMemory/numImgSelect'
 				},{
 					id: 3,
 					name: '数图计算',
-					path:'/pages/train/imageMemory/numImgCount'
 				},{
 					id: 4,
 					name: '数图排序',
-					path:'/pages/train/imageMemory/numImgSort'
+				},{
+					id: 4,
+					name: '混合模式',
 				},],
 				typeIndex: 0,
 			};
@@ -96,7 +95,7 @@
 			},
 			gotoUrl(){
 				uni.navigateTo({
-					url: this.typeArr[this.typeIndex].path
+					url: '/pages/train/imageMemory/numImgAll'
 				})
 			}
 		}

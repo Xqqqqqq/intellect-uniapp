@@ -99,7 +99,8 @@
 					// 情况2：切换
 					this.pairProblemList.forEach((it, ind) => {
 						if (it.answerId === item.id) {
-							it.answerId = ''
+							// it.answerId = ''
+							this.pairProblemList.splice(ind, 1)
 						}
 						if (ind === this.pairProblemList.length - 1) {
 							it.answerId = item.id
