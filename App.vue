@@ -10,18 +10,18 @@ export default {
 		console.log('App Launch');
 	},
 	onShow: function() {
-		this.platformName = fun.getPlatform()
-		switch(this.platformName) {
-		     case "MP-WEIXIN":
-				uni.switchTab({
-					url:'/pages/myData/myData'
-				})
-		        break;
-		     default:
-		        uni.navigateTo({
-		        	url:'/pages/myData/loadPage'
-		        })
-		} 
+		// this.platformName = fun.getPlatform()
+		// switch(this.platformName) {
+		//      case "MP-WEIXIN":
+		// 		uni.switchTab({
+		// 			url:'/pages/myData/myData'
+		// 		})
+		//         break;
+		//      default:
+		//         uni.navigateTo({
+		//         	url:'/pages/myData/loadPage'
+		//         })
+		// } 
 	},
 	onHide: function() {
 		console.log('App Hide');

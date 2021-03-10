@@ -78,14 +78,20 @@
 		methods:{
 			clickProblemList(arr){
 				this.problemList = arr
-				console.log(arr)
 			},
 			clickNext(){
 				if(Number(this.page.pageNum)+ 1 == Number(this.page.examNum)){
 					console.log('所有题都答完了')
+					console.log('btn',this.problemList)
 					this.btnName = '结束答题'
 					return
 				}else{
+					this.problemList.push({
+						answerId: '￥',
+						problemId: '￥',
+						problemName: '',
+						problemPic: ''
+					})
 					this.page.pageNum += 1
 				}
 			}

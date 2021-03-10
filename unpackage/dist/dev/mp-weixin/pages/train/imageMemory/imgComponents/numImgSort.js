@@ -237,6 +237,15 @@ var _default =
     },
     clickBottom: function clickBottom(item, index) {var _this = this;
       if (this.sortProblemList.length > 0) {
+        var lastProblemItem = this.sortProblemList[this.sortProblemList.length - 1];
+        if (lastProblemItem.problemId === '' || lastProblemItem.problemId === '￥') {
+          uni.showToast({
+            title: '请选择问题！',
+            icon: 'none',
+            duration: 2000 });
+
+          return;
+        }
         if (this.sortProblemList.length == 1 && this.sortProblemList[0].answerId == item.id) {
           this.sortProblemList = [];
         }

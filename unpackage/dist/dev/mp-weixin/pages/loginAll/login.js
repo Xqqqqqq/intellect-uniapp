@@ -153,13 +153,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var _default =
 {
   data: function data() {
     return {
       codeMsg: '发送验证码',
       count: 10,
-      disable: false };
+      disable: false,
+      checked: false };
 
   },
   methods: {
@@ -181,6 +184,53 @@ var _default =
     gotoUrl: function gotoUrl(url) {
       uni.navigateTo({
         url: url });
+
+    },
+    loginForProvider: function loginForProvider(type) {
+      var vm = this;
+      var openid = uni.getStorageSync('openid');
+      uni.getProvider({
+        service: 'oauth',
+        success: function success(res) {
+          if (~res.provider.indexOf('weixin')) {
+            uni.login({
+              provider: 'weixin',
+              success: function success(loginRes) {
+                console.log(loginRes);
+                vm.authorization = loginRes.code; // 获取code
+                uni.getUserInfo({
+                  provider: 'weixin',
+                  success: function success(info) {//这里请求接口
+                    console.log(info);
+                  },
+                  fail: function fail() {
+                    uni.showToast({ title: "微信登录授权失败", icon: "none" });
+                  } });
+
+              },
+              fail: function fail(err) {
+                uni.showToast({
+                  title: '授权失败！',
+                  icon: 'none' });
+
+              } });
+
+          } else {
+            uni.showToast({
+              title: '请先安装微信或升级版本',
+              icon: "none" });
+
+          }
+        } });
+
+    },
+    changeCheckbox: function changeCheckbox(e) {
+      this.checked = !this.checked;
+    },
+    openProvider: function openProvider() {
+      uni.showToast({
+        title: '请先同意服务协议！',
+        icon: 'none' });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

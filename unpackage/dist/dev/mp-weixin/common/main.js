@@ -87,7 +87,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 var _fun = _interopRequireDefault(__webpack_require__(/*! common/fun.js */ 8));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
   data: function data() {
@@ -99,24 +99,23 @@ var _fun = _interopRequireDefault(__webpack_require__(/*! common/fun.js */ 8));f
     console.log('App Launch');
   },
   onShow: function onShow() {
-    this.platformName = _fun.default.getPlatform();
-    switch (this.platformName) {
-      case "MP-WEIXIN":
-        uni.switchTab({
-          url: '/pages/myData/myData' });
-
-        break;
-      default:
-        uni.switchTab({
-          url: '/pages/myData/loadPage' });}
-
-
+    // this.platformName = fun.getPlatform()
+    // switch(this.platformName) {
+    //      case "MP-WEIXIN":
+    // 		uni.switchTab({
+    // 			url:'/pages/myData/myData'
+    // 		})
+    //         break;
+    //      default:
+    //         uni.navigateTo({
+    //         	url:'/pages/myData/loadPage'
+    //         })
+    // } 
   },
   onHide: function onHide() {
     console.log('App Hide');
   },
   methods: {} };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 8 */,

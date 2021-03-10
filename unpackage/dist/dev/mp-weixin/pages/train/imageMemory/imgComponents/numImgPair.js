@@ -237,6 +237,15 @@ var _default =
     },
     clickRight: function clickRight(item, index) {var _this = this;
       if (this.pairProblemList.length > 0) {
+        var lastProblemItem = this.pairProblemList[this.pairProblemList.length - 1];
+        if (lastProblemItem.problemId === '' || lastProblemItem.problemId === '￥') {
+          uni.showToast({
+            title: '请选择问题！',
+            icon: 'none',
+            duration: 2000 });
+
+          return;
+        }
         if (this.pairProblemList.length === 1 && this.pairProblemList[0].answerId === item.id) {
           this.pairProblemList = [];
         }

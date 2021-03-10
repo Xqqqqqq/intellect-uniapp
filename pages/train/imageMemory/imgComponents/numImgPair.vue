@@ -80,6 +80,15 @@
 			},
 			clickRight(item, index){
 				if (this.pairProblemList.length > 0) {
+					const lastProblemItem = this.pairProblemList[this.pairProblemList.length-1]
+					if(lastProblemItem.problemId === '' || lastProblemItem.problemId === '￥'){
+						uni.showToast({
+						    title: '请选择问题！',
+							icon: 'none',
+						    duration: 2000
+						});
+						return
+					}
 					if (this.pairProblemList.length === 1 && this.pairProblemList[0].answerId === item.id) {
 						this.pairProblemList = []
 					}
