@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///F:/项目总文件夹/intellect-uniapp/main.js"],"names":["createPage","Page"],"mappings":";;;;;;;;;;kDAAA;AACA;AACA,6G;AACAA,UAAU,CAACC,qBAAD,CAAV,C","file":"pages/myData/wakary-poster.js","sourcesContent":["import 'uni-pages';\nimport Vue from 'vue'\nimport Page from './pages/myData/wakary-poster.vue'\ncreatePage(Page)"],"sourceRoot":""}

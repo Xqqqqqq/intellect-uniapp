@@ -8,7 +8,11 @@
     "app-plus" : {
         "nvueCompiler" : "uni-app",
         "compilerVersion" : 3,
-        "modules" : {},
+        "modules" : {
+            "OAuth" : {},
+            "Payment" : {},
+            "Share" : {}
+        },
         "distribute" : {
             "android" : {
                 "permissions" : [
@@ -38,7 +42,21 @@
             },
             "ios" : {},
             "sdkConfigs" : {
-                "ad" : {}
+                "ad" : {},
+                "oauth" : {},
+                "payment" : {
+                    "weixin" : {
+                        "appid" : "wx34bbf246a8e3e2ba",
+                        "UniversalLinks" : ""
+                    }
+                },
+                "push" : {},
+                "share" : {
+                    "weixin" : {
+                        "appid" : "wx34bbf246a8e3e2ba",
+                        "UniversalLinks" : ""
+                    }
+                }
             }
         }
     },

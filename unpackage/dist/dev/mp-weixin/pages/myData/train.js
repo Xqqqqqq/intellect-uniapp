@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   myList: function() {
-    return __webpack_require__.e(/*! import() | components/my-list/my-list */ "components/my-list/my-list").then(__webpack_require__.bind(null, /*! @/components/my-list/my-list.vue */ 308))
+    return __webpack_require__.e(/*! import() | components/my-list/my-list */ "components/my-list/my-list").then(__webpack_require__.bind(null, /*! @/components/my-list/my-list.vue */ 319))
   }
 }
 var render = function() {
@@ -181,7 +181,7 @@ var _uCharts = _interopRequireDefault(__webpack_require__(/*! @/components/u-cha
 //
 //
 //
-var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 308));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _self;var canvaRadar = null;var _default = { components: { MyList: MyList }, data: function data() {return { cWidth: '', cHeight: '', pixelRatio: 1, chartData: { categories: ['英语词根', '少儿基础', '法律元素', '数字图像', '英文前缀'], series: [{ name: '英语词根', // color: '#ffffff',
+var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 319));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _self;var canvaRadar = null;var _default = { components: { MyList: MyList }, data: function data() {return { cWidth: '', cHeight: '', pixelRatio: 1, chartData: { categories: ['英语词根', '少儿基础', '法律元素', '数字图像', '英文前缀'], series: [{ name: '英语词根', // color: '#ffffff',
           data: [90, 110, 165, 195, 187] }, { name: '少儿基础', data: [190, 210, 105, 35, 27] }, { name: '法律元素', data: [10, 20, 100, 35, 27] },
         {
           name: '数字图像',

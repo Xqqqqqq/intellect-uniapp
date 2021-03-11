@@ -56,14 +56,14 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/loginAll/login",
-          "pathName": "pages/loginAll/login",
+          "name": "pages/myData/wakary-poster",
+          "pathName": "pages/myData/wakary-poster",
           "query": "",
           "scene": null
         },
         {
-          "name": "pages/mine/accountRelation",
-          "pathName": "pages/mine/accountRelation",
+          "name": "pages/myData/share",
+          "pathName": "pages/myData/share",
           "scene": null
         }
       ]
