@@ -27,6 +27,10 @@
 page {
   background-color: #FFFFFF;
 }
+button::after {
+  border: none;
+  background-color: none;
+}
 .login {
   width: 100%;
 }
@@ -51,7 +55,6 @@ page {
   width: 80%;
   margin: auto;
   margin-top: 10%;
-  position: relative;
 }
 .login .login-mid input {
   width: 100%;
@@ -63,16 +66,19 @@ page {
   font-size: 32rpx;
   border-bottom: 1px solid #E6E6E6;
 }
-.login .login-mid .login-midsms {
+.login .login-mid .login-mid-input {
+  position: relative;
+  width: 100%;
+}
+.login .login-mid .login-mid-input .login-midsms {
   position: absolute;
-  top: 32%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  bottom: 40%;
   right: 10rpx;
   font-size: 28rpx;
   color: #666;
   text-align: center;
   width: 180rpx;
+  z-index: 10;
 }
 .login .login-mid .login-midbtn {
   width: 100%;

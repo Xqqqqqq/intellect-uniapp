@@ -4,7 +4,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
     "enhance": false,
     "postcss": true,
@@ -56,14 +56,20 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/myData/wakary-poster",
-          "pathName": "pages/myData/wakary-poster",
+          "name": "pages/loginAll/login",
+          "pathName": "pages/loginAll/login",
           "query": "",
           "scene": null
         },
         {
-          "name": "pages/myData/share",
-          "pathName": "pages/myData/share",
+          "name": "pages/myData/myData",
+          "pathName": "pages/myData/myData",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/loginAll/login",
+          "pathName": "pages/loginAll/login",
           "scene": null
         }
       ]

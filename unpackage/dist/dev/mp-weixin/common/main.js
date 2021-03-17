@@ -8,9 +8,20 @@
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ 4);var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 5));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 5));
+var _httpRequest = _interopRequireDefault(__webpack_require__(/*! ./common/httpRequest */ 12));
+var _cache = _interopRequireDefault(__webpack_require__(/*! ./common/cache */ 14));
+var _queue = _interopRequireDefault(__webpack_require__(/*! ./common/queue */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var UniLoadMore = function UniLoadMore() {__webpack_require__.e(/*! require.ensure | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then((function () {return resolve(__webpack_require__(/*! @/components/uni-load-more/uni-load-more.vue */ 301));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniPopup = function uniPopup() {__webpack_require__.e(/*! require.ensure | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then((function () {return resolve(__webpack_require__(/*! @/components/uni-popup/uni-popup.vue */ 308));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var noData = function noData() {__webpack_require__.e(/*! require.ensure | components/no-data/no-data */ "components/no-data/no-data").then((function () {return resolve(__webpack_require__(/*! @/components/no-data/no-data.vue */ 315));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+
+
+
 
 _vue.default.config.productionTip = false;
+_vue.default.component('uni-load-more', UniLoadMore);
+_vue.default.component('uni-popup', uniPopup);
+_vue.default.component('no-data', noData);
+_vue.default.prototype.$Request = _httpRequest.default;
+_vue.default.prototype.$queue = _queue.default;
 
 _App.default.mpType = 'app';
 
@@ -87,7 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 var _fun = _interopRequireDefault(__webpack_require__(/*! common/fun.js */ 8));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
   data: function data() {
@@ -99,6 +110,7 @@ var _fun = _interopRequireDefault(__webpack_require__(/*! common/fun.js */ 8));f
     console.log('App Launch');
   },
   onShow: function onShow() {
+    var vm = this;
     // this.platformName = fun.getPlatform()
     // switch(this.platformName) {
     //      case "MP-WEIXIN":
@@ -110,12 +122,38 @@ var _fun = _interopRequireDefault(__webpack_require__(/*! common/fun.js */ 8));f
     //         uni.navigateTo({
     //         	url:'/pages/myData/loadPage'
     //         })
-    // } 
+    // }
+    uni.login({
+      provider: 'weixin',
+      success: function success(loginRes) {
+        // console.log(loginRes.code) // code
+        vm.$Request.get("/wxController.do?getOpenid&code=".concat(loginRes.code)).then(function (res) {
+          if (res.errmsg) {
+            uni.showToast({
+              title: res.errmsg,
+              icon: 'none' });
+
+          }
+          // console.log(res) //openid
+          if (res) {
+            uni.setStorageSync('openid', res.openid);
+            uni.setStorageSync('sessionKey', res.session_key);
+          }
+        });
+      },
+      fail: function fail(err) {
+        uni.showToast({
+          title: '授权失败！',
+          icon: 'none' });
+
+      } });
+
   },
   onHide: function onHide() {
     console.log('App Hide');
   },
   methods: {} };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 8 */,

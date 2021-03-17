@@ -5,17 +5,28 @@
 			<view class="login-uptext">武装大脑</view>
 		</view>
 		<view class="login-mid">
-			<input placeholder="请输入手机号" type="number"/>
-			<input placeholder="请输入验证码" type="number"/>
-			<view class="login-midsms" @click="clickCodemsg">{{codeMsg}}</view>
-			<view class="login-midbtn" @click="gotoUrl('/pages/myData/myData')">登录</view>
+			<input placeholder="请输入手机号" type="number" v-model="tel"/>
+			<view class="login-mid-input">
+				<input placeholder="请输入验证码" type="number" v-model="telCode"/>
+				<view class="login-midsms" @click="clickCodemsg">{{codeMsg}}</view>
+			</view>
+			<view class="login-midbtn" @click="clickLogin">登录</view>
 		</view>
-		<button class="login-down" open-type="getUserInfo" lang="zh_CN" @getuserinfo="loginForProvider" v-if="checked == true">
+		<button class="login-down" open-type="getPhoneNumber" @getphonenumber="onGetPhoneNumber" v-if="checked == true && weChatPhone == ''">
 			<image src='../../static/img/icons/weixin.jpg'></image>
+			<!-- 11 -->
 		</button>
-		<button class="login-down" v-else @click="openProvider">
+		<button class="login-down" v-if="checked == true && weChatPhone != ''" @click="clickWechatLogin">
 			<image src='../../static/img/icons/weixin.jpg'></image>
+			<!-- 22 -->
 		</button>
+		<button class="login-down" v-if="checked == false" @click="openProvider">
+			<image src='../../static/img/icons/weixin.jpg'></image>
+			<!-- 33 -->
+		</button>
+		<!-- <button class="login-down" open-type="getUserInfo" lang="zh_CN" @getuserinfo="loginForProvider" v-if="checked == true">
+			<image src='../../static/img/icons/weixin.jpg'></image>
+		</button> -->
 		<checkbox-group class="login-bottom" @change="changeCheckbox">
 			<checkbox style="transform: scale(0.7)" :checked="checked"></checkbox>
 			<view class="login-botext" @click="gotoUrl('/pages/loginAll/useragreement')">武装大脑服务用户协议</view>	
@@ -28,32 +39,209 @@
 		data() {
 			return {
 				codeMsg: '发送验证码',
-				count: 10,
+				count: 60,
 				disable: false,
-				checked: false,
+				checked: true,
+				tel:'',// 用户登录填写手机号
+				telCode: '',//验证码
+				weChatPhone:'',//用户微信获取手机号
 			};
 		},
+		mounted(){
+			if(uni.getStorageSync('phoneNumber')){
+				this.weChatPhone = uni.getStorageSync('phoneNumber')
+			}
+		},
 		methods:{
+			changeCheckbox(e){
+				this.checked = !this.checked
+			},
+			// 获取验证码
 			clickCodemsg(){
-				if(this.disable == false){
-					let timer =  setInterval(() => {
-						this.count -= 1
-						this.codeMsg = this.count + 's'
-						this.disable = true
-						if(this.count < 0){
-							clearInterval(timer)
-							this.codeMsg = '发送验证码'
-							this.count = 10
-							this.disable = false
-						}
-					}, 1000)
+				if (!this.tel) {
+					uni.showToast({
+						title: '请输入手机号码',
+						icon: 'none'
+					})
+					return
 				}
+				const rsg = /^[1][3,4,5,6,7,8][0-9]{9}$/
+				if (this.tel.indexOf('.') !== -1 || !rsg.test(this.tel)) {
+					uni.showToast({
+						title: '请输入正确的手机号码',
+						icon: 'none'
+					})
+					return
+				}
+				if(this.disable == false){
+					this.$Request.get(`/appTelcodeController.do?getTelcode&tel=${this.tel}&type=2`).then(res => {
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+						if(res.code == '0') {
+							let timer =  setInterval(() => {
+								this.count -= 1
+								this.codeMsg = this.count + 's'
+								this.disable = true
+								if(this.count < 0){
+									clearInterval(timer)
+									this.codeMsg = '发送验证码'
+									this.count = 60
+									this.disable = false
+								}
+							}, 1000)
+						}
+					}).catch(error => {
+						console.log(error)
+					})
+				}
+			},
+			// 点击登录按钮
+			clickLogin(){
+				if(this.checked == false){
+					uni.showToast({
+						title: '请先阅读同意服务协议！',
+						icon: 'none'
+					});
+				}else{
+					if(!this.tel || !this.telCode){
+						uni.showToast({
+							title: '请检查输入项！',
+							icon: 'none'
+						});
+					}else{
+						// 用户手机登录
+						this.$Request.get(`/appCollectsController.do?getCollectsList&tel=${this.tel}&telCode=${this.telCode}`)
+						.then(res => {
+							if(res.code == 0){
+								setTimeout(()=>{
+									uni.showToast({
+										title: '登录成功，正在跳转...',
+										icon: 'none'
+									})
+									uni.switchTab({
+										url:'/pages/myData/myData'
+									})
+								},1000)
+							}else if(res.code == 100){
+								// 尚未注册
+								this.$Request.get(`/appMemberController.do?registerMember&memberTel=${this.tel}&openid=${uni.getStorageSync('openid')}`
+								).then(res => {
+									if(res.code == 0){
+										setTimeout(()=>{
+											uni.showToast({
+												title: '登录成功，正在跳转...',
+												icon: 'none'
+											})
+											uni.switchTab({
+												url:'/pages/myData/myData'
+											})
+										},1000)
+									}else{
+										uni.showToast({
+											title: res.info,
+											icon: 'none'
+										})
+									}
+								})
+							}else{
+								uni.showToast({
+									title: res.info,
+									icon: 'none'
+								});
+							}
+						})
+					}
+				}
+			},
+			// 小程序获取用户手机号
+			onGetPhoneNumber(e){
+				let vm = this
+				if(e.detail.errMsg == 'getPhoneNumber:ok'){
+					vm.$Request.postT('/wxController.do?getWxPhone',{
+						ivdata:e.detail.iv,
+						encrypdata: e.detail.encryptedData,
+						sessionKey: uni.getStorageSync('sessionKey')
+					},'application/json;charset=UTF-8').then(res => {
+						if(res.code == 0){
+							uni.setStorageSync('phoneNumber', JSON.parse(res.data.phone).phoneNumber)
+							vm.weChatPhone = uni.getStorageSync('phoneNumber')
+							vm.wechatLoginMember()
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							});
+						}
+					})
+				}else{
+					uni.showToast({
+						title: '此程序需要获取您的授权才可进行登录！',
+						icon: 'none'
+					})
+				}
+			},
+			// 小程序已有手机号，实现微信登录
+			clickWechatLogin(){
+				this.wechatLoginMember()
+			},
+			// 小程序查看是否已经注册过，已注册则可登录
+			wechatLoginMember(){
+				this.$Request.get(`/appMemberController.do?loginMember&openid=${uni.getStorageSync('openid')}`).then(res => {
+					if(res.code == 0){
+						// 已注册，可登录
+						setTimeout(()=>{
+							uni.showToast({
+								title: '登录成功，正在跳转...',
+								icon: 'none'
+							})
+							uni.switchTab({
+								url:'/pages/myData/myData'
+							})
+						},1000)
+					}else if(res.code == 100){
+						// 尚未注册
+						this.$Request.get(`/appMemberController.do?registerMember&memberTel=${uni.getStorageSync('phoneNumber')}&openid=${uni.getStorageSync('openid')}`
+						).then(res => {
+							if(res.code == 0){
+								setTimeout(()=>{
+									uni.showToast({
+										title: '登录成功，正在跳转...',
+										icon: 'none'
+									})
+									uni.switchTab({
+										url:'/pages/myData/myData'
+									})
+								},1000)
+							}else{
+								uni.showToast({
+									title: res.info,
+									icon: 'none'
+								})
+							}
+						})
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			// 微信小程序点击勾选协议
+			openProvider(){
+				uni.showToast({
+					title: '请先阅读同意服务协议！',
+					icon: 'none'
+				});
 			},
 			gotoUrl(url){
 				uni.navigateTo({
 					url:url
 				})
 			},
+			// 微信登录,暂时没用到
 			loginForProvider(type){
 				var vm = this;
 				let openid = uni.getStorageSync('openid')
@@ -64,17 +252,28 @@
 				        	uni.login({
 				        		provider: 'weixin',
 				        		success: function(loginRes) {
-									console.log(loginRes)
-				        			vm.authorization = loginRes.code // 获取code
+									// console.log(loginRes.code) // code
+									vm.$Request.get(`/wxController.do?getOpenid&code=${loginRes.code}`).then(res => {
+										if(res.errmsg){
+											uni.showToast({
+												title: res.errmsg,
+												icon: 'none'
+											})
+										}
+										// console.log(res) //openid
+										if(res.openid){
+											uni.setStorageSync('openid', res.openid)
+										}
+									})
 									uni.getUserInfo({
 										provider: 'weixin',
 										success: (info) => { //这里请求接口
-										  console.log(info);
+										   console.log(info);
 										},
 										fail: () => {
-										  uni.showToast({title:"微信登录授权失败",icon:"none"});
+										   uni.showToast({title:"微信登录授权失败",icon:"none"});
 										}
-									  })
+									 })
 				        		},
 				        		fail(err) {
 				        			uni.showToast({
@@ -92,15 +291,6 @@
 				    }
 				});
 			},
-			changeCheckbox(e){
-				this.checked = !this.checked
-			},
-			openProvider(){
-				uni.showToast({
-					title: '请先同意服务协议！',
-					icon: 'none'
-				});
-			}
 		}
 	}
 </script>
@@ -109,6 +299,10 @@
 page{
 		background-color: #FFFFFF;
 	}
+button::after{
+	border: none;
+	background-color: none;
+}
 .login{
 	width: 100%;
 	.login-up{
@@ -132,7 +326,6 @@ page{
 		width: 80%;
 		margin: auto;
 		margin-top: 10%;
-		position: relative;
 		input{
 			width: 100%;
 			height: 100%;
@@ -142,15 +335,19 @@ page{
 			font-size: 32rpx;
 			border-bottom: 1px solid #E6E6E6;
 		}
-		.login-midsms{
-			position: absolute;
-			top: 32%;
-			transform: translateY(-50%);
-			right: 10rpx;
-			font-size: 28rpx;
-			color: #666;
-			text-align: center;
-			width: 180rpx;
+		.login-mid-input{
+			position: relative;
+			width: 100%;
+			.login-midsms{
+				position: absolute;
+				bottom: 40%;
+				right: 10rpx;
+				font-size: 28rpx;
+				color: #666;
+				text-align: center;
+				width: 180rpx;
+				z-index: 10;
+			}
 		}
 		.login-midbtn{
 			width: 100%;
@@ -198,7 +395,6 @@ page{
 			text-align: center;
 			font-size: 30rpx;
 		}
-		
 	}
 }
 </style>

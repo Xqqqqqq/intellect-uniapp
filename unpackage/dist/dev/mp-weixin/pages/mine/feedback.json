@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "意见建议",
   "usingComponents": {
+    "htz-image-upload": "/components/htz-image-upload/htz-image-upload",
     "avatar": "/components/yq-avatar/yq-avatar"
   }
 }

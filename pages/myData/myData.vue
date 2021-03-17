@@ -31,6 +31,8 @@
 		
 		<view class="wrap-content">
 			<my-list :myList="listdetial" @gotoUrl="gotoListDetail"></my-list>
+			<no-data v-if="status == 'noMore' && !listdetial.length"></no-data>
+			<uni-load-more class="no-data-more" v-else iconType="circle" :color="'#CCCCCC'" :contentText="contentText" :status="status" />
 		</view>
 	</view>
 </template>
@@ -88,7 +90,22 @@
 					date: '2020-10-10',
 					num: 20
 				}],
+				page:1,
+				contentText: {
+					contentdown: '查看更多',
+					contentrefresh: '加载中',
+					contentnomore: '- 暂时没有新内容了呢 -'
+				},
+				status: 'loading',
 			};
+		},
+		onPullDownRefresh() {
+			this.page = 1;
+			this.listdetial = [];
+			// uni.showLoading({
+			// 	title: '加载中'
+			// });
+			// uni.hideLoading();
 		},
 		methods:{
 			tabChange(item, index){

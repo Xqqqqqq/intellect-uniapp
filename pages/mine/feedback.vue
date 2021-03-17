@@ -13,24 +13,29 @@
 		</view>
 		<view class="feed-bottom">
 			<view class="feed-content-title">上传图片</view>
-			<view class="feed-content-ul">
+			<htz-image-upload :max="9" name="file" :chooseNum="9" v-model="imageData" @chooseSuccess="ceshiChooseSuccess"></htz-image-upload>
+			<!-- view class="feed-content-ul">
 				<image v-for="(item, index) in urls" :key="index" :src="item" @click="clickUrl(index)"></image>
 				<image  src='../../static/img/icons/add.png' @click="clickUrl(-1)"></image>
-			</view>
+			</view> -->
 		</view>
 		<view class="feed-btn">提交信息</view>
-		<avatar @upload="myUpload" ref="avatar" v-show="showAvatar"></avatar>
 	</view>
 </template>
 
 <script>
 	import avatar from "@/components/yq-avatar/yq-avatar.vue";
+	import htzImageUpload from '@/components/htz-image-upload/htz-image-upload.vue'
 	export default {
 		components: {
-			avatar
+			avatar,
+			htzImageUpload,
 		},
 		data() {
 			return {
+				uploadParams: {
+					type: 'dailyLife'
+				},
 				problemList:[{
 					id:1,
 					title:'系统操作问题'
@@ -54,30 +59,23 @@
 				urls: [],
 				urlImgIndex: 0,
 				showAvatar: false,
+				imageData: [
+				
+				],
 			};
 		},
 		methods:{
 			clickTab(item, index){
 				this.currentTab = index
 			},
-			myUpload(rsp) {
-				if(this.urlImgIndex >=0){
-					this.$set(this.urls, rsp.index, rsp.path);
-				}else{
-					this.urls.push(rsp.path)
-				}
-				this.showAvatar = false
+			ceshiChooseSuccess(tempFilePaths) { //选择图片返回
+				console.log('ceshiChooseSuccess', tempFilePaths);
+				/****************
+				以下代码是自定义上传逻辑，仅供参考
+				***************/
+				this.imgUpload(tempFilePaths);
+				/*******************************/
 			},
-			clickUrl(index){
-				this.showAvatar = true
-				this.urlImgIndex = index
-				this.$refs.avatar.fChooseImg(index,{
-					selWidth: "300upx",
-					selHeight: "300upx",
-					expWidth: '260upx',
-					expHeight: '260upx'
-				});
-			}
 		}
 	}
 </script>

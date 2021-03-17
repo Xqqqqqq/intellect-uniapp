@@ -1693,7 +1693,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 115:
+/***/ 119:
 /*!**************************************************************!*\
   !*** F:/项目总文件夹/intellect-uniapp/common/json/numImgPair.json ***!
   \**************************************************************/
@@ -1704,18 +1704,511 @@ module.exports = {"data":{"id":"4028d85677243c0f0177243d1eb40000","createDate":"
 
 /***/ }),
 
-/***/ 172:
+/***/ 12:
+/*!********************************************************!*\
+  !*** F:/项目总文件夹/intellect-uniapp/common/httpRequest.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {var _config = _interopRequireDefault(__webpack_require__(/*! ./config */ 13));
+var _cache = _interopRequireDefault(__webpack_require__(/*! ./cache */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+function checkToken(res) {
+  if (res.data && res.data.status == "FAIL" && res.data.code && res.data.code == 'MA1101' || res.data.msg && res.data.msg.indexOf('token') > 0) {
+    uni.reLaunch({
+      url: 'pages/loginAll/login' });
+
+  }
+}
+module.exports = {
+  config: function config(name) {
+    var info = null;
+    if (name) {
+      var name2 = name.split("."); //字符分割
+      if (name2.length > 1) {
+        info = _config.default[name2[0]][name2[1]] || null;
+      } else {
+        info = _config.default[name] || null;
+      }
+      if (info == null) {
+        var web_config = _cache.default.get("web_config");
+        if (web_config) {
+          if (name2.length > 1) {
+            info = web_config[name2[0]][name2[1]] || null;
+          } else {
+            info = web_config[name] || null;
+          }
+        }
+      }
+    }
+    return info;
+  },
+
+  postT: function postT(url, data, header) {
+    header = header || "application/x-www-form-urlencoded";
+    url = this.config("APIHOST") + url;
+    var token = uni.getStorageSync("token");
+    if (token) {
+      return new Promise(function (succ, error) {
+        uni.request({
+          url: url,
+          data: data,
+          method: "POST",
+          header: {
+            "content-type": header,
+            "token": token },
+
+          success: function success(result) {
+            checkToken(result);
+            succ.call(self, result.data);
+          },
+          fail: function fail(e) {
+            error.call(self, e);
+          } });
+
+      });
+    } else {
+      return new Promise(function (succ, error) {
+        uni.request({
+          url: url,
+          data: data,
+          method: "POST",
+          header: {
+            "content-type": header },
+
+          success: function success(result) {
+            checkToken(result);
+            succ.call(self, result.data);
+          },
+          fail: function fail(e) {
+            error.call(self, e);
+          } });
+
+      });
+    }
+  },
+
+  postJson: function postJson(url, data, header) {
+    header = header || "application/json";
+    url = this.config("APIHOST") + url;
+    var token = uni.getStorageSync("token");
+    if (token) {
+      return new Promise(function (succ, error) {
+        uni.request({
+          url: url,
+          data: data,
+          method: "POST",
+          header: {
+            "content-type": header,
+            "token": token },
+
+          success: function success(result) {
+            checkToken(result);
+            succ.call(self, result.data);
+          },
+          fail: function fail(e) {
+            error.call(self, e);
+          } });
+
+      });
+    } else {
+      return new Promise(function (succ, error) {
+        uni.request({
+          url: url,
+          data: data,
+          method: "POST",
+          header: {
+            "content-type": header },
+
+          success: function success(result) {
+            checkToken(result);
+            succ.call(self, result.data);
+          },
+          fail: function fail(e) {
+            error.call(self, e);
+          } });
+
+      });
+    }
+  },
+  getT: function getT(url, data, header) {
+    header = header || "application/x-www-form-urlencoded";
+    url = this.config("APIHOST") + url;
+    var token = uni.getStorageSync("token");
+    if (token) {
+      return new Promise(function (succ, error) {
+        uni.request({
+          url: url,
+          data: data,
+          method: "GET",
+          header: {
+            "content-type": header,
+            "token": token },
+
+          success: function success(result) {
+            checkToken(result);
+            succ.call(self, result.data);
+          },
+          fail: function fail(e) {
+            error.call(self, e);
+          } });
+
+      });
+    } else {
+      return new Promise(function (succ, error) {
+        uni.request({
+          url: url,
+          data: data,
+          method: "GET",
+          header: {
+            "content-type": header },
+
+          success: function success(result) {
+            checkToken(result);
+            succ.call(self, result.data);
+          },
+          fail: function fail(e) {
+            error.call(self, e);
+          } });
+
+      });
+    }
+
+  },
+  getJT: function getJT(url, data, header) {
+    header = header || "application/json";
+    url = this.config("APIHOST") + url;
+    var token = uni.getStorageSync("token");
+    return new Promise(function (succ, error) {
+      uni.request({
+        url: url,
+        data: data,
+        method: "GET",
+        header: {
+          "content-type": header,
+          "token": token },
+
+        success: function success(result) {
+          checkToken(result);
+          succ.call(self, result.data);
+        },
+        fail: function fail(e) {
+          error.call(self, e);
+        } });
+
+    });
+  },
+  get: function get(url, data, header) {
+    header = header || "application/x-www-form-urlencoded";
+    url = this.config("APIHOST") + url;
+    var token = uni.getStorageSync("token");
+    return new Promise(function (succ, error) {
+      uni.request({
+        url: url,
+        method: "GET",
+        header: {
+          "content-type": header,
+          "token": token },
+
+        success: function success(result) {
+          checkToken(result);
+          succ.call(self, result.data);
+        },
+        fail: function fail(e) {
+          error.call(self, e);
+        } });
+
+    });
+  } };
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 13:
+/*!***************************************************!*\
+  !*** F:/项目总文件夹/intellect-uniapp/common/config.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var ROOTPATH = "http://www.armedbrains.com/brain_sport_war/app";
+var ROOTPATH1 = "https://www.gomyorder.cn/tao";
+module.exports = {
+  APIHOST: ROOTPATH,
+  APIHOST1: ROOTPATH1,
+  ROOTPATH: ROOTPATH };
+
+/***/ }),
+
+/***/ 14:
+/*!**************************************************!*\
+  !*** F:/项目总文件夹/intellect-uniapp/common/cache.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(uni) {/**
+ * 缓存数据优化
+ * var cache = require('utils/cache.js');
+ * import cache from '../cache'
+ * 使用方法 【
+ *     一、设置缓存
+ *         string    cache.put('k', 'string你好啊');
+ *         json      cache.put('k', { "b": "3" }, 2);
+ *         array     cache.put('k', [1, 2, 3]);
+ *         boolean   cache.put('k', true);
+ *     二、读取缓存
+ *         默认值    cache.get('k')
+ *         string    cache.get('k', '你好')
+ *         json      cache.get('k', { "a": "1" })
+ *     三、移除/清理  
+ *         移除: cache.remove('k');
+ *         清理：cache.clear(); 
+ * 】
+ * @type {String}
+ */
+var postfix = '_mallStore'; // 缓存前缀 
+/**
+ * 设置缓存 
+ * @param  {[type]} k [键名]
+ * @param  {[type]} v [键值]
+ * @param  {[type]} t [时间、单位秒]
+ */
+function put(k, v, t) {
+  uni.setStorageSync(k, v);
+  var seconds = parseInt(t);
+  if (seconds > 0) {
+    var timestamp = Date.parse(new Date());
+    timestamp = timestamp / 1000 + seconds;
+    uni.setStorageSync(k + postfix, timestamp + "");
+  } else {
+    uni.removeStorageSync(k + postfix);
+  }
+}
+
+
+/**
+   * 获取缓存 
+   * @param  {[type]} k   [键名]
+   * @param  {[type]} def [获取为空时默认]
+   */
+function get(k, def) {
+  var deadtime = parseInt(uni.getStorageSync(k + postfix));
+  if (deadtime) {
+    if (parseInt(deadtime) < Date.parse(new Date()) / 1000) {
+      if (def) {
+        return def;
+      } else {
+        return false;
+      }
+    }
+  }
+  var res = uni.getStorageSync(k);
+  if (res) {
+    return res;
+  } else {
+    if (def == undefined || def == "") {
+      def = false;
+    }
+    return def;
+  }
+}
+
+function remove(k) {
+  uni.removeStorageSync(k);
+  uni.removeStorageSync(k + postfix);
+}
+
+/**
+   * 清理所有缓存
+   * @return {[type]} [description]
+   */
+function clear() {
+  uni.clearStorageSync();
+}
+
+
+module.exports = {
+  put: put,
+  get: get,
+  remove: remove,
+  clear: clear };
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 15:
+/*!**************************************************!*\
+  !*** F:/项目总文件夹/intellect-uniapp/common/queue.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(uni) {/**
+ * 队列封装
+ * @author maxd
+ * @date 2019.8.1
+ */
+module.exports = {
+
+
+  logout: function logout() {
+    this.remove("token");
+    this.remove("userId");
+    this.remove("mobile");
+    this.remove("openid");
+    this.remove("nickName");
+    this.remove("image_url");
+    this.remove("relation_id");
+  },
+  loginClear: function loginClear() {
+    this.remove("token");
+    this.remove("userId");
+    this.remove("mobile");
+    this.remove("nickName");
+    this.remove("image_url");
+    this.remove("relation_id");
+  },
+  showLoading: function showLoading(title) {
+    uni.showLoading({
+      title: title });
+
+  },
+  showToast: function showToast(title) {
+    uni.showToast({
+      title: title,
+      mask: false,
+      duration: 2000,
+      icon: "none" });
+
+  },
+  getSearchKeys: function getSearchKeys(key) {
+    var list =
+    "hello";
+    return list.match(key);
+  },
+  setJson: function setJson(key, value) {
+    var jsonString = JSON.stringify(value);
+    try {
+      uni.setStorageSync(key, jsonString);
+    } catch (e) {
+      // error
+    }
+  },
+  setData: function setData(key, value) {
+    try {
+      uni.setStorageSync(key, value);
+    } catch (e) {
+      // error
+    }
+  },
+  getData: function getData(key) {
+    try {
+      var value = uni.getStorageSync(key);
+      if (value) {
+        return value;
+      }
+    } catch (e) {
+      // error
+    }
+
+  },
+  getJson: function getJson(key) {
+    try {
+      var value = uni.getStorageSync(key);
+      if (value) {
+        return JSON.parse(value);
+      }
+    } catch (e) {
+      // error
+    }
+
+  },
+  clear: function clear() {
+    uni.clearStorage();
+  },
+  get: function get(key) {//获取队列里面全部的数据
+    var data = this.getJson(key);
+    if (data instanceof Array) {
+      return data;
+    }
+    return [];
+  },
+  insert: function insert(param) {//队列插入数据
+    param.capacityNum = param.capacityNum || 100; //队列容量 默认队列中超过100条数据，自动删除尾部
+    var data = this.getJson(param.key);
+    if (data instanceof Array) {
+      if (data.length > param.capacityNum) {
+        var total = data.length - param.capacityNum;
+        for (var i = 0; i < total; i++) {
+          data.pop();
+        }
+      }
+      data.unshift(param.value);
+    } else {
+      data = [];
+      data.push(param.value);
+    }
+    this.setJson(param.key, data);
+  },
+  removeItem: function removeItem(key, itemIds) {//提供itemIds数组 批量删除队列中的某项数据
+    var data = this.getJson(key);
+    if (data instanceof Array) {
+      for (var i = 0; i < itemIds.length; i++) {
+        for (var p = 0; p < data.length; p++) {
+          if (itemIds[i] === data[p].itemid) {
+            data.splice(p, 1);
+            break;
+          }
+        }
+      }
+      this.setJson(key, data);
+    }
+  },
+  isExist: function isExist(key, itemId) {//检测某条数据在队列中是否存在
+    var data = this.getJson(key);
+    if (data instanceof Array) {
+      for (var p = 0; p < data.length; p++) {
+        if (itemId === data[p].itemid) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  remove: function remove(key) {//删除某条队列
+    try {
+      uni.removeStorageSync(key);
+      //localStorage.removeItem(key)
+    } catch (e) {
+      // error
+    }
+  },
+  getCount: function getCount(key) {//获取队列中全部数据数量
+
+    var data = this.getJson(key);
+    if (data instanceof Array) {
+      return data.length;
+    }
+    return 0;
+  } };
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 168:
 /*!*********************************************************************************************!*\
   !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 173);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 169);
 
 /***/ }),
 
-/***/ 173:
+/***/ 169:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -1746,7 +2239,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 174);
+module.exports = __webpack_require__(/*! ./runtime */ 170);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -1763,7 +2256,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 174:
+/***/ 170:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -8567,7 +9060,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 66:
+/***/ 70:
 /*!******************************************************************!*\
   !*** F:/项目总文件夹/intellect-uniapp/components/u-charts/u-charts.js ***!
   \******************************************************************/

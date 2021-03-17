@@ -1,5 +1,4 @@
-// const ROOTPATH = "http://39.105.40.121/app-store-api";
-const ROOTPATH = "https://test.jiexiaohei.com/app-store-api";
+const ROOTPATH = "http://www.armedbrains.com/brain_sport_war/app";
 const ROOTPATH1 = "https://www.gomyorder.cn/tao";
 module.exports = {
     APIHOST: ROOTPATH,

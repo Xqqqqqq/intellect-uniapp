@@ -8,7 +8,8 @@
 		,{
             "path" : "pages/myData/myData",
             "style": {
-            	"navigationBarTitleText": "武装大脑"
+            	"navigationBarTitleText": "武装大脑",
+				"enablePullDownRefresh": true
             }
         }
         ,{
