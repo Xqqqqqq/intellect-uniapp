@@ -193,6 +193,7 @@ module.exports = {
             uni.request({
                 url: url,
                 method: "GET",
+				data: data,
                 header: {
                     "content-type": header,
                     "token": token

@@ -101,6 +101,12 @@ var components = {
   },
   myList: function() {
     return __webpack_require__.e(/*! import() | components/my-list/my-list */ "components/my-list/my-list").then(__webpack_require__.bind(null, /*! @/components/my-list/my-list.vue */ 336))
+  },
+  noData: function() {
+    return __webpack_require__.e(/*! import() | components/no-data/no-data */ "components/no-data/no-data").then(__webpack_require__.bind(null, /*! @/components/no-data/no-data.vue */ 315))
+  },
+  uniLoadMore: function() {
+    return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ 301))
   }
 }
 var render = function() {
@@ -140,7 +146,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var myScrollX = function myScrollX() {__webpack_require__.e(/*! require.ensure | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then((function () {return resolve(__webpack_require__(/*! @/components/my-scrollX/my-scrollX.vue */ 329));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var RenDropdownFilter = function RenDropdownFilter() {__webpack_require__.e(/*! require.ensure | components/ren-dropdown-filter/ren-dropdown-filter */ "components/ren-dropdown-filter/ren-dropdown-filter").then((function () {return resolve(__webpack_require__(/*! @/components/ren-dropdown-filter/ren-dropdown-filter.vue */ 350));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 336));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var myScrollX = function myScrollX() {__webpack_require__.e(/*! require.ensure | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then((function () {return resolve(__webpack_require__(/*! @/components/my-scrollX/my-scrollX.vue */ 329));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var RenDropdownFilter = function RenDropdownFilter() {__webpack_require__.e(/*! require.ensure | components/ren-dropdown-filter/ren-dropdown-filter */ "components/ren-dropdown-filter/ren-dropdown-filter").then((function () {return resolve(__webpack_require__(/*! @/components/ren-dropdown-filter/ren-dropdown-filter.vue */ 350));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 336));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
 
 
 
@@ -175,103 +183,182 @@ __webpack_require__.r(__webpack_exports__);
     return {
       goodsName: '',
       scrollTopList: [{
-        id: 0,
+        id: 1,
         name: '推荐' },
       {
-        id: 1,
-        name: '平台' },
-      {
-        id: 2,
-        name: '方法' },
-      {
-        id: 3,
-        name: '医疗' },
-      {
-        id: 4,
-        name: '法律' },
-      {
-        id: 3,
-        name: '少儿' }],
+        id: 0,
+        name: '全部' }],
 
       currentTopTab: 0,
       beforeColor: '#999999',
       afterColor: '#ffffff',
       filterData: [
       [{
-        text: '推荐训练',
-        value: 1 },
+        text: '全部收藏',
+        value: 0 },
       {
         text: '收藏升序',
         value: 2 },
       {
         text: '收藏降序',
-        value: 3 },
-      {
-        text: '全部训练',
-        value: 4 }],
+        value: 1 }],
 
       [{
         text: '全部特权',
-        value: 1 },
-      {
-        text: '专属VIP',
-        value: 2 },
-      {
-        text: '免费使用',
         value: 3 },
       {
+        text: '专属VIP',
+        value: 1 },
+      {
+        text: '免费使用',
+        value: 0 },
+      {
         text: '消耗能量',
-        value: 4 }],
+        value: 2 }],
 
       [{
         text: '全部收藏',
-        value: 1 },
+        value: 0 },
       {
         text: '已收藏',
-        value: 2 },
+        value: 1 },
       {
         text: '未收藏',
-        value: 3 }]],
+        value: 2 }]],
 
 
       defaultIndex: [0, 0, 0],
-      listdetial: [{
-        src: '../../static/img/icons/common.jpg',
-        title: '数字图像记忆',
-        source: '官方',
-        person: '100',
-        detail: '简介：针对0~100的数字进行图像',
-        date: '2020-10-10',
-        num: 20 },
-      {
-        src: '../../static/img/icons/common.jpg',
-        title: '数字图像记忆',
-        source: '官方',
-        person: '100',
-        detail: '简介：针对0~100的数字进行图像',
-        date: '2020-10-10',
-        num: 20 }] };
+      trainInfo: {
+        collectsList: [
+        {
+          collectsPic: 'https://img1.baidu.com/it/u=1091405991,859863778&fm=26&fmt=auto&gp=0.jpg',
+          collectsName: '1111',
+          collectsAuthor: '111',
+          attentionNum: '11',
+          collectsRemarks: '111111111111111',
+          studyDate: '11',
+          studyMonth: '11',
+          vipType: 1,
+          id: 1,
+          attentionType: 1 },
+
+        {
+          collectsPic: 'https://img1.baidu.com/it/u=1091405991,859863778&fm=26&fmt=auto&gp=0.jpg',
+          collectsName: '1111',
+          collectsAuthor: '111',
+          attentionNum: '11',
+          collectsRemarks: '111111111111111',
+          studyDate: '11',
+          studyMonth: '11',
+          vipType: 1,
+          id: 1,
+          attentionType: 0 }] },
 
 
+
+      page: 1,
+      contentText: {
+        contentdown: '查看更多',
+        contentrefresh: '加载中',
+        contentnomore: '- 暂时没有新内容了呢 -' },
+
+      status: 'noMore',
+      parameterInfo: {
+        recommendType: 1,
+        orderType: 0,
+        vipType: 3,
+        attentionType: 0 }
+      //初始化值
+    };
+  },
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.page = 1;
+    this.trainInfo = {};
+    uni.showLoading({
+      title: '加载中' });
+
+    this.getTrainList();
+    uni.hideLoading();
+  },
+  // onReachBottom(){ //不知道一共多少条
+  // 	if (this.page * 10 < this.total) {
+  // 		this.page = this.page + 1;
+  // 		this.getTrainList();
+  // 	}
+  // },
+  mounted: function mounted() {
+    this.getTrainList();
   },
   methods: {
+    // 获取训练数据列表
+    getTrainList: function getTrainList() {var _this = this;
+      this.$Request.get('/appCollectsController.do?getCollectsList&type=1&groupId', _objectSpread({},
+      this.parameterInfo, {
+        page: this.page })).
+      then(function (res) {
+        if (res.code == 0) {
+          _this.trainInfo = res.data;
+          _this.trainInfo.collectsList = [].concat(_toConsumableArray(_this.trainInfo.collectsList), _toConsumableArray(res.data.collectsList));
+        } else if (res.code == '-118') {
+          _this.status = 'noMore';
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
+    tabChange: function tabChange(item, index) {
+      this.currentTopTab = index;
+      this.parameterInfo.recommendType = item.id;
+      this.getTrainList();
+    },
+    onSelected: function onSelected(res) {
+      this.parameterInfo.orderType = res[0][0].value;
+      this.parameterInfo.vipType = res[1][0].value;
+      this.parameterInfo.attentionType = res[2][0].value;
+      this.getTrainList();
+    },
+    gotoListDetail: function gotoListDetail(item) {
+      console.log('1', item);
+      uni.navigateTo({
+        url: '/pages/train/imageMemory/numEleEntry' });
+
+    },
+    // 收藏
+    clickAttention: function clickAttention(item, index) {var _this2 = this;
+      if (uni.getStorageSync('userInfo')) {
+        var memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
+        var collectsId = item.id;
+        this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(memberId, "&collectsId=").concat(collectsId)).
+        then(function (res) {
+          if (res.code == 0) {
+            _this2.trainInfo.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1;
+          } else {
+            uni.showToast({
+              title: res.info,
+              icon: 'none' });
+
+          }
+        });
+      } else {
+        uni.showToast({
+          title: '您尚未登录，正在跳往登录页面。。。',
+          icon: 'none' });
+
+        setTimeout(function () {
+          uni.navigateTo({
+            url: '/pages/loginAll/login' });
+
+        }, 1000);
+      }
+    },
     bindNameInput: function bindNameInput(e) {
       this.goodsName = e.target.value;
       console.log(e.target.value);
     },
     clickSearch: function clickSearch() {
-    },
-    tabChange: function tabChange(item, index) {
-      this.currentTopTab = index;
-      console.log(item, index);
-    },
-    onSelected: function onSelected(res) {
-      console.log(res);
-    },
-    gotoListDetail: function gotoListDetail() {
-      uni.navigateTo({
-        url: '/pages/train/imageMemory/numEleEntry' });
-
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

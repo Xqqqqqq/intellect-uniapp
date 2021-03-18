@@ -31,6 +31,7 @@
 				"navigationBarBackgroundColor": "#2E3B67",
 				"navigationBarTextStyle": "white",
 				"navigationStyle": "custom",
+				"enablePullDownRefresh": true,
 				"app-plus": {
 					"titleNView": false
 				}
@@ -189,7 +190,8 @@
         ,{
             "path" : "pages/train/trainCenter",
             "style" : {
-				"navigationBarTitleText": "训练中心"
+				"navigationBarTitleText": "训练中心",
+				"enablePullDownRefresh": true
 			}
         }
         ,{

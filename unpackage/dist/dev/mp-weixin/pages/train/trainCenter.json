@@ -1,8 +1,11 @@
 {
   "navigationBarTitleText": "训练中心",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "my-scroll-x": "/components/my-scrollX/my-scrollX",
     "ren-dropdown-filter": "/components/ren-dropdown-filter/ren-dropdown-filter",
-    "my-list": "/components/my-list/my-list"
+    "my-list": "/components/my-list/my-list",
+    "no-data": "/components/no-data/no-data",
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
   }
 }

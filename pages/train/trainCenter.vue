@@ -14,7 +14,9 @@
 		</view>
 		<ren-dropdown-filter :filterData='filterData' :defaultIndex='defaultIndex' @onSelected='onSelected'></ren-dropdown-filter>
 		<view class="wrap-content">
-			<my-list :myList="listdetial" @gotoUrl="gotoListDetail"></my-list>
+			<my-list :myList="trainInfo.collectsList" @gotoUrl="gotoListDetail" @clickAttention="clickAttention"></my-list>
+			<no-data v-if="status == 'noMore' && !trainInfo.collectsList.length"></no-data>
+			<uni-load-more class="no-data-more" v-else iconType="circle" :color="'#CCCCCC'" :contentText="contentText" :status="status" />
 		</view>
 	</view>
 </template>
@@ -33,104 +35,183 @@
 			return {
 				goodsName:'',
 				scrollTopList:[{
-					id:0,
+					id:1,
 					name: '推荐',
 				},{
-					id:1,
-					name: '平台',
-				},{
-					id:2,
-					name: '方法',
-				},{
-					id:3,
-					name: '医疗',
-				},{
-					id:4,
-					name: '法律',
-				},{
-					id:3,
-					name: '少儿',
-				},],
+					id:0,
+					name: '全部',
+				}],
 				currentTopTab: 0,
 				beforeColor: '#999999',
 				afterColor: '#ffffff',
 				filterData: [
 					[{
-						text: '推荐训练',
-						value: 1
-					}, {
+						text: '全部收藏',
+						value: 0
+					},{
 						text: '收藏升序',
 						value: 2
 					}, {
 						text: '收藏降序',
-						value: 3
-					}, {
-						text: '全部训练',
-						value: 4
+						value: 1
 					}],
 					[{
 						text: '全部特权',
-						value: 1
-					}, {
-						text: '专属VIP',
-						value: 2
-					}, {
-						text: '免费使用',
 						value: 3
 					}, {
+						text: '专属VIP',
+						value: 1
+					}, {
+						text: '免费使用',
+						value: 0
+					}, {
 						text: '消耗能量',
-						value: 4
+						value: 2
 					}],
 					[{
 						text: '全部收藏',
-						value: 1
+						value: 0
 					}, {
 						text: '已收藏',
-						value: 2
+						value: 1
 					}, {
 						text: '未收藏',
-						value: 3
+						value: 2
 					}]
 				],
 				defaultIndex: [0, 0, 0],
-				listdetial:[{
-					src:'../../static/img/icons/common.jpg',
-					title: '数字图像记忆',
-					source: '官方',
-					person: '100',
-					detail: '简介：针对0~100的数字进行图像',
-					date: '2020-10-10',
-					num: 20
-				},{
-					src:'../../static/img/icons/common.jpg',
-					title: '数字图像记忆',
-					source: '官方',
-					person: '100',
-					detail: '简介：针对0~100的数字进行图像',
-					date: '2020-10-10',
-					num: 20
-				}],
+				trainInfo:{
+					collectsList:[
+						{
+							collectsPic:'https://img1.baidu.com/it/u=1091405991,859863778&fm=26&fmt=auto&gp=0.jpg',
+							collectsName:'1111',
+							collectsAuthor: '111',
+							attentionNum: '11',
+							collectsRemarks: '111111111111111',
+							studyDate: '11',
+							studyMonth: '11',
+							vipType: 1,
+							id:1,
+							attentionType: 1
+						},
+						{
+							collectsPic:'https://img1.baidu.com/it/u=1091405991,859863778&fm=26&fmt=auto&gp=0.jpg',
+							collectsName:'1111',
+							collectsAuthor: '111',
+							attentionNum: '11',
+							collectsRemarks: '111111111111111',
+							studyDate: '11',
+							studyMonth: '11',
+							vipType: 1,
+							id:1,
+							attentionType: 0
+						},
+					]
+				},
+				page:1,
+				contentText: {
+					contentdown: '查看更多',
+					contentrefresh: '加载中',
+					contentnomore: '- 暂时没有新内容了呢 -'
+				},
+				status: 'noMore',
+				parameterInfo:{
+					recommendType:1,
+					orderType:0,
+					vipType:3,
+					attentionType:0,
+				}, //初始化值
 			};
 		},
+		onPullDownRefresh() {
+			this.page = 1;
+			this.trainInfo = {};
+			uni.showLoading({
+				title: '加载中'
+			});
+			this.getTrainList()
+			uni.hideLoading();
+		},
+		// onReachBottom(){ //不知道一共多少条
+		// 	if (this.page * 10 < this.total) {
+		// 		this.page = this.page + 1;
+		// 		this.getTrainList();
+		// 	}
+		// },
+		mounted(){
+			this.getTrainList()
+		},
 		methods:{
+			// 获取训练数据列表
+			getTrainList(){
+				this.$Request.get('/appCollectsController.do?getCollectsList&type=1&groupId',{
+					...this.parameterInfo,
+					page:this.page
+				}).then(res => {
+					if(res.code == 0){
+						this.trainInfo = res.data
+						this.trainInfo.collectsList =  [...this.trainInfo.collectsList, ...res.data.collectsList]
+					}else if(res.code == '-118'){
+						this.status = 'noMore'
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			tabChange(item, index){
+				this.currentTopTab = index
+				this.parameterInfo.recommendType = item.id
+				this.getTrainList()
+			},
+			onSelected(res) {
+				this.parameterInfo.orderType = res[0][0].value
+				this.parameterInfo.vipType = res[1][0].value
+				this.parameterInfo.attentionType = res[2][0].value
+				this.getTrainList()
+			},
+			gotoListDetail(item){
+				console.log('1',item)
+				uni.navigateTo({
+					url: '/pages/train/imageMemory/numEleEntry'
+				})
+			},
+			// 收藏
+			clickAttention(item, index){
+				if(uni.getStorageSync('userInfo')){
+					let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+					let collectsId = item.id
+					this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${memberId}&collectsId=${collectsId}`)
+					.then(res => {
+						if(res.code == 0){
+							this.trainInfo.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showToast({
+						title: '您尚未登录，正在跳往登录页面。。。',
+						icon: 'none'
+					})
+					setTimeout(() => {
+						uni.navigateTo({
+							url:'/pages/loginAll/login'
+						})
+					}, 1000)
+				}
+			},
 			bindNameInput(e){
 				this.goodsName = e.target.value
 				console.log(e.target.value)
 			},
 			clickSearch(){
 			},
-			tabChange(item, index){
-				this.currentTopTab = index
-				console.log(item, index)
-			},
-			onSelected(res) {
-				console.log(res)
-			},
-			gotoListDetail(){
-				uni.navigateTo({
-					url:'/pages/train/imageMemory/numEleEntry'
-				})
-			}
 		}
 	}
 </script>

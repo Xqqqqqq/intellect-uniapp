@@ -120,6 +120,12 @@
 			this.getTrainList()
 			uni.hideLoading();
 		},
+		// onReachBottom(){ //不知道一共多少条
+		// 	if (this.page * 10 < this.total) {
+		// 		this.page = this.page + 1;
+		// 		this.getTrainList();
+		// 	}
+		// },
 		mounted(){
 			this.getTrainList()
 		},
@@ -129,6 +135,7 @@
 				this.$Request.get(`/appCollectsController.do?getTrainList&page=${this.page}&type=1&groupId`).then(res => {
 					if(res.code == 0){
 						this.trainInfo = res.data
+						this.trainInfo.collectsList =  [...this.trainInfo.collectsList, ...res.data.collectsList]
 					}else if(res.code == '-118'){
 						this.status = 'noMore'
 					}else{
@@ -141,16 +148,17 @@
 			},
 			gotoListDetail(item){
 				console.log('1',item)
-				// uni.navigateTo({
-				// 	url: '/pages/train/imageMemory/numEleEntry'
-				// })
+				uni.navigateTo({
+					url: '/pages/train/imageMemory/numEleEntry'
+				})
 			},
 			// 收藏
 			clickAttention(item, index){
 				if(uni.getStorageSync('userInfo')){
 					let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
 					let collectsId = item.id
-					this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${memberId}&collectsId=${collectsId}`).then(res => {
+					this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${memberId}&collectsId=${collectsId}`)
+					.then(res => {
 						if(res.code == 0){
 							this.trainInfo.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1
 						}else{

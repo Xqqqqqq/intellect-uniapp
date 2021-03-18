@@ -99,6 +99,7 @@ page.data-v-61c13d5f {
   left: 0;
   right: 0;
   bottom: 0;
+  top: 0;
   background-color: transparent;
   -webkit-transition: background-color 0.15s linear;
   transition: background-color 0.15s linear;

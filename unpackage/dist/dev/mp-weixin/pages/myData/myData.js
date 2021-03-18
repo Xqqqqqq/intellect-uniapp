@@ -146,7 +146,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var myScrollX = function myScrollX() {__webpack_require__.e(/*! require.ensure | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then((function () {return resolve(__webpack_require__(/*! @/components/my-scrollX/my-scrollX.vue */ 329));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var TopInput = function TopInput() {__webpack_require__.e(/*! require.ensure | components/top-input/top-input */ "components/top-input/top-input").then((function () {return resolve(__webpack_require__(/*! @/components/top-input/top-input.vue */ 322));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 336));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var myScrollX = function myScrollX() {__webpack_require__.e(/*! require.ensure | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then((function () {return resolve(__webpack_require__(/*! @/components/my-scrollX/my-scrollX.vue */ 329));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var TopInput = function TopInput() {__webpack_require__.e(/*! require.ensure | components/top-input/top-input */ "components/top-input/top-input").then((function () {return resolve(__webpack_require__(/*! @/components/top-input/top-input.vue */ 322));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 336));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -268,6 +268,12 @@ __webpack_require__.r(__webpack_exports__);
     this.getTrainList();
     uni.hideLoading();
   },
+  // onReachBottom(){ //不知道一共多少条
+  // 	if (this.page * 10 < this.total) {
+  // 		this.page = this.page + 1;
+  // 		this.getTrainList();
+  // 	}
+  // },
   mounted: function mounted() {
     this.getTrainList();
   },
@@ -277,6 +283,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$Request.get("/appCollectsController.do?getTrainList&page=".concat(this.page, "&type=1&groupId")).then(function (res) {
         if (res.code == 0) {
           _this.trainInfo = res.data;
+          _this.trainInfo.collectsList = [].concat(_toConsumableArray(_this.trainInfo.collectsList), _toConsumableArray(res.data.collectsList));
         } else if (res.code == '-118') {
           _this.status = 'noMore';
         } else {
@@ -289,16 +296,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     gotoListDetail: function gotoListDetail(item) {
       console.log('1', item);
-      // uni.navigateTo({
-      // 	url: '/pages/train/imageMemory/numEleEntry'
-      // })
+      uni.navigateTo({
+        url: '/pages/train/imageMemory/numEleEntry' });
+
     },
     // 收藏
     clickAttention: function clickAttention(item, index) {var _this2 = this;
       if (uni.getStorageSync('userInfo')) {
         var memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
         var collectsId = item.id;
-        this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(memberId, "&collectsId=").concat(collectsId)).then(function (res) {
+        this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(memberId, "&collectsId=").concat(collectsId)).
+        then(function (res) {
           if (res.code == 0) {
             _this2.trainInfo.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1;
           } else {
