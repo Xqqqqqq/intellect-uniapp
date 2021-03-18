@@ -197,6 +197,7 @@ __webpack_require__.r(__webpack_exports__);
 
   data: function data() {
     return {
+      showClassify: false,
       scrollTopList: [{
         id: 0,
         name: '无分类' },
@@ -221,22 +222,33 @@ __webpack_require__.r(__webpack_exports__);
       afterColor: '#2E3B67',
       placeholderText: '请输入搜索内容',
       changeValue: '',
-      listdetial: [{
-        src: '../../static/img/icons/common.jpg',
-        title: '数字图像记忆',
-        source: '官方',
-        person: '100',
-        detail: '简介：针对0~100的数字进行图像',
-        date: '2020-10-10',
-        num: 20 },
-      {
-        src: '../../static/img/icons/common.jpg',
-        title: '数字图像记忆',
-        source: '官方',
-        person: '100',
-        detail: '简介：针对0~100的数字进行图像',
-        date: '2020-10-10',
-        num: 20 }],
+      trainInfo: {
+        collectsList: [
+        {
+          collectsPic: 'https://img1.baidu.com/it/u=1091405991,859863778&fm=26&fmt=auto&gp=0.jpg',
+          collectsName: '1111',
+          collectsAuthor: '111',
+          attentionNum: '11',
+          collectsRemarks: '111111111111111',
+          studyDate: '11',
+          studyMonth: '11',
+          vipType: 1,
+          id: 1,
+          attentionType: 1 },
+
+        {
+          collectsPic: 'https://img1.baidu.com/it/u=1091405991,859863778&fm=26&fmt=auto&gp=0.jpg',
+          collectsName: '1111',
+          collectsAuthor: '111',
+          attentionNum: '11',
+          collectsRemarks: '111111111111111',
+          studyDate: '11',
+          studyMonth: '11',
+          vipType: 1,
+          id: 1,
+          attentionType: 0 }] },
+
+
 
       page: 1,
       contentText: {
@@ -244,18 +256,75 @@ __webpack_require__.r(__webpack_exports__);
         contentrefresh: '加载中',
         contentnomore: '- 暂时没有新内容了呢 -' },
 
-      status: 'loading' };
+      status: 'noMore' };
 
   },
   onPullDownRefresh: function onPullDownRefresh() {
     this.page = 1;
-    this.listdetial = [];
-    // uni.showLoading({
-    // 	title: '加载中'
-    // });
-    // uni.hideLoading();
+    this.trainInfo = {};
+    uni.showLoading({
+      title: '加载中' });
+
+    this.getTrainList();
+    uni.hideLoading();
+  },
+  mounted: function mounted() {
+    this.getTrainList();
   },
   methods: {
+    // 获取首页数据列表
+    getTrainList: function getTrainList() {var _this = this;
+      this.$Request.get("/appCollectsController.do?getTrainList&page=".concat(this.page, "&type=1&groupId")).then(function (res) {
+        if (res.code == 0) {
+          _this.trainInfo = res.data;
+        } else if (res.code == '-118') {
+          _this.status = 'noMore';
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
+    gotoListDetail: function gotoListDetail(item) {
+      console.log('1', item);
+      // uni.navigateTo({
+      // 	url: '/pages/train/imageMemory/numEleEntry'
+      // })
+    },
+    // 收藏
+    clickAttention: function clickAttention(item, index) {var _this2 = this;
+      if (uni.getStorageSync('userInfo')) {
+        var memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
+        var collectsId = item.id;
+        this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(memberId, "&collectsId=").concat(collectsId)).then(function (res) {
+          if (res.code == 0) {
+            _this2.trainInfo.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1;
+          } else {
+            uni.showToast({
+              title: res.info,
+              icon: 'none' });
+
+          }
+        });
+      } else {
+        uni.showToast({
+          title: '您尚未登录，正在跳往登录页面。。。',
+          icon: 'none' });
+
+        setTimeout(function () {
+          uni.navigateTo({
+            url: '/pages/loginAll/login' });
+
+        }, 1000);
+      }
+    },
+    gotoUrl: function gotoUrl(url) {
+      uni.navigateTo({
+        url: url });
+
+    },
     tabChange: function tabChange(item, index) {
       this.currentTopTab = index;
       console.log(item, index);
@@ -263,17 +332,6 @@ __webpack_require__.r(__webpack_exports__);
     changeInput: function changeInput(value) {
       console.log(value);
       this.changeValue = value;
-    },
-    gotoListDetail: function gotoListDetail(item) {
-      console.log(item);
-      uni.navigateTo({
-        url: '/pages/train/imageMemory/numEleEntry' });
-
-    },
-    gotoUrl: function gotoUrl(url) {
-      uni.navigateTo({
-        url: url });
-
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -247,28 +247,30 @@ var _default =
           this.$Request.get("/appCollectsController.do?getCollectsList&tel=".concat(this.tel, "&telCode=").concat(this.telCode)).
           then(function (res) {
             if (res.code == 0) {
-              setTimeout(function () {
-                uni.showToast({
-                  title: '登录成功，正在跳转...',
-                  icon: 'none' });
+              uni.showToast({
+                title: '登录成功，正在跳转...',
+                icon: 'none' });
 
+              setTimeout(function () {
                 uni.switchTab({
                   url: '/pages/myData/myData' });
 
+                uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
               }, 1000);
             } else if (res.code == 100) {
               // 尚未注册
               _this2.$Request.get("/appMemberController.do?registerMember&memberTel=".concat(_this2.tel, "&openid=").concat(uni.getStorageSync('openid'))).
               then(function (res) {
                 if (res.code == 0) {
-                  setTimeout(function () {
-                    uni.showToast({
-                      title: '登录成功，正在跳转...',
-                      icon: 'none' });
+                  uni.showToast({
+                    title: '登录成功，正在跳转...',
+                    icon: 'none' });
 
+                  setTimeout(function () {
                     uni.switchTab({
                       url: '/pages/myData/myData' });
 
+                    uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
                   }, 1000);
                 } else {
                   uni.showToast({
@@ -323,28 +325,30 @@ var _default =
       this.$Request.get("/appMemberController.do?loginMember&openid=".concat(uni.getStorageSync('openid'))).then(function (res) {
         if (res.code == 0) {
           // 已注册，可登录
-          setTimeout(function () {
-            uni.showToast({
-              title: '登录成功，正在跳转...',
-              icon: 'none' });
+          uni.showToast({
+            title: '登录成功，正在跳转...',
+            icon: 'none' });
 
+          setTimeout(function () {
             uni.switchTab({
               url: '/pages/myData/myData' });
 
+            uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
           }, 1000);
         } else if (res.code == 100) {
           // 尚未注册
           _this3.$Request.get("/appMemberController.do?registerMember&memberTel=".concat(uni.getStorageSync('phoneNumber'), "&openid=").concat(uni.getStorageSync('openid'))).
           then(function (res) {
             if (res.code == 0) {
-              setTimeout(function () {
-                uni.showToast({
-                  title: '登录成功，正在跳转...',
-                  icon: 'none' });
+              uni.showToast({
+                title: '登录成功，正在跳转...',
+                icon: 'none' });
 
+              setTimeout(function () {
                 uni.switchTab({
                   url: '/pages/myData/myData' });
 
+                uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
               }, 1000);
             } else {
               uni.showToast({

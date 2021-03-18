@@ -2,17 +2,24 @@
 	<view>
 		<view class="list-content-box" v-for="(item, index) in myList" :key="index" @click="gotoUrl(item)">
 			<view class="content-box-left">
-				<image :src="item.src"></image>
+				<image :src="item.collectsPic"></image>
 			</view>
 			<view class="content-box-right">
-				<view class="box-right-title">{{item.title}}</view>
+				<view class="box-right-title">
+					<image v-if="item.vipType == 1" src="../../static/img/icons/vip-yellow.png"></image>
+					{{item.collectsName}}
+				</view>
 				<view class="box-right-tip">
-					<view>出题：{{item.source}}</view>
-					<view><image src="../../static/img/icons/shoucang.png"></image>{{item.person}}人收藏</view>
+					<view>出题：{{item.collectsAuthor}}</view>
+					<view @click.stop="clickAttention(item, index)">
+						<image v-if="item.attentionType ==1" src="../../static/img/icons/shoucang.png"></image>
+						<image v-if="item.attentionType ==0" src="../../static/img/icons/star1.png"></image>
+						{{item.attentionNum}}人收藏
+					</view>
 				</view>
 				<view class="box-right-line"></view>
-				<view class="box-right-tip">简介：{{item.detail}}</view>
-				<view class="box-right-tip"><text>上次使用：{{item.date}}</text><text>{{item.num}}次/月</text></view>
+				<view class="box-right-tip">简介：{{item.collectsRemarks}}</view>
+				<view class="box-right-tip"><text>上次使用：{{item.studyDate}}</text><text>{{item.studyMonth}}次/本月</text></view>
 			</view>
 		</view>
 	</view>
@@ -35,6 +42,9 @@
 		methods:{
 			gotoUrl(item){
 				this.$emit('gotoUrl', item)
+			},
+			clickAttention(item,index){
+				this.$emit('clickAttention', item, index)
 			}
 		}
 	}
@@ -73,6 +83,11 @@
 			text-overflow:ellipsis;
 			white-space: nowrap;
 			margin-bottom: 20rpx;
+			image{
+				width: 35rpx;
+				height: 35rpx;
+				margin-right: 20rpx;
+			}
 		}
 		.box-right-tip{
 			color: #666;

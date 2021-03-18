@@ -4,15 +4,15 @@
 			<view class="wrap-top-box">
 				<view class="top-box-li" @click="gotoUrl('/pages/myData/calendar')">
 					<view class="top-box-li-title">本月签到</view>
-					<view class="top-box-li-num">0</view>
+					<view class="top-box-li-num">{{trainInfo.sign || 0}}</view>
 				</view>
 				<view class="top-box-li" @click="gotoUrl('/pages/myData/train')">
 					<view class="top-box-li-title">本月训练</view>
-					<view class="top-box-li-num">0</view>
+					<view class="top-box-li-num">{{trainInfo.train || 0}}</view>
 				</view>
 				<view class="top-box-li" @click="gotoUrl('/pages/myData/longestSeries')">
 					<view class="top-box-li-title">本月连续</view>
-					<view class="top-box-li-num">0</view>
+					<view class="top-box-li-num">{{trainInfo.continuous || 0}}</view>
 				</view>
 			</view>
 			<view class="wrap-top-tip animated">决胜于碎片化时间的利用</view>
@@ -21,17 +21,17 @@
 		<view class="wrap-bottom">
 			<view class="wrap-bottom-title">
 				<text>我的训练</text>
-				<text @click="gotoUrl('/pages/myData/groupManage')">分组管理 ></text>
+				<text v-if="showClassify" @click="gotoUrl('/pages/myData/groupManage')">分组管理 ></text>
 			</view>
-			<top-input class="top-input" :changeValue="changeValue" :placeholderText="placeholderText" @changeInput="changeInput"></top-input>
-			<my-scrollX 
+			<top-input v-if="showClassify" class="top-input" :changeValue="changeValue" :placeholderText="placeholderText" @changeInput="changeInput"></top-input>
+			<my-scrollX v-if="showClassify" 
 			:scrollList="scrollTopList" :currentTab="currentTopTab"
 			:beforeColor="beforeColor" :afterColor="afterColor" @tabChange="tabChange"></my-scrollX>
 		</view>
 		
 		<view class="wrap-content">
-			<my-list :myList="listdetial" @gotoUrl="gotoListDetail"></my-list>
-			<no-data v-if="status == 'noMore' && !listdetial.length"></no-data>
+			<my-list :myList="trainInfo.collectsList" @gotoUrl="gotoListDetail" @clickAttention="clickAttention"></my-list>
+			<no-data v-if="status == 'noMore' && !trainInfo.collectsList.length"></no-data>
 			<uni-load-more class="no-data-more" v-else iconType="circle" :color="'#CCCCCC'" :contentText="contentText" :status="status" />
 		</view>
 	</view>
@@ -49,6 +49,7 @@
 		},
 		data() {
 			return {
+				showClassify: false,
 				scrollTopList:[{
 					id:0,
 					name: '无分类',
@@ -73,41 +74,109 @@
 				afterColor: '#2E3B67',
 				placeholderText: '请输入搜索内容',
 				changeValue: '',
-				listdetial:[{
-					src:'../../static/img/icons/common.jpg',
-					title: '数字图像记忆',
-					source: '官方',
-					person: '100',
-					detail: '简介：针对0~100的数字进行图像',
-					date: '2020-10-10',
-					num: 20
-				},{
-					src:'../../static/img/icons/common.jpg',
-					title: '数字图像记忆',
-					source: '官方',
-					person: '100',
-					detail: '简介：针对0~100的数字进行图像',
-					date: '2020-10-10',
-					num: 20
-				}],
+				trainInfo:{
+					collectsList:[
+						{
+							collectsPic:'https://img1.baidu.com/it/u=1091405991,859863778&fm=26&fmt=auto&gp=0.jpg',
+							collectsName:'1111',
+							collectsAuthor: '111',
+							attentionNum: '11',
+							collectsRemarks: '111111111111111',
+							studyDate: '11',
+							studyMonth: '11',
+							vipType: 1,
+							id:1,
+							attentionType: 1
+						},
+						{
+							collectsPic:'https://img1.baidu.com/it/u=1091405991,859863778&fm=26&fmt=auto&gp=0.jpg',
+							collectsName:'1111',
+							collectsAuthor: '111',
+							attentionNum: '11',
+							collectsRemarks: '111111111111111',
+							studyDate: '11',
+							studyMonth: '11',
+							vipType: 1,
+							id:1,
+							attentionType: 0
+						},
+					]
+				},
 				page:1,
 				contentText: {
 					contentdown: '查看更多',
 					contentrefresh: '加载中',
 					contentnomore: '- 暂时没有新内容了呢 -'
 				},
-				status: 'loading',
+				status: 'noMore',
 			};
 		},
 		onPullDownRefresh() {
 			this.page = 1;
-			this.listdetial = [];
-			// uni.showLoading({
-			// 	title: '加载中'
-			// });
-			// uni.hideLoading();
+			this.trainInfo = {};
+			uni.showLoading({
+				title: '加载中'
+			});
+			this.getTrainList()
+			uni.hideLoading();
+		},
+		mounted(){
+			this.getTrainList()
 		},
 		methods:{
+			// 获取首页数据列表
+			getTrainList(){
+				this.$Request.get(`/appCollectsController.do?getTrainList&page=${this.page}&type=1&groupId`).then(res => {
+					if(res.code == 0){
+						this.trainInfo = res.data
+					}else if(res.code == '-118'){
+						this.status = 'noMore'
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			gotoListDetail(item){
+				console.log('1',item)
+				// uni.navigateTo({
+				// 	url: '/pages/train/imageMemory/numEleEntry'
+				// })
+			},
+			// 收藏
+			clickAttention(item, index){
+				if(uni.getStorageSync('userInfo')){
+					let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+					let collectsId = item.id
+					this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${memberId}&collectsId=${collectsId}`).then(res => {
+						if(res.code == 0){
+							this.trainInfo.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showToast({
+						title: '您尚未登录，正在跳往登录页面。。。',
+						icon: 'none'
+					})
+					setTimeout(() => {
+						uni.navigateTo({
+							url:'/pages/loginAll/login'
+						})
+					}, 1000)
+				}
+			},
+			gotoUrl(url){
+				uni.navigateTo({
+					url: url
+				})
+			},
 			tabChange(item, index){
 				this.currentTopTab = index
 				console.log(item, index)
@@ -116,17 +185,6 @@
 				console.log(value)
 				this.changeValue = value
 			},
-			gotoListDetail(item){
-				console.log(item)
-				uni.navigateTo({
-					url: '/pages/train/imageMemory/numEleEntry'
-				})
-			},
-			gotoUrl(url){
-				uni.navigateTo({
-					url: url
-				})
-			}
 		}
 	}
 </script>
@@ -183,7 +241,7 @@ page{
 	.wrap-bottom{
 		background-color: #fff;
 		padding: 30rpx 24rpx;
-		padding-bottom: 0rpx;
+		// padding-bottom: 0rpx;
 		box-sizing: border-box;
 		box-shadow:0px 2px 10px 0px rgba(108,143,197,0.14);
 		.top-input{
@@ -195,8 +253,8 @@ page{
 			display: flex;
 			justify-content: space-between;
 			color: $uni-text-color;
-			font-size: 28rpx;
-			margin-bottom: 30rpx;
+			font-size: 30rpx;
+			// margin-bottom: 20rpx;
 			font-weight: bold;
 		}
 	}

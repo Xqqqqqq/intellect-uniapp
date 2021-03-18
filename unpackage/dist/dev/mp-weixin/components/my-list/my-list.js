@@ -134,6 +134,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   props: {
@@ -151,6 +158,9 @@ var _default =
   methods: {
     gotoUrl: function gotoUrl(item) {
       this.$emit('gotoUrl', item);
+    },
+    clickAttention: function clickAttention(item, index) {
+      this.$emit('clickAttention', item, index);
     } } };exports.default = _default;
 
 /***/ }),

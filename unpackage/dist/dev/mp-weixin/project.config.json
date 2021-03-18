@@ -64,12 +64,6 @@
         {
           "name": "pages/myData/myData",
           "pathName": "pages/myData/myData",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/loginAll/login",
-          "pathName": "pages/loginAll/login",
           "scene": null
         }
       ]

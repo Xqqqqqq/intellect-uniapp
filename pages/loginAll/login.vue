@@ -115,28 +115,30 @@
 						this.$Request.get(`/appCollectsController.do?getCollectsList&tel=${this.tel}&telCode=${this.telCode}`)
 						.then(res => {
 							if(res.code == 0){
+								uni.showToast({
+									title: '登录成功，正在跳转...',
+									icon: 'none'
+								})
 								setTimeout(()=>{
-									uni.showToast({
-										title: '登录成功，正在跳转...',
-										icon: 'none'
-									})
 									uni.switchTab({
 										url:'/pages/myData/myData'
 									})
+									uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 								},1000)
 							}else if(res.code == 100){
 								// 尚未注册
 								this.$Request.get(`/appMemberController.do?registerMember&memberTel=${this.tel}&openid=${uni.getStorageSync('openid')}`
 								).then(res => {
 									if(res.code == 0){
+										uni.showToast({
+											title: '登录成功，正在跳转...',
+											icon: 'none'
+										})
 										setTimeout(()=>{
-											uni.showToast({
-												title: '登录成功，正在跳转...',
-												icon: 'none'
-											})
 											uni.switchTab({
 												url:'/pages/myData/myData'
 											})
+											uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 										},1000)
 									}else{
 										uni.showToast({
@@ -191,28 +193,30 @@
 				this.$Request.get(`/appMemberController.do?loginMember&openid=${uni.getStorageSync('openid')}`).then(res => {
 					if(res.code == 0){
 						// 已注册，可登录
+						uni.showToast({
+							title: '登录成功，正在跳转...',
+							icon: 'none'
+						})
 						setTimeout(()=>{
-							uni.showToast({
-								title: '登录成功，正在跳转...',
-								icon: 'none'
-							})
 							uni.switchTab({
 								url:'/pages/myData/myData'
 							})
+							uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 						},1000)
 					}else if(res.code == 100){
 						// 尚未注册
 						this.$Request.get(`/appMemberController.do?registerMember&memberTel=${uni.getStorageSync('phoneNumber')}&openid=${uni.getStorageSync('openid')}`
 						).then(res => {
 							if(res.code == 0){
+								uni.showToast({
+									title: '登录成功，正在跳转...',
+									icon: 'none'
+								})
 								setTimeout(()=>{
-									uni.showToast({
-										title: '登录成功，正在跳转...',
-										icon: 'none'
-									})
 									uni.switchTab({
 										url:'/pages/myData/myData'
 									})
+									uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 								},1000)
 							}else{
 								uni.showToast({
