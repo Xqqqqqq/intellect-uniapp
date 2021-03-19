@@ -56,8 +56,14 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/loginAll/login",
-          "pathName": "pages/loginAll/login",
+          "name": "pages/myData/train",
+          "pathName": "pages/myData/train",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/train/trainCenter",
+          "pathName": "pages/train/trainCenter",
           "query": "",
           "scene": null
         },

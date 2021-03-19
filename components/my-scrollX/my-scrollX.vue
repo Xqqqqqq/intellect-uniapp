@@ -4,7 +4,7 @@
 		class="my-scroll-li"
 		:class="{'my-scroll-li-active':currentTab == index}"
 		:style="{color: currentTab == index ? afterColor : beforeColor, 'border-bottom': currentTab == index ? `5rpx solid ${afterColor}` : ''}"
-		v-for="(item, index) in scrollList" :key="index">{{item.name}}</view>
+		v-for="(item, index) in scrollList" :key="index">{{item.groupName}}</view>
 	</scroll-view>
 </template>
 

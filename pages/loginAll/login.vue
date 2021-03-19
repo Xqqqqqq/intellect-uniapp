@@ -14,15 +14,12 @@
 		</view>
 		<button class="login-down" open-type="getPhoneNumber" @getphonenumber="onGetPhoneNumber" v-if="checked == true && weChatPhone == ''">
 			<image src='../../static/img/icons/weixin.jpg'></image>
-			<!-- 11 -->
 		</button>
 		<button class="login-down" v-if="checked == true && weChatPhone != ''" @click="clickWechatLogin">
 			<image src='../../static/img/icons/weixin.jpg'></image>
-			<!-- 22 -->
 		</button>
 		<button class="login-down" v-if="checked == false" @click="openProvider">
 			<image src='../../static/img/icons/weixin.jpg'></image>
-			<!-- 33 -->
 		</button>
 		<!-- <button class="login-down" open-type="getUserInfo" lang="zh_CN" @getuserinfo="loginForProvider" v-if="checked == true">
 			<image src='../../static/img/icons/weixin.jpg'></image>
@@ -119,11 +116,11 @@
 									title: '登录成功，正在跳转...',
 									icon: 'none'
 								})
+								uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 								setTimeout(()=>{
 									uni.switchTab({
 										url:'/pages/myData/myData'
 									})
-									uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 								},1000)
 							}else if(res.code == 100){
 								// 尚未注册
@@ -134,11 +131,11 @@
 											title: '登录成功，正在跳转...',
 											icon: 'none'
 										})
+										uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 										setTimeout(()=>{
 											uni.switchTab({
 												url:'/pages/myData/myData'
 											})
-											uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 										},1000)
 									}else{
 										uni.showToast({
@@ -197,11 +194,11 @@
 							title: '登录成功，正在跳转...',
 							icon: 'none'
 						})
+						uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 						setTimeout(()=>{
 							uni.switchTab({
 								url:'/pages/myData/myData'
 							})
-							uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 						},1000)
 					}else if(res.code == 100){
 						// 尚未注册
@@ -212,11 +209,11 @@
 									title: '登录成功，正在跳转...',
 									icon: 'none'
 								})
+								uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 								setTimeout(()=>{
 									uni.switchTab({
 										url:'/pages/myData/myData'
 									})
-									uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 								},1000)
 							}else{
 								uni.showToast({

@@ -1,11 +1,11 @@
 import configdata from './config'
 import cache from './cache'
 function checkToken(res){
-	if (res.data && res.data.status == "FAIL" && res.data.code && res.data.code == 'MA1101' || res.data.msg && res.data.msg.indexOf('token') > 0) {
-		uni.reLaunch({
-			url: 'pages/loginAll/login'
-		});
-	}
+	// if (res.data && res.data.status == "FAIL" && res.data.code && res.data.code == 'MA1101' || res.data.msg && res.data.msg.indexOf('token') > 0) {
+	// 	uni.reLaunch({
+	// 		url: 'pages/loginAll/login'
+	// 	});
+	// }
 }
 module.exports = {
     config: function (name) {

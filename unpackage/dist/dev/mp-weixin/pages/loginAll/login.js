@@ -163,9 +163,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 var _default =
 {
   data: function data() {
@@ -251,11 +248,11 @@ var _default =
                 title: '登录成功，正在跳转...',
                 icon: 'none' });
 
+              uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
               setTimeout(function () {
                 uni.switchTab({
                   url: '/pages/myData/myData' });
 
-                uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
               }, 1000);
             } else if (res.code == 100) {
               // 尚未注册
@@ -266,11 +263,11 @@ var _default =
                     title: '登录成功，正在跳转...',
                     icon: 'none' });
 
+                  uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
                   setTimeout(function () {
                     uni.switchTab({
                       url: '/pages/myData/myData' });
 
-                    uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
                   }, 1000);
                 } else {
                   uni.showToast({
@@ -329,11 +326,11 @@ var _default =
             title: '登录成功，正在跳转...',
             icon: 'none' });
 
+          uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
           setTimeout(function () {
             uni.switchTab({
               url: '/pages/myData/myData' });
 
-            uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
           }, 1000);
         } else if (res.code == 100) {
           // 尚未注册
@@ -344,11 +341,11 @@ var _default =
                 title: '登录成功，正在跳转...',
                 icon: 'none' });
 
+              uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
               setTimeout(function () {
                 uni.switchTab({
                   url: '/pages/myData/myData' });
 
-                uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
               }, 1000);
             } else {
               uni.showToast({

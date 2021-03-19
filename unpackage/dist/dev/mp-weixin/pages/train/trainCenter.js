@@ -182,14 +182,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       goodsName: '',
-      scrollTopList: [{
-        id: 1,
-        name: '推荐' },
-      {
-        id: 0,
-        name: '全部' }],
-
-      currentTopTab: 0,
+      scrollTopList: [],
+      currentTopTab: -1,
       beforeColor: '#999999',
       afterColor: '#ffffff',
       filterData: [
@@ -224,117 +218,72 @@ __webpack_require__.r(__webpack_exports__);
         value: 1 },
       {
         text: '未收藏',
-        value: 2 }]],
+        value: 2 }],
+
+      [{
+        text: '全部类型',
+        value: 0 },
+      {
+        text: '推荐类型',
+        value: 1 }]],
 
 
-      defaultIndex: [0, 0, 0],
-      trainInfo: {
-        collectsList: [
-        {
-          collectsPic: 'https://img1.baidu.com/it/u=1091405991,859863778&fm=26&fmt=auto&gp=0.jpg',
-          collectsName: '1111',
-          collectsAuthor: '111',
-          attentionNum: '11',
-          collectsRemarks: '111111111111111',
-          studyDate: '11',
-          studyMonth: '11',
-          vipType: 1,
-          id: 1,
-          attentionType: 1 },
-
-        {
-          collectsPic: 'https://img1.baidu.com/it/u=1091405991,859863778&fm=26&fmt=auto&gp=0.jpg',
-          collectsName: '1111',
-          collectsAuthor: '111',
-          attentionNum: '11',
-          collectsRemarks: '111111111111111',
-          studyDate: '11',
-          studyMonth: '11',
-          vipType: 1,
-          id: 1,
-          attentionType: 0 }] },
-
-
-
+      defaultIndex: [0, 0, 0, 0],
+      trainInfo: {},
+      collectsList: [],
       page: 1,
       contentText: {
         contentdown: '查看更多',
         contentrefresh: '加载中',
         contentnomore: '- 暂时没有新内容了呢 -' },
 
-      status: 'noMore',
+      status: 'loading',
       parameterInfo: {
-        recommendType: 1,
-        orderType: 0,
-        vipType: 3,
-        attentionType: 0 }
+        groupId: '', //组别id（选填）
+        orderType: 0, //排序类型1收藏逆序2收藏正序0默认时间倒序
+        vipType: 3, //vip类型1vip2消耗能量0免费3全
+        attentionType: 0, //收藏类型1已收藏2未收藏0全部
+        recommendType: 0, //推荐类型1推荐0全部
+        collectsName: '' },
       //初始化值
-    };
+      code: '' };
+
   },
   onPullDownRefresh: function onPullDownRefresh() {
     this.page = 1;
     this.trainInfo = {};
+    this.collectsList = [];
     uni.showLoading({
       title: '加载中' });
 
     this.getTrainList();
     uni.hideLoading();
   },
-  // onReachBottom(){ //不知道一共多少条
-  // 	if (this.page * 10 < this.total) {
-  // 		this.page = this.page + 1;
-  // 		this.getTrainList();
-  // 	}
-  // },
-  mounted: function mounted() {
+  onReachBottom: function onReachBottom() {
+    if (this.code != '-116') {
+      this.page = this.page + 1;
+      this.getTrainList();
+    }
+  },
+  onShow: function onShow() {
     this.getTrainList();
   },
   methods: {
     // 获取训练数据列表
     getTrainList: function getTrainList() {var _this = this;
-      this.$Request.get('/appCollectsController.do?getCollectsList&type=1&groupId', _objectSpread({},
-      this.parameterInfo, {
-        page: this.page })).
-      then(function (res) {
-        if (res.code == 0) {
-          _this.trainInfo = res.data;
-          _this.trainInfo.collectsList = [].concat(_toConsumableArray(_this.trainInfo.collectsList), _toConsumableArray(res.data.collectsList));
-        } else if (res.code == '-118') {
-          _this.status = 'noMore';
-        } else {
-          uni.showToast({
-            title: res.info,
-            icon: 'none' });
-
-        }
-      });
-    },
-    tabChange: function tabChange(item, index) {
-      this.currentTopTab = index;
-      this.parameterInfo.recommendType = item.id;
-      this.getTrainList();
-    },
-    onSelected: function onSelected(res) {
-      this.parameterInfo.orderType = res[0][0].value;
-      this.parameterInfo.vipType = res[1][0].value;
-      this.parameterInfo.attentionType = res[2][0].value;
-      this.getTrainList();
-    },
-    gotoListDetail: function gotoListDetail(item) {
-      console.log('1', item);
-      uni.navigateTo({
-        url: '/pages/train/imageMemory/numEleEntry' });
-
-    },
-    // 收藏
-    clickAttention: function clickAttention(item, index) {var _this2 = this;
       if (uni.getStorageSync('userInfo')) {
         var memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
-        var collectsId = item.id;
-        this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(memberId, "&collectsId=").concat(collectsId)).
+        this.$Request.get('/appCollectsController.do?getCollectsList&type=1', _objectSpread({},
+        this.parameterInfo, {
+          page: this.page,
+          memberId: memberId })).
         then(function (res) {
+          _this.trainInfo = res.data;
+          _this.scrollTopList = res.data.groupList;
           if (res.code == 0) {
-            _this2.trainInfo.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1;
+            _this.collectsList = [].concat(_toConsumableArray(_this.collectsList), _toConsumableArray(res.data.collectsList));
+          } else if (res.code == '-118' || res.code == '-116') {
+            _this.status = 'noMore';
           } else {
             uni.showToast({
               title: res.info,
@@ -354,11 +303,58 @@ __webpack_require__.r(__webpack_exports__);
         }, 1000);
       }
     },
+    tabChange: function tabChange(item, index) {
+      this.page = 1;
+      this.trainInfo = {};
+      this.collectsList = [];
+      this.currentTopTab = index;
+      this.parameterInfo.groupId = item.id;
+      this.getTrainList();
+    },
+    onSelected: function onSelected(res) {
+      this.page = 1;
+      this.trainInfo = {};
+      this.collectsList = [];
+      this.parameterInfo.orderType = res[0][0].value;
+      this.parameterInfo.vipType = res[1][0].value;
+      this.parameterInfo.attentionType = res[2][0].value;
+      this.parameterInfo.recommendType = res[3][0].value;
+      this.getTrainList();
+    },
+    gotoListDetail: function gotoListDetail(item) {
+      console.log('1', item);
+      uni.navigateTo({
+        url: '/pages/train/imageMemory/numEleEntry' });
+
+    },
+    // 收藏
+    clickAttention: function clickAttention(item, index) {var _this2 = this;
+      var memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
+      var collectsId = item.id;
+      this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(memberId, "&collectsId=").concat(collectsId)).
+      then(function (res) {
+        if (res.code == 0) {
+          _this2.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1;
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
     bindNameInput: function bindNameInput(e) {
-      this.goodsName = e.target.value;
-      console.log(e.target.value);
+      this.parameterInfo.collectsName = e.target.value;
+      this.page = 1;
+      this.trainInfo = {};
+      this.collectsList = [];
+      this.getTrainList();
     },
     clickSearch: function clickSearch() {
+      this.page = 1;
+      this.trainInfo = {};
+      this.collectsList = [];
+      this.getTrainList();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

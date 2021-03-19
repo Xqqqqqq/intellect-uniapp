@@ -2,7 +2,7 @@
 	<view>
 		<view class="list-content-box" v-for="(item, index) in myList" :key="index" @click="gotoUrl(item)">
 			<view class="content-box-left">
-				<image :src="item.collectsPic"></image>
+				<image :src="item.collectsPic" v-if="item.collectsPic"></image>
 			</view>
 			<view class="content-box-right">
 				<view class="box-right-title">
@@ -19,7 +19,7 @@
 				</view>
 				<view class="box-right-line"></view>
 				<view class="box-right-tip">简介：{{item.collectsRemarks}}</view>
-				<view class="box-right-tip"><text>上次使用：{{item.studyDate}}</text><text>{{item.studyMonth}}次/本月</text></view>
+				<view class="box-right-tip"><text>上次使用：{{item.studyDate || '暂无'}}</text><text>{{item.studyMonth}}次/本月</text></view>
 			</view>
 		</view>
 	</view>

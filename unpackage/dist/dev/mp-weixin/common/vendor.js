@@ -1715,11 +1715,11 @@ module.exports = {"data":{"id":"4028d85677243c0f0177243d1eb40000","createDate":"
 /* WEBPACK VAR INJECTION */(function(uni) {var _config = _interopRequireDefault(__webpack_require__(/*! ./config */ 13));
 var _cache = _interopRequireDefault(__webpack_require__(/*! ./cache */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 function checkToken(res) {
-  if (res.data && res.data.status == "FAIL" && res.data.code && res.data.code == 'MA1101' || res.data.msg && res.data.msg.indexOf('token') > 0) {
-    uni.reLaunch({
-      url: 'pages/loginAll/login' });
-
-  }
+  // if (res.data && res.data.status == "FAIL" && res.data.code && res.data.code == 'MA1101' || res.data.msg && res.data.msg.indexOf('token') > 0) {
+  // 	uni.reLaunch({
+  // 		url: 'pages/loginAll/login'
+  // 	});
+  // }
 }
 module.exports = {
   config: function config(name) {

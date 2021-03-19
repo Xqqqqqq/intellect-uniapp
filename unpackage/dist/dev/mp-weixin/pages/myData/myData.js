@@ -222,93 +222,49 @@ __webpack_require__.r(__webpack_exports__);
       afterColor: '#2E3B67',
       placeholderText: '请输入搜索内容',
       changeValue: '',
-      trainInfo: {
-        collectsList: [
-        {
-          collectsPic: 'https://img1.baidu.com/it/u=1091405991,859863778&fm=26&fmt=auto&gp=0.jpg',
-          collectsName: '1111',
-          collectsAuthor: '111',
-          attentionNum: '11',
-          collectsRemarks: '111111111111111',
-          studyDate: '11',
-          studyMonth: '11',
-          vipType: 1,
-          id: 1,
-          attentionType: 1 },
-
-        {
-          collectsPic: 'https://img1.baidu.com/it/u=1091405991,859863778&fm=26&fmt=auto&gp=0.jpg',
-          collectsName: '1111',
-          collectsAuthor: '111',
-          attentionNum: '11',
-          collectsRemarks: '111111111111111',
-          studyDate: '11',
-          studyMonth: '11',
-          vipType: 1,
-          id: 1,
-          attentionType: 0 }] },
-
-
-
+      trainInfo: {},
+      collectsList: [],
       page: 1,
       contentText: {
         contentdown: '查看更多',
         contentrefresh: '加载中',
         contentnomore: '- 暂时没有新内容了呢 -' },
 
-      status: 'noMore' };
+      status: 'loading',
+      code: '' };
 
   },
   onPullDownRefresh: function onPullDownRefresh() {
     this.page = 1;
     this.trainInfo = {};
+    this.collectsList = [];
     uni.showLoading({
       title: '加载中' });
 
     this.getTrainList();
     uni.hideLoading();
   },
-  // onReachBottom(){ //不知道一共多少条
-  // 	if (this.page * 10 < this.total) {
-  // 		this.page = this.page + 1;
-  // 		this.getTrainList();
-  // 	}
-  // },
-  mounted: function mounted() {
+  onReachBottom: function onReachBottom() {
+    if (this.code != '-116') {
+      this.page = this.page + 1;
+      this.getTrainList();
+    }
+  },
+  onShow: function onShow() {
     this.getTrainList();
   },
   methods: {
     // 获取首页数据列表
     getTrainList: function getTrainList() {var _this = this;
-      this.$Request.get("/appCollectsController.do?getTrainList&page=".concat(this.page, "&type=1&groupId")).then(function (res) {
-        if (res.code == 0) {
-          _this.trainInfo = res.data;
-          _this.trainInfo.collectsList = [].concat(_toConsumableArray(_this.trainInfo.collectsList), _toConsumableArray(res.data.collectsList));
-        } else if (res.code == '-118') {
-          _this.status = 'noMore';
-        } else {
-          uni.showToast({
-            title: res.info,
-            icon: 'none' });
-
-        }
-      });
-    },
-    gotoListDetail: function gotoListDetail(item) {
-      console.log('1', item);
-      uni.navigateTo({
-        url: '/pages/train/imageMemory/numEleEntry' });
-
-    },
-    // 收藏
-    clickAttention: function clickAttention(item, index) {var _this2 = this;
       if (uni.getStorageSync('userInfo')) {
         var memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
-        var collectsId = item.id;
-        this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(memberId, "&collectsId=").concat(collectsId)).
-        then(function (res) {
+        this.$Request.get("/appCollectsController.do?getTrainList&memberId=".concat(memberId, "&page=").concat(this.page, "&type=1&groupId")).then(function (res) {
+          _this.code = res.code;
+          _this.trainInfo = res.data;
           if (res.code == 0) {
-            _this2.trainInfo.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1;
+            _this.collectsList = [].concat(_toConsumableArray(_this.collectsList), _toConsumableArray(res.data.collectsList));
+          } else if (res.code == '-118' || res.code == '-116') {
+            _this.status = 'noMore';
           } else {
             uni.showToast({
               title: res.info,
@@ -327,6 +283,28 @@ __webpack_require__.r(__webpack_exports__);
 
         }, 1000);
       }
+    },
+    gotoListDetail: function gotoListDetail(item) {
+      console.log('1', item);
+      uni.navigateTo({
+        url: '/pages/train/imageMemory/numEleEntry' });
+
+    },
+    // 收藏
+    clickAttention: function clickAttention(item, index) {var _this2 = this;
+      var memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
+      var collectsId = item.id;
+      this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(memberId, "&collectsId=").concat(collectsId)).
+      then(function (res) {
+        if (res.code == 0) {
+          _this2.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1;
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
     },
     gotoUrl: function gotoUrl(url) {
       uni.navigateTo({
