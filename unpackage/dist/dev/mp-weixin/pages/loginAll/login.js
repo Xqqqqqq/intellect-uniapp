@@ -163,6 +163,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -241,7 +244,7 @@ var _default =
 
         } else {
           // 用户手机登录
-          this.$Request.get("/appCollectsController.do?getCollectsList&tel=".concat(this.tel, "&telCode=").concat(this.telCode)).
+          this.$Request.get("/appMemberController.do?loginMemberTel&tel=".concat(this.tel, "&telCode=").concat(this.telCode)).
           then(function (res) {
             if (res.code == 0) {
               uni.showToast({

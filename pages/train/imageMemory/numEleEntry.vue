@@ -2,47 +2,40 @@
 	<view class="ele-entry">
 		<view class="list-content-box">
 			<view class="content-box-left">
-				<image src="../../../static/img/icons/common.jpg"></image>
+				<image :src="entryInfo.collectsPic"></image>
 			</view>
 			<view class="content-box-right">
-				<view class="box-right-title">数字元素训练</view>
+				<view class="box-right-title">{{entryInfo.collectsName}}</view>
 				<view class="box-right-tip">
-					<view>出题：官方</view>
-					<view><image src="../../../static/img/icons/shoucang.png"></image>1人收藏</view>
+					<view>出题：{{entryInfo.collectsAuthor}}</view>
+					<view><image src="../../../static/img/icons/shoucang.png"></image>{{entryInfo.attentionNum}}人收藏</view>
 				</view>
 				<view class="box-right-line"></view>
-				<view class="box-right-tip">简介：杰弗里斯减肥了复健科</view>
-				<view class="box-right-tip"><text>上次使用：2020-1-1</text><text>1次/月</text></view>
+				<view class="box-right-tip">简介：{{entryInfo.collectsRemarks}}</view>
+				<view class="box-right-tip"><text>上次使用：{{entryInfo.studyDate || '暂无'}}</text><text>{{entryInfo.studyMonth}}次/本月</text></view>
 			</view>
 		</view>
-		<view class="detail-top-picker">
+		<!-- <view class="detail-top-picker">
 			<view>当前分组：无分组</view>
 			<picker>更多 ></picker>
-		</view>
+		</view> -->
 		<view class="ele-content">
 			<view class="ele-content-title">内容详述</view>
-			<rich-text :nodes="nodes"></rich-text>
+			<rich-text :nodes="entryInfo.collectsContent"></rich-text>
 		</view>
 		<view class="ele-bottom">
 			<view class="ele-bottom-title">关键词</view>
 			<view class="ele-bottom-ul">
-				<view class="ele-bottom-ul-li">数学</view>
-				<view class="ele-bottom-ul-li">数学</view>
-				<view class="ele-bottom-ul-li">数学</view>
-				<view class="ele-bottom-ul-li">数学</view>
-				<view class="ele-bottom-ul-li">数学</view>
-				<view class="ele-bottom-ul-li">数学</view>
-				<view class="ele-bottom-ul-li">数学</view>
-				<view class="ele-bottom-ul-li">数学</view>
-				<view class="ele-bottom-ul-li">数学</view>
-				<view class="ele-bottom-ul-li">数学</view>
-				<view class="ele-bottom-ul-li">数学</view>
+				<view class="ele-bottom-ul-li" v-if="entryInfo.labelOne">{{entryInfo.labelOne}}</view>
+				<view class="ele-bottom-ul-li" v-if="entryInfo.labelTwo">{{entryInfo.labelTwo}}</view>
+				<view class="ele-bottom-ul-li" v-if="entryInfo.labelThree">{{entryInfo.labelThree}}</view>
+				<view class="ele-bottom-ul-li" v-if="entryInfo.labelFour">{{entryInfo.labelFour}}</view>
 			</view>
 		</view>
 		<view class="ele-btn">
-			<view class="ele-btn-li ele-btn-li-gray" @click="gotoUrl('/pages/train/imageMemory/historyTest')">历史测试</view>
-			<view class="ele-btn-li ele-btn-li-blue" @click="gotoUrl('/pages/train/imageMemory/numImgTest')">前往测试</view>
-			<view class="ele-btn-li ele-btn-li-green" @click="gotoUrl('/pages/train/imageMemory/numImgCard')">进入训练</view>
+			<view class="ele-btn-li ele-btn-li-gray" @click="gotoUrl('/pages/train/imageMemory/historyTest', 'history')">历史测试</view>
+			<view class="ele-btn-li ele-btn-li-blue" @click="gotoUrl('/pages/train/imageMemory/numImgTest', 'test')">前往测试</view>
+			<view class="ele-btn-li ele-btn-li-green" @click="gotoUrl('/pages/train/imageMemory/numImgCard', 'card')">进入训练</view>
 		</view>
 	</view>
 </template>
@@ -51,15 +44,42 @@
 	export default {
 		data() {
 			return {
-				nodes:''
+				nodes:'',
+				entryInfo:{},
+				collectsId: '',
+				memberId: '',
 			};
 		},
-		methods:{
-			gotoUrl(url){
-				uni.navigateTo({
-					url: url
-				})
+		onLoad(options){
+			console.log(options.id)
+			this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+			if(options.id){
+				this.collectsId = options.id
+				this.getCollects()
 			}
+		},
+		methods:{
+			// 获取详情数据
+			getCollects(){
+				this.$Request.get(`/appCollectsController.do?getCollects&memberId=${this.memberId}&collectsId=${this.collectsId}`)
+				.then(res => {
+					if(res.code == 0){
+						this.entryInfo = res.data
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			gotoUrl(url, type){
+				if(type == 'card'){ // 进入训练
+					uni.navigateTo({
+						url: `${url}?collectsId=${this.collectsId}`
+					})
+				}
+			},
 		}
 	}
 </script>

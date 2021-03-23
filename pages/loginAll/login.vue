@@ -14,12 +14,15 @@
 		</view>
 		<button class="login-down" open-type="getPhoneNumber" @getphonenumber="onGetPhoneNumber" v-if="checked == true && weChatPhone == ''">
 			<image src='../../static/img/icons/weixin.jpg'></image>
+			<!-- 1 -->
 		</button>
 		<button class="login-down" v-if="checked == true && weChatPhone != ''" @click="clickWechatLogin">
 			<image src='../../static/img/icons/weixin.jpg'></image>
+			<!-- 2 -->
 		</button>
 		<button class="login-down" v-if="checked == false" @click="openProvider">
 			<image src='../../static/img/icons/weixin.jpg'></image>
+			<!-- 3 -->
 		</button>
 		<!-- <button class="login-down" open-type="getUserInfo" lang="zh_CN" @getuserinfo="loginForProvider" v-if="checked == true">
 			<image src='../../static/img/icons/weixin.jpg'></image>
@@ -109,7 +112,7 @@
 						});
 					}else{
 						// 用户手机登录
-						this.$Request.get(`/appCollectsController.do?getCollectsList&tel=${this.tel}&telCode=${this.telCode}`)
+						this.$Request.get(`/appMemberController.do?loginMemberTel&tel=${this.tel}&telCode=${this.telCode}`)
 						.then(res => {
 							if(res.code == 0){
 								uni.showToast({

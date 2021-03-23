@@ -56,14 +56,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/myData/train",
-          "pathName": "pages/myData/train",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/train/trainCenter",
-          "pathName": "pages/train/trainCenter",
+          "name": "pages/loginAll/login",
+          "pathName": "pages/loginAll/login",
           "query": "",
           "scene": null
         },
@@ -74,8 +68,8 @@
           "scene": null
         },
         {
-          "name": "pages/train/trainCenter",
-          "pathName": "pages/train/trainCenter",
+          "name": "pages/train/imageMemory/numImgCard",
+          "pathName": "pages/train/imageMemory/numImgCard",
           "scene": null
         }
       ]

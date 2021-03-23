@@ -46,6 +46,25 @@ page {
   position: fixed;
   left: 0;
   top: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+  background-color: #FFFFFF;
+  line-height: 120rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #2E3B67;
+  -webkit-box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.3);
+          box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.3);
+}
+.img-card .card-filter .card-filter-li {
+  border-bottom: 6rpx solid #2E3B67;
+  padding-bottom: 10rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .img-card .img-card-swiper {
   width: 100%;
@@ -164,6 +183,13 @@ page {
 .img-card .img-card-swiper .img-card-ul .card-ul-li .card-ul-li-right .ul-li-right-detail {
   color: #666;
   font-size: 30rpx;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.img-card .img-card-swiper .img-card-ul .card-ul-li-choose {
+  border: 1rpx solid #2E3B67;
 }
 .img-card .img-card-btn {
   width: 100%;

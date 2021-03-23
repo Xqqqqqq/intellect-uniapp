@@ -1,6 +1,4 @@
 {
   "navigationBarTitleText": "数字图像关联训练",
-  "usingComponents": {
-    "ren-dropdown-filter": "/components/ren-dropdown-filter/ren-dropdown-filter"
-  }
+  "usingComponents": {}
 }

@@ -172,25 +172,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 var _default =
 {
   data: function data() {
     return {
-      nodes: '' };
+      nodes: '',
+      entryInfo: {},
+      collectsId: '',
+      memberId: '' };
 
   },
+  onLoad: function onLoad(options) {
+    console.log(options.id);
+    this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
+    if (options.id) {
+      this.collectsId = options.id;
+      this.getCollects();
+    }
+  },
   methods: {
-    gotoUrl: function gotoUrl(url) {
-      uni.navigateTo({
-        url: url });
+    // 获取详情数据
+    getCollects: function getCollects() {var _this = this;
+      this.$Request.get("/appCollectsController.do?getCollects&memberId=".concat(this.memberId, "&collectsId=").concat(this.collectsId)).
+      then(function (res) {
+        if (res.code == 0) {
+          _this.entryInfo = res.data;
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
 
+        }
+      });
+    },
+    gotoUrl: function gotoUrl(url, type) {
+      if (type == 'card') {// 进入训练
+        uni.navigateTo({
+          url: "".concat(url, "?collectsId=").concat(this.collectsId) });
+
+      }
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

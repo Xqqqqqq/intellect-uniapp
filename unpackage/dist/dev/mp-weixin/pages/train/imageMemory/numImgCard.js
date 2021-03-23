@@ -13,11 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components = {
-  renDropdownFilter: function() {
-    return __webpack_require__.e(/*! import() | components/ren-dropdown-filter/ren-dropdown-filter */ "components/ren-dropdown-filter/ren-dropdown-filter").then(__webpack_require__.bind(null, /*! @/components/ren-dropdown-filter/ren-dropdown-filter.vue */ 350))
-  }
-}
+var components
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -55,99 +51,59 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var RenDropdownFilter = function RenDropdownFilter() {__webpack_require__.e(/*! require.ensure | components/ren-dropdown-filter/ren-dropdown-filter */ "components/ren-dropdown-filter/ren-dropdown-filter").then((function () {return resolve(__webpack_require__(/*! @/components/ren-dropdown-filter/ren-dropdown-filter.vue */ 350));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default =
 {
-  components: {
-    RenDropdownFilter: RenDropdownFilter },
-
   data: function data() {
     return {
-      filterData: [
-      [{
-        text: '1/10',
-        value: 1 },
-      {
-        text: '2/10',
-        value: 2 },
-      {
-        text: '3/10',
-        value: 3 },
-      {
-        text: '4/10',
-        value: 4 },
-      {
-        text: '5/10',
-        value: 5 },
-      {
-        text: '6/10',
-        value: 6 },
-      {
-        text: '7/10',
-        value: 7 },
-      {
-        text: '8/10',
-        value: 8 },
-      {
-        text: '9/10',
-        value: 9 },
-      {
-        text: '10/10',
-        value: 10 }],
-
-      [{
-        text: '顺序',
-        value: 1 },
-      {
-        text: '乱序',
-        value: 2 },
-      {
-        text: '倒叙',
-        value: 3 }]],
-
-
-      defaultIndex: [0, 0],
       indicatorDots: false,
       autoplay: false,
       circular: true,
@@ -156,49 +112,91 @@ __webpack_require__.r(__webpack_exports__);
       dotsStyles: {
         color: 'black' },
 
-      swiperList: [{
-        imgSrc: '../../../static/img/icons/zhongjiang.png',
-        title: '一件衣服',
-        num: 1 },
-
-      {
-        imgSrc: '../../../static/img/icons/shandian.png',
-        title: '两只袜子',
-        num: 2 },
-
-      {
-        imgSrc: '../../../static/img/icons/zhongjiang.png',
-        title: '一件衣服',
-        num: 1 },
-
-      {
-        imgSrc: '../../../static/img/icons/shandian.png',
-        title: '两只袜子',
-        num: 2 },
-
-      {
-        imgSrc: '../../../static/img/icons/zhongjiang.png',
-        title: '一件衣服',
-        num: 1 },
-
-      {
-        imgSrc: '../../../static/img/icons/shandian.png',
-        title: '两只袜子',
-        num: 2 }],
-
-
+      swiperList: [],
       current: 0,
-      showCard: true // 是否展示card格式
-    };
+      showCard: false, // 是否展示card格式
+      collectsId: '402aa38151aef50c0151aef50c2600cc',
+      memberId: '',
+      orderType: 1,
+      optionId: '',
+      numList: [],
+      numIndex: 0,
+      orderList: [{
+        id: 1,
+        title: "顺序" },
+      {
+        id: 2,
+        title: "倒序" },
+      {
+        id: 3,
+        title: "乱序" }],
+
+      orderIndex: 0 };
+
   },
-  mounted: function mounted() {
+  onLoad: function onLoad(options) {
+    console.log(options);
+    this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
+    if (options.collectsId) {
+      this.collectsId = options.collectsId;
+    }
+    this.startPractice();
   },
   methods: {
-    onSelected: function onSelected(res) {
-      console.log(res);
+    startPractice: function startPractice() {var _this = this;
+      this.$Request.get("/appOptionController.do?startPractice&memberId=".concat(this.memberId, "&collectsId=").concat(this.collectsId)).
+      then(function (res) {
+        if (res.code == 0) {
+          for (var i = 0; i < res.data.listNum; i++) {
+            _this.numList.push("".concat(i + 1, "/").concat(res.data.listNum));
+          }
+          _this.swiperList = res.data.optionList;
+          _this.optionId = res.data.optionVo.id;
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
+    getPracticeOptionList: function getPracticeOptionList() {var _this2 = this;
+      this.$Request.get("/appOptionController.do?getPracticeOptionList", {
+        memberId: this.memberId,
+        collectsId: this.collectsId,
+        orderType: this.orderType,
+        optionId: this.optionId }).
+
+      then(function (res) {
+        if (res.code == 0) {
+          for (var i = 0; i < res.data.listNum; i++) {
+            _this2.numList.push("".concat(i + 1, "/").concat(res.data.listNum));
+          }
+          _this2.swiperList = res.data.optionList;
+          _this2.optionId = res.data.option.id;
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
+    bindNumChange: function bindNumChange(e) {
+      this.numIndex = e.detail.value;
+    },
+    bindOrderChange: function bindOrderChange(e) {
+      this.orderIndex = e.detail.value;
+      this.orderType = this.orderList[e.detail.value].id;
+      this.getPracticeOptionList();
     },
     change: function change(e) {
-      this.current = e.detail.current;
+      this.numIndex = e.detail.current;
+      this.optionId = this.swiperList[e.detail.current].id;
+    },
+    clickLi: function clickLi(index) {
+      this.numIndex = index;
+      this.optionId = this.swiperList[index].id;
     },
     changeType: function changeType() {
       this.showCard = !this.showCard;

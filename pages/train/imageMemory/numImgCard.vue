@@ -1,18 +1,25 @@
 <template>
 	<view class="img-card">
-		<ren-dropdown-filter class="card-filter" :filterData='filterData' :defaultIndex='defaultIndex' @onSelected='onSelected'></ren-dropdown-filter>
+		<view class="card-filter">
+			<picker @change="bindNumChange" :value="numIndex" :range="numList">
+				<text class="card-filter-li">{{numList[numIndex]}}</text>
+			</picker>
+			<picker @change="bindOrderChange" :value="orderIndex" :range="orderList" range-key="title">
+				<text class="card-filter-li">{{orderList[orderIndex].title}}</text>
+			</picker>
+		</view>
 		<view class="img-card-swiper">
-			<swiper class="swiper" :circular="circular" v-if="showCard"
+			<swiper class="swiper" :circular="circular" v-if="showCard" @change="change" :current="numIndex"
 		   :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
 				<swiper-item v-for="(item, index) in swiperList" :key="index">
 					<view class="swiper-item">
 					  <view class="swiper-item-num">
-							{{item.num}}
+							{{item.sort}}
 							<text class="item-num-tip">元素</text>
 					  </view>
-					  <image :src="item.imgSrc" class="swiper-item-img" mode="widthFix"></image>
+					  <image :src="item.optionPic" class="swiper-item-img" mode="widthFix"></image>
 					  <view class="swiper-item-text">
-							{{item.title}}
+							{{item.optionContent}}
 							<text class="item-num-tip">备注</text>
 					  </view>
 					 </view>
@@ -21,13 +28,14 @@
 
 			<!-- 列表 -->
 			<view class="img-card-ul" v-if="!showCard">
-				<view class="card-ul-li" v-for="(item ,index) in swiperList" :key="index">
+				<view :class="{'card-ul-li-choose' : numIndex == index}" class="card-ul-li"
+				v-for="(item ,index) in swiperList" :key="index" @click="clickLi(index)">
 					<view class="card-ul-li-left">
-						<image :src="item.imgSrc"></image>
+						<image :src="item.optionPic"></image>
 					</view>
 					<view class="card-ul-li-right">
-						<view class="ul-li-right-title">{{item.num}}</view>
-						<view class="ul-li-right-detail">{{item.title}}</view>
+						<view class="ul-li-right-title">{{item.sort}}</view>
+						<view class="ul-li-right-detail">{{item.optionContent}}</view>
 					</view>
 				</view>
 			</view>
@@ -40,57 +48,9 @@
 </template>
 
 <script>
-	import RenDropdownFilter from '@/components/ren-dropdown-filter/ren-dropdown-filter.vue'
 	export default {
-		components: {
-			RenDropdownFilter,
-		},
 		data() {
 			return {
-				filterData: [
-					[{
-						text: '1/10',
-						value: 1
-					}, {
-						text: '2/10',
-						value: 2
-					}, {
-						text: '3/10',
-						value: 3
-					}, {
-						text: '4/10',
-						value: 4
-					}, {
-						text: '5/10',
-						value: 5
-					}, {
-						text: '6/10',
-						value: 6
-					}, {
-						text: '7/10',
-						value: 7
-					}, {
-						text: '8/10',
-						value: 8
-					}, {
-						text: '9/10',
-						value: 9
-					}, {
-						text: '10/10',
-						value: 10
-					}],
-					[{
-						text: '顺序',
-						value: 1
-					}, {
-						text: '乱序',
-						value: 2
-					}, {
-						text: '倒叙',
-						value: 3
-					}]
-				],
-				defaultIndex: [0, 0],
 				indicatorDots: false,
 				autoplay: false,
 				circular: true,
@@ -99,49 +59,91 @@
 				dotsStyles: {
 					color: 'black',
 				},
-				swiperList: [{
-						imgSrc: '../../../static/img/icons/zhongjiang.png',
-						title: '一件衣服',
-						num: 1
-					},
-					{
-						imgSrc: '../../../static/img/icons/shandian.png',
-						title: '两只袜子',
-						num: 2
-					},
-					{
-						imgSrc: '../../../static/img/icons/zhongjiang.png',
-						title: '一件衣服',
-						num: 1
-					},
-					{
-						imgSrc: '../../../static/img/icons/shandian.png',
-						title: '两只袜子',
-						num: 2
-					},
-					{
-						imgSrc: '../../../static/img/icons/zhongjiang.png',
-						title: '一件衣服',
-						num: 1
-					},
-					{
-						imgSrc: '../../../static/img/icons/shandian.png',
-						title: '两只袜子',
-						num: 2
-					},
-				],
+				swiperList: [],
 				current: 0,
-				showCard: true, // 是否展示card格式
+				showCard: false, // 是否展示card格式
+				collectsId: '402aa38151aef50c0151aef50c2600cc',
+				memberId: '',
+				orderType: 1,
+				optionId: '',
+				numList:[],
+				numIndex:0,
+				orderList:[{
+					id:1,
+					title:"顺序"
+				},{
+					id:2,
+					title:"倒序"
+				},{
+					id:3,
+					title:"乱序"
+				},],
+				orderIndex:0,
 			}
 		},
-		mounted() {
+		onLoad(options) {
+			console.log(options)
+			this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+			if(options.collectsId){
+				this.collectsId = options.collectsId
+			}
+			this.startPractice()
 		},
 		methods: {
-			onSelected(res) {
-				console.log(res)
+			startPractice(){
+				this.$Request.get(`/appOptionController.do?startPractice&memberId=${this.memberId}&collectsId=${this.collectsId}`)
+				.then(res => {
+					if(res.code == 0){
+						for(let i =0; i< res.data.listNum; i++){
+							this.numList.push(`${i+1}/${res.data.listNum}`)
+						}
+						this.swiperList = res.data.optionList
+						this.optionId = res.data.optionVo.id
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			getPracticeOptionList(){
+				this.$Request.get(`/appOptionController.do?getPracticeOptionList`,{
+					memberId: this.memberId,
+					collectsId: this.collectsId,
+					orderType: this.orderType,
+					optionId: this.optionId,
+				})
+				.then(res => {
+					if(res.code == 0){
+						for(let i =0; i< res.data.listNum; i++){
+							this.numList.push(`${i+1}/${res.data.listNum}`)
+						}
+						this.swiperList = res.data.optionList
+						this.optionId = res.data.option.id
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			bindNumChange(e){
+				this.numIndex = e.detail.value
+			},
+			bindOrderChange(e){
+				this.orderIndex = e.detail.value
+				this.orderType = this.orderList[e.detail.value].id
+				this.getPracticeOptionList()
 			},
 			change(e) {
-				this.current = e.detail.current;
+				this.numIndex = e.detail.current;
+				this.optionId = this.swiperList[e.detail.current].id
+			},
+			clickLi(index){
+				this.numIndex = index;
+				this.optionId = this.swiperList[index].id
 			},
 			changeType() {
 				this.showCard = !this.showCard
@@ -173,6 +175,20 @@
 			position: fixed;
 			left: 0;
 			top: 0;
+			width: 100%;
+			display: flex;
+			justify-content: space-around;
+			background-color: #FFFFFF;
+			line-height: 120rpx;
+			font-size: 36rpx;
+			font-weight: bold;
+			color: $uni-color-primary;
+			box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.3);
+			.card-filter-li{
+				border-bottom: 6rpx solid $uni-color-primary;
+				padding-bottom: 10rpx;
+				box-sizing: border-box;
+			}
 		}
 
 		.img-card-swiper {
@@ -278,8 +294,15 @@
 						.ul-li-right-detail {
 							color: #666;
 							font-size: 30rpx;
+							width: 100%;
+							overflow: hidden;
+							text-overflow:ellipsis;
+							white-space: nowrap;
 						}
 					}
+				}
+				.card-ul-li-choose{
+					border: 1rpx solid $uni-color-primary;
 				}
 			}
 		}
