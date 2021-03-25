@@ -39,6 +39,8 @@
           border-radius: 15rpx;
   color: #FFFFFF;
   padding: 5% 15%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .energy .energy-top .energy-top-num {
   font-size: 70rpx;
@@ -94,6 +96,7 @@
 .energy .energy-content .history-li .history-li-top .li-top-left {
   font-size: 32rpx;
   font-weight: bold;
+  color: #444;
 }
 .energy .energy-content .history-li .history-li-top .li-top-right {
   font-size: 30rpx;
@@ -101,7 +104,7 @@
   color: #dd524d;
 }
 .energy .energy-content .history-li .history-li-bottom {
-  color: #666666;
+  color: #999;
   font-size: 26rpx;
 }
 

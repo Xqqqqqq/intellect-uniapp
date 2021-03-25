@@ -30,7 +30,7 @@ page {
 }
 .img-card {
   width: 100%;
-  height: calc(100% - 25px);
+  height: calc(100vh - 25px);
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -46,6 +46,7 @@ page {
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 999;
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -68,11 +69,10 @@ page {
 }
 .img-card .img-card-swiper {
   width: 100%;
-  padding: 24rpx;
-  padding-top: 135rpx;
+  padding: 140rpx 24rpx 100rpx 24rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  height: calc(100% - 25px - 110rpx);
+  height: calc(100vh - 25px);
   overflow-y: scroll;
 }
 .img-card .img-card-swiper .swiper {

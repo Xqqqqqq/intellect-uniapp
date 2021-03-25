@@ -56,8 +56,20 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/myData/calendar",
-          "pathName": "pages/myData/calendar",
+          "name": "pages/mine/mine",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/train/imageMemory/numImgCard",
+          "pathName": "pages/train/imageMemory/numImgCard",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/myData/myData",
+          "pathName": "pages/myData/myData",
           "scene": null
         }
       ]

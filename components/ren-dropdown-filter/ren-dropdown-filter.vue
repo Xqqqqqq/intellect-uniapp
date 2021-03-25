@@ -166,10 +166,10 @@ page {
         .navs {
             position: relative;
             height: 110rpx;
-            padding: 0 40rpx;
+            padding: 0 24rpx;
             display: flex;
             align-items: center;
-            justify-content: space-around;
+            justify-content: space-between;
             background-color: #fff;
             border-bottom: 2rpx solid #f5f6f9;
             color: #8b9aae;

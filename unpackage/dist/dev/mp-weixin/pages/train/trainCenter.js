@@ -327,9 +327,9 @@ __webpack_require__.r(__webpack_exports__);
       this.getTrainList();
     },
     gotoListDetail: function gotoListDetail(item) {
-      console.log('1', item);
+      // console.log('1',item)
       uni.navigateTo({
-        url: '/pages/train/imageMemory/numEleEntry' });
+        url: "/pages/train/imageMemory/numEleEntry?id=".concat(item.id) });
 
     },
     // 收藏

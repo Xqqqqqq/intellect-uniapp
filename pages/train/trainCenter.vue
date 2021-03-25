@@ -179,9 +179,9 @@
 				this.getTrainList()
 			},
 			gotoListDetail(item){
-				console.log('1',item)
+				// console.log('1',item)
 				uni.navigateTo({
-					url: '/pages/train/imageMemory/numEleEntry'
+					url: `/pages/train/imageMemory/numEleEntry?id=${item.id}`
 				})
 			},
 			// 收藏

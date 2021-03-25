@@ -13,7 +13,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  noData: function() {
+    return __webpack_require__.e(/*! import() | components/no-data/no-data */ "components/no-data/no-data").then(__webpack_require__.bind(null, /*! @/components/no-data/no-data.vue */ 315))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -100,6 +104,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -114,7 +123,7 @@ var _default =
 
       swiperList: [],
       current: 0,
-      showCard: false, // 是否展示card格式
+      showCard: true, // 是否展示card格式
       collectsId: '402aa38151aef50c0151aef50c2600cc',
       memberId: '',
       orderType: 1,
@@ -131,7 +140,8 @@ var _default =
         id: 3,
         title: "乱序" }],
 
-      orderIndex: 0 };
+      orderIndex: 0,
+      code: '' };
 
   },
   onLoad: function onLoad(options) {
@@ -146,6 +156,8 @@ var _default =
     startPractice: function startPractice() {var _this = this;
       this.$Request.get("/appOptionController.do?startPractice&memberId=".concat(this.memberId, "&collectsId=").concat(this.collectsId)).
       then(function (res) {
+        _this.code = res.code;
+        console.log('123434', _this.code);
         if (res.code == 0) {
           for (var i = 0; i < res.data.listNum; i++) {
             _this.numList.push("".concat(i + 1, "/").concat(res.data.listNum));

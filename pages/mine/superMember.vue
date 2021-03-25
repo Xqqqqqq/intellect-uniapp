@@ -283,6 +283,7 @@
 		justify-content: space-between;
 		font-size: 28rpx;
 		margin-top: 30rpx;
+		box-sizing: border-box;
 		.member-picker-left{
 			color: $uni-color-warning;
 		}

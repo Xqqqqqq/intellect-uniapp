@@ -1,48 +1,53 @@
 <template>
-	<view class="img-card">
-		<view class="card-filter">
-			<picker @change="bindNumChange" :value="numIndex" :range="numList">
-				<text class="card-filter-li">{{numList[numIndex]}}</text>
-			</picker>
-			<picker @change="bindOrderChange" :value="orderIndex" :range="orderList" range-key="title">
-				<text class="card-filter-li">{{orderList[orderIndex].title}}</text>
-			</picker>
-		</view>
-		<view class="img-card-swiper">
-			<swiper class="swiper" :circular="circular" v-if="showCard" @change="change" :current="numIndex"
-		   :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
-				<swiper-item v-for="(item, index) in swiperList" :key="index">
-					<view class="swiper-item">
-					  <view class="swiper-item-num">
-							{{item.sort}}
-							<text class="item-num-tip">元素</text>
-					  </view>
-					  <image :src="item.optionPic" class="swiper-item-img" mode="widthFix"></image>
-					  <view class="swiper-item-text">
-							{{item.optionContent}}
-							<text class="item-num-tip">备注</text>
-					  </view>
-					 </view>
-				</swiper-item>
-		   </swiper>
-
-			<!-- 列表 -->
-			<view class="img-card-ul" v-if="!showCard">
-				<view :class="{'card-ul-li-choose' : numIndex == index}" class="card-ul-li"
-				v-for="(item ,index) in swiperList" :key="index" @click="clickLi(index)">
-					<view class="card-ul-li-left">
-						<image :src="item.optionPic"></image>
-					</view>
-					<view class="card-ul-li-right">
-						<view class="ul-li-right-title">{{item.sort}}</view>
-						<view class="ul-li-right-detail">{{item.optionContent}}</view>
+	<view style="height: 100vh;">
+		<view class="img-card" v-if="code == '0'">
+			<view class="card-filter">
+				<picker @change="bindNumChange" :value="numIndex" :range="numList">
+					<text class="card-filter-li">{{numList[numIndex]}}</text>
+				</picker>
+				<picker @change="bindOrderChange" :value="orderIndex" :range="orderList" range-key="title">
+					<text class="card-filter-li">{{orderList[orderIndex].title}}</text>
+				</picker>
+			</view>
+			<view class="img-card-swiper">
+				<swiper class="swiper" :circular="circular" v-if="showCard" @change="change" :current="numIndex"
+			   :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
+					<swiper-item v-for="(item, index) in swiperList" :key="index">
+						<view class="swiper-item">
+						  <view class="swiper-item-num">
+								{{item.sort}}
+								<text class="item-num-tip">元素</text>
+						  </view>
+						  <image :src="item.optionPic" class="swiper-item-img" mode="widthFix"></image>
+						  <view class="swiper-item-text">
+								{{item.optionContent}}
+								<text class="item-num-tip">备注</text>
+						  </view>
+						 </view>
+					</swiper-item>
+			   </swiper>
+		
+				<!-- 列表 -->
+				<view class="img-card-ul" v-if="!showCard">
+					<view :class="{'card-ul-li-choose' : numIndex == index}" class="card-ul-li"
+					v-for="(item ,index) in swiperList" :key="index" @click="clickLi(index)">
+						<view class="card-ul-li-left">
+							<image :src="item.optionPic"></image>
+						</view>
+						<view class="card-ul-li-right">
+							<view class="ul-li-right-title">{{item.sort}}</view>
+							<view class="ul-li-right-detail">{{item.optionContent}}</view>
+						</view>
 					</view>
 				</view>
 			</view>
+			<view class="img-card-btn">
+				<view class="card-btn-li card-btn-li-orange" @click="changeType">切换列表形式</view>
+				<view class="card-btn-li card-btn-li-blue" @click="gotoUrl">前往测试</view>
+			</view>
 		</view>
-		<view class="img-card-btn">
-			<view class="card-btn-li card-btn-li-orange" @click="changeType">切换列表形式</view>
-			<view class="card-btn-li card-btn-li-blue" @click="gotoUrl">前往测试</view>
+		<view style="padding-top: 200rpx;" v-if="code != '0'">
+			<no-data></no-data>
 		</view>
 	</view>
 </template>
@@ -61,7 +66,7 @@
 				},
 				swiperList: [],
 				current: 0,
-				showCard: false, // 是否展示card格式
+				showCard: true, // 是否展示card格式
 				collectsId: '402aa38151aef50c0151aef50c2600cc',
 				memberId: '',
 				orderType: 1,
@@ -79,6 +84,7 @@
 					title:"乱序"
 				},],
 				orderIndex:0,
+				code: '',
 			}
 		},
 		onLoad(options) {
@@ -93,6 +99,8 @@
 			startPractice(){
 				this.$Request.get(`/appOptionController.do?startPractice&memberId=${this.memberId}&collectsId=${this.collectsId}`)
 				.then(res => {
+					this.code = res.code
+					console.log('123434',this.code)
 					if(res.code == 0){
 						for(let i =0; i< res.data.listNum; i++){
 							this.numList.push(`${i+1}/${res.data.listNum}`)
@@ -165,7 +173,7 @@
 
 	.img-card {
 		width: 100%;
-		height: calc(100% - var(--status-bar-height));
+		height: calc(100vh - var(--status-bar-height));
 		display: flex;
 		flex-direction: column;
 		overflow-y: scroll;
@@ -175,6 +183,7 @@
 			position: fixed;
 			left: 0;
 			top: 0;
+			z-index: 999;
 			width: 100%;
 			display: flex;
 			justify-content: space-around;
@@ -193,10 +202,9 @@
 
 		.img-card-swiper {
 			width: 100%;
-			padding: 24rpx;
-			padding-top: 135rpx;
+			padding: 140rpx 24rpx 100rpx 24rpx;
 			box-sizing: border-box;
-			height: calc(100% - var(--status-bar-height) - 110rpx);
+			height: calc(100vh - var(--status-bar-height));
 			overflow-y: scroll;
 
 			.swiper {

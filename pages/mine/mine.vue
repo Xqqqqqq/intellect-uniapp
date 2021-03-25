@@ -6,27 +6,27 @@
 		<view class="mine-top">
 			<template v-if="userLogin">
 				<view class="mine-top-left">
-					<image src="../../static/img/icons/zhongjiang.png"></image>
+					<image :src="userInfo.memberPic || '../../static/img/icons/unlogin.png'"></image>
 				</view>
 				<view class="mine-top-right" @click="gotoUrl('/pages/mine/editUserInfo')">
-					<view class="top-right-name">哈哈哈</view>
-					<view class="top-right-date" v-if="isVip">兰盾会员剩余时间：180天</view>
+					<view class="top-right-name">{{userInfo.memberNickname}}</view>
+					<view class="top-right-date" v-if="userInfo.isVip == 1">兰盾会员剩余时间：{{userInfo.vipDays}}天</view>
 					<view class="top-right-btn bg-gradual-orange text-center shadow-blur" 
-					v-if="!isVip" @click="gotoUrl('/pages/mine/commonMember')">普通成员</view>
+					v-if="userInfo.isVip == 0" @click="gotoUrl('/pages/mine/commonMember')">普通成员</view>
 				</view>
-				<view class="mine-top-pos" v-if="!isVip" @click="gotoUrl('/pages/mine/superMember')">
+				<view class="mine-top-pos" v-if="userInfo.isVip == 0" @click="gotoUrl('/pages/mine/superMember')">
 					<image class="top-pos-img" src='../../static/img/icons/vip.png'></image>
 					兰盾会员
 				</view>
-				<view class="mine-top-pos" v-if="isVip" @click="gotoUrl('/pages/mine/superMember')">
+				<view class="mine-top-pos" v-if="userInfo.isVip == 1" @click="gotoUrl('/pages/mine/superMember')">
 					立即充值
 				</view>
 			</template>
 			<template v-else>
 				<view class="mine-top-left">
-					<image src="../../static/img/icons/zhongjiang.png"></image>
+					<image src="../../static/img/icons/unlogin.png"></image>
 				</view>
-				<view class="mine-top-right" @click="gotoUrl('/pages/myData/login')">
+				<view class="mine-top-right" @click="gotoLogin('/pages/loginAll/login')">
 					<view class="top-right-name">点击登录</view>
 				</view>
 			</template>
@@ -34,20 +34,20 @@
 		<view class="mine-content">
 			<view class="mine-content-li" @click="gotoUrl('/pages/mine/energy')">
 				<view class="content-li-title">我的能量</view>
-				<view class="content-li-num">0</view>
+				<view class="content-li-num">{{userInfo.memberScore}}</view>
 			</view>
 			<view class="mine-content-li" @click="gotoUrl('/pages/mine/cardVoucher')">
 				<view class="content-li-title">我的卡券</view>
-				<view class="content-li-num">0</view>
+				<view class="content-li-num">{{userInfo.couponNum}}</view>
 			</view>
 			<view class="mine-content-li" @click="gotoUrl('/pages/mine/collect')">
 				<view class="content-li-title">我的收藏</view>
-				<view class="content-li-num">0</view>
+				<view class="content-li-num">{{userInfo.articleNum}}</view>
 			</view>
 		</view>
 		<view class="mine-bottom">
 			<view class="mine-bottom-li" @click="gotoTab('/pages/myData/myData')">
-				<view class="bottom-li-left">我的训练(3)</view>
+				<view class="bottom-li-left">我的训练({{userInfo.collectsNum}})</view>
 				<view class="bottom-li-right">></view>
 			</view>
 			<view class="mine-bottom-li" @click="gotoUrl('/pages/mine/activityExchange')">
@@ -62,7 +62,7 @@
 				<view class="bottom-li-left">意见建议</view>
 				<view class="bottom-li-right">></view>
 			</view>
-			<view class="mine-bottom-li" @click="gotoUrl('/pages/mine/aboutUs')">
+			<view class="mine-bottom-li" @click="gotoLogin('/pages/mine/aboutUs')">
 				<view class="bottom-li-left">关于我们</view>
 				<view class="bottom-li-right">></view>
 			</view>
@@ -91,18 +91,91 @@
 				isVip: true, // 是否是vip
 				isShowModal: false,
 				modalTitle: '提示',
+				memberId: '',
+				userInfo: {},
+				code: 0
 			}
 		},
+		onShow(){
+			this.memberId = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).id : ''
+			this.getMember()
+		},
+		onPullDownRefresh() {
+			this.userInfo = {};
+			uni.showLoading({
+				title: '加载中'
+			});
+			this.getMember()
+			uni.hideLoading();
+		},
 		methods: {
+			// 获取我的信息
+			getMember(){
+				this.$Request.get(`/appMemberController.do?getMember&memberId=${this.memberId}`)
+				.then(res => {
+					this.code = res.code
+					this.userInfo = res.data.memberVo
+					if(res.code == 0){
+						this.userLogin = true
+					}else if(res.code == '100'){
+						this.userLogin = false
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
 			gotoUrl(url){
+				let vm = this
+				if(vm.code == 0){
+					uni.navigateTo({
+						url:url
+					})
+				}else if(vm.code == 100){
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
+			},
+			// 点击登录按钮
+			gotoLogin(url){
 				uni.navigateTo({
 					url:url
 				})
 			},
 			gotoTab(url){
-				uni.switchTab({
-					url: url
-				})
+				let vm = this
+				if(vm.code == 0){
+					uni.switchTab({
+						url: url
+					})
+				}else if(vm.code == 100){
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
 			},
 			gotoReturn(){
 				this.isShowModal = true
@@ -129,6 +202,9 @@
 </script>
 
 <style lang="scss">
+	page{
+		background-color: #f4f4f4;
+	}
 .mine{
 	width: 100%;
 	.modal-text{
@@ -173,7 +249,7 @@
 	}
 	.mine-top{
 		width: 100%;
-		padding:150rpx 80rpx;
+		padding:150rpx 50rpx;
 		box-sizing: border-box;
 		background: linear-gradient(to right, rgb(94, 92, 216), $uni-color-primary);
 		position: relative;

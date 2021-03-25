@@ -121,9 +121,12 @@
 								})
 								uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 								setTimeout(()=>{
-									uni.switchTab({
-										url:'/pages/myData/myData'
+									uni.navigateBack({
+										delta:1
 									})
+									// uni.switchTab({
+									// 	url:'/pages/myData/myData'
+									// })
 								},1000)
 							}else if(res.code == 100){
 								// 尚未注册
@@ -136,9 +139,12 @@
 										})
 										uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 										setTimeout(()=>{
-											uni.switchTab({
-												url:'/pages/myData/myData'
+											uni.navigateBack({
+												delta:1
 											})
+											// uni.switchTab({
+											// 	url:'/pages/myData/myData'
+											// })
 										},1000)
 									}else{
 										uni.showToast({
@@ -199,9 +205,12 @@
 						})
 						uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 						setTimeout(()=>{
-							uni.switchTab({
-								url:'/pages/myData/myData'
+							uni.navigateBack({
+								delta:1
 							})
+							// uni.switchTab({
+							// 	url:'/pages/myData/myData'
+							// })
 						},1000)
 					}else if(res.code == 100){
 						// 尚未注册
@@ -214,9 +223,12 @@
 								})
 								uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 								setTimeout(()=>{
-									uni.switchTab({
-										url:'/pages/myData/myData'
+									uni.navigateBack({
+										delta:1
 									})
+									// uni.switchTab({
+									// 	url:'/pages/myData/myData'
+									// })
 								},1000)
 							}else{
 								uni.showToast({

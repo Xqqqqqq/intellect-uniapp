@@ -59,15 +59,16 @@ page.data-v-61c13d5f {
 .filter-wrapper .inner-wrapper .navs.data-v-61c13d5f {
   position: relative;
   height: 110rpx;
-  padding: 0 40rpx;
+  padding: 0 24rpx;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
   background-color: #fff;
   border-bottom: 2rpx solid #f5f6f9;
   color: #8b9aae;

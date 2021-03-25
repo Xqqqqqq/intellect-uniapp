@@ -52,6 +52,7 @@
 		border-radius: 15rpx;
 		color: #FFFFFF;
 		padding: 5% 15%;
+		box-sizing: border-box;
 		.energy-top-num{
 			font-size: 70rpx;
 			font-weight: bold;
@@ -96,6 +97,7 @@
 				.li-top-left{
 					font-size: 32rpx;
 					font-weight: bold;
+					color: #444;
 				}
 				.li-top-right{
 					font-size: 30rpx;
@@ -104,7 +106,7 @@
 				}
 			}
 			.history-li-bottom{
-				color: #666666;
+				color: #999;
 				font-size: 26rpx;
 			}
 		}

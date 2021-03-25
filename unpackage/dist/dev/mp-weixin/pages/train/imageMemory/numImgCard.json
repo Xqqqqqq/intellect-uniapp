@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "数字图像关联训练",
-  "usingComponents": {}
+  "usingComponents": {
+    "no-data": "/components/no-data/no-data"
+  }
 }

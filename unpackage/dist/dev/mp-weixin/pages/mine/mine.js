@@ -226,19 +226,92 @@ __webpack_require__.r(__webpack_exports__);
       userLogin: true, // 用户是否登录
       isVip: true, // 是否是vip
       isShowModal: false,
-      modalTitle: '提示' };
+      modalTitle: '提示',
+      memberId: '',
+      userInfo: {},
+      code: 0 };
 
   },
+  onShow: function onShow() {
+    this.memberId = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).id : '';
+    this.getMember();
+  },
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.userInfo = {};
+    uni.showLoading({
+      title: '加载中' });
+
+    this.getMember();
+    uni.hideLoading();
+  },
   methods: {
+    // 获取我的信息
+    getMember: function getMember() {var _this = this;
+      this.$Request.get("/appMemberController.do?getMember&memberId=".concat(this.memberId)).
+      then(function (res) {
+        _this.code = res.code;
+        _this.userInfo = res.data.memberVo;
+        if (res.code == 0) {
+          _this.userLogin = true;
+        } else if (res.code == '100') {
+          _this.userLogin = false;
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
     gotoUrl: function gotoUrl(url) {
+      var vm = this;
+      if (vm.code == 0) {
+        uni.navigateTo({
+          url: url });
+
+      } else if (vm.code == 100) {
+        uni.showModal({
+          title: '提示',
+          content: '您尚未登录，是否去登录？',
+          success: function success(res) {
+            if (res.confirm) {
+              uni.navigateTo({
+                url: '/pages/loginAll/login' });
+
+            } else if (res.cancel) {
+              console.log('用户点击取消');
+            }
+          } });
+
+      }
+    },
+    // 点击登录按钮
+    gotoLogin: function gotoLogin(url) {
       uni.navigateTo({
         url: url });
 
     },
     gotoTab: function gotoTab(url) {
-      uni.switchTab({
-        url: url });
+      var vm = this;
+      if (vm.code == 0) {
+        uni.switchTab({
+          url: url });
 
+      } else if (vm.code == 100) {
+        uni.showModal({
+          title: '提示',
+          content: '您尚未登录，是否去登录？',
+          success: function success(res) {
+            if (res.confirm) {
+              uni.navigateTo({
+                url: '/pages/loginAll/login' });
+
+            } else if (res.cancel) {
+              console.log('用户点击取消');
+            }
+          } });
+
+      }
     },
     gotoReturn: function gotoReturn() {
       this.isShowModal = true;

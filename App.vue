@@ -65,6 +65,9 @@ export default {
 /* @import 'uni.scss'; */
 @import 'static/css/animate.css';
 /* 解决头条小程序组件内引入字体不生效的问题 */
+page{
+	background-color: #f1f1f1;
+}
 /* #ifdef MP-TOUTIAO */
 @font-face {
 	font-family: uniicons;
