@@ -114,7 +114,12 @@
 						this.code = res.code
 						this.trainInfo = res.data
 						if(res.code == 0){
-							this.collectsList =  [...this.collectsList, ...res.data.collectsList]
+							this.collectsList =  [...this.collectsList, ...res.data.collectsList].map(item => {
+								return {
+									...item,
+									studyDate: item.studyDate && item.studyDate.substring(0,10)
+								}
+							})
 						}else if(res.code == '-118' || res.code == '-116'){
 							this.status = 'noMore'
 						}else{
@@ -150,6 +155,7 @@
 				.then(res => {
 					if(res.code == 0){
 						this.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1
+						this.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1
 					}else{
 						uni.showToast({
 							title: res.info,

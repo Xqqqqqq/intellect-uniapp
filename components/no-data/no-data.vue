@@ -69,7 +69,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		padding-top: 150rpx;
+		padding-top: 100rpx;
 		.img-icon {
 			width: 360rpx;
 			height: 200rpx;

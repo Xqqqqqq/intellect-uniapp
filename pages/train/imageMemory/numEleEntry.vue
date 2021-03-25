@@ -65,6 +65,7 @@
 				.then(res => {
 					if(res.code == 0){
 						this.entryInfo = res.data
+						this.entryInfo.studyDate = res.data.studyDate.substring(0,10)
 					}else{
 						uni.showToast({
 							title: res.info,

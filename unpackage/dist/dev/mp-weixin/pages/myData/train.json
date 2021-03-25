@@ -1,6 +1,9 @@
 {
   "navigationBarTitleText": "本月训练",
+  "enablePullDownRefresh": true,
   "usingComponents": {
-    "my-list": "/components/my-list/my-list"
+    "my-list": "/components/my-list/my-list",
+    "no-data": "/components/no-data/no-data",
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
   }
 }

@@ -197,6 +197,7 @@ var _default =
       then(function (res) {
         if (res.code == 0) {
           _this.entryInfo = res.data;
+          _this.entryInfo.studyDate = res.data.studyDate.substring(0, 10);
         } else {
           uni.showToast({
             title: res.info,

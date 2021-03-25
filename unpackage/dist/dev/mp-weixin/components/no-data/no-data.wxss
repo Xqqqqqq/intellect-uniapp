@@ -39,7 +39,7 @@
   -webkit-box-pack: center;
   -webkit-justify-content: center;
           justify-content: center;
-  padding-top: 150rpx;
+  padding-top: 100rpx;
 }
 .no-data-wrap .img-icon {
   width: 360rpx;

@@ -62,8 +62,8 @@
 	box-shadow:0px 2px 10px 0px rgba(108,143,197,0.14);
 	margin-bottom: 20rpx;
 	.content-box-left{
-		width: 180rpx;
-		height: 180rpx;
+		width: 170rpx;
+		height: 170rpx;
 		border-radius: 30rpx;
 		overflow: hidden;
 		margin-right: 30rpx;
@@ -73,7 +73,7 @@
 		}
 	}
 	.content-box-right{
-		width: 66%;
+		width: 68%;
 		.box-right-title{
 			color: #333333;
 			font-weight: bold;

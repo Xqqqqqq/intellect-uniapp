@@ -56,20 +56,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/loginAll/login",
-          "pathName": "pages/loginAll/login",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/myData/myData",
-          "pathName": "pages/myData/myData",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/train/imageMemory/numImgCard",
-          "pathName": "pages/train/imageMemory/numImgCard",
+          "name": "pages/myData/calendar",
+          "pathName": "pages/myData/calendar",
           "scene": null
         }
       ]

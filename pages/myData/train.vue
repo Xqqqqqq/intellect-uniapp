@@ -4,7 +4,7 @@
 			<view class="wrap-top-box">
 				<view class="top-box-li">
 					<view class="top-box-li-title">本月</view>
-					<view class="top-box-li-num">30次</view>
+					<view class="top-box-li-num">{{trainInfo.num}}次</view>
 				</view>
 			</view>
 			<view class="wrap-top-tip">碎片化时间训练方向</view>
@@ -16,7 +16,9 @@
 		<view class="train-line"></view>
 		<view class="charts-title" style="background-color: #F5F5F5;">月度训练排行</view>
 		<view class="train-content">
-			<my-list :myList="listdetial" @gotoUrl="gotoListDetail"></my-list>
+			<my-list :myList="collectsList" @gotoUrl="gotoListDetail" @clickAttention="clickAttention"></my-list>
+			<no-data v-if="status == 'noMore' && !collectsList.length"></no-data>
+			<uni-load-more class="no-data-more" v-else iconType="circle" :color="'#CCCCCC'" :contentText="contentText" :status="status" />
 		</view>
 	</view>
 </template>
@@ -36,51 +38,126 @@
 				cHeight:'',
 				pixelRatio:1,
 				chartData: {
-					categories: ['英语词根', '少儿基础', '法律元素', '数字图像', '英文前缀'],
+					categories: [],
 					series: [{
-						name: '英语词根',
-						// color: '#ffffff',
-						data: [90, 110, 165, 195, 187]
-					}, {
-						name: '少儿基础',
-						data: [190, 210, 105, 35, 27]
-					}, {
-						name: '法律元素',
-						data: [10, 20, 100, 35, 27]
-					}, {
-						name: '数字图像',
-						data: [101, 220, 140, 39, 50]
-					}, {
-						name: '英文前缀',
-						data: [122, 320, 70, 300, 200]
-					}]
+						data: []
+					}, ]
 				},
-				listdetial:[{
-					src:'../../static/img/icons/common.jpg',
-					title: '数字图像记忆',
-					source: '官方',
-					person: '100',
-					detail: '简介：针对0~100的数字进行图像',
-					date: '2020-10-10',
-					num: 20
-				},{
-					src:'../../static/img/icons/common.jpg',
-					title: '数字图像记忆',
-					source: '官方',
-					person: '100',
-					detail: '简介：针对0~100的数字进行图像',
-					date: '2020-10-10',
-					num: 20
-				}],
+				trainInfo:{},
+				collectsList:[],
+				page:1,
+				contentText: {
+					contentdown: '查看更多',
+					contentrefresh: '加载中',
+					contentnomore: '- 暂时没有新内容了呢 -'
+				},
+				status: 'loading',
+				code:'',
+				memberId: '',
 			}
 		},
 		onLoad() {
 			_self = this;
+			this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id
 			this.cWidth=uni.upx2px(750);
 			this.cHeight=uni.upx2px(500);
-			this.getServerData();
+			// this.getServerData();
+			this.getTrainList()
+		},
+		onPullDownRefresh() {
+			this.page = 1;
+			this.trainInfo = {};
+			this.collectsList = []
+			this.chartData.categories = []
+			this.chartData.series[0].data = []
+			uni.showLoading({
+				title: '加载中'
+			});
+			this.getTrainList()
+			uni.hideLoading();
+		},
+		onReachBottom(){
+			if (this.code != '-116') {
+				this.page = this.page + 1;
+				this.chartData.categories = []
+				this.chartData.series[0].data = []
+				this.getTrainList();
+			}
 		},
 		methods: {
+			// 获取本月训练数据列表
+			getTrainList(){
+				let _self = this
+				this.$Request.get(`/appCollectsController.do?getMonthCollectsList&memberId=${this.memberId}&page=${this.page}`)
+				.then(res => {
+					this.code = res.code
+					this.trainInfo = res.data
+					res.data.labelList.forEach(item => {
+						this.chartData.categories.push(item.labelName)
+						this.chartData.series[0].data.push(item.labelNum)
+					})
+					_self.showRadar("canvasRadar",this.chartData)
+					if(res.code == 0){
+						this.collectsList =  [...this.collectsList, ...res.data.collectsList].map(item => {
+							return {
+								...item,
+								studyDate: item.studyDate && item.studyDate.substring(0,10)
+							}
+						})
+					}else if(res.code == '-118' || res.code == '-116'){
+						this.status = 'noMore'
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			showRadar(canvasId,chartData){
+				canvaRadar=new uCharts({
+					$this:_self,
+					canvasId: canvasId,
+					type: 'radar',
+					fontSize:11,
+					legend:{show:false},
+					background:'#FFFFFF',
+					pixelRatio:_self.pixelRatio,
+					animation: true,
+					dataLabel: true,
+					categories: chartData.categories,
+					series: chartData.series,
+					width: _self.cWidth*_self.pixelRatio,
+					height: _self.cHeight*_self.pixelRatio,
+					extra: {
+						radar: {
+							max: 100//雷达数值的最大值
+						}
+					}
+				});
+			},
+			// 收藏
+			clickAttention(item, index){
+				let collectsId = item.id
+				this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${this.memberId}&collectsId=${collectsId}`)
+				.then(res => {
+					if(res.code == 0){
+						this.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1
+						this.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			gotoListDetail(item){
+				// console.log('1',item)
+				uni.navigateTo({
+					url: `/pages/train/imageMemory/numEleEntry?id=${item.id}`
+				})
+			},
 			getServerData(){
 				let _self = this
 				let Radar={categories:[],series:[]};
@@ -103,31 +180,6 @@
 				// 	},
 				// });
 			},
-			showRadar(canvasId,chartData){
-				canvaRadar=new uCharts({
-					$this:_self,
-					canvasId: canvasId,
-					type: 'radar',
-					fontSize:11,
-					legend:{show:true},
-					background:'#FFFFFF',
-					pixelRatio:_self.pixelRatio,
-					animation: true,
-					dataLabel: true,
-					categories: chartData.categories,
-					series: chartData.series,
-					width: _self.cWidth*_self.pixelRatio,
-					height: _self.cHeight*_self.pixelRatio,
-					extra: {
-						radar: {
-							max: 200//雷达数值的最大值
-						}
-					}
-				});
-			},
-			gotoListDetail(item){
-				console.log(item)
-			}
 		}
 	}
 </script>

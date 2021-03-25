@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "本月签到",
-  "usingComponents": {}
+  "usingComponents": {
+    "ss-calendar": "/components/ss-calendar/ss-calendar"
+  }
 }

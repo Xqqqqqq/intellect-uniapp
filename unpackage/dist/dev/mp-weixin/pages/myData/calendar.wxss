@@ -24,176 +24,94 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.all .all-banner {
+.all .all-bg {
   width: 100%;
-  height: 300rpx;
-  background: url(data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABQAAD/4QMqaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MDhGNjA0QTVFNUM5MTFFQUJCRThERjNEQTE3RjMxN0MiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MDhGNjA0QTZFNUM5MTFFQUJCRThERjNEQTE3RjMxN0MiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDowOEY2MDRBM0U1QzkxMUVBQkJFOERGM0RBMTdGMzE3QyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDowOEY2MDRBNEU1QzkxMUVBQkJFOERGM0RBMTdGMzE3QyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv/uAA5BZG9iZQBkwAAAAAH/2wCEAAICAgICAgICAgIDAgICAwQDAgID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) no-repeat;
-  background-size: 100% 100%;
-  -webkit-box-shadow: 0px 1px 5rpx 0px rgba(145, 160, 221, 0.75);
-          box-shadow: 0px 1px 5rpx 0px rgba(145, 160, 221, 0.75);
-  padding: 40rpx 24rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-.all .all-banner .bar {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
-  font-size: 30rpx;
-  font-weight: bold;
-  color: #FFFFFF;
-}
-.all .all-banner .bar .barbtn {
-  height: 30px;
-  line-height: 30px;
-  font-size: 12px;
-}
-.all .all-banner .bar .bar-right {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  line-height: 50rpx;
-}
-.all .all-banner .bar .bar-right image {
-  width: 50rpx;
-  height: 50rpx;
-  margin-right: 10rpx;
-}
-.all .all-banner .bar .bar-right text {
-  color: #FFDF5D;
-  margin-left: 5rpx;
-  margin-right: 5rpx;
-}
-.all .all-banner .check-in-btn {
-  width: 166rpx;
-  height: 166rpx;
-  background: #fff;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
-  margin: 0 auto;
-  font-size: 34rpx;
-  font-weight: bold;
-  color: #2E3B67;
-  text-align: center;
-  line-height: 144rpx;
-  padding-top: 11rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-.all .all-banner .check-in-btn .check-in-btn-inner {
-  width: 144rpx;
-  height: 144rpx;
-  background: white;
-  -webkit-box-shadow: 4rpx 9rpx 23rpx 2rpx rgba(46, 59, 103, 0.61);
-          box-shadow: 4rpx 9rpx 23rpx 2rpx rgba(46, 59, 103, 0.61);
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
-  margin: 0 auto;
-  position: relative;
-}
-.all .all-banner .check-in-btn .check-in-btn-inner .en-text {
-  font-size: 40rpx;
-  font-weight: bold;
-  color: rgba(61, 114, 237, 0.1);
-  position: absolute;
-  top: 0rpx;
-  left: 14rpx;
+  height: 500rpx;
+  background-color: #2E3B67;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
 }
 .all .all-calendar {
   width: 90%;
-  margin: 5% auto;
-  background: #FFFFFF;
+  margin: auto;
+  position: relative;
+  z-index: 10;
+  margin-top: 5%;
+}
+.all .all-calendar .all-calendar-box {
+  width: 100%;
   -webkit-border-radius: 20rpx;
           border-radius: 20rpx;
-  -webkit-box-shadow: 1px 2px 6px 0px rgba(108, 143, 197, 0.3);
-          box-shadow: 1px 2px 6px 0px rgba(108, 143, 197, 0.3);
+  -webkit-box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.4);
+          box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.4);
+  overflow: hidden;
 }
-.all .all-calendar .week {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
-  padding: 20rpx 40rpx;
-  margin: 20rpx;
-  margin-bottom: 0;
-}
-.all .all-calendar .week view {
-  color: #333333;
-  font-weight: bold;
-  font-size: 28rpx;
-}
-.all .all-calendar .myDateTable {
+.all .all-calendar .all-calendar-btn {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-wrap: wrap;
-          flex-wrap: wrap;
-  padding: 20rpx;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  margin-top: 30rpx;
 }
-.all .all-calendar .myDateTable .dateCell {
-  width: 14%;
-  padding: 1vw;
+.all .all-calendar .all-calendar-btn .calendar-btn-li {
+  width: 45%;
   text-align: center;
-  font-size: 32rpx;
-}
-.all .all-calendar .myDateTable .dateCell .cell {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
-  height: 10vw;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-}
-.all .all-calendar .whiteColor {
-  color: #666;
-}
-.all .all-calendar .greenColor {
-  color: #01b90b;
+  line-height: 70rpx;
+  color: #FFFFFF;
+  -webkit-border-radius: 10rpx;
+          border-radius: 10rpx;
+  font-size: 26rpx;
   font-weight: bold;
 }
-.all .all-calendar .bgWhite {
+.all .all-calendar .all-calendar-btn .btn-li-red {
+  color: #0081ff;
+  background-color: #cce6ff;
+}
+.all .all-calendar .all-calendar-btn .btn-li-olive {
+  color: #8dc63f;
+  background-color: #e8f4d9;
+}
+.all .all-calendar .all-calendar-btn .btn-li-grey {
+  background-color: #8799a3;
+  color: #ffffff;
+}
+.all .all-calendar .calendar-btn-other {
+  width: 100%;
+  -webkit-border-radius: 20rpx;
+          border-radius: 20rpx;
+  margin-top: 30rpx;
+  background-image: -webkit-linear-gradient(45deg, #ff9700, #ed1c24);
+  background-image: linear-gradient(45deg, #ff9700, #ed1c24);
+  color: #ffffff;
+  position: relative;
+  padding: 0 30rpx;
+  line-height: 150rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 24rpx;
+}
+.all .all-calendar .calendar-btn-other .btn-other-right {
+  position: absolute;
+  right: 30rpx;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   background-color: #fff;
+  width: 230rpx;
+  line-height: 60rpx;
+  -webkit-border-radius: 20rpx;
+          border-radius: 20rpx;
+  color: #dd524d;
+  text-align: center;
 }
-.all .all-calendar .bgGray {
-  background-color: rgba(255, 255, 255, 0.42);
-}
-.all .all-calendar .bgBlue {
-  font-size: 28rpx;
-  background-color: #2E3B67;
-  color: #FFFFFF;
-}
-.all .all-calendar .redColor {
-  color: #ff0000;
-}
-.all .all-calendar .TipArea {
-  word-break: break-all;
-  word-wrap: break-word;
-  font-size: 14px;
-  padding: 10px;
-}
-.all .all-calendar .impTip {
-  display: inline-block;
-  color: #ff0000;
+.all .all-calendar .calendar-btn-other .btn-other-right image {
+  width: 35rpx;
+  height: 35rpx;
 }
 .all .calcendar-pos {
   position: fixed;
@@ -212,9 +130,8 @@
   height: 80rpx;
 }
 .all .calcendar-rule {
-  width: 90%;
-  margin: auto;
-  padding-bottom: 30rpx;
+  width: 100%;
+  padding-bottom: 80rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }

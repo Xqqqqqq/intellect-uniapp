@@ -46,7 +46,8 @@
         ,{
             "path" : "pages/myData/train",
             "style" : {
-				"navigationBarTitleText": "本月训练"
+				"navigationBarTitleText": "本月训练",
+				"enablePullDownRefresh": true
 			}
         }
         ,{

@@ -95,6 +95,12 @@ __webpack_require__.r(__webpack_exports__);
 var components = {
   myList: function() {
     return __webpack_require__.e(/*! import() | components/my-list/my-list */ "components/my-list/my-list").then(__webpack_require__.bind(null, /*! @/components/my-list/my-list.vue */ 336))
+  },
+  noData: function() {
+    return __webpack_require__.e(/*! import() | components/no-data/no-data */ "components/no-data/no-data").then(__webpack_require__.bind(null, /*! @/components/no-data/no-data.vue */ 315))
+  },
+  uniLoadMore: function() {
+    return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ 301))
   }
 }
 var render = function() {
@@ -158,65 +164,142 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _uCharts = _interopRequireDefault(__webpack_require__(/*! @/components/u-charts/u-charts.js */ 70));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 336));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _self;var canvaRadar = null;var _default = { components: { MyList: MyList }, data: function data() {return { cWidth: '', cHeight: '', pixelRatio: 1, chartData: { categories: ['英语词根', '少儿基础', '法律元素', '数字图像', '英文前缀'], series: [{ name: '英语词根', // color: '#ffffff',
-          data: [90, 110, 165, 195, 187] }, { name: '少儿基础', data: [190, 210, 105, 35, 27] }, { name: '法律元素', data: [10, 20, 100, 35, 27] },
-        {
-          name: '数字图像',
-          data: [101, 220, 140, 39, 50] },
-        {
-          name: '英文前缀',
-          data: [122, 320, 70, 300, 200] }] },
 
 
-      listdetial: [{
-        src: '../../static/img/icons/common.jpg',
-        title: '数字图像记忆',
-        source: '官方',
-        person: '100',
-        detail: '简介：针对0~100的数字进行图像',
-        date: '2020-10-10',
-        num: 20 },
-      {
-        src: '../../static/img/icons/common.jpg',
-        title: '数字图像记忆',
-        source: '官方',
-        person: '100',
-        detail: '简介：针对0~100的数字进行图像',
-        date: '2020-10-10',
-        num: 20 }] };
+var _uCharts = _interopRequireDefault(__webpack_require__(/*! @/components/u-charts/u-charts.js */ 70));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 336));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
+var _self;
+var canvaRadar = null;var _default =
+{
+  components: {
+    MyList: MyList },
+
+  data: function data() {
+    return {
+      cWidth: '',
+      cHeight: '',
+      pixelRatio: 1,
+      chartData: {
+        categories: [],
+        series: [{
+          data: [] }] },
+
+
+      trainInfo: {},
+      collectsList: [],
+      page: 1,
+      contentText: {
+        contentdown: '查看更多',
+        contentrefresh: '加载中',
+        contentnomore: '- 暂时没有新内容了呢 -' },
+
+      status: 'loading',
+      code: '',
+      memberId: '' };
 
   },
   onLoad: function onLoad() {
     _self = this;
+    this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
     this.cWidth = uni.upx2px(750);
     this.cHeight = uni.upx2px(500);
-    this.getServerData();
+    // this.getServerData();
+    this.getTrainList();
+  },
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.page = 1;
+    this.trainInfo = {};
+    this.collectsList = [];
+    this.chartData.categories = [];
+    this.chartData.series[0].data = [];
+    uni.showLoading({
+      title: '加载中' });
+
+    this.getTrainList();
+    uni.hideLoading();
+  },
+  onReachBottom: function onReachBottom() {
+    if (this.code != '-116') {
+      this.page = this.page + 1;
+      this.chartData.categories = [];
+      this.chartData.series[0].data = [];
+      this.getTrainList();
+    }
   },
   methods: {
+    // 获取本月训练数据列表
+    getTrainList: function getTrainList() {var _this = this;
+      var _self = this;
+      this.$Request.get("/appCollectsController.do?getMonthCollectsList&memberId=".concat(this.memberId, "&page=").concat(this.page)).
+      then(function (res) {
+        _this.code = res.code;
+        _this.trainInfo = res.data;
+        res.data.labelList.forEach(function (item) {
+          _this.chartData.categories.push(item.labelName);
+          _this.chartData.series[0].data.push(item.labelNum);
+        });
+        _self.showRadar("canvasRadar", _this.chartData);
+        if (res.code == 0) {
+          _this.collectsList = [].concat(_toConsumableArray(_this.collectsList), _toConsumableArray(res.data.collectsList)).map(function (item) {
+            return _objectSpread({},
+            item, {
+              studyDate: item.studyDate && item.studyDate.substring(0, 10) });
+
+          });
+        } else if (res.code == '-118' || res.code == '-116') {
+          _this.status = 'noMore';
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
+    showRadar: function showRadar(canvasId, chartData) {
+      canvaRadar = new _uCharts.default({
+        $this: _self,
+        canvasId: canvasId,
+        type: 'radar',
+        fontSize: 11,
+        legend: { show: false },
+        background: '#FFFFFF',
+        pixelRatio: _self.pixelRatio,
+        animation: true,
+        dataLabel: true,
+        categories: chartData.categories,
+        series: chartData.series,
+        width: _self.cWidth * _self.pixelRatio,
+        height: _self.cHeight * _self.pixelRatio,
+        extra: {
+          radar: {
+            max: 100 //雷达数值的最大值
+          } } });
+
+
+    },
+    // 收藏
+    clickAttention: function clickAttention(item, index) {var _this2 = this;
+      var collectsId = item.id;
+      this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(this.memberId, "&collectsId=").concat(collectsId)).
+      then(function (res) {
+        if (res.code == 0) {
+          _this2.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1;
+          _this2.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1;
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
+    gotoListDetail: function gotoListDetail(item) {
+      // console.log('1',item)
+      uni.navigateTo({
+        url: "/pages/train/imageMemory/numEleEntry?id=".concat(item.id) });
+
+    },
     getServerData: function getServerData() {
       var _self = this;
       var Radar = { categories: [], series: [] };
@@ -238,31 +321,6 @@ var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | compo
       // 		_self.tips="网络错误，小程序端请检查合法域名";
       // 	},
       // });
-    },
-    showRadar: function showRadar(canvasId, chartData) {
-      canvaRadar = new _uCharts.default({
-        $this: _self,
-        canvasId: canvasId,
-        type: 'radar',
-        fontSize: 11,
-        legend: { show: true },
-        background: '#FFFFFF',
-        pixelRatio: _self.pixelRatio,
-        animation: true,
-        dataLabel: true,
-        categories: chartData.categories,
-        series: chartData.series,
-        width: _self.cWidth * _self.pixelRatio,
-        height: _self.cHeight * _self.pixelRatio,
-        extra: {
-          radar: {
-            max: 200 //雷达数值的最大值
-          } } });
-
-
-    },
-    gotoListDetail: function gotoListDetail(item) {
-      console.log(item);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
