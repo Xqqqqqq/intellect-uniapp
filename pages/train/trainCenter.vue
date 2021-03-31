@@ -110,6 +110,7 @@
 			});
 			this.getTrainList()
 			uni.hideLoading();
+			uni.stopPullDownRefresh()
 		},
 		onReachBottom(){
 			if (this.code != '-116') {
@@ -132,6 +133,7 @@
 					}).then(res => {
 						this.trainInfo = res.data
 						this.scrollTopList = res.data.groupList
+						this.status = 'noMore'
 						if(res.code == 0){
 							this.collectsList =  [...this.collectsList, ...res.data.collectsList].map(item => {
 								return {

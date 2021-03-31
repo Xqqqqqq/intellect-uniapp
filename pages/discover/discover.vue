@@ -2,7 +2,7 @@
 	<view class="discover">
 		<view class="discover-top">
 			<view class="wrap-select">
-			  <input @input="bindNameInput" v-model="goodsName" 
+			  <input @input="bindNameInput" v-model="articleName" 
 			  type="text" placeholder="请输入搜索内容" placeholder-class="input-placeholder" class="input-length"/>
 			  <view class="search-icon" @click="clickSearch">
 			    <image src="../../static/img/icons/search.png"></image>
@@ -14,30 +14,32 @@
 		</view>
 		
 		<view class="discover-ul">
-			<view class="discover-ul-li" @click="gotoUrl">
+			<view class="discover-ul-li" @click="gotoUrl(item)" v-for="(item, index) in articleList" :key="index">
 				<view class="ul-li-left">
-					<image src='../../static/img/icons/bj.jpg'></image>
-					<view class="ul-li-left-pos">记忆</view>
+					<image :src='item.articleImg'></image>
+					<view class="ul-li-left-pos">{{item.typeName}}</view>
 				</view>
 				<view class="ul-li-right">
-					<view class="li-right-title">标题标题标题标</view>
-					<view class="li-right-author">作者：分手就分手</view>
+					<view class="li-right-title">{{item.articleTitle}}</view>
+					<view class="li-right-author">作者：{{item.articleAuthor || '未知'}}</view>
 					<view class="li-right-bottom">
 						<view class="right-bottom-display">
 							<view class="right-bottom-watch">
-								<image src='../../static/img/icons/watch.png'></image>111
+								<image src='../../static/img/icons/watch.png'></image>{{item.readNum || 0}}
 							</view>
 							<view class="right-bottom-watch">
-								<image src='../../static/img/icons/star1.png'></image>111
+								<image src='../../static/img/icons/star1.png'></image>{{item.attentionNum || 0}}
 							</view>
 							<view class="right-bottom-watch">
-								<image src='../../static/img/icons/book.png'></image>111
+								<image src='../../static/img/icons/book.png'></image>{{item.collectsNum || 0}}
 							</view>
 						</view>
-						<view>2020-09-09</view>
+						<view>{{item.createDate}}</view>
 					</view>
 				</view>
 			</view>
+			<no-data v-if="status == 'noMore' && !articleList.length"></no-data>
+			<uni-load-more class="no-data-more" v-else iconType="circle" :color="'#CCCCCC'" :contentText="contentText" :status="status" />
 		</view>
 	</view>
 </template>
@@ -50,45 +52,115 @@
 		},
 		data() {
 			return {
-				goodsName:'',
 				scrollTopList:[{
-					id:0,
-					name: '推荐',
-				},{
-					id:1,
-					name: '平台',
-				},{
-					id:2,
-					name: '方法',
-				},{
-					id:3,
-					name: '医疗',
-				},{
-					id:4,
-					name: '法律',
-				},{
-					id:3,
-					name: '少儿',
-				},],
+					typeName: '推荐',
+					id: ''
+				}],
 				currentTopTab: 0,
 				beforeColor: '#999999',
 				afterColor: '#ffffff',
+				articleList:[],
+				contentText: {
+					contentdown: '查看更多',
+					contentrefresh: '加载中',
+					contentnomore: '- 暂时没有新内容了呢 -'
+				},
+				status: 'loading',
+				code:'',
+				memberId:'',
+				typeId:'',
+				articleName:'',
+				page:1,
 			}
 		},
+		onPullDownRefresh() {
+			this.page = 1;
+			this.articleList = []
+			this.scrollTopList = [{
+				typeName: '推荐',
+				id: ''
+			}]
+			uni.showLoading({
+				title: '加载中'
+			});
+			this.getTrainList()
+			uni.hideLoading();
+			uni.stopPullDownRefresh()
+		},
+		onReachBottom(){
+			this.scrollTopList = [{
+				typeName: '推荐',
+				id: ''
+			}]
+			if (this.code != '-116') {
+				this.page = this.page + 1;
+				this.getTrainList();
+			}
+		},
+		onShow(){
+			this.page = 1;
+			this.articleList = []
+			this.scrollTopList = [{
+				typeName: '推荐',
+				id: ''
+			}]
+			this.getTrainList()
+		},
 		methods:{
+			// 获取首页数据列表
+			getTrainList(){
+				this.memberId = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).id : ''
+				this.$Request.get('/appArticleController.do?getArticleList',{
+					memberId: this.memberId,
+					typeId: this.typeId,
+					articleName: this.articleName,
+					page: this.page
+				}).then(res => {
+					this.code = res.code
+					this.status = 'noMore'
+					this.scrollTopList = this.scrollTopList.concat(res.data.typeList).map(item => {
+						return {
+							...item,
+							groupName: item.typeName
+						}
+					})
+					if(res.code == 0){
+						this.articleList =  [...this.articleList, ...res.data.articleList].map(item => {
+							return {
+								...item,
+								createDate: item.createDate && item.createDate.substring(0,10)
+							}
+						})
+					}else if(res.code == '-118' || res.code == '-116'){
+						this.status = 'noMore'
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
 			bindNameInput(e){
-				this.goodsName = e.target.value
+				this.articleName = e.target.value
 				console.log(e.target.value)
 			},
 			clickSearch(){
 			},
 			tabChange(item, index){
 				this.currentTopTab = index
-				console.log(item, index)
+				this.typeId = item.id
+				this.articleList = []
+				this.scrollTopList = [{
+					typeName: '推荐',
+					id: ''
+				}]
+				this.page = 1
+				this.getTrainList()
 			},
-			gotoUrl(){
+			gotoUrl(item){
 				uni.navigateTo({
-					url: '/pages/discover/discoverDetail'
+					url: `/pages/discover/discoverDetail?id=${item.id}`
 				})
 			}
 		}
@@ -177,7 +249,8 @@ page{
 					right: 0;
 					background-color: $uni-color-warning;
 					color: #FFFFFF;
-					font-size: 16rpx;
+					font-size: 32rpx;
+					font-weight: bold;
 					text-align: center;
 					height: 45rpx;
 					line-height: 45rpx;

@@ -256,9 +256,6 @@ var _default =
                 uni.navigateBack({
                   delta: 1 });
 
-                // uni.switchTab({
-                // 	url:'/pages/myData/myData'
-                // })
               }, 1000);
             } else if (res.code == 100) {
               // 尚未注册
@@ -274,9 +271,6 @@ var _default =
                     uni.navigateBack({
                       delta: 1 });
 
-                    // uni.switchTab({
-                    // 	url:'/pages/myData/myData'
-                    // })
                   }, 1000);
                 } else {
                   uni.showToast({
@@ -327,8 +321,9 @@ var _default =
       this.wechatLoginMember();
     },
     // 小程序查看是否已经注册过，已注册则可登录
-    wechatLoginMember: function wechatLoginMember() {var _this3 = this;
-      this.$Request.get("/appMemberController.do?loginMember&openid=".concat(uni.getStorageSync('openid'))).then(function (res) {
+    wechatLoginMember: function wechatLoginMember() {
+      var vm = this;
+      vm.$Request.get("/appMemberController.do?loginMember&openid=".concat(uni.getStorageSync('openid'))).then(function (res) {
         if (res.code == 0) {
           // 已注册，可登录
           uni.showToast({
@@ -340,13 +335,10 @@ var _default =
             uni.navigateBack({
               delta: 1 });
 
-            // uni.switchTab({
-            // 	url:'/pages/myData/myData'
-            // })
           }, 1000);
         } else if (res.code == 100) {
           // 尚未注册
-          _this3.$Request.get("/appMemberController.do?registerMember&memberTel=".concat(uni.getStorageSync('phoneNumber'), "&openid=").concat(uni.getStorageSync('openid'))).
+          vm.$Request.get("/appMemberController.do?registerMember&memberTel=".concat(uni.getStorageSync('phoneNumber'), "&openid=").concat(uni.getStorageSync('openid'))).
           then(function (res) {
             if (res.code == 0) {
               uni.showToast({
@@ -358,9 +350,6 @@ var _default =
                 uni.navigateBack({
                   delta: 1 });
 
-                // uni.switchTab({
-                // 	url:'/pages/myData/myData'
-                // })
               }, 1000);
             } else {
               uni.showToast({

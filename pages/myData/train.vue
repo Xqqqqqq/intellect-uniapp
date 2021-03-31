@@ -75,6 +75,7 @@
 			});
 			this.getTrainList()
 			uni.hideLoading();
+			uni.stopPullDownRefresh()
 		},
 		onReachBottom(){
 			if (this.code != '-116') {

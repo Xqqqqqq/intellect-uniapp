@@ -1,6 +1,4 @@
 {
   "navigationBarTitleText": "编辑信息",
-  "usingComponents": {
-    "avatar": "/components/yq-avatar/yq-avatar"
-  }
+  "usingComponents": {}
 }

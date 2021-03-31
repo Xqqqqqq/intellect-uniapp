@@ -2,59 +2,61 @@
 	<view class="edit">
 		<view class="edit-li">
 			<view class="edit-li-left">头像：</view>
-			<view class="edit-li-right" @click="openavatar">
-				<image :src="userImg ? userImg : '../../static/img/icons/common.jpg'"></image>
+			<view class="edit-li-right">
+				<image :src="userInfo.memberPic ? userInfo.memberPic : '../../static/img/icons/unlogin.png'"></image>
 			</view>
 		</view>
 		<view class="edit-li" @click="gotoNickname">
 			<view class="edit-li-left">昵称：</view>
-			<view class="edit-li-right">哈哈 ></view>
+			<view class="edit-li-right">{{userInfo.memberNickname}} ></view>
 		</view>
 		<picker @change="bindSexChange" :value="sexIndex" :range="sexList" range-key="title">
 			<view class="edit-li">
 				<view class="edit-li-left">性别：</view>
-				<view class="edit-li-right">{{sexList[sexIndex].title}} ></view>
+				<view class="edit-li-right">{{sexList[sexIndex+1].title}} ></view>
 			</view>
 		</picker>
 		<view class="edit-btn">保存信息</view>
-		<avatar v-show="avatarShow" selWidth="200px" selHeight="200upx" @upload="myUpload" ref="avatar" avatarStyle="width: 200upx; height: 200upx; border-radius: 100%;">
-		</avatar>
 	</view>
 </template>
 
 <script>
-	import avatar from "@/components/yq-avatar/yq-avatar.vue";
 	export default {
 		components: {
-			avatar
 		},
 		data() {
 			return {
-				userImg:'',
-				avatarShow: false,
 				sexList:[{
-					id:0,
+					id:1,
 					title:'男'
 				},{
-					id:1,
+					id:2,
 					title:'女'
 				},],
-				sexIndex:0
+				sexIndex:0,
+				userInfo:{},
+				memberId:''
 			};
 		},
+		onShow(){
+			this.memberId = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).id : ''
+			this.getMember()
+		},
 		methods:{
-			openavatar(){
-				this.avatarShow = true
-				this.$refs.avatar.fChooseImg(1, {
-					selWidth: "300upx",
-					selHeight: "300upx",
-					expWidth: '260upx',
-					expHeight: '260upx'
-				});
-			},
-			myUpload(rsp) {
-				this.avatarShow = false
-				this.userImg = rsp.base64
+			// 获取我的信息
+			getMember(){
+				this.$Request.get(`/appMemberController.do?getMember&memberId=${this.memberId}`)
+				.then(res => {
+					this.userInfo = res.data.memberVo
+					uni.setStorageSync('userInfo', JSON.stringify(res.data.memberVo))
+					if(res.code == 0 || res.code == 100){
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
 			},
 			bindSexChange(e){
 				this.sexIndex = e.detail.value

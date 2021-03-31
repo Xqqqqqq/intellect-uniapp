@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   ssCalendar: function() {
-    return __webpack_require__.e(/*! import() | components/ss-calendar/ss-calendar */ "components/ss-calendar/ss-calendar").then(__webpack_require__.bind(null, /*! @/components/ss-calendar/ss-calendar.vue */ 350))
+    return __webpack_require__.e(/*! import() | components/ss-calendar/ss-calendar */ "components/ss-calendar/ss-calendar").then(__webpack_require__.bind(null, /*! @/components/ss-calendar/ss-calendar.vue */ 342))
   }
 }
 var render = function() {
@@ -134,7 +134,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var ssCalendar = function ssCalendar() {__webpack_require__.e(/*! require.ensure | components/ss-calendar/ss-calendar */ "components/ss-calendar/ss-calendar").then((function () {return resolve(__webpack_require__(/*! @/components/ss-calendar/ss-calendar.vue */ 350));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var ssCalendar = function ssCalendar() {__webpack_require__.e(/*! require.ensure | components/ss-calendar/ss-calendar */ "components/ss-calendar/ss-calendar").then((function () {return resolve(__webpack_require__(/*! @/components/ss-calendar/ss-calendar.vue */ 342));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
 
 
 
@@ -252,6 +253,20 @@ __webpack_require__.r(__webpack_exports__);
 
       }
       console.log('onSignIn', payload);
+    },
+    // 点击领取能量
+    clickReceive: function clickReceive() {var _this4 = this;
+      this.$Request.postT('/appSignController.do?exchangeOneDayMember', {
+        memberId: this.memberId }).
+      then(function (res) {
+        if (res.code == 0) {
+          _this4.getMemberSignRecord();
+        }
+        uni.showToast({
+          title: res.info,
+          icon: 'none' });
+
+      });
     },
     onPrev: function onPrev(payload) {
       console.log('onPrev', payload);

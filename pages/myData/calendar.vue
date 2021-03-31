@@ -18,7 +18,8 @@
 			</view>
 			<view class="calendar-btn-other">
 				<view class="btn-other-left">1天会员体验</view>
-				<view class="btn-other-right">领取（<image src='../../static/img/icons/shandian.png'></image> X1）</view>
+				<view class="btn-other-right" v-if="trainInfo.ifSign == 0" @click="clickReceive">领取（<image src='../../static/img/icons/shandian.png'></image> X1）</view>
+				<view class="btn-other-right btn-other-right-gray" v-if="trainInfo.ifSign == 1">今日已领完</view>
 			</view>
 			<view class="calcendar-rule">
 				<view class="train-title">
@@ -117,6 +118,20 @@
 			  }
 			  console.log('onSignIn', payload)
 			},
+			// 点击领取能量
+			clickReceive(){
+				this.$Request.postT('/appSignController.do?exchangeOneDayMember',{
+					memberId: this.memberId
+				}).then(res => {
+					if(res.code == 0){
+						this.getMemberSignRecord()
+					}
+					uni.showToast({
+						title: res.info,
+						icon: 'none'
+					})
+				})
+			},
 			onPrev(payload) {
 			  console.log('onPrev', payload)
 			},
@@ -203,6 +218,10 @@
 						width: 35rpx;
 						height: 35rpx;
 					}
+				}
+				.btn-other-right-gray{
+					background-color: $uni-text-color-disable;
+					color: #FFFFFF;
 				}
 			}
 		}

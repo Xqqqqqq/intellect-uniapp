@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   lModal: function() {
-    return __webpack_require__.e(/*! import() | components/l-modal/l-modal */ "components/l-modal/l-modal").then(__webpack_require__.bind(null, /*! @/components/l-modal/l-modal.vue */ 343))
+    return __webpack_require__.e(/*! import() | components/l-modal/l-modal */ "components/l-modal/l-modal").then(__webpack_require__.bind(null, /*! @/components/l-modal/l-modal.vue */ 335))
   }
 }
 var render = function() {
@@ -134,7 +134,10 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var lModal = function lModal() {__webpack_require__.e(/*! require.ensure | components/l-modal/l-modal */ "components/l-modal/l-modal").then((function () {return resolve(__webpack_require__(/*! @/components/l-modal/l-modal.vue */ 343));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var lModal = function lModal() {__webpack_require__.e(/*! require.ensure | components/l-modal/l-modal */ "components/l-modal/l-modal").then((function () {return resolve(__webpack_require__(/*! @/components/l-modal/l-modal.vue */ 335));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
 
 
 
@@ -243,6 +246,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.getMember();
     uni.hideLoading();
+    uni.stopPullDownRefresh();
   },
   methods: {
     // 获取我的信息
@@ -251,6 +255,7 @@ __webpack_require__.r(__webpack_exports__);
       then(function (res) {
         _this.code = res.code;
         _this.userInfo = res.data.memberVo;
+        uni.setStorageSync('userInfo', JSON.stringify(res.data.memberVo));
         if (res.code == 0) {
           _this.userLogin = true;
         } else if (res.code == '100') {

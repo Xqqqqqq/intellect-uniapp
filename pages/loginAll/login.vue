@@ -124,9 +124,6 @@
 									uni.navigateBack({
 										delta:1
 									})
-									// uni.switchTab({
-									// 	url:'/pages/myData/myData'
-									// })
 								},1000)
 							}else if(res.code == 100){
 								// 尚未注册
@@ -142,9 +139,6 @@
 											uni.navigateBack({
 												delta:1
 											})
-											// uni.switchTab({
-											// 	url:'/pages/myData/myData'
-											// })
 										},1000)
 									}else{
 										uni.showToast({
@@ -196,7 +190,8 @@
 			},
 			// 小程序查看是否已经注册过，已注册则可登录
 			wechatLoginMember(){
-				this.$Request.get(`/appMemberController.do?loginMember&openid=${uni.getStorageSync('openid')}`).then(res => {
+				let vm = this
+				vm.$Request.get(`/appMemberController.do?loginMember&openid=${uni.getStorageSync('openid')}`).then(res => {
 					if(res.code == 0){
 						// 已注册，可登录
 						uni.showToast({
@@ -208,13 +203,10 @@
 							uni.navigateBack({
 								delta:1
 							})
-							// uni.switchTab({
-							// 	url:'/pages/myData/myData'
-							// })
 						},1000)
 					}else if(res.code == 100){
 						// 尚未注册
-						this.$Request.get(`/appMemberController.do?registerMember&memberTel=${uni.getStorageSync('phoneNumber')}&openid=${uni.getStorageSync('openid')}`
+						vm.$Request.get(`/appMemberController.do?registerMember&memberTel=${uni.getStorageSync('phoneNumber')}&openid=${uni.getStorageSync('openid')}`
 						).then(res => {
 							if(res.code == 0){
 								uni.showToast({
@@ -226,9 +218,6 @@
 									uni.navigateBack({
 										delta:1
 									})
-									// uni.switchTab({
-									// 	url:'/pages/myData/myData'
-									// })
 								},1000)
 							}else{
 								uni.showToast({

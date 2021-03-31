@@ -1,6 +1,9 @@
 {
   "navigationBarTitleText": "发现更多",
+  "enablePullDownRefresh": true,
   "usingComponents": {
-    "my-scroll-x": "/components/my-scrollX/my-scrollX"
+    "my-scroll-x": "/components/my-scrollX/my-scrollX",
+    "no-data": "/components/no-data/no-data",
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
   }
 }

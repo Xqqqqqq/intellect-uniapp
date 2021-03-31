@@ -94,7 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   myList: function() {
-    return __webpack_require__.e(/*! import() | components/my-list/my-list */ "components/my-list/my-list").then(__webpack_require__.bind(null, /*! @/components/my-list/my-list.vue */ 336))
+    return __webpack_require__.e(/*! import() | components/my-list/my-list */ "components/my-list/my-list").then(__webpack_require__.bind(null, /*! @/components/my-list/my-list.vue */ 328))
+  },
+  noData: function() {
+    return __webpack_require__.e(/*! import() | components/no-data/no-data */ "components/no-data/no-data").then(__webpack_require__.bind(null, /*! @/components/no-data/no-data.vue */ 307))
   }
 }
 var render = function() {
@@ -134,8 +137,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 336));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
-
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 328));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -195,29 +197,66 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   data: function data() {
     return {
       nodes: '',
-      listdetial: [{
-        src: '../../static/img/icons/common.jpg',
-        title: '数字图像记忆',
-        source: '官方',
-        person: '100',
-        detail: '简介：针对0~100的数字进行图像',
-        date: '2020-10-10',
-        num: 20 },
-      {
-        src: '../../static/img/icons/common.jpg',
-        title: '数字图像记忆',
-        source: '官方',
-        person: '100',
-        detail: '简介：针对0~100的数字进行图像',
-        date: '2020-10-10',
-        num: 20 }] };
-
+      articleVo: {},
+      collectsList: [],
+      id: '4028d856788109dc0178811031bc000b',
+      memberId: '',
+      code: '' };
 
   },
+  onLoad: function onLoad(option) {
+    if (option.id) {
+      this.id = option.id;
+    }
+    this.memberId = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).id : '';
+    this.getArticleDetail();
+  },
   methods: {
+    // 获取文章细节
+    getArticleDetail: function getArticleDetail() {var _this = this;
+      this.$Request.get("/appArticleController.do?getArticleDetail&memberId=".concat(this.memberId, "&id=").concat(this.id)).
+      then(function (res) {
+        _this.code = res.code;
+        _this.articleVo = res.data.articleVo;
+        if (res.code == 0) {
+          _this.collectsList = res.data.collectsList.map(function (item) {
+            return _objectSpread({},
+            item, {
+              studyDate: item.studyDate && item.studyDate.substring(0, 10) });
+
+          });
+        } else if (res.code == '-118') {
+          _this.status = 'noMore';
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
     gotoListDetail: function gotoListDetail(item) {
-      console.log(item);
+      uni.navigateTo({
+        url: "/pages/train/imageMemory/numEleEntry?id=".concat(item.id) });
+
+    },
+    // 收藏
+    clickAttention: function clickAttention(item, index) {var _this2 = this;
+      var collectsId = item.id;
+      this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(this.memberId, "&collectsId=").concat(collectsId)).
+      then(function (res) {
+        if (res.code == 0) {
+          _this2.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1;
+          _this2.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1;
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

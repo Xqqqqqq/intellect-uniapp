@@ -15,7 +15,6 @@
     "pages/train/imageMemory/numImgPair",
     "pages/train/imageMemory/numImgTestOver",
     "pages/mine/superMember",
-    "pages/mine/commonMember",
     "pages/mine/energy",
     "pages/mine/cardVoucher",
     "pages/myData/share",
@@ -82,5 +81,5 @@
     "uni-popup": "/components/uni-popup/uni-popup",
     "no-data": "/components/no-data/no-data"
   },
-  "sitemapLocation": "sitemap7.json"
+  "sitemapLocation": "sitemap99.json"
 }

@@ -10,7 +10,7 @@
 			<view class="wrap-top-btn" @click="gotoHistory">历史充值</view>
 		</view>
 		<view class="member-price">
-			<view class="member-price-title">请选择开通时长</view>
+			<view class="member-price-title">请选择开通时长<text>（注：时间累加-可重复购买）</text></view>
 			<scroll-view scroll-x="true" class="member-price-scroll">
 				<view class="member-price-scroll-li"  @tap="clickPriceTab(index,item)"
 				 :class="{'memory-scroll-li-active':currentPriceTab == index}"
@@ -156,6 +156,10 @@
 			color: #333333;
 			font-weight: bold;
 			margin-bottom: 30rpx;
+			text{
+				color: #999;
+				font-size: 24rpx;
+			}
 		}
 		.member-price-scroll{
 			width: 100%;

@@ -59,9 +59,7 @@
 				urls: [],
 				urlImgIndex: 0,
 				showAvatar: false,
-				imageData: [
-				
-				],
+				imageData: [],
 			};
 		},
 		methods:{

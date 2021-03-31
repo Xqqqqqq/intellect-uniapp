@@ -5,21 +5,24 @@
 		</view>
 		<view class="mine-top">
 			<template v-if="userLogin">
-				<view class="mine-top-left">
+				<view class="mine-top-left" @click="gotoUrl('/pages/mine/editUserInfo')">
 					<image :src="userInfo.memberPic || '../../static/img/icons/unlogin.png'"></image>
 				</view>
 				<view class="mine-top-right" @click="gotoUrl('/pages/mine/editUserInfo')">
-					<view class="top-right-name">{{userInfo.memberNickname}}</view>
+					<view class="top-right-name">
+						<image v-if="userInfo.isVip == 1" src='../../static/img/icons/vip-yellow.png'></image>
+						{{userInfo.memberNickname}}
+					</view>
 					<view class="top-right-date" v-if="userInfo.isVip == 1">兰盾会员剩余时间：{{userInfo.vipDays}}天</view>
-					<view class="top-right-btn bg-gradual-orange text-center shadow-blur" 
-					v-if="userInfo.isVip == 0" @click="gotoUrl('/pages/mine/commonMember')">普通成员</view>
+					<view class="top-right-btn shadow-blur" v-if="userInfo.isVip == 0">普通会员</view>
 				</view>
 				<view class="mine-top-pos" v-if="userInfo.isVip == 0" @click="gotoUrl('/pages/mine/superMember')">
 					<image class="top-pos-img" src='../../static/img/icons/vip.png'></image>
 					兰盾会员
 				</view>
 				<view class="mine-top-pos" v-if="userInfo.isVip == 1" @click="gotoUrl('/pages/mine/superMember')">
-					立即充值
+					<image class="top-pos-img" src='../../static/img/icons/vip.png'></image>
+					会员充值
 				</view>
 			</template>
 			<template v-else>
@@ -107,6 +110,7 @@
 			});
 			this.getMember()
 			uni.hideLoading();
+			uni.stopPullDownRefresh()
 		},
 		methods: {
 			// 获取我的信息
@@ -115,6 +119,7 @@
 				.then(res => {
 					this.code = res.code
 					this.userInfo = res.data.memberVo
+					uni.setStorageSync('userInfo', JSON.stringify(res.data.memberVo))
 					if(res.code == 0){
 						this.userLogin = true
 					}else if(res.code == '100'){
@@ -225,6 +230,26 @@
 			width: 100%;
 		}
 	}
+	.shadow-blur {
+		position: relative;
+	}
+	
+	.shadow-blur::before {
+		content: "";
+		display: block;
+		background: inherit;
+		filter: blur(10upx);
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 10upx;
+		left: 10upx;
+		z-index: -1;
+		opacity: 0.4;
+		transform-origin: 0 0;
+		border-radius: inherit;
+		transform: scale(1, 1);
+	}
 	.title-box{
 		width: 100%;
 		display: flex;
@@ -261,7 +286,7 @@
 			border-radius: 50%;
 			overflow: hidden;
 			border: 4rpx solid #FFFFFF;
-			margin-right: 40rpx;
+			margin-right: 30rpx;
 			image{
 				width: 100%;
 				height: 100%;
@@ -275,9 +300,26 @@
 			.top-right-name{
 				font-weight: bold;
 				font-size: 36rpx;
+				max-width: 320rpx;
+				overflow:hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				image{
+					width: 40rpx;
+					height: 40rpx;
+					margin-right: 10rpx;
+				}
 			}
 			.top-right-date{
-				font-size: 28rpx;
+				text-align: center;
+				height: 45rpx;
+				line-height: 45rpx;
+				padding: 0 20rpx;
+				box-sizing: border-box;
+				border-radius: 50rpx;
+				font-size: 24rpx;
+				background-color: #e54d42;
+				color: #fff;
 			}
 			.top-right-btn{
 				text-align: center;
@@ -287,6 +329,9 @@
 				box-sizing: border-box;
 				border-radius: 50rpx;
 				font-size: 24rpx;
+				color: #8799a3;
+				background-color: #e7ebed;
+				width: 180rpx;
 			}
 		}
 		.mine-top-pos{

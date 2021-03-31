@@ -56,14 +56,26 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/mine/mine",
-          "pathName": "pages/mine/mine",
+          "name": "pages/mine/editUserInfo",
+          "pathName": "pages/mine/editUserInfo",
           "query": "",
           "scene": null
         },
         {
-          "name": "pages/train/imageMemory/numImgCard",
-          "pathName": "pages/train/imageMemory/numImgCard",
+          "name": "pages/mine/editNickname",
+          "pathName": "pages/mine/editNickname",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/discover/discover",
+          "pathName": "pages/discover/discover",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/discover/discoverDetail",
+          "pathName": "pages/discover/discoverDetail",
           "query": "",
           "scene": null
         },

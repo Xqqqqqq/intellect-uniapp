@@ -94,19 +94,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   topInput: function() {
-    return __webpack_require__.e(/*! import() | components/top-input/top-input */ "components/top-input/top-input").then(__webpack_require__.bind(null, /*! @/components/top-input/top-input.vue */ 322))
+    return __webpack_require__.e(/*! import() | components/top-input/top-input */ "components/top-input/top-input").then(__webpack_require__.bind(null, /*! @/components/top-input/top-input.vue */ 314))
   },
   myScrollX: function() {
-    return __webpack_require__.e(/*! import() | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then(__webpack_require__.bind(null, /*! @/components/my-scrollX/my-scrollX.vue */ 329))
+    return __webpack_require__.e(/*! import() | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then(__webpack_require__.bind(null, /*! @/components/my-scrollX/my-scrollX.vue */ 321))
   },
   myList: function() {
-    return __webpack_require__.e(/*! import() | components/my-list/my-list */ "components/my-list/my-list").then(__webpack_require__.bind(null, /*! @/components/my-list/my-list.vue */ 336))
+    return __webpack_require__.e(/*! import() | components/my-list/my-list */ "components/my-list/my-list").then(__webpack_require__.bind(null, /*! @/components/my-list/my-list.vue */ 328))
   },
   noData: function() {
-    return __webpack_require__.e(/*! import() | components/no-data/no-data */ "components/no-data/no-data").then(__webpack_require__.bind(null, /*! @/components/no-data/no-data.vue */ 315))
+    return __webpack_require__.e(/*! import() | components/no-data/no-data */ "components/no-data/no-data").then(__webpack_require__.bind(null, /*! @/components/no-data/no-data.vue */ 307))
   },
   uniLoadMore: function() {
-    return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ 301))
+    return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ 293))
   }
 }
 var render = function() {
@@ -146,7 +146,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var myScrollX = function myScrollX() {__webpack_require__.e(/*! require.ensure | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then((function () {return resolve(__webpack_require__(/*! @/components/my-scrollX/my-scrollX.vue */ 329));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var TopInput = function TopInput() {__webpack_require__.e(/*! require.ensure | components/top-input/top-input */ "components/top-input/top-input").then((function () {return resolve(__webpack_require__(/*! @/components/top-input/top-input.vue */ 322));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 336));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var myScrollX = function myScrollX() {__webpack_require__.e(/*! require.ensure | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then((function () {return resolve(__webpack_require__(/*! @/components/my-scrollX/my-scrollX.vue */ 321));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var TopInput = function TopInput() {__webpack_require__.e(/*! require.ensure | components/top-input/top-input */ "components/top-input/top-input").then((function () {return resolve(__webpack_require__(/*! @/components/top-input/top-input.vue */ 314));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 328));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -198,25 +198,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       showClassify: false,
-      scrollTopList: [{
-        id: 0,
-        name: '无分类' },
-      {
-        id: 1,
-        name: '英语' },
-      {
-        id: 2,
-        name: '记忆' },
-      {
-        id: 3,
-        name: '医疗' },
-      {
-        id: 4,
-        name: '法律' },
-      {
-        id: 3,
-        name: '少儿' }],
-
+      scrollTopList: [],
       currentTopTab: 0,
       beforeColor: '#666666',
       afterColor: '#2E3B67',
@@ -243,6 +225,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.getTrainList();
     uni.hideLoading();
+    uni.stopPullDownRefresh();
   },
   onReachBottom: function onReachBottom() {
     if (this.code != '-116') {
@@ -261,6 +244,7 @@ __webpack_require__.r(__webpack_exports__);
         this.$Request.get("/appCollectsController.do?getTrainList&memberId=".concat(memberId, "&page=").concat(this.page, "&type=1&groupId")).then(function (res) {
           _this.code = res.code;
           _this.trainInfo = res.data;
+          _this.status = 'noMore';
           if (res.code == 0) {
             _this.collectsList = [].concat(_toConsumableArray(_this.collectsList), _toConsumableArray(res.data.collectsList)).map(function (item) {
               return _objectSpread({},

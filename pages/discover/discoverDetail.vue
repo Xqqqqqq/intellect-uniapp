@@ -1,24 +1,23 @@
 <template>
 	<view class="detail">
 		<view class="detail-top">
-			<view class="detail-top-title">
-				标题标题标题标题标题标题标题标题标题标题标题标题标题标题
-			</view>
+			<view class="detail-top-title">{{articleVo.articleTitle}}</view>
 			<view class="detail-top-info">
-				<view>作者：方式</view>
-				<view>2020-09-09</view>
+				<view>作者：{{articleVo.articleAuthor || '未知'}}</view>
+				<view>{{articleVo.createDate}}</view>
 			</view>
-			<view class="detail-top-picker">
+			<!-- <view class="detail-top-picker">
 				<view>当前分组：无分组</view>
 				<picker>更多 ></picker>
-			</view>
+			</view> -->
 		</view>
 		<view class="detail-content">
-			<image src="../../static/img/icons/zhongjiang.png"></image>
-			<rich-text :nodes="nodes"></rich-text>
+			<image :src="articleVo.articleImg"></image>
+			<rich-text :nodes="articleVo.content"></rich-text>
 		</view>
 		<view class="detail-ul">
-			<my-list :myList="listdetial" @gotoUrl="gotoListDetail"></my-list>
+			<my-list :myList="collectsList" @gotoUrl="gotoListDetail" @clickAttention="clickAttention"></my-list>
+			<no-data v-if="status == 'noMore' && !collectsList.length"></no-data>
 		</view>
 		<view class="detail-bottom">
 			<view class="detail-bottom-li detail-bottom-li-gray">取消全部收藏</view>
@@ -26,21 +25,21 @@
 		</view>
 		<view class="detail-btn">
 			<view class="detail-btn-li">
-				<view class="btn-li-num">1.1k</view>
+				<view class="btn-li-num">{{articleVo.thumbNum}}</view>
 				<view class="btn-li-img">
 					<image src='../../static/img/icons/youyong.png'></image>
 				</view>
 				<view class="btn-li-title">有用</view>
 			</view>
 			<view class="detail-btn-li">
-				<view class="btn-li-num">1.1k</view>
+				<view class="btn-li-num">{{articleVo.unThumbNum}}</view>
 				<view class="btn-li-img">
 					<image src='../../static/img/icons/wuyong.png'></image>
 				</view>
 				<view class="btn-li-title">无用</view>
 			</view>
 			<view class="detail-btn-li">
-				<view class="btn-li-num">1.1k</view>
+				<view class="btn-li-num">{{articleVo.attentionNum}}</view>
 				<view class="btn-li-img">
 					<image src='../../static/img/icons/shoucang2.png'></image>
 				</view>
@@ -59,29 +58,65 @@
 		data() {
 			return {
 				nodes: '',
-				listdetial:[{
-					src:'../../static/img/icons/common.jpg',
-					title: '数字图像记忆',
-					source: '官方',
-					person: '100',
-					detail: '简介：针对0~100的数字进行图像',
-					date: '2020-10-10',
-					num: 20
-				},{
-					src:'../../static/img/icons/common.jpg',
-					title: '数字图像记忆',
-					source: '官方',
-					person: '100',
-					detail: '简介：针对0~100的数字进行图像',
-					date: '2020-10-10',
-					num: 20
-				}],
+				articleVo:{},
+				collectsList:[],
+				id:'4028d856788109dc0178811031bc000b',
+				memberId: '',
+				code:'',
 			};
 		},
-		methods:{
-			gotoListDetail(item){
-				console.log(item)
+		onLoad(option){
+			if(option.id){
+				this.id = option.id
 			}
+			this.memberId = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).id : ''
+			this.getArticleDetail()
+		},
+		methods:{
+			// 获取文章细节
+			getArticleDetail(){
+				this.$Request.get(`/appArticleController.do?getArticleDetail&memberId=${this.memberId}&id=${this.id}`)
+				.then(res => {
+					this.code = res.code
+					this.articleVo = res.data.articleVo
+					if(res.code == 0){
+						this.collectsList =  res.data.collectsList.map(item => {
+							return {
+								...item,
+								studyDate: item.studyDate && item.studyDate.substring(0,10)
+							}
+						})
+					}else if(res.code == '-118'){
+						this.status = 'noMore'
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			gotoListDetail(item){
+				uni.navigateTo({
+					url: `/pages/train/imageMemory/numEleEntry?id=${item.id}`
+				})
+			},
+			// 收藏
+			clickAttention(item, index){
+				let collectsId = item.id
+				this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${this.memberId}&collectsId=${collectsId}`)
+				.then(res => {
+					if(res.code == 0){
+						this.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1
+						this.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
 		}
 	}
 </script>

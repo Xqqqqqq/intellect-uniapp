@@ -103,7 +103,7 @@
 		}
 		.box-right-line{
 			width: 100%;
-			height: 1rpx;
+			height: 2rpx;
 			background-color: #F0F0F0;
 			margin-top: 10rpx;
 			margin-bottom: 10rpx;

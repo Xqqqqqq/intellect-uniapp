@@ -50,25 +50,7 @@
 		data() {
 			return {
 				showClassify: false,
-				scrollTopList:[{
-					id:0,
-					name: '无分类',
-				},{
-					id:1,
-					name: '英语',
-				},{
-					id:2,
-					name: '记忆',
-				},{
-					id:3,
-					name: '医疗',
-				},{
-					id:4,
-					name: '法律',
-				},{
-					id:3,
-					name: '少儿',
-				},],
+				scrollTopList:[],
 				currentTopTab: 0,
 				beforeColor: '#666666',
 				afterColor: '#2E3B67',
@@ -95,6 +77,7 @@
 			});
 			this.getTrainList()
 			uni.hideLoading();
+			uni.stopPullDownRefresh()
 		},
 		onReachBottom(){
 			if (this.code != '-116') {
@@ -113,6 +96,7 @@
 					this.$Request.get(`/appCollectsController.do?getTrainList&memberId=${memberId}&page=${this.page}&type=1&groupId`).then(res => {
 						this.code = res.code
 						this.trainInfo = res.data
+						this.status = 'noMore'
 						if(res.code == 0){
 							this.collectsList =  [...this.collectsList, ...res.data.collectsList].map(item => {
 								return {

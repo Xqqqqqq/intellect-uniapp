@@ -94,7 +94,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   myScrollX: function() {
-    return __webpack_require__.e(/*! import() | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then(__webpack_require__.bind(null, /*! @/components/my-scrollX/my-scrollX.vue */ 329))
+    return __webpack_require__.e(/*! import() | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then(__webpack_require__.bind(null, /*! @/components/my-scrollX/my-scrollX.vue */ 321))
+  },
+  noData: function() {
+    return __webpack_require__.e(/*! import() | components/no-data/no-data */ "components/no-data/no-data").then(__webpack_require__.bind(null, /*! @/components/no-data/no-data.vue */ 307))
+  },
+  uniLoadMore: function() {
+    return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ 293))
   }
 }
 var render = function() {
@@ -134,7 +140,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var myScrollX = function myScrollX() {__webpack_require__.e(/*! require.ensure | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then((function () {return resolve(__webpack_require__(/*! @/components/my-scrollX/my-scrollX.vue */ 329));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var myScrollX = function myScrollX() {__webpack_require__.e(/*! require.ensure | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then((function () {return resolve(__webpack_require__(/*! @/components/my-scrollX/my-scrollX.vue */ 321));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
 
 
 
@@ -186,45 +194,115 @@ __webpack_require__.r(__webpack_exports__);
 
   data: function data() {
     return {
-      goodsName: '',
       scrollTopList: [{
-        id: 0,
-        name: '推荐' },
-      {
-        id: 1,
-        name: '平台' },
-      {
-        id: 2,
-        name: '方法' },
-      {
-        id: 3,
-        name: '医疗' },
-      {
-        id: 4,
-        name: '法律' },
-      {
-        id: 3,
-        name: '少儿' }],
+        typeName: '推荐',
+        id: '' }],
 
       currentTopTab: 0,
       beforeColor: '#999999',
-      afterColor: '#ffffff' };
+      afterColor: '#ffffff',
+      articleList: [],
+      contentText: {
+        contentdown: '查看更多',
+        contentrefresh: '加载中',
+        contentnomore: '- 暂时没有新内容了呢 -' },
+
+      status: 'loading',
+      code: '',
+      memberId: '',
+      typeId: '',
+      articleName: '',
+      page: 1 };
 
   },
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.page = 1;
+    this.articleList = [];
+    this.scrollTopList = [{
+      typeName: '推荐',
+      id: '' }];
+
+    uni.showLoading({
+      title: '加载中' });
+
+    this.getTrainList();
+    uni.hideLoading();
+    uni.stopPullDownRefresh();
+  },
+  onReachBottom: function onReachBottom() {
+    this.scrollTopList = [{
+      typeName: '推荐',
+      id: '' }];
+
+    if (this.code != '-116') {
+      this.page = this.page + 1;
+      this.getTrainList();
+    }
+  },
+  onShow: function onShow() {
+    this.page = 1;
+    this.articleList = [];
+    this.scrollTopList = [{
+      typeName: '推荐',
+      id: '' }];
+
+    this.getTrainList();
+  },
   methods: {
+    // 获取首页数据列表
+    getTrainList: function getTrainList() {var _this = this;
+      this.memberId = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).id : '';
+      this.$Request.get('/appArticleController.do?getArticleList', {
+        memberId: this.memberId,
+        typeId: this.typeId,
+        articleName: this.articleName,
+        page: this.page }).
+      then(function (res) {
+        _this.code = res.code;
+        _this.status = 'noMore';
+        _this.scrollTopList = _this.scrollTopList.concat(res.data.typeList).map(function (item) {
+          return _objectSpread({},
+          item, {
+            groupName: item.typeName });
+
+        });
+        if (res.code == 0) {
+          _this.articleList = [].concat(_toConsumableArray(_this.articleList), _toConsumableArray(res.data.articleList)).map(function (item) {
+            return _objectSpread({},
+            item, {
+              createDate: item.createDate && item.createDate.substring(0, 10) });
+
+          });
+        } else if (res.code == '-118' || res.code == '-116') {
+          _this.status = 'noMore';
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
     bindNameInput: function bindNameInput(e) {
-      this.goodsName = e.target.value;
+      this.articleName = e.target.value;
       console.log(e.target.value);
     },
     clickSearch: function clickSearch() {
     },
     tabChange: function tabChange(item, index) {
       this.currentTopTab = index;
-      console.log(item, index);
+      this.typeId = item.id;
+      this.articleList = [];
+      this.scrollTopList = [{
+        typeName: '推荐',
+        id: '' }];
+
+      this.page = 1;
+      this.getTrainList();
     },
-    gotoUrl: function gotoUrl() {
+    gotoUrl: function gotoUrl(item) {
       uni.navigateTo({
-        url: '/pages/discover/discoverDetail' });
+        url: "/pages/discover/discoverDetail?id=".concat(item.id) });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

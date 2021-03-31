@@ -15,7 +15,8 @@
         ,{
             "path" : "pages/discover/discover",
             "style" : {
-				"navigationBarTitleText": "发现更多"
+				"navigationBarTitleText": "发现更多",
+				"enablePullDownRefresh": true
 			}
         }
 		,{
@@ -96,12 +97,6 @@
             "path" : "pages/mine/superMember",
             "style" : {
 				"navigationBarTitleText": "兰盾超级会员"
-			}
-        }
-        ,{
-            "path" : "pages/mine/commonMember",
-            "style" : {
-				"navigationBarTitleText": "普通会员"
 			}
         }
         ,{

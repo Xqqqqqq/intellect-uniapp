@@ -113,6 +113,10 @@
   width: 35rpx;
   height: 35rpx;
 }
+.all .all-calendar .calendar-btn-other .btn-other-right-gray {
+  background-color: #c0c0c0;
+  color: #FFFFFF;
+}
 .all .calcendar-pos {
   position: fixed;
   right: 24rpx;
