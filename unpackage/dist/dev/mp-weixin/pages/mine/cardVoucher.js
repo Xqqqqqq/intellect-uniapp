@@ -130,7 +130,17 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -183,8 +193,10 @@ var _default =
         name: '历史卡券' }],
 
       currentTab: 0,
-      showH5: true };
-
+      showH5: true,
+      cardList: [], //可用卡券
+      wasteCardList: [] //历史卡券
+    };
   },
   onShow: function onShow() {
     if (navigator) {
@@ -192,11 +204,39 @@ var _default =
     } else {
       this.showH5 = false;
     }
+    this.getCardList();
   },
   methods: {
+    // 获取当前页面的信息
+    getCardList: function getCardList() {var _this = this;
+      this.openid = uni.getStorageSync('openid') ? uni.getStorageSync('openid') : '';
+      this.$Request.get("/appCardController.do?getCardList&openid=".concat(this.openid)).
+      then(function (res) {
+        if (res.code == 0) {
+          _this.cardList = res.data.cardList.map(function (item) {
+            return _objectSpread({},
+            item, {
+              expiresDate: item.expiresDate && item.expiresDate.substring(0, 10) });
+
+          });
+          _this.wasteCardList = res.data.wasteCardList.map(function (item) {
+            return _objectSpread({},
+            item, {
+              useDate: item.useDate && item.useDate.substring(0, 10) });
+
+          });
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
     clickTab: function clickTab(index) {
       this.currentTab = index;
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

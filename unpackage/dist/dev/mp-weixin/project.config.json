@@ -56,8 +56,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/mine/superMember",
-          "pathName": "pages/mine/superMember",
+          "name": "pages/mine/cardVoucher",
+          "pathName": "pages/mine/cardVoucher",
           "scene": null
         }
       ]

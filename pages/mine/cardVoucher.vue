@@ -6,32 +6,42 @@
 			v-for="(item, index) in tabList" :key="index">{{item.name}}</view>
 		</view>
 		
-		<view class="card-ul">
-			<view class="card-ul-li">
-				<view class="card-ul-li-left">3<text>点能量</text></view>
+		<view class="card-ul" v-if="currentTab == 0">
+			<view class="card-ul-li" v-for="(item, index) in cardList" :key="index">
+				<view class="card-ul-li-left">
+					{{item.cardValue}}
+					<text v-if="item.cardType == 2">点能量</text>
+					<text v-if="item.cardType == 1">元</text>
+				</view>
 				<view class="card-ul-li-content">
 					<image src='../../static/img/icons/red.png'></image>
 				</view>
 				<view class="card-ul-li-right">
 					<view class="ul-li-right-title">
-						<image src="../../static/img/icons/leiji.png"></image>
-						新人能量券
+						<image :src="item.cardPic"></image>
+						{{item.cardName}}
 					</view>
-					<view class="ul-li-right-status">到期时间：2020-10-10</view>
+					<view class="ul-li-right-status">到期时间：{{item.expiresDate}}</view>
 				</view>
 				<view class="card-ul-li-btn">立即领取</view>
 			</view>
-			<view class="card-ul-li">
-				<view class="card-ul-li-left">3<text>元</text></view>
+		</view>
+		<view class="card-ul" v-if="currentTab == 1">
+			<view class="card-ul-li" v-for="(item, index) in wasteCardList" :key="index">
+				<view class="card-ul-li-left">
+					{{item.cardValue}}
+					<text v-if="item.cardType == 2">点能量</text>
+					<text v-if="item.cardType == 1">元</text>
+				</view>
 				<view class="card-ul-li-content">
 					<image src='../../static/img/icons/red.png'></image>
 				</view>
 				<view class="card-ul-li-right">
 					<view class="ul-li-right-title">
-						<image src="../../static/img/icons/leiji.png"></image>
-						新人能量券
+						<image :src="item.cardPic"></image>
+						{{item.cardName}}
 					</view>
-					<view class="ul-li-right-status">到期时间：2020-10-10</view>
+					<view class="ul-li-right-status">使用时间：{{item.useDate}}</view>
 				</view>
 				<view class="card-ul-li-btn card-ul-li-btn-other">已兑换</view>
 			</view>
@@ -52,6 +62,8 @@
 				}],
 				currentTab:0,
 				showH5: true,
+				cardList:[],//可用卡券
+				wasteCardList: [], //历史卡券
 			};
 		},
 		onShow(){
@@ -60,8 +72,35 @@
 			}else{
 				this.showH5 = false
 			}
+			this.getCardList()
 		},
 		methods:{
+			// 获取当前页面的信息
+			getCardList(){
+				this.openid = uni.getStorageSync('openid') ? uni.getStorageSync('openid') : ''
+				this.$Request.get(`/appCardController.do?getCardList&openid=${this.openid}`)
+				.then(res => {
+					if(res.code == 0){
+						this.cardList = res.data.cardList.map(item => {
+							return {
+								...item,
+								expiresDate: item.expiresDate && item.expiresDate.substring(0,10)
+							}
+						})
+						this.wasteCardList = res.data.wasteCardList.map(item => {
+							return {
+								...item,
+								useDate: item.useDate && item.useDate.substring(0,10)
+							}
+						})
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
 			clickTab(index){
 				this.currentTab = index
 			}
