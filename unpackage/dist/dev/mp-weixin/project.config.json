@@ -44,17 +44,23 @@
   "appid": "wx34bbf246a8e3e2ba",
   "projectname": "intellect-uniapp",
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
+    "plugin": {
       "list": []
     },
     "game": {
       "list": []
     },
-    "miniprogram": {
+    "gamePlugin": {
       "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/mine/superMember",
+          "pathName": "pages/mine/superMember",
+          "scene": null
+        }
+      ]
     }
   }
 }

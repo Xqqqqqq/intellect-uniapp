@@ -117,7 +117,7 @@
   font-weight: bold;
 }
 .super-member .member-price .member-price-scroll .member-price-scroll-li .price-scroll-li-price {
-  font-size: 75rpx;
+  font-size: 70rpx;
   margin-bottom: 15rpx;
   font-weight: bold;
 }
@@ -166,12 +166,15 @@
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  top: -6%;
+  top: -10%;
   height: 80rpx;
   line-height: 80rpx;
   width: 280rpx;
   font-weight: bold;
   font-size: 30rpx;
+  background-image: -webkit-linear-gradient(45deg, #ff9700, #ed1c24);
+  background-image: linear-gradient(45deg, #ff9700, #ed1c24);
+  color: #ffffff;
 }
 .super-member .member-price-detail .price-detail-li {
   display: -webkit-box;

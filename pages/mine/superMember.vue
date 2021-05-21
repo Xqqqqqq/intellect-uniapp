@@ -3,7 +3,8 @@
 		<view class="wrap-top">
 			<view class="wrap-top-box">
 				<view class="top-box-li">
-					<view class="top-box-li-title">当前：普通会员（无限期）</view>
+					<view class="top-box-li-title" v-if="memberInfo.vipDay == 0">当前：普通会员（无限期）</view>
+					<view class="top-box-li-title" style="color: #f0ad4e;" v-else>当前：VIP兰盾会员（{{memberInfo.vipDay}}天）</view>
 				</view>
 			</view>
 			<view class="wrap-top-tip">碎片化时间加强思维能力</view>
@@ -14,32 +15,32 @@
 			<scroll-view scroll-x="true" class="member-price-scroll">
 				<view class="member-price-scroll-li"  @tap="clickPriceTab(index,item)"
 				 :class="{'memory-scroll-li-active':currentPriceTab == index}"
-				v-for="(item, index) in scrollPriceList" :key="index">
-					<view class="price-scroll-li-name">{{item.name}}</view>
-					<view class="price-scroll-li-price"><text>￥</text>{{item.price}}</view>
-					<view class="price-scroll-li-origin" v-if="item.originPrice">原价：￥{{item.originPrice}}</view>
-					<view class="price-scroll-li-origin" v-else>原价：￥{{item.price}}</view>
-					<view class="price-scroll-li-date">有效期:{{item.date}}天</view>
+				v-for="(item, index) in memberInfo.vipValueList" :key="index">
+					<view class="price-scroll-li-name">{{item.vipName}}</view>
+					<view class="price-scroll-li-price"><text>￥</text>{{item.truePrice}}</view>
+					<view class="price-scroll-li-origin" v-if="item.vipPrice">原价：￥{{item.vipPrice}}</view>
+					<view class="price-scroll-li-origin" v-else>原价：￥{{item.truePrice}}</view>
+					<view class="price-scroll-li-date">有效期:{{item.vipDays}}天</view>
 					<image src="../../static/img/icons/VIP@2x.png"></image>
 				</view>
 			</scroll-view>
 		</view>
-		<picker>
+		<picker @change="bindMoneyChange" :value="moneyIndex" :range="memberInfo.cardList" range-key="cardName">
 			<view class="member-picker">
 				<view class="member-picker-left">优惠折扣</view>
-				<view class="member-picker-right">-5元 ></view>
+				<view class="member-picker-right">-{{memberInfo.cardList[moneyIndex].cardName}} ></view>
 			</view>
 		</picker>
 		<view class="member-price-detail">
-			<view class="price-detail-title bg-gradual-orange shadow-blur">会员权益</view>
-			<view class="price-detail-li" v-for="(item, index) in detailList" :key="index">
+			<view class="price-detail-title">会员权益</view>
+			<view class="price-detail-li" v-for="(item, index) in memberInfo.declareList" :key="index">
 				<view class="detail-li-left">{{index+1}}</view>
-				<view class="detail-li-right">{{item}}</view>
+				<view class="detail-li-right">{{item.declareName}}</view>
 			</view>
 		</view>
 		<view class="member-price-btn">
-			<text class="price-btn-sign">￥</text>{{scrollInfo.price}}
-			<text class="price-btn-through" v-if="scrollInfo.sign">（折扣：{{scrollInfo.sign}}）</text>
+			<text class="price-btn-sign">￥</text>{{scrollInfo.truePrice}}
+			<text class="price-btn-through" v-if="scrollInfo.vipDiscount">（折扣：{{scrollInfo.vipDiscount}}）</text>
 		</view>
 	</view>
 </template>
@@ -48,42 +49,33 @@
 	export default {
 		data() {
 			return {
-				scrollPriceList:[{
-					id:0,
-					name: '试用版',
-					price: 19.9,
-					originPrice: null,
-					sign: null,
-					date: '30'
-				},{
-					id:1,
-					name: '思维训练',
-					price: 199,
-					originPrice: 200,
-					sign: '8折',
-					date: '180'
-				},{
-					id:2,
-					name: '武装大脑',
-					price: 1999,
-					originPrice: 2000,
-					sign: '6折',
-					date: '365'
-				}],
+				openid: '',
+				memberInfo:{},
+				scrollInfo:{}, //所选钱数
 				currentPriceTab: 0,
-				detailList:[
-					'普通训练全开通',
-					'会员转享训练全开通',
-					'自动签到攒能量',
-					'赛事排名参与权限',
-				],
-				scrollInfo:{}
+				moneyIndex: 0, //优惠钱数下标
 			};
 		},
-		mounted(){
-			this.scrollInfo = this.scrollPriceList[0]
+		onShow(){
+			this.getVipPage()
 		},
 		methods:{
+			// 获取当前页面的信息
+			getVipPage(){
+				this.openid = uni.getStorageSync('openid') ? uni.getStorageSync('openid') : ''
+				this.$Request.get(`/appVipController.do?getVipPage&openid=${this.openid}`)
+				.then(res => {
+					if(res.code == 0){
+						this.memberInfo = res.data
+						this.scrollInfo = res.data.vipValueList[0]
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
 			// 导航切换
 			clickPriceTab(index, item) {
 				if (this.currentPriceTab == index) {
@@ -92,6 +84,10 @@
 					this.currentPriceTab = index
 					this.scrollInfo = item
 				}
+			},
+			bindMoneyChange(e){
+				console.log(e.detail)
+				this.moneyIndex = e.detail.value
 			},
 			gotoHistory(){
 				uni.navigateTo({
@@ -181,7 +177,7 @@
 					font-weight: bold;
 				}
 				.price-scroll-li-price{
-					font-size: 75rpx;
+					font-size: 70rpx;
 					margin-bottom: 15rpx;
 					font-weight: bold;
 					text{
@@ -227,12 +223,14 @@
 			position: absolute;
 			left: 50%;
 			transform: translateX(-50%);
-			top: -6%;
+			top: -10%;
 			height: 80rpx;
 			line-height: 80rpx;
 			width: 280rpx;
 			font-weight: bold;
 			font-size: 30rpx;
+			background-image: linear-gradient(45deg, #ff9700, #ed1c24);
+			color: #ffffff;
 		}
 		.price-detail-li{
 			display: flex;

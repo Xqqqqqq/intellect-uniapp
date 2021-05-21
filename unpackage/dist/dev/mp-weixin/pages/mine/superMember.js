@@ -176,46 +176,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
     return {
-      scrollPriceList: [{
-        id: 0,
-        name: '试用版',
-        price: 19.9,
-        originPrice: null,
-        sign: null,
-        date: '30' },
-      {
-        id: 1,
-        name: '思维训练',
-        price: 199,
-        originPrice: 200,
-        sign: '8折',
-        date: '180' },
-      {
-        id: 2,
-        name: '武装大脑',
-        price: 1999,
-        originPrice: 2000,
-        sign: '6折',
-        date: '365' }],
-
+      openid: '',
+      memberInfo: {},
+      scrollInfo: {}, //所选钱数
       currentPriceTab: 0,
-      detailList: [
-      '普通训练全开通',
-      '会员转享训练全开通',
-      '自动签到攒能量',
-      '赛事排名参与权限'],
-
-      scrollInfo: {} };
-
+      moneyIndex: 0 //优惠钱数下标
+    };
   },
-  mounted: function mounted() {
-    this.scrollInfo = this.scrollPriceList[0];
+  onShow: function onShow() {
+    this.getVipPage();
   },
   methods: {
+    // 获取当前页面的信息
+    getVipPage: function getVipPage() {var _this = this;
+      this.openid = uni.getStorageSync('openid') ? uni.getStorageSync('openid') : '';
+      this.$Request.get("/appVipController.do?getVipPage&openid=".concat(this.openid)).
+      then(function (res) {
+        if (res.code == 0) {
+          _this.memberInfo = res.data;
+          _this.scrollInfo = res.data.vipValueList[0];
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
     // 导航切换
     clickPriceTab: function clickPriceTab(index, item) {
       if (this.currentPriceTab == index) {
@@ -224,6 +216,10 @@ var _default =
         this.currentPriceTab = index;
         this.scrollInfo = item;
       }
+    },
+    bindMoneyChange: function bindMoneyChange(e) {
+      console.log(e.detail);
+      this.moneyIndex = e.detail.value;
     },
     gotoHistory: function gotoHistory() {
       uni.navigateTo({
