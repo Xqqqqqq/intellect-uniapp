@@ -92,7 +92,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  noData: function() {
+    return __webpack_require__.e(/*! import() | components/no-data/no-data */ "components/no-data/no-data").then(__webpack_require__.bind(null, /*! @/components/no-data/no-data.vue */ 307))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -150,33 +154,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
     return {
       chooseDate: '',
-      historyList: [{
-        time: '2020-01-01 13:00',
-        title: '突击训练',
-        money: 19.90 },
-      {
-        time: '2020-01-01 13:00',
-        title: '突击训练',
-        money: 19.90 },
-      {
-        time: '2020-01-01 13:00',
-        title: '突击训练',
-        money: 19.90 }] };
-
+      historyList: [],
+      status: 'loading' };
 
   },
+  mounted: function mounted() {
+    var date = new Date();
+    var nowYear = date.getFullYear();
+    // 获取当前月份
+    var nowMonth = date.getMonth() + 1;
+    // 对月份进行处理，1-9月在前面添加一个“0”
+    if (nowMonth >= 1 && nowMonth <= 9) {
+      nowMonth = "0" + nowMonth;
+    }
+    this.chooseDate = "".concat(nowYear, "-").concat(nowMonth);
+    this.getBuyVipList();
+  },
   methods: {
+    // 获取当前页面的信息
+    getBuyVipList: function getBuyVipList() {var _this = this;
+      this.openid = uni.getStorageSync('openid') ? uni.getStorageSync('openid') : '';
+      this.$Request.get("/appVipController.do?getBuyVipList&openid=".concat(this.openid, "&dateString=").concat(this.chooseDate)).
+      then(function (res) {
+        if (res.data.billList.length <= 0) {
+          _this.status = 'noMore';
+        }
+        if (res.code == 0) {
+          _this.historyList = res.data.billList;
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
     changeDate: function changeDate(e) {
       this.chooseDate = e.detail.value;
+      this.getBuyVipList();
     },
     gotoDetail: function gotoDetail(item) {
       uni.navigateTo({
-        url: '/pages/mine/historyDetail' });
+        url: "/pages/mine/historyDetail?billId=".concat(item.id) });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

@@ -3,42 +3,43 @@
 		<view class="detail-box">
 			<view class="detail-box-li">
 				<view class="detail-box-li-left">名称</view>
-				<view class="detail-box-li-right">会员试用版</view>
+				<view class="detail-box-li-right">{{historyInfo.valueName}}</view>
 			</view>
 			<view class="detail-box-li">
 				<view class="detail-box-li-left">期限</view>
-				<view class="detail-box-li-right">30天</view>
+				<view class="detail-box-li-right">{{historyInfo.valueDay}}天</view>
 			</view>
 		</view>
 		
 		<view class="detail-box">
 			<view class="detail-box-li">
 				<view class="detail-box-li-left">原价</view>
-				<view class="detail-box-li-right">90元</view>
+				<view class="detail-box-li-right">{{historyInfo.bill.billPrice}}元</view>
 			</view>
 			<view class="detail-box-li">
 				<view class="detail-box-li-left">折扣</view>
-				<view class="detail-box-li-right">8折</view>
+				<view class="detail-box-li-right">{{historyInfo.bill.billDiscount}}</view>
 			</view>
 			<view class="detail-box-li">
 				<view class="detail-box-li-left">现价</view>
-				<view class="detail-box-li-right">50元</view>
+				<view class="detail-box-li-right">{{historyInfo.bill.truePrice}}元</view>
 			</view>
 			<view class="detail-box-li">
 				<view class="detail-box-li-left">优惠券</view>
-				<view class="detail-box-li-right">-5元</view>
+				<view class="detail-box-li-right">{{historyInfo.bill.billReduced}}元</view>
 			</view>
 			<view class="detail-box-li">
 				<view class="detail-box-li-left">实付</view>
-				<view class="detail-box-li-right">44元</view>
+				<view class="detail-box-li-right">{{historyInfo.bill.truePrice - historyInfo.bill.billReduced}}元</view>
 			</view>
 			<view class="detail-box-li">
 				<view class="detail-box-li-left">支付方式</view>
-				<view class="detail-box-li-right">微信支付</view>
+				<view class="detail-box-li-right" v-if="historyInfo.bill.payType == 1">微信支付</view>
+				<view class="detail-box-li-right" v-else>支付宝支付</view>
 			</view>
 			<view class="detail-box-li">
 				<view class="detail-box-li-left">支付时间</view>
-				<view class="detail-box-li-right">2020-09-09 13：00</view>
+				<view class="detail-box-li-right">{{historyInfo.bill.createDate}}</view>
 			</view>
 		</view>
 	</view>
@@ -48,8 +49,32 @@
 	export default {
 		data() {
 			return {
-				
+				billId:'2c9a29b67992dc52017992df8b8c0000',
+				historyInfo:{}
 			};
+		},
+		onLoad(option){
+			console.log(option)
+			if(option.billId) {
+				this.billId = option.billId
+			}
+			this.getBuyVipDetail()
+		},
+		methods:{
+			// 获取当前页面的信息
+			getBuyVipDetail(){
+				this.$Request.get(`/appVipController.do?getBuyVipDetail&billId=${this.billId}`)
+				.then(res => {
+					if(res.code == 0){
+						this.historyInfo = res.data
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
 		}
 	}
 </script>

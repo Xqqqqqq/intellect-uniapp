@@ -188,6 +188,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 {
   components: {
     myScrollX: myScrollX },
@@ -283,11 +285,34 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    // 收藏
+    clickAttention: function clickAttention(item, index) {var _this2 = this;
+      var memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
+      var articleId = item.id;
+      this.$Request.get("/appCollectsController.do?getCollectsList&memberId=".concat(memberId, "&articleId=").concat(articleId)).
+      then(function (res) {
+        if (res.code == 0) {
+          _this2.articleList[index].attentionType = item.attentionType == 1 ? 0 : 1;
+          _this2.articleList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1;
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
     bindNameInput: function bindNameInput(e) {
       this.articleName = e.target.value;
       console.log(e.target.value);
+      this.articleList = [];
+      this.page = 1;
+      this.getTrainList();
     },
     clickSearch: function clickSearch() {
+      this.articleList = [];
+      this.page = 1;
+      this.getTrainList();
     },
     tabChange: function tabChange(item, index) {
       this.currentTopTab = index;

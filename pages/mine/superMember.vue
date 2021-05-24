@@ -18,8 +18,7 @@
 				v-for="(item, index) in memberInfo.vipValueList" :key="index">
 					<view class="price-scroll-li-name">{{item.vipName}}</view>
 					<view class="price-scroll-li-price"><text>￥</text>{{item.truePrice}}</view>
-					<view class="price-scroll-li-origin" v-if="item.vipPrice">原价：￥{{item.vipPrice}}</view>
-					<view class="price-scroll-li-origin" v-else>原价：￥{{item.truePrice}}</view>
+					<view class="price-scroll-li-origin">折扣：{{item.vipDiscount || '无'}}</view>
 					<view class="price-scroll-li-date">有效期:{{item.vipDays}}天</view>
 					<image src="../../static/img/icons/VIP@2x.png"></image>
 				</view>
@@ -28,9 +27,18 @@
 		<picker @change="bindMoneyChange" :value="moneyIndex" :range="memberInfo.cardList" range-key="cardName">
 			<view class="member-picker">
 				<view class="member-picker-left">优惠折扣</view>
-				<view class="member-picker-right">-{{memberInfo.cardList[moneyIndex].cardName}} ></view>
+				<view class="member-picker-right">-{{memberInfo.cardList[moneyIndex].cardValue}}元 ></view>
 			</view>
 		</picker>
+		<radio-group @change="radioChange">
+			<label class="member-picker" v-for="(item, index) in radioList" :key="item.value">
+				<view class="member-radio">
+					<image src='../../static/img/icons/weixin.jpg' class="member-picker-img"></image>
+					{{item.name}}
+				</view>
+				<radio :value="item.value" :checked="index === current" style="transform: scale(0.6);"/>
+			</label>
+		</radio-group>
 		<view class="member-price-detail">
 			<view class="price-detail-title">会员权益</view>
 			<view class="price-detail-li" v-for="(item, index) in memberInfo.declareList" :key="index">
@@ -38,9 +46,9 @@
 				<view class="detail-li-right">{{item.declareName}}</view>
 			</view>
 		</view>
-		<view class="member-price-btn">
-			<text class="price-btn-sign">￥</text>{{scrollInfo.truePrice}}
-			<text class="price-btn-through" v-if="scrollInfo.vipDiscount">（折扣：{{scrollInfo.vipDiscount}}）</text>
+		<view class="member-price-btn" @click="openPay">
+			<text class="price-btn-sign">￥</text>{{scrollInfo.nowPrice}}
+			<text class="price-btn-through" v-if="scrollInfo.vipPrice">（原价：￥{{scrollInfo.vipPrice}}）</text>
 		</view>
 	</view>
 </template>
@@ -54,6 +62,11 @@
 				scrollInfo:{}, //所选钱数
 				currentPriceTab: 0,
 				moneyIndex: 0, //优惠钱数下标
+				radioList: [{
+					value: '1',
+					name: '微信'
+				}],
+				current: 0
 			};
 		},
 		onShow(){
@@ -68,6 +81,7 @@
 					if(res.code == 0){
 						this.memberInfo = res.data
 						this.scrollInfo = res.data.vipValueList[0]
+						this.scrollInfo.nowPrice = Number(res.data.vipValueList[0].truePrice - res.data.cardList[0].cardValue).toFixed(1)
 					}else{
 						uni.showToast({
 							title: res.info,
@@ -76,18 +90,65 @@
 					}
 				})
 			},
-			// 导航切换
+			// 切换价格
 			clickPriceTab(index, item) {
 				if (this.currentPriceTab == index) {
 					return false
 				} else {
 					this.currentPriceTab = index
 					this.scrollInfo = item
+					this.scrollInfo.nowPrice = Number(item.truePrice - this.memberInfo.cardList[this.moneyIndex].cardValue).toFixed(1)
 				}
 			},
+			// 选择优惠券
 			bindMoneyChange(e){
-				console.log(e.detail)
+				// console.log(e.detail)
 				this.moneyIndex = e.detail.value
+				this.scrollInfo.nowPrice = Number(this.scrollInfo.truePrice - this.memberInfo.cardList[this.moneyIndex].cardValue).toFixed(1)
+			},
+			// 选择支付方式
+			radioChange(e){
+				console.log(e.detail)
+			},
+			// 支付
+			openPay(){
+				if(uni.getStorageSync('openid')){
+					this.$Request.get('/wxPayController.do?wxVipPay',{
+						openid: uni.getStorageSync('openid'),
+						totalMoney: this.scrollInfo.nowPrice,
+						vipValueId: this.scrollInfo.id,
+						cardId: this.memberInfo.cardList[this.moneyIndex].id ? this.memberInfo.cardList[this.moneyIndex].id : ''
+					}).then(res => {
+						if(res.code == 0){
+							let value = res.data
+							// 微信支付
+							uni.requestPayment({
+							    provider: 'wxpay',
+							    timeStamp: value.timestamp,
+							    nonceStr: value.noncestr,
+							    package: value.package,
+							    signType: 'MD5',
+							    paySign: value.sign,
+							    success: function (res) {
+							        console.log('success:' + JSON.stringify(res));
+							    },
+							    fail: function (err) {
+							        console.log('fail:' + JSON.stringify(err));
+							    }
+							});
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showToast({
+						title: '未获取到openid',
+						icon: 'none'
+					})
+				}
 			},
 			gotoHistory(){
 				uni.navigateTo({
@@ -187,7 +248,6 @@
 				.price-scroll-li-origin{
 					font-size: 26rpx;
 					margin-bottom: 20rpx;
-					text-decoration: line-through;
 				}
 				.price-scroll-li-date{
 					font-size: 26rpx;
@@ -293,6 +353,15 @@
 			color: $uni-color-error;
 			font-size: 34rpx;
 			font-weight: bold;
+		}
+		.member-radio{
+			vertical-align: middle;
+		}
+		.member-picker-img{
+			width: 40rpx;
+			height: 40rpx;
+			vertical-align: middle;
+			margin-right: 20rpx;
 		}
 	}
 }

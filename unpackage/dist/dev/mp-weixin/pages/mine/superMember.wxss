@@ -127,7 +127,6 @@
 .super-member .member-price .member-price-scroll .member-price-scroll-li .price-scroll-li-origin {
   font-size: 26rpx;
   margin-bottom: 20rpx;
-  text-decoration: line-through;
 }
 .super-member .member-price .member-price-scroll .member-price-scroll-li .price-scroll-li-date {
   font-size: 26rpx;
@@ -246,5 +245,14 @@
   color: #dd524d;
   font-size: 34rpx;
   font-weight: bold;
+}
+.super-member .member-picker .member-radio {
+  vertical-align: middle;
+}
+.super-member .member-picker .member-picker-img {
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: middle;
+  margin-right: 20rpx;
 }
 

@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "历史充值",
-  "usingComponents": {}
+  "usingComponents": {
+    "no-data": "/components/no-data/no-data"
+  }
 }

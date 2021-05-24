@@ -27,8 +27,10 @@
 							<view class="right-bottom-watch">
 								<image src='../../static/img/icons/watch.png'></image>{{item.readNum || 0}}
 							</view>
-							<view class="right-bottom-watch">
-								<image src='../../static/img/icons/star1.png'></image>{{item.attentionNum || 0}}
+							<view class="right-bottom-watch" @click.stop="clickAttention(item, index)">
+								<image v-if="item.attentionType ==1" src="../../static/img/icons/shoucang.png"></image>
+								<image v-if="item.attentionType ==0" src="../../static/img/icons/star1.png"></image>
+								{{item.attentionNum || 0}}
 							</view>
 							<view class="right-bottom-watch">
 								<image src='../../static/img/icons/book.png'></image>{{item.collectsNum || 0}}
@@ -141,11 +143,34 @@
 					}
 				})
 			},
+			// 收藏
+			clickAttention(item, index){
+				let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+				let articleId = item.id
+				this.$Request.get(`/appCollectsController.do?getCollectsList&memberId=${memberId}&articleId=${articleId}`)
+				.then(res => {
+					if(res.code == 0){
+						this.articleList[index].attentionType = item.attentionType == 1 ? 0 : 1
+						this.articleList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
 			bindNameInput(e){
 				this.articleName = e.target.value
 				console.log(e.target.value)
+				this.articleList = []
+				this.page = 1
+				this.getTrainList()
 			},
 			clickSearch(){
+				this.articleList = []
+				this.page = 1
+				this.getTrainList()
 			},
 			tabChange(item, index){
 				this.currentTopTab = index

@@ -56,8 +56,26 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/mine/cardVoucher",
-          "pathName": "pages/mine/cardVoucher",
+          "name": "pages/mine/superMember",
+          "pathName": "pages/mine/superMember",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/historyRecharge",
+          "pathName": "pages/mine/historyRecharge",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/historyDetail",
+          "pathName": "pages/mine/historyDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/discover/discover",
+          "pathName": "pages/discover/discover",
           "scene": null
         }
       ]
