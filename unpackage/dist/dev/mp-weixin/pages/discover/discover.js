@@ -289,11 +289,11 @@ __webpack_require__.r(__webpack_exports__);
     clickAttention: function clickAttention(item, index) {var _this2 = this;
       var memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
       var articleId = item.id;
-      this.$Request.get("/appCollectsController.do?getCollectsList&memberId=".concat(memberId, "&articleId=").concat(articleId)).
+      this.$Request.get("/appAttentionController.do?takeArticleAttention&memberId=".concat(memberId, "&articleId=").concat(articleId)).
       then(function (res) {
         if (res.code == 0) {
           _this2.articleList[index].attentionType = item.attentionType == 1 ? 0 : 1;
-          _this2.articleList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1;
+          _this2.articleList[index].attentionNum = item.attentionType == 1 ? item.attentionNum + 1 : item.attentionNum - 1;
         } else {
           uni.showToast({
             title: res.info,
