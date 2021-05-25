@@ -185,6 +185,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
@@ -194,6 +195,7 @@ var _default =
       scrollInfo: {}, //所选钱数
       currentPriceTab: 0,
       moneyIndex: 0, //优惠钱数下标
+      discountPrice: 0, // 优惠金额
       radioList: [{
         value: '1',
         name: '微信' }],
@@ -213,7 +215,7 @@ var _default =
         if (res.code == 0) {
           _this.memberInfo = res.data;
           _this.scrollInfo = res.data.vipValueList[0];
-          _this.scrollInfo.nowPrice = Number(res.data.vipValueList[0].truePrice - res.data.cardList[0].cardValue).toFixed(1);
+          _this.scrollInfo.nowPrice = Number(res.data.vipValueList[0].truePrice - _this.discountPrice).toFixed(2);
         } else {
           uni.showToast({
             title: res.info,
@@ -227,16 +229,18 @@ var _default =
       if (this.currentPriceTab == index) {
         return false;
       } else {
+        // this.discountPrice = 0
         this.currentPriceTab = index;
         this.scrollInfo = item;
-        this.scrollInfo.nowPrice = Number(item.truePrice - this.memberInfo.cardList[this.moneyIndex].cardValue).toFixed(1);
+        this.scrollInfo.nowPrice = Number(item.truePrice - this.discountPrice).toFixed(2) > 0 ? Number(item.truePrice - this.discountPrice).toFixed(2) : 0;
       }
     },
     // 选择优惠券
     bindMoneyChange: function bindMoneyChange(e) {
       // console.log(e.detail)
       this.moneyIndex = e.detail.value;
-      this.scrollInfo.nowPrice = Number(this.scrollInfo.truePrice - this.memberInfo.cardList[this.moneyIndex].cardValue).toFixed(1);
+      this.discountPrice = this.memberInfo.cardList[this.moneyIndex].cardValue;
+      this.scrollInfo.nowPrice = Number(this.scrollInfo.truePrice - this.discountPrice).toFixed(2) > 0 ? Number(this.scrollInfo.truePrice - this.discountPrice).toFixed(2) : 0;
     },
     // 选择支付方式
     radioChange: function radioChange(e) {
@@ -249,7 +253,7 @@ var _default =
           openid: uni.getStorageSync('openid'),
           totalMoney: this.scrollInfo.nowPrice,
           vipValueId: this.scrollInfo.id,
-          cardId: this.memberInfo.cardList[this.moneyIndex].id ? this.memberInfo.cardList[this.moneyIndex].id : '' }).
+          cardId: this.discountPrice == 0 ? '' : this.memberInfo.cardList[this.moneyIndex].id }).
         then(function (res) {
           if (res.code == 0) {
             var value = res.data;

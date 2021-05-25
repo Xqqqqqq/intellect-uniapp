@@ -253,8 +253,8 @@ var _default =
 
               uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
               setTimeout(function () {
-                uni.navigateBack({
-                  delta: 1 });
+                uni.switchTab({
+                  url: '/pages/myData/myData' });
 
               }, 1000);
             } else if (res.code == 100) {
@@ -268,8 +268,8 @@ var _default =
 
                   uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
                   setTimeout(function () {
-                    uni.navigateBack({
-                      delta: 1 });
+                    uni.switchTab({
+                      url: '/pages/myData/myData' });
 
                   }, 1000);
                 } else {
@@ -332,8 +332,8 @@ var _default =
 
           uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
           setTimeout(function () {
-            uni.navigateBack({
-              delta: 1 });
+            uni.switchTab({
+              url: '/pages/myData/myData' });
 
           }, 1000);
         } else if (res.code == 100) {
@@ -347,8 +347,8 @@ var _default =
 
               uni.setStorageSync('userInfo', JSON.stringify(res.data.member));
               setTimeout(function () {
-                uni.navigateBack({
-                  delta: 1 });
+                uni.switchTab({
+                  url: '/pages/myData/myData' });
 
               }, 1000);
             } else {

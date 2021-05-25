@@ -235,12 +235,13 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    // 训练跳转详情
     gotoListDetail: function gotoListDetail(item) {
       uni.navigateTo({
         url: "/pages/train/imageMemory/numEleEntry?id=".concat(item.id) });
 
     },
-    // 收藏
+    // 收藏训练
     clickAttention: function clickAttention(item, index) {var _this2 = this;
       var collectsId = item.id;
       this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(this.memberId, "&collectsId=").concat(collectsId)).
@@ -256,9 +257,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    // 点击收藏、取消收藏按钮
+    // 点击收藏、取消收藏训练按钮
     clickButton: function clickButton(type) {
-      console.log(type);
       switch (type) {
         case 'up':
           this.upArticleCollectsAttention();
@@ -294,6 +294,66 @@ __webpack_require__.r(__webpack_exports__);
             icon: 'none' });
 
           _this4.getArticleDetail();
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
+    // 收藏文章
+    clickArtAttention: function clickArtAttention() {var _this5 = this;
+      this.$Request.get("/appAttentionController.do?takeArticleAttention&memberId=".concat(this.memberId, "&articleId=").concat(this.id)).
+      then(function (res) {
+        if (res.code == 0) {
+          _this5.articleVo.attentionType = _this5.articleVo.attentionType == 1 ? 0 : 1;
+          _this5.articleVo.attentionNum = _this5.articleVo.attentionType == 1 ? _this5.articleVo.attentionNum + 1 : _this5.articleVo.attentionNum - 1;
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
+    // 点击有用、无用
+    clickUsefulness: function clickUsefulness(type) {
+      switch (type) {
+        case 'use':
+          this.usefulArticleThumbs();
+          break;
+        case 'unUse':
+          this.uselessArticleThumbs();
+          break;}
+
+    },
+    usefulArticleThumbs: function usefulArticleThumbs() {var _this6 = this;
+      this.$Request.get("/appAttentionController.do?usefulArticleThumbs&memberId=".concat(this.memberId, "&articleId=").concat(this.id)).
+      then(function (res) {
+        if (res.code == 0) {
+          uni.showToast({
+            title: '操作成功！',
+            icon: 'none' });
+
+          _this6.getArticleDetail();
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
+    uselessArticleThumbs: function uselessArticleThumbs() {var _this7 = this;
+      this.$Request.get("/appAttentionController.do?uselessArticleThumbs&memberId=".concat(this.memberId, "&articleId=").concat(this.id)).
+      then(function (res) {
+        if (res.code == 0) {
+          uni.showToast({
+            title: '操作成功！',
+            icon: 'none' });
+
+          _this7.getArticleDetail();
         } else {
           uni.showToast({
             title: res.info,

@@ -4,7 +4,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": false,
+    "urlCheck": true,
     "es6": true,
     "enhance": false,
     "postcss": true,
@@ -55,6 +55,30 @@
     },
     "miniprogram": {
       "list": [
+        {
+          "name": "pages/loginAll/login",
+          "pathName": "pages/loginAll/login",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/myData/myData",
+          "pathName": "pages/myData/myData",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/myData/myData",
+          "pathName": "pages/myData/myData",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/superMember",
+          "pathName": "pages/mine/superMember",
+          "query": "",
+          "scene": null
+        },
         {
           "name": "pages/discover/discoverDetail",
           "pathName": "pages/discover/discoverDetail",

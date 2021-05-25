@@ -24,23 +24,23 @@
 			<view class="detail-bottom-li detail-bottom-li-blue" @click="clickButton('up')">收藏全部训练</view>
 		</view>
 		<view class="detail-btn">
-			<view class="detail-btn-li">
+			<view class="detail-btn-li" @click="clickUsefulness('use')">
 				<view class="btn-li-num">{{articleVo.thumbNum}}</view>
-				<view class="btn-li-img">
+				<view class="btn-li-img" :class="{'btn-li-img-choose':articleVo.thumbType == 1}">
 					<image src='../../static/img/icons/youyong.png'></image>
 				</view>
 				<view class="btn-li-title">有用</view>
 			</view>
-			<view class="detail-btn-li">
+			<view class="detail-btn-li" @click="clickUsefulness('unUse')">
 				<view class="btn-li-num">{{articleVo.unThumbNum}}</view>
-				<view class="btn-li-img">
+				<view class="btn-li-img" :class="{'btn-li-img-choose':articleVo.thumbType == 2}">
 					<image src='../../static/img/icons/wuyong.png'></image>
 				</view>
 				<view class="btn-li-title">无用</view>
 			</view>
-			<view class="detail-btn-li">
+			<view class="detail-btn-li" @click="clickArtAttention">
 				<view class="btn-li-num">{{articleVo.attentionNum}}</view>
-				<view class="btn-li-img">
+				<view class="btn-li-img" :class="{'btn-li-img-choose':articleVo.attentionType == 1}">
 					<image src='../../static/img/icons/shoucang2.png'></image>
 				</view>
 				<view class="btn-li-title">收藏</view>
@@ -96,12 +96,13 @@
 					}
 				})
 			},
+			// 训练跳转详情
 			gotoListDetail(item){
 				uni.navigateTo({
 					url: `/pages/train/imageMemory/numEleEntry?id=${item.id}`
 				})
 			},
-			// 收藏
+			// 收藏训练
 			clickAttention(item, index){
 				let collectsId = item.id
 				this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${this.memberId}&collectsId=${collectsId}`)
@@ -117,9 +118,8 @@
 					}
 				})
 			},
-			// 点击收藏、取消收藏按钮
+			// 点击收藏、取消收藏训练按钮
 			clickButton(type){
-				console.log(type)
 				switch(type) {
 				 case 'up':
 					this.upArticleCollectsAttention()
@@ -152,6 +152,66 @@
 					if(res.code == 0){
 						uni.showToast({
 							title: '取消成功！',
+							icon: 'none'
+						})
+						this.getArticleDetail()
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			// 收藏文章
+			clickArtAttention(){
+				this.$Request.get(`/appAttentionController.do?takeArticleAttention&memberId=${this.memberId}&articleId=${this.id}`)
+				.then(res => {
+					if(res.code == 0){
+						this.articleVo.attentionType = this.articleVo.attentionType == 1 ? 0 : 1
+						this.articleVo.attentionNum = this.articleVo.attentionType == 1 ? this.articleVo.attentionNum + 1 : this.articleVo.attentionNum - 1
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			// 点击有用、无用
+			clickUsefulness(type){
+				switch(type) {
+				 case 'use':
+					this.usefulArticleThumbs()
+					break;
+				 case 'unUse':
+					this.uselessArticleThumbs()
+					break;
+				} 
+			},
+			usefulArticleThumbs(){
+				this.$Request.get(`/appAttentionController.do?usefulArticleThumbs&memberId=${this.memberId}&articleId=${this.id}`)
+				.then(res => {
+					if(res.code == 0){
+						uni.showToast({
+							title: '操作成功！',
+							icon: 'none'
+						})
+						this.getArticleDetail()
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			uselessArticleThumbs(){
+				this.$Request.get(`/appAttentionController.do?uselessArticleThumbs&memberId=${this.memberId}&articleId=${this.id}`)
+				.then(res => {
+					if(res.code == 0){
+						uni.showToast({
+							title: '操作成功！',
 							icon: 'none'
 						})
 						this.getArticleDetail()
@@ -266,6 +326,9 @@ page{
 					left: 50%;
 					top: 50%;
 					transform: translate(-50%, -50%);
+				}
+				&-choose{
+					background-color: #d2f1f0;
 				}
 			}
 			.btn-li-title{

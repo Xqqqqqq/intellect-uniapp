@@ -150,6 +150,9 @@ page {
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
+.detail .detail-btn .detail-btn-li .btn-li-img-choose {
+  background-color: #d2f1f0;
+}
 .detail .detail-btn .detail-btn-li .btn-li-title {
   color: #666666;
   font-size: 24rpx;

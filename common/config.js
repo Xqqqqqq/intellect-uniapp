@@ -1,4 +1,4 @@
-const ROOTPATH = "http://www.armedbrains.com/brain_sport_war/app";
+const ROOTPATH = "https://www.armedbrains.com/brain_sport_war/app";
 const ROOTPATH1 = "https://www.gomyorder.cn/tao";
 module.exports = {
     APIHOST: ROOTPATH,

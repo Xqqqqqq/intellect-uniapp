@@ -1933,7 +1933,7 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var ROOTPATH = "http://www.armedbrains.com/brain_sport_war/app";
+var ROOTPATH = "https://www.armedbrains.com/brain_sport_war/app";
 var ROOTPATH1 = "https://www.gomyorder.cn/tao";
 module.exports = {
   APIHOST: ROOTPATH,

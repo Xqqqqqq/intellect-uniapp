@@ -121,8 +121,8 @@
 								})
 								uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 								setTimeout(()=>{
-									uni.navigateBack({
-										delta:1
+									uni.switchTab({
+										url:'/pages/myData/myData'
 									})
 								},1000)
 							}else if(res.code == 100){
@@ -136,8 +136,8 @@
 										})
 										uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 										setTimeout(()=>{
-											uni.navigateBack({
-												delta:1
+											uni.switchTab({
+												url:'/pages/myData/myData'
 											})
 										},1000)
 									}else{
@@ -200,8 +200,8 @@
 						})
 						uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 						setTimeout(()=>{
-							uni.navigateBack({
-								delta:1
+							uni.switchTab({
+								url:'/pages/myData/myData'
 							})
 						},1000)
 					}else if(res.code == 100){
@@ -215,8 +215,8 @@
 								})
 								uni.setStorageSync('userInfo', JSON.stringify(res.data.member))
 								setTimeout(()=>{
-									uni.navigateBack({
-										delta:1
+									uni.switchTab({
+										url:'/pages/myData/myData'
 									})
 								},1000)
 							}else{
@@ -351,7 +351,7 @@ button::after{
 				color: #666;
 				text-align: center;
 				width: 180rpx;
-				z-index: 10;
+				z-index: 1000;
 			}
 		}
 		.login-midbtn{

@@ -78,7 +78,7 @@ button::after {
   color: #666;
   text-align: center;
   width: 180rpx;
-  z-index: 10;
+  z-index: 1000;
 }
 .login .login-mid .login-midbtn {
   width: 100%;
