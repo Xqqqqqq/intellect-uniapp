@@ -56,26 +56,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/mine/superMember",
-          "pathName": "pages/mine/superMember",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/mine/historyRecharge",
-          "pathName": "pages/mine/historyRecharge",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/mine/historyDetail",
-          "pathName": "pages/mine/historyDetail",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/discover/discover",
-          "pathName": "pages/discover/discover",
+          "name": "pages/discover/discoverDetail",
+          "pathName": "pages/discover/discoverDetail",
           "scene": null
         }
       ]

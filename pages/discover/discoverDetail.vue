@@ -20,8 +20,8 @@
 			<no-data v-if="status == 'noMore' && !collectsList.length"></no-data>
 		</view>
 		<view class="detail-bottom">
-			<view class="detail-bottom-li detail-bottom-li-gray">取消全部收藏</view>
-			<view class="detail-bottom-li detail-bottom-li-blue">收藏全部训练</view>
+			<view class="detail-bottom-li detail-bottom-li-gray" @click="clickButton('drop')">取消全部收藏</view>
+			<view class="detail-bottom-li detail-bottom-li-blue" @click="clickButton('up')">收藏全部训练</view>
 		</view>
 		<view class="detail-btn">
 			<view class="detail-btn-li">
@@ -109,6 +109,52 @@
 					if(res.code == 0){
 						this.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1
 						this.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			// 点击收藏、取消收藏按钮
+			clickButton(type){
+				console.log(type)
+				switch(type) {
+				 case 'up':
+					this.upArticleCollectsAttention()
+					break;
+				 case 'drop':
+					this.dropArticleCollectsAttention()
+					break;
+				} 
+			},
+			upArticleCollectsAttention(){
+				this.$Request.get(`/appAttentionController.do?upArticleCollectsAttention&memberId=${this.memberId}&articleId=${this.id}`)
+				.then(res => {
+					if(res.code == 0){
+						uni.showToast({
+							title: '收藏成功！',
+							icon: 'none'
+						})
+						this.getArticleDetail()
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			dropArticleCollectsAttention(){
+				this.$Request.get(`/appAttentionController.do?dropArticleCollectsAttention&memberId=${this.memberId}&articleId=${this.id}`)
+				.then(res => {
+					if(res.code == 0){
+						uni.showToast({
+							title: '取消成功！',
+							icon: 'none'
+						})
+						this.getArticleDetail()
 					}else{
 						uni.showToast({
 							title: res.info,

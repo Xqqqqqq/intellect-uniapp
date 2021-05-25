@@ -255,6 +255,52 @@ __webpack_require__.r(__webpack_exports__);
 
         }
       });
+    },
+    // 点击收藏、取消收藏按钮
+    clickButton: function clickButton(type) {
+      console.log(type);
+      switch (type) {
+        case 'up':
+          this.upArticleCollectsAttention();
+          break;
+        case 'drop':
+          this.dropArticleCollectsAttention();
+          break;}
+
+    },
+    upArticleCollectsAttention: function upArticleCollectsAttention() {var _this3 = this;
+      this.$Request.get("/appAttentionController.do?upArticleCollectsAttention&memberId=".concat(this.memberId, "&articleId=").concat(this.id)).
+      then(function (res) {
+        if (res.code == 0) {
+          uni.showToast({
+            title: '收藏成功！',
+            icon: 'none' });
+
+          _this3.getArticleDetail();
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
+    dropArticleCollectsAttention: function dropArticleCollectsAttention() {var _this4 = this;
+      this.$Request.get("/appAttentionController.do?dropArticleCollectsAttention&memberId=".concat(this.memberId, "&articleId=").concat(this.id)).
+      then(function (res) {
+        if (res.code == 0) {
+          uni.showToast({
+            title: '取消成功！',
+            icon: 'none' });
+
+          _this4.getArticleDetail();
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
