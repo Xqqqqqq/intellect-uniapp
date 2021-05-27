@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var numImgPair = function numImgPair() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgPair */ "pages/train/imageMemory/imgComponents/numImgPair").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgPair.vue */ 377));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var numImgSelect = function numImgSelect() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgSelect */ "pages/train/imageMemory/imgComponents/numImgSelect").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgSelect.vue */ 384));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var numImgCount = function numImgCount() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgCount */ "pages/train/imageMemory/imgComponents/numImgCount").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgCount.vue */ 391));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var numImgSort = function numImgSort() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgSort */ "pages/train/imageMemory/imgComponents/numImgSort").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgSort.vue */ 398));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -146,68 +146,115 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _numImgPair = _interopRequireDefault(__webpack_require__(/*! @/common/json/numImgPair.json */ 119));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var numImgPair = function numImgPair() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgPair */ "pages/train/imageMemory/imgComponents/numImgPair").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgPair.vue */ 377));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var numImgSelect = function numImgSelect() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgSelect */ "pages/train/imageMemory/imgComponents/numImgSelect").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgSelect.vue */ 384));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var numImgCount = function numImgCount() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgCount */ "pages/train/imageMemory/imgComponents/numImgCount").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgCount.vue */ 391));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var numImgSort = function numImgSort() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgSort */ "pages/train/imageMemory/imgComponents/numImgSort").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgSort.vue */ 398));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { numImgPair: numImgPair, numImgSelect: numImgSelect, numImgCount: numImgCount, numImgSort: numImgSort }, data: function data() {return { allData: {}, problemList: [], //保存所有已选中的数据
+
+
+
+
+
+
+
+
+
+{
+  components: {
+    numImgPair: numImgPair,
+    numImgSelect: numImgSelect,
+    numImgCount: numImgCount,
+    numImgSort: numImgSort },
+
+  data: function data() {
+    return {
+      allData: {},
+      problemList: [], //保存所有已选中的数据
       showH5: true,
       topLeftName: '数图配对',
       btnName: '下一组',
       page: {
-        pageNum: 0,
+        pageNum: 0, // 当前组数下标
         examNum: 10,
-        examTime: null } };
+        examTime: null },
 
-
+      userExamTime: 0, //用户选择的答题时间数
+      optionInfo: {
+        collectsId: '402aa38151aef50c0151aef50c2600cc',
+        time: 5,
+        type: 4,
+        num: 8 }
+      // 所有从前一个页面传过来的数据（需要传给后台的数据）
+    };
   },
-  onShow: function onShow() {var _this = this;
+  onLoad: function onLoad(options) {
+    // if(options){
+    // 	this.optionInfo = JSON.parse(options.options)
+    // 	console.log(this.optionInfo)
+    // }
+  },
+  onShow: function onShow() {
     if (navigator) {
       this.showH5 = true;
     } else {
       this.showH5 = false;
     }
-    this.allData = _numImgPair.default.data;
-    this.page.examTime = _numImgPair.default.data.examTime;
-    this.page.examNum = _numImgPair.default.data.examNum;
-    switch (this.allData.examType) {
-      case 1:
-        this.topLeftName = '数图配对';
-        break;
-      case 2:
-        this.topLeftName = '数图单选';
-        break;
-      case 3:
-        this.topLeftName = '数图计算';
-        break;
-      case 4:
-        this.topLeftName = '数图排序';
-        break;
-      case 5:
-        this.topLeftName = '混合模式';
-        break;
-      default:
-        break;}
-
-    var timer = setInterval(function () {
-      _this.page.examTime = _this.page.examTime - 1;
-      if (_this.page.examTime === 0) {
-        clearInterval(timer);
-      }
-    }, 1000);
+    this.startNumExamination();
   },
   methods: {
+    // 获取训练数据列表
+    startNumExamination: function startNumExamination() {var _this = this;
+      if (uni.getStorageSync('userInfo')) {
+        var memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
+        this.$Request.get('/appExaminationController.do?startNumExamination', _objectSpread({},
+        this.optionInfo, {
+          memberId: memberId })).
+        then(function (res) {
+          if (res.code == 0) {
+            _this.allData = res.data;
+            _this.userExamTime = res.data.examTime;
+            _this.page.examTime = _this.userExamTime; // 用户选择的每题时间数
+            _this.page.examNum = _this.allData.examNum; // 测试组数
+            var timer = setInterval(function () {
+              // 倒计时
+              _this.page.examTime = _this.page.examTime - 1;
+              // 当倒计时为0时
+              if (_this.page.examTime === 0) {
+                console.log('allData', _this.allData);
+                if (Number(_this.page.pageNum) + 1 == Number(_this.page.examNum)) {
+                  console.log('所有题都答完了');
+                  console.log('onshow', _this.problemList);
+                  _this.btnName = '结束答题';
+                  clearInterval(timer);
+                  return;
+                } else {
+                  _this.problemList.push({
+                    answerId: '￥',
+                    problemId: '￥',
+                    problemName: '',
+                    problemPic: '' });
+
+                  _this.page.pageNum += 1;
+                  _this.page.examTime = _this.userExamTime;
+                }
+              }
+            }, 1000);
+
+          } else {
+            uni.showToast({
+              title: res.info,
+              icon: 'none' });
+
+          }
+        });
+      } else {
+        uni.showToast({
+          title: '您尚未登录，正在跳往登录页面。。。',
+          icon: 'none' });
+
+        setTimeout(function () {
+          uni.navigateTo({
+            url: '/pages/loginAll/login' });
+
+        }, 1000);
+      }
+    },
     clickProblemList: function clickProblemList(arr) {
       this.problemList = arr;
     },
@@ -227,6 +274,7 @@ var numImgPair = function numImgPair() {__webpack_require__.e(/*! require.ensure
         this.page.pageNum += 1;
       }
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

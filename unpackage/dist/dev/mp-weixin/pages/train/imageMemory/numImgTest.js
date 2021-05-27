@@ -192,11 +192,17 @@ var _default =
   data: function data() {
     return {
       secondArr: [{
-        id: 1,
-        name: '25秒' },
+        id: 0,
+        name: '不读秒' },
       {
-        id: 2,
-        name: '不读秒' }],
+        id: 5,
+        name: '5秒/题' },
+      {
+        id: 10,
+        name: '10秒/题' },
+      {
+        id: 15,
+        name: '15秒/题' }],
 
       secondIndex: 0,
       typeArr: [{
@@ -212,22 +218,51 @@ var _default =
         id: 4,
         name: '数图排序' },
       {
-        id: 4,
+        id: 5,
         name: '混合模式' }],
 
-      typeIndex: 0 };
+      typeIndex: 0,
+      numArr: [{
+        id: 8,
+        name: '8题' },
+      {
+        id: 16,
+        name: '16题' },
+      {
+        id: 32,
+        name: '32题' }],
 
+      numIndex: 0,
+      optionInfo: {
+        collectsId: '402aa38151aef50c0151aef50c2600cc',
+        time: '',
+        type: '',
+        num: '' }
+      // 所有从前一个页面传过来的数据（需要传给后台的数据）
+    };
+  },
+  onLoad: function onLoad(option) {
+    this.optionInfo.time = this.secondArr[0].id;
+    this.optionInfo.type = this.typeArr[0].id;
+    this.optionInfo.num = this.numArr[0].id;
   },
   methods: {
     bindSecondChange: function bindSecondChange(e) {
       this.secondIndex = e.detail.value;
+      this.optionInfo.time = this.secondArr[e.detail.value].id;
     },
     bindTypeChange: function bindTypeChange(e) {
       this.typeIndex = e.detail.value;
+      this.optionInfo.type = this.typeArr[e.detail.value].id;
+    },
+    bindNumChange: function bindNumChange(e) {
+      this.numIndex = e.detail.value;
+      this.optionInfo.num = this.numArr[e.detail.value].id;
     },
     gotoUrl: function gotoUrl() {
+      // console.log(this.optionInfo)
       uni.navigateTo({
-        url: '/pages/train/imageMemory/numImgAll' });
+        url: "/pages/train/imageMemory/numImgAll?options=".concat(JSON.stringify(this.optionInfo)) });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

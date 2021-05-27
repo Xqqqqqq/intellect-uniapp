@@ -60,6 +60,12 @@
   -webkit-flex-direction: column;
           flex-direction: column;
   border-bottom: 1px solid #D3D3D3;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.img-pair-box .pair-box-left .box-left-li image {
+  width: 100%;
+  height: 100%;
 }
 .img-pair-box .pair-box-left .box-left-li-click {
   background-color: rgba(0, 0, 0, 0.3);
@@ -98,6 +104,8 @@
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
           flex-direction: column;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .img-pair-box .pair-box-right .box-right-li image {
   width: 100%;

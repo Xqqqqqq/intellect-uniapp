@@ -3,7 +3,7 @@
 		<view class="select-box-content">
 			<view class="box-content-li" :class="{'box-content-li-click':sortProblemList.filter(it => it.problemId === item.id).length > 0}"
 			v-for="(item,index) in topList" :key="index" @click="clickTop(item, index)">
-				<view v-if="allData.startGroupVoList[page.pageNum].problemType == '1'">{{item.problemName}}</view>
+				<view v-if="allData.startGroupVoList[page.pageNum].showType == '1'">{{item.problemName}}</view>
 				<image v-else :src="item.problemPic"></image>
 			</view>
 		</view>
@@ -11,10 +11,10 @@
 		<view class="select-box-content">
 			<view class="box-content-li"
 			 v-for="(item,index) in bottomList" :key="index" @click="clickBottom(item, index)">
-				<image v-if="allData.startGroupVoList[page.pageNum].problemType == '1'" :src="item.answerPic"></image>
+				<image v-if="allData.startGroupVoList[page.pageNum].showType == '1'" :src="item.answerPic"></image>
 				<view v-else>{{item.answerName}}</view>
-				<image v-if="allData.startGroupVoList[page.pageNum].problemType != '1' && sortProblemList.length > 0 && sortProblemList.filter(it => it.answerId === item.id).length > 0" class="box-right-li-img" :src="sortProblemList.find(it => it.answerId === item.id).problemPic"></image>
-				<view v-if="allData.startGroupVoList[page.pageNum].problemType == '1' && sortProblemList.length > 0 && sortProblemList.filter(it => it.answerId === item.id).length > 0" class="box-right-li-num">{{sortProblemList.find(it => it.answerId === item.id).problemName}}</view>
+				<image v-if="allData.startGroupVoList[page.pageNum].showType != '1' && sortProblemList.length > 0 && sortProblemList.filter(it => it.answerId === item.id).length > 0" class="box-right-li-img" :src="sortProblemList.find(it => it.answerId === item.id).problemPic"></image>
+				<view v-if="allData.startGroupVoList[page.pageNum].showType == '1' && sortProblemList.length > 0 && sortProblemList.filter(it => it.answerId === item.id).length > 0" class="box-right-li-num">{{sortProblemList.find(it => it.answerId === item.id).problemName}}</view>
 			</view>
 		</view>
 	</view>

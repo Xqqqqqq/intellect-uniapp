@@ -15,7 +15,7 @@
 					<swiper-item v-for="(item, index) in swiperList" :key="index">
 						<view class="swiper-item">
 						  <view class="swiper-item-num">
-								{{item.sorts}}
+								{{item.optionName}}
 								<text class="item-num-tip">元素</text>
 						  </view>
 						  <image :src="item.optionPic" class="swiper-item-img" mode="widthFix"></image>
@@ -35,7 +35,7 @@
 							<image :src="item.optionPic"></image>
 						</view>
 						<view class="card-ul-li-right">
-							<view class="ul-li-right-title">{{item.sorts}}</view>
+							<view class="ul-li-right-title">{{item.optionName}}</view>
 							<view class="ul-li-right-detail">{{item.optionContent}}</view>
 						</view>
 					</view>

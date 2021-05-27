@@ -1,7 +1,12 @@
 <template>
 	<view class="img-pair">
 		<view class="img-pair-top" :style="{top: showH5 ? '88rpx' : '0rpx'}">
-			<view class="pair-top-blue">{{topLeftName}}：</view>
+			<!-- <view class="pair-top-blue">{{topLeftName}}：</view> -->
+			<view class="pair-top-blue" v-if="allData.startGroupVoList[page.pageNum].groupType == 1">数图配对</view>
+			<view class="pair-top-blue" v-if="allData.startGroupVoList[page.pageNum].groupType == 2">数图单选</view>
+			<view class="pair-top-blue" v-if="allData.startGroupVoList[page.pageNum].groupType == 3">数图计算</view>
+			<view class="pair-top-blue" v-if="allData.startGroupVoList[page.pageNum].groupType == 4">数图排序</view>
+			<view class="pair-top-blue" v-if="allData.startGroupVoList[page.pageNum].groupType == 5">混合模式</view>
 			<view class="pair-top-red">{{page.examTime}}s</view>
 			<view class="pair-top-blue">第{{page.pageNum+1}}组 / 共{{page.examNum}}组</view>
 		</view>
@@ -14,7 +19,6 @@
 </template>
 
 <script>
-	import myData from '@/common/json/numImgPair.json'
 	import numImgPair from './imgComponents/numImgPair.vue'
 	import numImgSelect from './imgComponents/numImgSelect.vue'
 	import numImgCount from './imgComponents/numImgCount.vue'
@@ -34,11 +38,24 @@
 				topLeftName: '数图配对',
 				btnName: '下一组',
 				page:{
-					pageNum: 0,
+					pageNum: 0, // 当前组数下标
 					examNum: 10,
 					examTime: null,
-				}
+				},
+				userExamTime: 0, //用户选择的答题时间数
+				optionInfo:{
+					collectsId: '402aa38151aef50c0151aef50c2600cc',
+					time: 5,
+					type: 4,
+					num: 8
+				},// 所有从前一个页面传过来的数据（需要传给后台的数据）
 			};
+		},
+		onLoad(options){
+			// if(options){
+			// 	this.optionInfo = JSON.parse(options.options)
+			// 	console.log(this.optionInfo)
+			// }
 		},
 		onShow(){
 			if(navigator){
@@ -46,36 +63,66 @@
 			}else{
 				this.showH5 = false
 			}
-			this.allData = myData.data
-			this.page.examTime = myData.data.examTime
-			this.page.examNum = myData.data.examNum
-			switch(this.allData.examType) {
-				case 1:
-					this.topLeftName = '数图配对'
-					break;
-				case 2:
-					this.topLeftName = '数图单选'
-					break;
-				case 3:
-					this.topLeftName = '数图计算'
-					break;
-				case 4:
-					this.topLeftName = '数图排序'
-					break;
-				case 5:
-					this.topLeftName = '混合模式'
-					break;
-			     default:
-			        break
-			} 
-			const timer = setInterval(() => {
-				this.page.examTime = this.page.examTime - 1;
-				if (this.page.examTime === 0) {
-					clearInterval(timer);
-				}
-			}, 1000);
+			this.startNumExamination()
 		},
 		methods:{
+			// 获取训练数据列表
+			startNumExamination(){
+				if(uni.getStorageSync('userInfo')){
+					let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+					this.$Request.get('/appExaminationController.do?startNumExamination',{
+						...this.optionInfo,
+						memberId:memberId
+					}).then(res => {
+						if(res.code == 0){
+							this.allData = res.data
+							this.userExamTime = res.data.examTime
+							this.page.examTime = this.userExamTime // 用户选择的每题时间数
+							this.page.examNum = this.allData.examNum // 测试组数
+							const timer = setInterval(() => {
+								// 倒计时
+								this.page.examTime = this.page.examTime - 1;
+								// 当倒计时为0时
+								if (this.page.examTime === 0) {
+									console.log('allData', this.allData)
+									if(Number(this.page.pageNum)+ 1 == Number(this.page.examNum)){
+										console.log('所有题都答完了')
+										console.log('onshow',this.problemList)
+										this.btnName = '结束答题'
+										clearInterval(timer);
+										return
+									}else{
+										this.problemList.push({
+											answerId: '￥',
+											problemId: '￥',
+											problemName: '',
+											problemPic: ''
+										})
+										this.page.pageNum += 1
+										this.page.examTime = this.userExamTime
+									}
+								}
+							}, 1000);
+							
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showToast({
+						title: '您尚未登录，正在跳往登录页面。。。',
+						icon: 'none'
+					})
+					setTimeout(() => {
+						uni.navigateTo({
+							url:'/pages/loginAll/login'
+						})
+					}, 1000)
+				}
+			},
 			clickProblemList(arr){
 				this.problemList = arr
 			},
@@ -90,7 +137,7 @@
 						answerId: '￥',
 						problemId: '￥',
 						problemName: '',
-						problemPic: ''
+						problemPic: '',
 					})
 					this.page.pageNum += 1
 				}

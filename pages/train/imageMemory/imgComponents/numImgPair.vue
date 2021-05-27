@@ -1,20 +1,20 @@
 <template>
 	<view class="img-pair-box">
 		<view class="pair-box-left">
-			<view class="box-left-title" v-html="allData.startGroupVoList[page.pageNum].problemType == '1' ? '元素' : '图片'"></view>
+			<view class="box-left-title" v-html="allData.startGroupVoList[page.pageNum].showType == '1' ? '元素' : '图片'"></view>
 			<view class="box-left-li" :class="{'box-left-li-click':pairProblemList.filter(it => it.problemId === item.id).length > 0}"
 			 v-for="(item,index) in leftList" :key="index" @click="clickLeft(item, index)">
-				<view v-if="allData.startGroupVoList[page.pageNum].problemType == '1'">{{item.problemName}}</view>
+				<view v-if="allData.startGroupVoList[page.pageNum].showType == '1'">{{item.problemName}}</view>
 				<image v-else :src="item.problemPic"></image>
 			</view>
 		</view>
 		<view class="pair-box-right">
-			<view class="box-right-title" v-html="allData.startGroupVoList[page.pageNum].problemType == '1' ? '图片' : '元素'"></view>
+			<view class="box-right-title" v-html="allData.startGroupVoList[page.pageNum].showType == '1' ? '图片' : '元素'"></view>
 			<view class="box-right-li" v-for="(item,index) in rightList" :key="index" @click="clickRight(item, index)">
-				<image v-if="allData.startGroupVoList[page.pageNum].problemType == '1'" :src="item.answerPic"></image>
+				<image v-if="allData.startGroupVoList[page.pageNum].showType == '1'" :src="item.answerPic"></image>
 				<view v-else>{{item.answerName}}</view>
-				<image v-if="allData.startGroupVoList[page.pageNum].problemType != '1' && pairProblemList.length > 0 && pairProblemList.filter(it => it.answerId === item.id).length > 0" class="box-right-li-img" :src="pairProblemList.find(it => it.answerId === item.id).problemPic"></image>
-				<view v-if="allData.startGroupVoList[page.pageNum].problemType == '1' && pairProblemList.length > 0 && pairProblemList.filter(it => it.answerId === item.id).length > 0" class="box-right-li-num">{{pairProblemList.find(it => it.answerId === item.id).problemName}}</view>
+				<image v-if="allData.startGroupVoList[page.pageNum].showType != '1' && pairProblemList.length > 0 && pairProblemList.filter(it => it.answerId === item.id).length > 0" class="box-right-li-img" :src="pairProblemList.find(it => it.answerId === item.id).problemPic"></image>
+				<view v-if="allData.startGroupVoList[page.pageNum].showType == '1' && pairProblemList.length > 0 && pairProblemList.filter(it => it.answerId === item.id).length > 0" class="box-right-li-num">{{pairProblemList.find(it => it.answerId === item.id).problemName}}</view>
 			</view>
 		</view>
 	</view>
@@ -44,7 +44,7 @@
 			return {
 				leftList:[],
 				rightList:[],
-				pairProblemList: this.problemList
+				pairProblemList: this.problemList,
 			};
 		},
 		mounted(){
@@ -149,6 +149,11 @@
 			justify-content: center;
 			flex-direction: column;
 			border-bottom: 1px solid #D3D3D3;
+			box-sizing: border-box;
+			image{
+				width: 100%;
+				height: 100%;
+			}
 		}
 		.box-left-li-click{
 			background-color: rgba(0,0,0,.3);
@@ -180,6 +185,7 @@
 			display: flex;
 			justify-content: center;
 			flex-direction: column;
+			box-sizing: border-box;
 			image{
 				width: 100%;
 				height: 100%;

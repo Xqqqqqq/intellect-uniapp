@@ -1,15 +1,15 @@
 <template>
 	<view class="img-select-box">
 		<view class="select-box-top" v-for="(item, index) in topList" :key="index">
-			<view v-if="allData.startGroupVoList[page.pageNum].problemType == '1'">{{item.problemName}}</view>
+			<view v-if="allData.startGroupVoList[page.pageNum].showType == '1'">{{item.problemName}}</view>
 			<image v-else :src="item.problemPic" mode="widthFix"></image>
 		</view>
-		<view class="select-box-title" v-if="allData.startGroupVoList[page.pageNum].problemType == '1'">选择元素对应图片：</view>
+		<view class="select-box-title" v-if="allData.startGroupVoList[page.pageNum].showType == '1'">选择元素对应图片：</view>
 		<view class="select-box-title" v-else>选择图片对应元素：</view>
 		<view class="select-box-content">
 			<view class="box-content-li"
 			v-for="(item, index) in bottomList" :key="index" @click="chooseOne(item, index)">
-				<image v-if="allData.startGroupVoList[page.pageNum].problemType == '1'" :src="item.answerPic"></image>
+				<image v-if="allData.startGroupVoList[page.pageNum].showType == '1'" :src="item.answerPic"></image>
 				<view v-else>{{item.answerName}}</view>
 				<view v-if="currentTab == index" class="box-content-li-block"></view>
 			</view>
@@ -68,6 +68,8 @@
 <style lang="scss">
 .img-select-box{
 	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
 	.select-box-top{
 		width: 100%;
 		height: 300rpx;

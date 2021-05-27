@@ -1,14 +1,14 @@
 <template>
 	<view class="img-select-box">
 		<view class="select-box-top" v-for="(item, index) in topList" :key="index">
-			<view v-if="allData.startGroupVoList[page.pageNum].problemType == '1'">{{item.problemName}}</view>
+			<view v-if="allData.startGroupVoList[page.pageNum].showType == '1'">{{item.problemName}}</view>
 			<image v-else :src="item.problemPic" mode="widthFix"></image>
 		</view>
-		<view class="select-box-title">选择上面元素的<text class="select-box-text">向后第1张</text>图片：</view>
+		<view class="select-box-title" v-for="(item, index) in topList" :key="index">选择上面元素的<text class="select-box-text">{{item.problemContent}}</text></view>
 		<view class="select-box-content">
 			<view class="box-content-li"
 			v-for="(item, index) in bottomList" :key="index" @click="chooseOne(item, index)">
-				<image v-if="allData.startGroupVoList[page.pageNum].problemType == '1'" :src="item.answerPic"></image>
+				<image v-if="allData.startGroupVoList[page.pageNum].showType == '1'" :src="item.answerPic"></image>
 				<view v-else>{{item.answerName}}</view>
 				<view v-if="currentTab == index" class="box-content-li-block"></view>
 			</view>

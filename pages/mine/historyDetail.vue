@@ -22,7 +22,7 @@
 			</view>
 			<view class="detail-box-li">
 				<view class="detail-box-li-left">现价</view>
-				<view class="detail-box-li-right">{{historyInfo.bill.truePrice}}元</view>
+				<view class="detail-box-li-right">{{historyInfo.bill.truePrice + historyInfo.bill.billReduced}}元</view>
 			</view>
 			<view class="detail-box-li">
 				<view class="detail-box-li-left">优惠券</view>
@@ -30,7 +30,7 @@
 			</view>
 			<view class="detail-box-li">
 				<view class="detail-box-li-left">实付</view>
-				<view class="detail-box-li-right">{{historyInfo.bill.truePrice - historyInfo.bill.billReduced}}元</view>
+				<view class="detail-box-li-right">{{historyInfo.bill.truePrice}}元</view>
 			</view>
 			<view class="detail-box-li">
 				<view class="detail-box-li-left">支付方式</view>

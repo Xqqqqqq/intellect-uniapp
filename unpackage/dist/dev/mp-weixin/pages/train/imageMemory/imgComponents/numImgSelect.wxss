@@ -26,6 +26,8 @@
 /* 文章场景相关 */
 .img-select-box {
   width: 100%;
+  height: 100%;
+  overflow-y: scroll;
 }
 .img-select-box .select-box-top {
   width: 100%;
