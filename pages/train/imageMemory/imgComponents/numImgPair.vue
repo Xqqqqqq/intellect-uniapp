@@ -2,7 +2,7 @@
 	<view class="img-pair-box">
 		<view class="pair-box-left">
 			<view class="box-left-title" v-html="allData.startGroupVoList[page.pageNum].showType == '1' ? '元素' : '图片'"></view>
-			<view class="box-left-li" :class="{'box-left-li-click':pairProblemList.filter(it => it.problemId === item.id).length > 0}"
+			<view class="box-left-li" :class="{'box-left-li-click':pairProblemList.filter(it => it.problemId == item.id).length > 0}"
 			 v-for="(item,index) in leftList" :key="index" @click="clickLeft(item, index)">
 				<view v-if="allData.startGroupVoList[page.pageNum].showType == '1'">{{item.problemName}}</view>
 				<image v-else :src="item.problemPic"></image>
@@ -53,6 +53,7 @@
 		},
 		methods:{
 			clickLeft(item, index){
+				// console.log(this.pairProblemList)
 				if (this.pairProblemList.length > 0) {
 					const lastProblemItem = this.pairProblemList[this.pairProblemList.length - 1] 
 					if (lastProblemItem.answerId === '' && lastProblemItem.problemId !== item.id) {
@@ -65,6 +66,7 @@
 					}	
 				}
 				const problemIdList = this.pairProblemList.map(it => it.problemId)
+				// console.log(problemIdList)
 				if (problemIdList.includes(item.id)) {
 					this.pairProblemList = this.pairProblemList.filter(it => it.problemId !== item.id)
 				} else {

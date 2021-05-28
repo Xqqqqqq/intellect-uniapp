@@ -79,6 +79,10 @@
 					uni.navigateTo({
 						url: `${url}?collectsId=${this.collectsId}`
 					})
+				}else if(type == 'history'){
+					uni.navigateTo({
+						url: `${url}?title=${this.entryInfo.collectsName}`
+					})
 				}
 			},
 		}

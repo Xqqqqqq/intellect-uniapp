@@ -1,65 +1,47 @@
 <template>
 	<view class="history">
 		<view class="history-top">
-			<view class="history-top-title">数字元素测试</view>
+			<view class="history-top-title">{{title}}</view>
 			<view class="img-test-top">
 				<view class="test-top-li">
 					<view class="test-top-li-title">上次成绩</view>
-					<view class="test-top-li-num">0</view>
+					<view class="test-top-li-num">{{historyInfo.lastScore}}</view>
 				</view>
 				<view class="test-top-li">
 					<view class="test-top-li-title">参与次数</view>
-					<view class="test-top-li-num">0</view>
+					<view class="test-top-li-num">{{historyInfo.examTimes}}</view>
 				</view>
 				<view class="test-top-li">
 					<view class="test-top-li-title">最好成绩</view>
-					<view class="test-top-li-num">0</view>
+					<view class="test-top-li-num">{{historyInfo.bestScore}}</view>
 				</view>
 			</view>
 		</view>
-		<view class="history-title">历史测试（3）</view>
-		<view class="history-content">
-			<view class="history-content-li">
+		<view class="history-title">历史测试（{{historyList.length}}）</view>
+		<view class="history-content" v-if="historyList.length > 0">
+			<view class="history-content-li" v-for="(item, index) in historyList" :key="index">
 				<view class="content-li-left">
-					<view class="li-left-title">数字元素训练</view>
+					<view class="li-left-title">{{item.collectsName}}(测试)</view>
 					<view class="li-left-detail">
-						<text>测试时间：2020-01-01 13:00</text>
+						<text>测试时间：{{item.createDate}}</text>
 					</view>
 					<view class="li-left-detail">
-						<text>题目：30</text>
-						<text>时间：无时限</text>
+						<text>题目：{{item.examNum}}</text>
+						<text>时间：{{item.examTime || '无限时'}}</text>
 					</view>
 					<view class="li-left-detail">
-						<text>模式：混合模式</text>
+						<text>模式：{{item.examTypeName}}</text>
 					</view>
 				</view>
 				<view class="content-li-line"></view>
 				<view class="content-li-right">
 					<view class="li-right-top">准确率</view>
-					<view class="li-right-bottom">100%</view>
-				</view>
-			</view>
-			<view class="history-content-li">
-				<view class="content-li-left">
-					<view class="li-left-title">数字元素训练</view>
-					<view class="li-left-detail">
-						<text>测试时间：2020-01-01 13:00</text>
-					</view>
-					<view class="li-left-detail">
-						<text>题目：30</text>
-						<text>时间：无时限</text>
-					</view>
-					<view class="li-left-detail">
-						<text>模式：混合模式</text>
-					</view>
-				</view>
-				<view class="content-li-line"></view>
-				<view class="content-li-right">
-					<view class="li-right-top">准确率</view>
-					<view class="li-right-bottom">100%</view>
+					<view class="li-right-bottom">{{item.exmScore || 0}}</view>
 				</view>
 			</view>
 		</view>
+		<no-data v-if="status == 'noMore' && !historyList.length"></no-data>
+		<uni-load-more class="no-data-more" v-else iconType="circle" :color="'#CCCCCC'" :contentText="contentText" :status="status" />
 	</view>
 </template>
 
@@ -67,8 +49,79 @@
 	export default {
 		data() {
 			return {
-				
+				page:1,
+				historyInfo:{},
+				historyList:[],
+				contentText: {
+					contentdown: '查看更多',
+					contentrefresh: '加载中',
+					contentnomore: '- 暂时没有新内容了呢 -'
+				},
+				status: 'loading',
+				code:'',
+				title:'数字元素测试'
 			};
+		},
+		onLoad(options){
+			if(options.title){
+				this.title = options.title
+			}
+		},
+		onShow(){
+			this.getExaminationHistory()
+		},
+		onPullDownRefresh() {
+			this.page = 1;
+			this.historyInfo = {};
+			this.historyList = []
+			uni.showLoading({
+				title: '加载中'
+			});
+			this.getExaminationHistory()
+			uni.hideLoading();
+			uni.stopPullDownRefresh()
+		},
+		onReachBottom(){
+			if (this.code != '-116') {
+				this.page = this.page + 1;
+				this.getExaminationHistory();
+			}
+		},
+		methods:{
+			// 获取历史训练数据
+			getExaminationHistory(){
+				if(uni.getStorageSync('userInfo')){
+					let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+					this.$Request.get('/appExaminationController.do?getExaminationHistory',{
+						page:this.page,
+						memberId:memberId
+					}).then(res => {
+						this.code = res.code
+						this.historyInfo = res.data
+						this.status = 'noMore'
+						if(res.code == 0){
+							this.historyList =  [...this.historyList, ...res.data.examList]
+						}else if(res.code == '-118' || res.code == '-116'){
+							this.status = 'noMore'
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showToast({
+						title: '您尚未登录，正在跳往登录页面。。。',
+						icon: 'none'
+					})
+					setTimeout(() => {
+						uni.navigateTo({
+							url:'/pages/loginAll/login'
+						})
+					}, 1000)
+				}
+			},
 		}
 	}
 </script>

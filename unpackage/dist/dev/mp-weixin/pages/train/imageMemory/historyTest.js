@@ -92,7 +92,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  noData: function() {
+    return __webpack_require__.e(/*! import() | components/no-data/no-data */ "components/no-data/no-data").then(__webpack_require__.bind(null, /*! @/components/no-data/no-data.vue */ 307))
+  },
+  uniLoadMore: function() {
+    return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ 293))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -130,25 +137,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;} //
 //
 //
 //
@@ -198,10 +187,81 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _default =
 {
   data: function data() {
-    return {};
+    return {
+      page: 1,
+      historyInfo: {},
+      historyList: [],
+      contentText: {
+        contentdown: '查看更多',
+        contentrefresh: '加载中',
+        contentnomore: '- 暂时没有新内容了呢 -' },
 
+      status: 'loading',
+      code: '',
+      title: '数字元素测试' };
 
-  } };exports.default = _default;
+  },
+  onLoad: function onLoad(options) {
+    if (options.title) {
+      this.title = options.title;
+    }
+  },
+  onShow: function onShow() {
+    this.getExaminationHistory();
+  },
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.page = 1;
+    this.historyInfo = {};
+    this.historyList = [];
+    uni.showLoading({
+      title: '加载中' });
+
+    this.getExaminationHistory();
+    uni.hideLoading();
+    uni.stopPullDownRefresh();
+  },
+  onReachBottom: function onReachBottom() {
+    if (this.code != '-116') {
+      this.page = this.page + 1;
+      this.getExaminationHistory();
+    }
+  },
+  methods: {
+    // 获取历史训练数据
+    getExaminationHistory: function getExaminationHistory() {var _this = this;
+      if (uni.getStorageSync('userInfo')) {
+        var memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
+        this.$Request.get('/appExaminationController.do?getExaminationHistory', {
+          page: this.page,
+          memberId: memberId }).
+        then(function (res) {
+          _this.code = res.code;
+          _this.historyInfo = res.data;
+          _this.status = 'noMore';
+          if (res.code == 0) {
+            _this.historyList = [].concat(_toConsumableArray(_this.historyList), _toConsumableArray(res.data.examList));
+          } else if (res.code == '-118' || res.code == '-116') {
+            _this.status = 'noMore';
+          } else {
+            uni.showToast({
+              title: res.info,
+              icon: 'none' });
+
+          }
+        });
+      } else {
+        uni.showToast({
+          title: '您尚未登录，正在跳往登录页面。。。',
+          icon: 'none' });
+
+        setTimeout(function () {
+          uni.navigateTo({
+            url: '/pages/loginAll/login' });
+
+        }, 1000);
+      }
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

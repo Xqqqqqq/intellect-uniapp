@@ -1,4 +1,8 @@
 {
   "navigationBarTitleText": "历史测试",
-  "usingComponents": {}
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "no-data": "/components/no-data/no-data",
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
+  }
 }

@@ -83,7 +83,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   var l0 = _vm.__map(_vm.leftList, function(item, index) {
     var g0 = _vm.pairProblemList.filter(function(it) {
-      return it.problemId === item.id
+      return it.problemId == item.id
     })
     return {
       $orig: _vm.__get_orig(item),
@@ -210,6 +210,7 @@ var _default =
   },
   methods: {
     clickLeft: function clickLeft(item, index) {
+      // console.log(this.pairProblemList)
       if (this.pairProblemList.length > 0) {
         var lastProblemItem = this.pairProblemList[this.pairProblemList.length - 1];
         if (lastProblemItem.answerId === '' && lastProblemItem.problemId !== item.id) {
@@ -222,6 +223,7 @@ var _default =
         }
       }
       var problemIdList = this.pairProblemList.map(function (it) {return it.problemId;});
+      // console.log(problemIdList)
       if (problemIdList.includes(item.id)) {
         this.pairProblemList = this.pairProblemList.filter(function (it) {return it.problemId !== item.id;});
       } else {

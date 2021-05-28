@@ -79,8 +79,9 @@
 		},
 		data() {
 			return {
-				
 			};
+		},
+		onLoad(options){
 		},
 		methods:{
 			goBack(){

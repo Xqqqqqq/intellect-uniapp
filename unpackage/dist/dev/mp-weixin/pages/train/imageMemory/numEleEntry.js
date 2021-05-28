@@ -211,6 +211,10 @@ var _default =
         uni.navigateTo({
           url: "".concat(url, "?collectsId=").concat(this.collectsId) });
 
+      } else if (type == 'history') {
+        uni.navigateTo({
+          url: "".concat(url, "?title=").concat(this.entryInfo.collectsName) });
+
       }
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

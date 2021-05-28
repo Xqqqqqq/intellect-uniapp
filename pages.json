@@ -199,7 +199,8 @@
         ,{
             "path" : "pages/train/imageMemory/historyTest",
             "style" : {
-				"navigationBarTitleText": "历史测试"
+				"navigationBarTitleText": "历史测试",
+				"enablePullDownRefresh": true
 			}
         }
         ,{

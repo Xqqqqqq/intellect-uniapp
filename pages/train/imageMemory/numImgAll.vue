@@ -1,13 +1,12 @@
 <template>
 	<view class="img-pair">
 		<view class="img-pair-top" :style="{top: showH5 ? '88rpx' : '0rpx'}">
-			<!-- <view class="pair-top-blue">{{topLeftName}}：</view> -->
 			<view class="pair-top-blue" v-if="allData.startGroupVoList[page.pageNum].groupType == 1">数图配对</view>
 			<view class="pair-top-blue" v-if="allData.startGroupVoList[page.pageNum].groupType == 2">数图单选</view>
 			<view class="pair-top-blue" v-if="allData.startGroupVoList[page.pageNum].groupType == 3">数图计算</view>
 			<view class="pair-top-blue" v-if="allData.startGroupVoList[page.pageNum].groupType == 4">数图排序</view>
 			<view class="pair-top-blue" v-if="allData.startGroupVoList[page.pageNum].groupType == 5">混合模式</view>
-			<view class="pair-top-red">{{page.examTime}}s</view>
+			<view class="pair-top-red" v-if="userExamTime != ''">{{page.examTime}}s</view>
 			<view class="pair-top-blue">第{{page.pageNum+1}}组 / 共{{page.examNum}}组</view>
 		</view>
 		<numImgPair v-if="allData.startGroupVoList[page.pageNum].groupType == 1" :page="page" :allData="allData" :problemList="problemList" @clickPairLeft="clickProblemList" @clickPairRight="clickProblemList"></numImgPair>
@@ -45,17 +44,17 @@
 				userExamTime: 0, //用户选择的答题时间数
 				optionInfo:{
 					collectsId: '402aa38151aef50c0151aef50c2600cc',
-					time: 5,
-					type: 4,
+					time: 0,
+					type: 1,
 					num: 8
 				},// 所有从前一个页面传过来的数据（需要传给后台的数据）
 			};
 		},
 		onLoad(options){
-			// if(options){
-			// 	this.optionInfo = JSON.parse(options.options)
-			// 	console.log(this.optionInfo)
-			// }
+			if(options){
+				this.optionInfo = JSON.parse(options.options)
+				console.log(this.optionInfo)
+			}
 		},
 		onShow(){
 			if(navigator){
@@ -76,34 +75,35 @@
 					}).then(res => {
 						if(res.code == 0){
 							this.allData = res.data
-							this.userExamTime = res.data.examTime
+							this.userExamTime = res.data.examTime == 0 ? '' : res.data.examTime
 							this.page.examTime = this.userExamTime // 用户选择的每题时间数
 							this.page.examNum = this.allData.examNum // 测试组数
-							const timer = setInterval(() => {
-								// 倒计时
-								this.page.examTime = this.page.examTime - 1;
-								// 当倒计时为0时
-								if (this.page.examTime === 0) {
-									console.log('allData', this.allData)
-									if(Number(this.page.pageNum)+ 1 == Number(this.page.examNum)){
-										console.log('所有题都答完了')
-										console.log('onshow',this.problemList)
-										this.btnName = '结束答题'
-										clearInterval(timer);
-										return
-									}else{
-										this.problemList.push({
-											answerId: '￥',
-											problemId: '￥',
-											problemName: '',
-											problemPic: ''
-										})
-										this.page.pageNum += 1
-										this.page.examTime = this.userExamTime
+							if(this.userExamTime != ''){
+								const timer = setInterval(() => {
+									// 倒计时
+									this.page.examTime = this.page.examTime - 1;
+									// 当倒计时为0时
+									if (this.page.examTime === 0) {
+										console.log('allData', this.allData)
+										if(Number(this.page.pageNum)+ 1 == Number(this.page.examNum)){
+											console.log('所有题都答完了')
+											console.log('onshow',this.problemList)
+											this.btnName = '结束答题'
+											clearInterval(timer);
+											return
+										}else{
+											this.problemList.push({
+												answerId: '￥',
+												problemId: '￥',
+												problemName: '',
+												problemPic: ''
+											})
+											this.page.pageNum += 1
+											this.page.examTime = this.userExamTime
+										}
 									}
-								}
-							}, 1000);
-							
+								}, 1000);
+							}
 						}else{
 							uni.showToast({
 								title: res.info,
@@ -141,7 +141,21 @@
 					})
 					this.page.pageNum += 1
 				}
-			}
+			},
+			// 答题结束
+			takeNumExamination(){
+				this.$Request.postJson('/appExaminationController.do?takeNumExamination',{
+					...this.answerInfo
+				}).then(res => {
+					if(res.code == 0){
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
 		}
 	}
 </script>

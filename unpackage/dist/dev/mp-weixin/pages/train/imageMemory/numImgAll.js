@@ -154,7 +154,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 {
   components: {
     numImgPair: numImgPair,
@@ -177,17 +176,17 @@ __webpack_require__.r(__webpack_exports__);
       userExamTime: 0, //用户选择的答题时间数
       optionInfo: {
         collectsId: '402aa38151aef50c0151aef50c2600cc',
-        time: 5,
-        type: 4,
+        time: 0,
+        type: 1,
         num: 8 }
       // 所有从前一个页面传过来的数据（需要传给后台的数据）
     };
   },
   onLoad: function onLoad(options) {
-    // if(options){
-    // 	this.optionInfo = JSON.parse(options.options)
-    // 	console.log(this.optionInfo)
-    // }
+    if (options) {
+      this.optionInfo = JSON.parse(options.options);
+      console.log(this.optionInfo);
+    }
   },
   onShow: function onShow() {
     if (navigator) {
@@ -208,34 +207,35 @@ __webpack_require__.r(__webpack_exports__);
         then(function (res) {
           if (res.code == 0) {
             _this.allData = res.data;
-            _this.userExamTime = res.data.examTime;
+            _this.userExamTime = res.data.examTime == 0 ? '' : res.data.examTime;
             _this.page.examTime = _this.userExamTime; // 用户选择的每题时间数
             _this.page.examNum = _this.allData.examNum; // 测试组数
-            var timer = setInterval(function () {
-              // 倒计时
-              _this.page.examTime = _this.page.examTime - 1;
-              // 当倒计时为0时
-              if (_this.page.examTime === 0) {
-                console.log('allData', _this.allData);
-                if (Number(_this.page.pageNum) + 1 == Number(_this.page.examNum)) {
-                  console.log('所有题都答完了');
-                  console.log('onshow', _this.problemList);
-                  _this.btnName = '结束答题';
-                  clearInterval(timer);
-                  return;
-                } else {
-                  _this.problemList.push({
-                    answerId: '￥',
-                    problemId: '￥',
-                    problemName: '',
-                    problemPic: '' });
+            if (_this.userExamTime != '') {
+              var timer = setInterval(function () {
+                // 倒计时
+                _this.page.examTime = _this.page.examTime - 1;
+                // 当倒计时为0时
+                if (_this.page.examTime === 0) {
+                  console.log('allData', _this.allData);
+                  if (Number(_this.page.pageNum) + 1 == Number(_this.page.examNum)) {
+                    console.log('所有题都答完了');
+                    console.log('onshow', _this.problemList);
+                    _this.btnName = '结束答题';
+                    clearInterval(timer);
+                    return;
+                  } else {
+                    _this.problemList.push({
+                      answerId: '￥',
+                      problemId: '￥',
+                      problemName: '',
+                      problemPic: '' });
 
-                  _this.page.pageNum += 1;
-                  _this.page.examTime = _this.userExamTime;
+                    _this.page.pageNum += 1;
+                    _this.page.examTime = _this.userExamTime;
+                  }
                 }
-              }
-            }, 1000);
-
+              }, 1000);
+            }
           } else {
             uni.showToast({
               title: res.info,
@@ -273,6 +273,20 @@ __webpack_require__.r(__webpack_exports__);
 
         this.page.pageNum += 1;
       }
+    },
+    // 答题结束
+    takeNumExamination: function takeNumExamination() {
+      this.$Request.postJson('/appExaminationController.do?takeNumExamination', _objectSpread({},
+      this.answerInfo)).
+      then(function (res) {
+        if (res.code == 0) {
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

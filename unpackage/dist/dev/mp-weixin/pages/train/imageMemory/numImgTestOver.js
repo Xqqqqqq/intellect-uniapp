@@ -216,7 +216,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
 
-
+  },
+  onLoad: function onLoad(options) {
   },
   methods: {
     goBack: function goBack() {
