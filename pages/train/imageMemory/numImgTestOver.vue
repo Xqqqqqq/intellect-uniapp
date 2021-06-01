@@ -3,27 +3,27 @@
 		<view class="test-over-top">
 			<view class="over-top-li">
 				<view class="test-over-circle">
-					<cmd-progress type="circle" :percent="75" :stroke-width="10" :width="120"></cmd-progress>
+					<cmd-progress type="circle" :percent="answerInfo.score" :stroke-width="10" :width="120"></cmd-progress>
 				</view>
 				<view class="over-top-li-right">
 					<view class="over-top-li-box">
-						<view class="top-li-box-num">75%</view>
+						<view class="top-li-box-num">{{answerInfo.score}}%</view>
 						<view class="top-li-box-title">正确率</view>
 					</view>
 					<view class="over-top-li-box">
-						<view class="top-li-box-num">100</view>
+						<view class="top-li-box-num">{{answerInfo.allNum}}</view>
 						<view class="top-li-box-title">题目</view>
 					</view>
 				</view>
 			</view>
 			<view class="over-top-li">
 				<view class="over-top-li-box">
-					<view class="top-li-box-num">75</view>
+					<view class="top-li-box-num">{{answerInfo.getNum}}</view>
 					<view class="top-li-box-title">正确题数</view>
 				</view>
 				<view class="over-top-li-line"></view>
 				<view class="over-top-li-box">
-					<view class="top-li-box-num">25</view>
+					<view class="top-li-box-num">{{answerInfo.lostNum}}</view>
 					<view class="top-li-box-title">错误题数</view>
 				</view>
 			</view>
@@ -31,41 +31,24 @@
 		
 		<view class="test-over-content">
 			<view class="over-content-title">ERROR <text>错记元素</text></view>
-			<view class="over-content-box">
-				<view class="content-box-li">
+			<view class="over-content-box" v-if="answerInfo.lostList.length > 0">
+				<view class="content-box-li" v-for="(item, index) in answerInfo.lostList" :key="index">
 					<view class="box-li-left">
-						<image src='../../../static/img/icons/zhongjiang.png'></image>
+						<image :src='item.answerPic'></image>
 					</view>
 					<view class="box-li-content">
 						<image src="../../../static/img/icons/blue-arrow.png"></image>
 					</view>
-					<view class="box-li-left">1</view>
-				</view>
-				<view class="content-box-li">
-					<view class="box-li-left">
-						<image src='../../../static/img/icons/zhongjiang.png'></image>
-					</view>
-					<view class="box-li-content">
-						<image src="../../../static/img/icons/blue-arrow.png"></image>
-					</view>
-					<view class="box-li-left">1</view>
-				</view>
-				<view class="content-box-li">
-					<view class="box-li-left">
-						<image src='../../../static/img/icons/zhongjiang.png'></image>
-					</view>
-					<view class="box-li-content">
-						<image src="../../../static/img/icons/blue-arrow.png"></image>
-					</view>
-					<view class="box-li-left">1</view>
+					<view class="box-li-left">{{item.answerName}}</view>
 				</view>
 			</view>
+			<no-data v-else></no-data>
 		</view>
 		
 		<view class="test-over-bottom">
-			<view class="over-bottom-li bottom-li-green" @click="goBack">重新测试</view>
+			<view class="over-bottom-li bottom-li-red" @click="goBackAll">重新测试</view>
 			<view class="over-bottom-li bottom-li-yellow" @click="gotoTest">前往训练</view>
-			<view class="over-bottom-li bottom-li-red" @click="goBack">回看过程</view>
+			<!-- <view class="over-bottom-li bottom-li-green" @click="goBackRead">回看过程</view> -->
 		</view>
 		<view class="test-over-bottom-clone"></view>
 	</view>
@@ -79,19 +62,53 @@
 		},
 		data() {
 			return {
+				id: '2c9a29b679c688a20179c6914a1a01e6', // 答案id
+				answerInfo:{}
 			};
 		},
 		onLoad(options){
+			if(options.id){
+				// console.log(options.id)
+				this.id = options.id
+			}
+		},
+		onShow(){
+			if(this.id){
+				this.getNumExaminationResult()
+			}
 		},
 		methods:{
-			goBack(){
-				uni.navigateBack({
-					delta:1
+			// 获取答题结果数据
+			getNumExaminationResult(){
+				this.$Request.get('/appExaminationController.do?getNumExaminationResult',{
+					id:this.id
+				}).then(res => {
+					if(res.code == 0){
+						this.answerInfo =  res.data
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
 				})
 			},
+			// 重新测试
+			goBackAll(){
+				uni.navigateTo({
+					url: '/pages/train/imageMemory/numImgAll'
+				})
+			},
+			// 前往训练
 			gotoTest(){
 				uni.navigateTo({
-					url: '/pages/train/imageMemory/numImgTest'
+					url: `/pages/train/imageMemory/numImgTest?collectsId=${this.answerInfo.examId}`
+				})
+			},
+			// 回看过程
+			goBackRead(){
+				uni.navigateTo({
+					url: '/pages/train/imageMemory/numImgAllRead'
 				})
 			}
 		}
@@ -220,7 +237,8 @@
 		line-height: 100rpx;
 		color: #FFFFFF;
 		.over-bottom-li{
-			width: 33%;
+			// width: 33%;
+			width: 50%;
 			text-align: center;
 		}
 		.bottom-li-green{

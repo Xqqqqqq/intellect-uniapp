@@ -12,7 +12,6 @@
     "pages/loginAll/useragreement",
     "pages/train/imageMemory/numImgCard",
     "pages/train/imageMemory/numImgTest",
-    "pages/train/imageMemory/numImgPair",
     "pages/train/imageMemory/numImgTestOver",
     "pages/mine/superMember",
     "pages/mine/energy",
@@ -33,7 +32,8 @@
     "pages/train/imageMemory/numEleEntry",
     "pages/train/imageMemory/historyTest",
     "pages/loginAll/changePhone",
-    "pages/train/imageMemory/numImgAll"
+    "pages/train/imageMemory/numImgAll",
+    "pages/train/imageMemory/numImgAllRead"
   ],
   "subPackages": [],
   "window": {
@@ -80,6 +80,5 @@
     "uni-load-more": "/components/uni-load-more/uni-load-more",
     "uni-popup": "/components/uni-popup/uni-popup",
     "no-data": "/components/no-data/no-data"
-  },
-  "sitemapLocation": "sitemap39.json"
+  }
 }

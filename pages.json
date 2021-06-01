@@ -82,12 +82,6 @@
 			}
         }
         ,{
-            "path" : "pages/train/imageMemory/numImgPair",
-            "style" : {
-				"navigationBarTitleText": "通关考试"
-			}
-        }
-        ,{
             "path" : "pages/train/imageMemory/numImgTestOver",
             "style" : {
 				"navigationBarTitleText": "考试结束"
@@ -215,6 +209,12 @@
 				"navigationBarTitleText": "数字元素测试"
 			}
         }
+		,{
+		    "path" : "pages/train/imageMemory/numImgAllRead",
+		    "style" : {
+				"navigationBarTitleText": "测试结果回看"
+			}
+		}
     ],
 	"tabBar": {
 		"color": "#8F9091",

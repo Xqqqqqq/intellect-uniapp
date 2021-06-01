@@ -242,6 +242,9 @@ var _default =
     };
   },
   onLoad: function onLoad(option) {
+    if (option) {
+      this.optionInfo.collectsId = option.collectsId;
+    }
     this.optionInfo.time = this.secondArr[0].id;
     this.optionInfo.type = this.typeArr[0].id;
     this.optionInfo.num = this.numArr[0].id;
@@ -261,8 +264,9 @@ var _default =
     },
     gotoUrl: function gotoUrl() {
       // console.log(this.optionInfo)
+      uni.setStorageSync('optionInfo', this.optionInfo);
       uni.navigateTo({
-        url: "/pages/train/imageMemory/numImgAll?options=".concat(JSON.stringify(this.optionInfo)) });
+        url: '/pages/train/imageMemory/numImgAll' });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

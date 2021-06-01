@@ -79,9 +79,13 @@
 					uni.navigateTo({
 						url: `${url}?collectsId=${this.collectsId}`
 					})
-				}else if(type == 'history'){
+				}else if(type == 'history'){ // 历史测试
 					uni.navigateTo({
 						url: `${url}?title=${this.entryInfo.collectsName}`
+					})
+				}else if(type == 'test') { //前往测试
+					uni.navigateTo({
+						url: `${url}?collectsId=${this.collectsId}`
 					})
 				}
 			},

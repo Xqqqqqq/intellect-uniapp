@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "测试结果回看",
+  "usingComponents": {
+    "num-img-pair": "/pages/train/imageMemory/imgComponentsRead/numImgPair",
+    "num-img-select": "/pages/train/imageMemory/imgComponentsRead/numImgSelect",
+    "num-img-count": "/pages/train/imageMemory/imgComponentsRead/numImgCount",
+    "num-img-sort": "/pages/train/imageMemory/imgComponentsRead/numImgSort"
+  }
+}

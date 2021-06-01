@@ -45,16 +45,10 @@
 				optionInfo:{
 					collectsId: '402aa38151aef50c0151aef50c2600cc',
 					time: 0,
-					type: 1,
+					type: 3,
 					num: 8
 				},// 所有从前一个页面传过来的数据（需要传给后台的数据）
 			};
-		},
-		onLoad(options){
-			if(options){
-				this.optionInfo = JSON.parse(options.options)
-				console.log(this.optionInfo)
-			}
 		},
 		onShow(){
 			if(navigator){
@@ -62,6 +56,7 @@
 			}else{
 				this.showH5 = false
 			}
+			this.optionInfo = uni.getStorageSync('optionInfo')
 			this.startNumExamination()
 		},
 		methods:{
@@ -84,13 +79,14 @@
 									this.page.examTime = this.page.examTime - 1;
 									// 当倒计时为0时
 									if (this.page.examTime === 0) {
-										console.log('allData', this.allData)
+										// console.log('allData', this.allData)
 										if(Number(this.page.pageNum)+ 1 == Number(this.page.examNum)){
 											console.log('所有题都答完了')
-											console.log('onshow',this.problemList)
 											this.btnName = '结束答题'
+											let answerList = this.problemList.filter(item => item.problemId != '￥')
+											console.log(answerList)
+											this.takeNumExamination(answerList)
 											clearInterval(timer);
-											return
 										}else{
 											this.problemList.push({
 												answerId: '￥',
@@ -129,9 +125,10 @@
 			clickNext(){
 				if(Number(this.page.pageNum)+ 1 == Number(this.page.examNum)){
 					console.log('所有题都答完了')
-					console.log('btn',this.problemList)
 					this.btnName = '结束答题'
-					return
+					let answerList = this.problemList.filter(item => item.problemId != '￥')
+					console.log(answerList)
+					this.takeNumExamination(answerList)
 				}else{
 					this.problemList.push({
 						answerId: '￥',
@@ -143,11 +140,22 @@
 				}
 			},
 			// 答题结束
-			takeNumExamination(){
+			takeNumExamination(answerList){
 				this.$Request.postJson('/appExaminationController.do?takeNumExamination',{
-					...this.answerInfo
+					answerList: answerList,
+					id: this.allData.id
 				}).then(res => {
 					if(res.code == 0){
+						let id = res.data.id
+						uni.showToast({
+							title: '提交成功，正在跳转...',
+							icon: 'none'
+						})
+						setTimeout(()=>{
+							uni.navigateTo({
+								url:`/pages/train/imageMemory/numImgTestOver?id=${id}`
+							})
+						},1000)
 					}else{
 						uni.showToast({
 							title: res.info,

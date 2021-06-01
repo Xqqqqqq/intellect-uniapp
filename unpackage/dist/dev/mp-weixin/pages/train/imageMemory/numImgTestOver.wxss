@@ -166,7 +166,7 @@
   color: #FFFFFF;
 }
 .test-over .test-over-bottom .over-bottom-li {
-  width: 33%;
+  width: 50%;
   text-align: center;
 }
 .test-over .test-over-bottom .bottom-li-green {
