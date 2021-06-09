@@ -29,6 +29,9 @@ page {
 }
 .ele-entry {
   width: 100%;
+  padding-bottom: 100rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .ele-entry .list-content-box {
   width: 100%;

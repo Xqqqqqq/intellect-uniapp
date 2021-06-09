@@ -93,11 +93,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
+  uniNavBar: function() {
+    return __webpack_require__.e(/*! import() | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @/components/uni-nav-bar/uni-nav-bar.vue */ 495))
+  },
   cmdProgress: function() {
-    return __webpack_require__.e(/*! import() | components/cmd-progress/cmd-progress */ "components/cmd-progress/cmd-progress").then(__webpack_require__.bind(null, /*! @/components/cmd-progress/cmd-progress.vue */ 340))
+    return __webpack_require__.e(/*! import() | components/cmd-progress/cmd-progress */ "components/cmd-progress/cmd-progress").then(__webpack_require__.bind(null, /*! @/components/cmd-progress/cmd-progress.vue */ 348))
   },
   noData: function() {
-    return __webpack_require__.e(/*! import() | components/no-data/no-data */ "components/no-data/no-data").then(__webpack_require__.bind(null, /*! @/components/no-data/no-data.vue */ 298))
+    return __webpack_require__.e(/*! import() | components/no-data/no-data */ "components/no-data/no-data").then(__webpack_require__.bind(null, /*! @/components/no-data/no-data.vue */ 306))
   }
 }
 var render = function() {
@@ -137,7 +140,10 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var cmdProgress = function cmdProgress() {__webpack_require__.e(/*! require.ensure | components/cmd-progress/cmd-progress */ "components/cmd-progress/cmd-progress").then((function () {return resolve(__webpack_require__(/*! @/components/cmd-progress/cmd-progress.vue */ 340));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var cmdProgress = function cmdProgress() {__webpack_require__.e(/*! require.ensure | components/cmd-progress/cmd-progress */ "components/cmd-progress/cmd-progress").then((function () {return resolve(__webpack_require__(/*! @/components/cmd-progress/cmd-progress.vue */ 348));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 495));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
 
 
 
@@ -197,7 +203,8 @@ __webpack_require__.r(__webpack_exports__);
 
 {
   components: {
-    cmdProgress: cmdProgress },
+    cmdProgress: cmdProgress,
+    uniNavBar: uniNavBar },
 
   data: function data() {
     return {

@@ -29,30 +29,6 @@
           "scene": null
         },
         {
-          "name": "pages/train/imageMemory/numEleEntry",
-          "pathName": "pages/train/imageMemory/numEleEntry",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/train/imageMemory/numImgTest",
-          "pathName": "pages/train/imageMemory/numImgTest",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/train/imageMemory/numImgAll",
-          "pathName": "pages/train/imageMemory/numImgAll",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/train/imageMemory/numImgTestOver",
-          "pathName": "pages/train/imageMemory/numImgTestOver",
-          "query": "",
-          "scene": null
-        },
-        {
           "name": "pages/myData/myData",
           "pathName": "pages/myData/myData",
           "query": "",

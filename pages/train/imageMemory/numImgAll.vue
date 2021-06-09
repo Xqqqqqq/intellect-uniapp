@@ -48,6 +48,7 @@
 					type: 3,
 					num: 8
 				},// 所有从前一个页面传过来的数据（需要传给后台的数据）
+				timer: null
 			};
 		},
 		onShow(){
@@ -74,7 +75,7 @@
 							this.page.examTime = this.userExamTime // 用户选择的每题时间数
 							this.page.examNum = this.allData.examNum // 测试组数
 							if(this.userExamTime != ''){
-								const timer = setInterval(() => {
+								this.timer = setInterval(() => {
 									// 倒计时
 									this.page.examTime = this.page.examTime - 1;
 									// 当倒计时为0时
@@ -86,7 +87,7 @@
 											let answerList = this.problemList.filter(item => item.problemId != '￥')
 											console.log(answerList)
 											this.takeNumExamination(answerList)
-											clearInterval(timer);
+											clearInterval(this.timer);
 										}else{
 											this.problemList.push({
 												answerId: '￥',
@@ -129,6 +130,7 @@
 					let answerList = this.problemList.filter(item => item.problemId != '￥')
 					console.log(answerList)
 					this.takeNumExamination(answerList)
+					clearInterval(this.timer);
 				}else{
 					this.problemList.push({
 						answerId: '￥',
@@ -137,6 +139,7 @@
 						problemPic: '',
 					})
 					this.page.pageNum += 1
+					this.page.examTime = this.userExamTime
 				}
 			},
 			// 答题结束

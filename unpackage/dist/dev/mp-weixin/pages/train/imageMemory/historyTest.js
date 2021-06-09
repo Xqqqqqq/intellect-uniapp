@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   noData: function() {
-    return __webpack_require__.e(/*! import() | components/no-data/no-data */ "components/no-data/no-data").then(__webpack_require__.bind(null, /*! @/components/no-data/no-data.vue */ 298))
+    return __webpack_require__.e(/*! import() | components/no-data/no-data */ "components/no-data/no-data").then(__webpack_require__.bind(null, /*! @/components/no-data/no-data.vue */ 306))
   },
   uniLoadMore: function() {
-    return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ 284))
+    return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ 292))
   }
 }
 var render = function() {
@@ -207,6 +207,9 @@ var _default =
     }
   },
   onShow: function onShow() {
+    this.page = 1;
+    this.historyInfo = {};
+    this.historyList = [];
     this.getExaminationHistory();
   },
   onPullDownRefresh: function onPullDownRefresh() {

@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var numImgPair = function numImgPair() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgPair */ "pages/train/imageMemory/imgComponents/numImgPair").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgPair.vue */ 368));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var numImgSelect = function numImgSelect() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgSelect */ "pages/train/imageMemory/imgComponents/numImgSelect").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgSelect.vue */ 375));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var numImgCount = function numImgCount() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgCount */ "pages/train/imageMemory/imgComponents/numImgCount").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgCount.vue */ 382));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var numImgSort = function numImgSort() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgSort */ "pages/train/imageMemory/imgComponents/numImgSort").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgSort.vue */ 389));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var numImgPair = function numImgPair() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgPair */ "pages/train/imageMemory/imgComponents/numImgPair").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgPair.vue */ 376));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var numImgSelect = function numImgSelect() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgSelect */ "pages/train/imageMemory/imgComponents/numImgSelect").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgSelect.vue */ 383));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var numImgCount = function numImgCount() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgCount */ "pages/train/imageMemory/imgComponents/numImgCount").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgCount.vue */ 390));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var numImgSort = function numImgSort() {__webpack_require__.e(/*! require.ensure | pages/train/imageMemory/imgComponents/numImgSort */ "pages/train/imageMemory/imgComponents/numImgSort").then((function () {return resolve(__webpack_require__(/*! ./imgComponents/numImgSort.vue */ 397));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -178,9 +178,10 @@ __webpack_require__.r(__webpack_exports__);
         collectsId: '402aa38151aef50c0151aef50c2600cc',
         time: 0,
         type: 3,
-        num: 8 }
+        num: 8 },
       // 所有从前一个页面传过来的数据（需要传给后台的数据）
-    };
+      timer: null };
+
   },
   onShow: function onShow() {
     if (navigator) {
@@ -206,7 +207,7 @@ __webpack_require__.r(__webpack_exports__);
             _this.page.examTime = _this.userExamTime; // 用户选择的每题时间数
             _this.page.examNum = _this.allData.examNum; // 测试组数
             if (_this.userExamTime != '') {
-              var timer = setInterval(function () {
+              _this.timer = setInterval(function () {
                 // 倒计时
                 _this.page.examTime = _this.page.examTime - 1;
                 // 当倒计时为0时
@@ -218,7 +219,7 @@ __webpack_require__.r(__webpack_exports__);
                     var answerList = _this.problemList.filter(function (item) {return item.problemId != '￥';});
                     console.log(answerList);
                     _this.takeNumExamination(answerList);
-                    clearInterval(timer);
+                    clearInterval(_this.timer);
                   } else {
                     _this.problemList.push({
                       answerId: '￥',
@@ -261,6 +262,7 @@ __webpack_require__.r(__webpack_exports__);
         var answerList = this.problemList.filter(function (item) {return item.problemId != '￥';});
         console.log(answerList);
         this.takeNumExamination(answerList);
+        clearInterval(this.timer);
       } else {
         this.problemList.push({
           answerId: '￥',
@@ -269,6 +271,7 @@ __webpack_require__.r(__webpack_exports__);
           problemPic: '' });
 
         this.page.pageNum += 1;
+        this.page.examTime = this.userExamTime;
       }
     },
     // 答题结束

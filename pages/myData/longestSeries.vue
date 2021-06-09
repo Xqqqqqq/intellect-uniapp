@@ -4,7 +4,7 @@
 			<view class="wrap-top-box">
 				<view class="top-box-li">
 					<view class="top-box-li-title">本月</view>
-					<view class="top-box-li-num">3天</view>
+					<view class="top-box-li-num">0天</view>
 				</view>
 			</view>
 			<view class="wrap-top-tip">碎片化时间训练坚持力</view>
@@ -13,11 +13,11 @@
 			<view class="longer-top-li">
 				<view class="top-li-line">
 					<view>本月最长连续</view>
-					<view><text>3</text>天</view>
+					<view><text>0</text>天</view>
 				</view>
 				<view class="top-li-line">
-					<view>起始：456454</view>
-					<view>结束：454456</view>
+					<view>起始：0</view>
+					<view>结束：0</view>
 				</view>
 			</view>
 		</view>
@@ -36,23 +36,7 @@
 		},
 		data() {
 			return {
-				listdetial:[{
-					src:'../../static/img/icons/common.jpg',
-					title: '数字图像记忆',
-					source: '官方',
-					person: '100',
-					detail: '简介：针对0~100的数字进行图像',
-					date: '2020-10-10',
-					num: 20
-				},{
-					src:'../../static/img/icons/common.jpg',
-					title: '数字图像记忆',
-					source: '官方',
-					person: '100',
-					detail: '简介：针对0~100的数字进行图像',
-					date: '2020-10-10',
-					num: 20
-				}],
+				listdetial:[],
 			}
 		},
 		methods: {

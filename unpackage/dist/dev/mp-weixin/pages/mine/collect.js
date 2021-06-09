@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   myScrollX: function() {
-    return __webpack_require__.e(/*! import() | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then(__webpack_require__.bind(null, /*! @/components/my-scrollX/my-scrollX.vue */ 312))
+    return __webpack_require__.e(/*! import() | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then(__webpack_require__.bind(null, /*! @/components/my-scrollX/my-scrollX.vue */ 320))
   }
 }
 var render = function() {
@@ -134,7 +134,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var myScrollX = function myScrollX() {__webpack_require__.e(/*! require.ensure | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then((function () {return resolve(__webpack_require__(/*! @/components/my-scrollX/my-scrollX.vue */ 312));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var myScrollX = function myScrollX() {__webpack_require__.e(/*! require.ensure | components/my-scrollX/my-scrollX */ "components/my-scrollX/my-scrollX").then((function () {return resolve(__webpack_require__(/*! @/components/my-scrollX/my-scrollX.vue */ 320));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 

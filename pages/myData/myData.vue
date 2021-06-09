@@ -86,6 +86,9 @@
 			}
 		},
 		onShow(){
+			this.page = 1;
+			this.trainInfo = {};
+			this.collectsList = []
 			this.getTrainList()
 		},
 		methods:{

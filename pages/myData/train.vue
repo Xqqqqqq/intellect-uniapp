@@ -56,11 +56,16 @@
 				memberId: '',
 			}
 		},
-		onLoad() {
+		onShow() {
 			_self = this;
 			this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id
 			this.cWidth=uni.upx2px(750);
 			this.cHeight=uni.upx2px(500);
+			this.page = 1;
+			this.trainInfo = {};
+			this.collectsList = []
+			this.chartData.categories = []
+			this.chartData.series[0].data = []
 			// this.getServerData();
 			this.getTrainList()
 		},

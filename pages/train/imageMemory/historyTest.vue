@@ -68,6 +68,9 @@
 			}
 		},
 		onShow(){
+			this.page = 1;
+			this.historyInfo = {};
+			this.historyList = []
 			this.getExaminationHistory()
 		},
 		onPullDownRefresh() {

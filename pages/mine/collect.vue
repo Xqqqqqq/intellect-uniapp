@@ -25,7 +25,7 @@
 				</view>
 				<view class="ul-li-right">
 					<view class="li-right-title">标题标题标题标</view>
-					<view class="li-right-author">作者：分手就分手</view>
+					<view class="li-right-author">作者：股市大哥大</view>
 					<view class="li-right-bottom">
 						<view class="right-bottom-display">
 							<view class="right-bottom-watch">

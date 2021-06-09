@@ -18,7 +18,7 @@
 					</view>
 				</view>
 				<view class="box-right-line"></view>
-				<view class="box-right-tip">简介：{{item.collectsRemarks}}</view>
+				<view class="box-right-tip">简介：<rich-text style="width: 80%;" :nodes="item.collectsRemarks"></rich-text></view>
 				<view class="box-right-tip"><text>上次使用：{{item.studyDate || '暂无'}}</text><text>{{item.studyMonth}}次/本月</text></view>
 			</view>
 		</view>

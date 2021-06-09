@@ -153,19 +153,7 @@ var _default =
 {
   data: function data() {
     return {
-      historyList: [{
-        time: '2020-01-01 13:00',
-        title: '数字元素测试',
-        money: 19.90 },
-      {
-        time: '2020-01-01 13:00',
-        title: '数字元素测试',
-        money: 19.90 },
-      {
-        time: '2020-01-01 13:00',
-        title: '数字元素测试',
-        money: 19.90 }] };
-
+      historyList: [] };
 
   } };exports.default = _default;
 

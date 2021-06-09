@@ -11,7 +11,7 @@
 					<view><image src="../../../static/img/icons/shoucang.png"></image>{{entryInfo.attentionNum}}人收藏</view>
 				</view>
 				<view class="box-right-line"></view>
-				<view class="box-right-tip">简介：{{entryInfo.collectsRemarks}}</view>
+				<view class="box-right-tip">简介：<rich-text style="width: 80%;" :nodes="entryInfo.collectsRemarks"></rich-text></view>
 				<view class="box-right-tip"><text>上次使用：{{entryInfo.studyDate || '暂无'}}</text><text>{{entryInfo.studyMonth}}次/本月</text></view>
 			</view>
 		</view>
@@ -99,6 +99,8 @@ page{
 }
 .ele-entry{
 	width: 100%;
+	padding-bottom: 100rpx;
+	box-sizing: border-box;
 	.list-content-box{
 		width: 100%;
 		background-color: #FFFFFF;

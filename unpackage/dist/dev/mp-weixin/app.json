@@ -80,5 +80,6 @@
     "uni-load-more": "/components/uni-load-more/uni-load-more",
     "uni-popup": "/components/uni-popup/uni-popup",
     "no-data": "/components/no-data/no-data"
-  }
+  },
+  "sitemapLocation": "sitemap95.json"
 }

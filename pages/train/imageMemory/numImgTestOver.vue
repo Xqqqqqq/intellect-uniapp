@@ -1,5 +1,7 @@
 <template>
 	<view class="test-over">
+		<uni-nav-bar left-icon="back" title="考试结束" @clickLeft="gotoTest"
+		statusBar="true" fixed="true" backgroundColor="#2E3B67" color="#ffffff"></uni-nav-bar>
 		<view class="test-over-top">
 			<view class="over-top-li">
 				<view class="test-over-circle">
@@ -56,9 +58,11 @@
 
 <script>
 	import cmdProgress from "@/components/cmd-progress/cmd-progress.vue"
+	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
 	export default {
 		components: {
-			cmdProgress
+			cmdProgress,
+			uniNavBar
 		},
 		data() {
 			return {
