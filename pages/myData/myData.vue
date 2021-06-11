@@ -49,7 +49,7 @@
 		},
 		data() {
 			return {
-				showClassify: false,
+				showClassify: false, // 是否展示分组
 				scrollTopList:[],
 				currentTopTab: 0,
 				beforeColor: '#666666',

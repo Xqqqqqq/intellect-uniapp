@@ -4,7 +4,7 @@
 			<view class="wrap-top-box">
 				<view class="top-box-li">
 					<view class="top-box-li-title">本月</view>
-					<view class="top-box-li-num">0天</view>
+					<view class="top-box-li-num">{{trainInfo.num || 0}}天</view>
 				</view>
 			</view>
 			<view class="wrap-top-tip">碎片化时间训练坚持力</view>
@@ -13,17 +13,19 @@
 			<view class="longer-top-li">
 				<view class="top-li-line">
 					<view>本月最长连续</view>
-					<view><text>0</text>天</view>
+					<view><text>{{trainInfo.num || 0}}</text>天</view>
 				</view>
 				<view class="top-li-line">
-					<view>起始：0</view>
-					<view>结束：0</view>
+					<view>起始：{{trainInfo.startTime || 0}}</view>
+					<view>结束：{{trainInfo.endTime || 0}}</view>
 				</view>
 			</view>
 		</view>
 		
 		<view class="longer-content">
-			<my-list :myList="listdetial" @gotoUrl="gotoListDetail"></my-list>
+			<my-list :myList="collectsList" @gotoUrl="gotoListDetail" @clickAttention="clickAttention"></my-list>
+			<no-data v-if="status == 'noMore' && !collectsList.length"></no-data>
+			<uni-load-more class="no-data-more" v-else iconType="circle" :color="'#CCCCCC'" :contentText="contentText" :status="status" />
 		</view>
 	</view>
 </template>
@@ -36,13 +38,101 @@
 		},
 		data() {
 			return {
-				listdetial:[],
+				trainInfo:{},
+				collectsList:[],
+				page:1,
+				contentText: {
+					contentdown: '查看更多',
+					contentrefresh: '加载中',
+					contentnomore: '- 暂时没有新内容了呢 -'
+				},
+				status: 'loading',
+				code:'',
 			}
 		},
-		methods: {
-			gotoListDetail(item){
-				console.log(item)
+		onPullDownRefresh() {
+			this.page = 1;
+			this.trainInfo = {};
+			this.collectsList = []
+			uni.showLoading({
+				title: '加载中'
+			});
+			this.getTrainList()
+			uni.hideLoading();
+			uni.stopPullDownRefresh()
+		},
+		onReachBottom(){
+			if (this.code != '-116') {
+				this.page = this.page + 1;
+				this.getTrainList();
 			}
+		},
+		onShow(){
+			this.page = 1;
+			this.trainInfo = {};
+			this.collectsList = []
+			this.getTrainList()
+		},
+		methods: {
+			// 获取本月连续数据列表
+			getTrainList(){
+				if(uni.getStorageSync('userInfo')){
+					let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+					this.$Request.get(`/appCollectsController.do?getMonthNumCollectsList&memberId=${memberId}&page=${this.page}`).then(res => {
+						this.code = res.code
+						this.trainInfo = res.data
+						this.status = 'noMore'
+						if(res.code == 0){
+							this.collectsList =  [...this.collectsList, ...res.data.collectsList].map(item => {
+								return {
+									...item,
+									studyDate: item.studyDate && item.studyDate.substring(0,10)
+								}
+							})
+						}else if(res.code == '-118' || res.code == '-116'){
+							this.status = 'noMore'
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showToast({
+						title: '您尚未登录，正在跳往登录页面。。。',
+						icon: 'none'
+					})
+					setTimeout(() => {
+						uni.navigateTo({
+							url:'/pages/loginAll/login'
+						})
+					}, 1000)
+				}
+			},
+			gotoListDetail(item){
+				// console.log('1',item)
+				uni.navigateTo({
+					url: `/pages/train/imageMemory/numEleEntry?id=${item.id}`
+				})
+			},
+			// 收藏
+			clickAttention(item, index){
+				let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+				let collectsId = item.id
+				this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${memberId}&collectsId=${collectsId}`)
+				.then(res => {
+					if(res.code == 0){
+						this.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1
+						this.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
 		}
 	}
 </script>

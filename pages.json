@@ -54,7 +54,8 @@
         ,{
             "path" : "pages/myData/longestSeries",
             "style" : {
-				"navigationBarTitleText": "本月连续"
+				"navigationBarTitleText": "本月连续",
+				"enablePullDownRefresh": true
 			}
         }
         ,{

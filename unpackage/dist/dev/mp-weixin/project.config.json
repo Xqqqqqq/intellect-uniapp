@@ -23,20 +23,14 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/train/imageMemory/numImgTestOver",
-          "pathName": "pages/train/imageMemory/numImgTestOver",
+          "name": "pages/myData/longestSeries",
+          "pathName": "pages/myData/longestSeries",
           "query": "",
           "scene": null
         },
         {
           "name": "pages/myData/myData",
           "pathName": "pages/myData/myData",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/train/imageMemory/numImgTestOver",
-          "pathName": "pages/train/imageMemory/numImgTestOver",
           "scene": null
         }
       ]

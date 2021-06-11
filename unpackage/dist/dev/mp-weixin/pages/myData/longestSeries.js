@@ -95,6 +95,12 @@ __webpack_require__.r(__webpack_exports__);
 var components = {
   myList: function() {
     return __webpack_require__.e(/*! import() | components/my-list/my-list */ "components/my-list/my-list").then(__webpack_require__.bind(null, /*! @/components/my-list/my-list.vue */ 327))
+  },
+  noData: function() {
+    return __webpack_require__.e(/*! import() | components/no-data/no-data */ "components/no-data/no-data").then(__webpack_require__.bind(null, /*! @/components/no-data/no-data.vue */ 306))
+  },
+  uniLoadMore: function() {
+    return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ 292))
   }
 }
 var render = function() {
@@ -134,7 +140,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 327));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var MyList = function MyList() {__webpack_require__.e(/*! require.ensure | components/my-list/my-list */ "components/my-list/my-list").then((function () {return resolve(__webpack_require__(/*! @/components/my-list/my-list.vue */ 327));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
 
 
 
@@ -172,13 +180,102 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   data: function data() {
     return {
-      listdetial: [] };
+      trainInfo: {},
+      collectsList: [],
+      page: 1,
+      contentText: {
+        contentdown: '查看更多',
+        contentrefresh: '加载中',
+        contentnomore: '- 暂时没有新内容了呢 -' },
+
+      status: 'loading',
+      code: '' };
 
   },
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.page = 1;
+    this.trainInfo = {};
+    this.collectsList = [];
+    uni.showLoading({
+      title: '加载中' });
+
+    this.getTrainList();
+    uni.hideLoading();
+    uni.stopPullDownRefresh();
+  },
+  onReachBottom: function onReachBottom() {
+    if (this.code != '-116') {
+      this.page = this.page + 1;
+      this.getTrainList();
+    }
+  },
+  onShow: function onShow() {
+    this.page = 1;
+    this.trainInfo = {};
+    this.collectsList = [];
+    this.getTrainList();
+  },
   methods: {
+    // 获取本月连续数据列表
+    getTrainList: function getTrainList() {var _this = this;
+      if (uni.getStorageSync('userInfo')) {
+        var memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
+        this.$Request.get("/appCollectsController.do?getMonthNumCollectsList&memberId=".concat(memberId, "&page=").concat(this.page)).then(function (res) {
+          _this.code = res.code;
+          _this.trainInfo = res.data;
+          _this.status = 'noMore';
+          if (res.code == 0) {
+            _this.collectsList = [].concat(_toConsumableArray(_this.collectsList), _toConsumableArray(res.data.collectsList)).map(function (item) {
+              return _objectSpread({},
+              item, {
+                studyDate: item.studyDate && item.studyDate.substring(0, 10) });
+
+            });
+          } else if (res.code == '-118' || res.code == '-116') {
+            _this.status = 'noMore';
+          } else {
+            uni.showToast({
+              title: res.info,
+              icon: 'none' });
+
+          }
+        });
+      } else {
+        uni.showToast({
+          title: '您尚未登录，正在跳往登录页面。。。',
+          icon: 'none' });
+
+        setTimeout(function () {
+          uni.navigateTo({
+            url: '/pages/loginAll/login' });
+
+        }, 1000);
+      }
+    },
     gotoListDetail: function gotoListDetail(item) {
-      console.log(item);
+      // console.log('1',item)
+      uni.navigateTo({
+        url: "/pages/train/imageMemory/numEleEntry?id=".concat(item.id) });
+
+    },
+    // 收藏
+    clickAttention: function clickAttention(item, index) {var _this2 = this;
+      var memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
+      var collectsId = item.id;
+      this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(memberId, "&collectsId=").concat(collectsId)).
+      then(function (res) {
+        if (res.code == 0) {
+          _this2.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1;
+          _this2.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1;
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
