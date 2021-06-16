@@ -253,7 +253,6 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     gotoListDetail: function gotoListDetail(item) {
-      // console.log('1',item)
       uni.navigateTo({
         url: "/pages/train/imageMemory/numEleEntry?id=".concat(item.id) });
 

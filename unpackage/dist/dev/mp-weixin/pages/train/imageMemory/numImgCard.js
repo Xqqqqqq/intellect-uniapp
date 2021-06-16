@@ -124,7 +124,7 @@ var _default =
       swiperList: [],
       current: 0,
       showCard: true, // 是否展示card格式
-      collectsId: '402aa38151aef50c0151aef50c2600cc',
+      collectsId: '2c9a29b679f923d7017a0e74cd7b0005',
       memberId: '',
       orderType: 1,
       optionId: '',
@@ -215,7 +215,7 @@ var _default =
     },
     gotoUrl: function gotoUrl() {
       uni.navigateTo({
-        url: '/pages/train/imageMemory/numImgTest' });
+        url: "/pages/train/imageMemory/numImgTest?collectsId=".concat(this.collectsId) });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

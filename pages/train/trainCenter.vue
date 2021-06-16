@@ -35,7 +35,7 @@
 			return {
 				goodsName:'',
 				scrollTopList:[],
-				currentTopTab: -1,
+				currentTopTab: 0,
 				beforeColor: '#999999',
 				afterColor: '#ffffff',
 				filterData: [
@@ -135,7 +135,12 @@
 						memberId:memberId
 					}).then(res => {
 						this.trainInfo = res.data
+						res.data.groupList.unshift({
+							id:'',
+							groupName: '全部'
+						})
 						this.scrollTopList = res.data.groupList
+						console.log(this.scrollTopList)
 						this.status = 'noMore'
 						if(res.code == 0){
 							this.collectsList =  [...this.collectsList, ...res.data.collectsList].map(item => {
@@ -184,7 +189,6 @@
 				this.getTrainList()
 			},
 			gotoListDetail(item){
-				// console.log('1',item)
 				uni.navigateTo({
 					url: `/pages/train/imageMemory/numEleEntry?id=${item.id}`
 				})

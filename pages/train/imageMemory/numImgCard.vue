@@ -67,7 +67,7 @@
 				swiperList: [],
 				current: 0,
 				showCard: true, // 是否展示card格式
-				collectsId: '402aa38151aef50c0151aef50c2600cc',
+				collectsId: '2c9a29b679f923d7017a0e74cd7b0005',
 				memberId: '',
 				orderType: 1,
 				optionId: '',
@@ -158,7 +158,7 @@
 			},
 			gotoUrl() {
 				uni.navigateTo({
-					url: '/pages/train/imageMemory/numImgTest'
+					url: `/pages/train/imageMemory/numImgTest?collectsId=${this.collectsId}`
 				})
 			},
 		}
@@ -244,8 +244,13 @@
 						font-size: 34rpx;
 						background-color: #DDDDDD;
 						height: 250rpx;
-						line-height: 250rpx;
 						position: relative;
+						display: flex;
+						align-items: center;
+						padding: 30rpx;
+						box-sizing: border-box;
+						overflow-y: scroll;
+						justify-content: center;
 					}
 					.item-num-tip{
 						position: absolute;
@@ -278,7 +283,7 @@
 						width: 200rpx;
 						height: 200rpx;
 						overflow: hidden;
-						margin-right: 15%;
+						border-radius: 10rpx;
 
 						image {
 							width: 100%;
@@ -287,25 +292,27 @@
 					}
 
 					.card-ul-li-right {
-						flex: 1;
 						display: flex;
-						height: 200rpx;
 						justify-content: space-around;
 						flex-direction: column;
+						padding-left: 5%;
+						box-sizing: border-box;
+						width: 68%;
 
 						.ul-li-right-title {
 							font-weight: bold;
 							color: #333;
-							font-size: 60rpx;
+							font-size: 50rpx;
 						}
 
 						.ul-li-right-detail {
 							color: #666;
 							font-size: 30rpx;
 							width: 100%;
-							overflow: hidden;
-							text-overflow:ellipsis;
-							white-space: nowrap;
+							line-height: 40rpx;
+							// overflow: hidden;
+							// text-overflow:ellipsis;
+							// white-space: nowrap;
 						}
 					}
 				}

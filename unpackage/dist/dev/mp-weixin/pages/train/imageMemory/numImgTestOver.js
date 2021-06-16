@@ -201,6 +201,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 {
   components: {
     cmdProgress: cmdProgress,
@@ -209,6 +210,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       id: '2c9a29b679c688a20179c6914a1a01e6', // 答案id
+      collectsId: '702aa38151aef50c0151aef50c2600cc',
       answerInfo: {} };
 
   },
@@ -216,6 +218,7 @@ __webpack_require__.r(__webpack_exports__);
     if (options.id) {
       // console.log(options.id)
       this.id = options.id;
+      this.collectsId = options.collectsId;
     }
   },
   onShow: function onShow() {
@@ -248,13 +251,19 @@ __webpack_require__.r(__webpack_exports__);
     // 前往训练
     gotoTest: function gotoTest() {
       uni.navigateTo({
-        url: "/pages/train/imageMemory/numImgTest?collectsId=".concat(this.answerInfo.examId) });
+        url: "/pages/train/imageMemory/numImgTest?collectsId=".concat(this.collectsId) });
 
     },
     // 回看过程
     goBackRead: function goBackRead() {
       uni.navigateTo({
         url: '/pages/train/imageMemory/numImgAllRead' });
+
+    },
+    // 返回首页
+    gotoHome: function gotoHome() {
+      uni.switchTab({
+        url: '/pages/myData/myData' });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

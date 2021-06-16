@@ -23,14 +23,26 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/myData/longestSeries",
-          "pathName": "pages/myData/longestSeries",
+          "name": "pages/train/imageMemory/numImgTestOver",
+          "pathName": "pages/train/imageMemory/numImgTestOver",
           "query": "",
           "scene": null
         },
         {
           "name": "pages/myData/myData",
           "pathName": "pages/myData/myData",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/myData/train",
+          "pathName": "pages/myData/train",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/train/trainCenter",
+          "pathName": "pages/train/trainCenter",
           "scene": null
         }
       ]

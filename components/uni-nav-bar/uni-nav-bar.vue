@@ -229,7 +229,7 @@
 
 	.uni-navbar--border {
 		border-bottom-width: 1rpx;
-		border-bottom-style: solid;
+		/* border-bottom-style: solid; */
 		border-bottom-color: #e5e5e5;
 	}
 </style>

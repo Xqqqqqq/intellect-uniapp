@@ -92,7 +92,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  uniNavBar: function() {
+    return __webpack_require__.e(/*! import() | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @/components/uni-nav-bar/uni-nav-bar.vue */ 348))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -130,65 +134,71 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 348));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
+  components: {
+    uniNavBar: uniNavBar },
+
   data: function data() {
     return {
       secondArr: [{
@@ -234,7 +244,7 @@ var _default =
 
       numIndex: 0,
       optionInfo: {
-        collectsId: '402aa38151aef50c0151aef50c2600cc',
+        collectsId: '702aa38151aef50c0151aef50c2600cc',
         time: '',
         type: '',
         num: '' }
@@ -242,6 +252,7 @@ var _default =
     };
   },
   onLoad: function onLoad(option) {
+    console.log(option.collectsId);
     if (option) {
       this.optionInfo.collectsId = option.collectsId;
     }
@@ -250,6 +261,11 @@ var _default =
     this.optionInfo.num = this.numArr[0].id;
   },
   methods: {
+    gotoTest: function gotoTest() {
+      uni.redirectTo({
+        url: "/pages/train/imageMemory/numEleEntry?id=".concat(this.optionInfo.collectsId) });
+
+    },
     bindSecondChange: function bindSecondChange(e) {
       this.secondIndex = e.detail.value;
       this.optionInfo.time = this.secondArr[e.detail.value].id;
@@ -263,6 +279,7 @@ var _default =
       this.optionInfo.num = this.numArr[e.detail.value].id;
     },
     gotoUrl: function gotoUrl() {
+      console.log('点击按钮');
       // console.log(this.optionInfo)
       uni.setStorageSync('optionInfo', this.optionInfo);
       uni.navigateTo({

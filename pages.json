@@ -79,7 +79,12 @@
         ,{
             "path" : "pages/train/imageMemory/numImgTest",
             "style" : {
-				"navigationBarTitleText": "数字元素测试"
+				"navigationBarTitleText": "数字元素测试",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"scrollIndicator": "none"
+				}
 			}
         }
         ,{

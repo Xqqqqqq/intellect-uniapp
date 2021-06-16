@@ -183,7 +183,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       goodsName: '',
       scrollTopList: [],
-      currentTopTab: -1,
+      currentTopTab: 0,
       beforeColor: '#999999',
       afterColor: '#ffffff',
       filterData: [
@@ -283,7 +283,12 @@ __webpack_require__.r(__webpack_exports__);
           memberId: memberId })).
         then(function (res) {
           _this.trainInfo = res.data;
+          res.data.groupList.unshift({
+            id: '',
+            groupName: '全部' });
+
           _this.scrollTopList = res.data.groupList;
+          console.log(_this.scrollTopList);
           _this.status = 'noMore';
           if (res.code == 0) {
             _this.collectsList = [].concat(_toConsumableArray(_this.collectsList), _toConsumableArray(res.data.collectsList)).map(function (item) {
@@ -332,7 +337,6 @@ __webpack_require__.r(__webpack_exports__);
       this.getTrainList();
     },
     gotoListDetail: function gotoListDetail(item) {
-      // console.log('1',item)
       uni.navigateTo({
         url: "/pages/train/imageMemory/numEleEntry?id=".concat(item.id) });
 

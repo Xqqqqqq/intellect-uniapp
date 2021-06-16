@@ -122,7 +122,7 @@
 }
 .uni-navbar--border.data-v-70364d73 {
 		border-bottom-width: 1rpx;
-		border-bottom-style: solid;
+		/* border-bottom-style: solid; */
 		border-bottom-color: #e5e5e5;
 }
 

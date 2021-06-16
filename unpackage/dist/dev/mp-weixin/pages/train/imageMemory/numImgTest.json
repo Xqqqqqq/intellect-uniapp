@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "数字元素测试",
-  "usingComponents": {}
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar"
+  }
 }

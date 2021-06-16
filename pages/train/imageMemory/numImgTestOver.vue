@@ -1,6 +1,6 @@
 <template>
 	<view class="test-over">
-		<uni-nav-bar left-icon="back" title="考试结束" @clickLeft="gotoTest"
+		<uni-nav-bar title="考试结束"
 		statusBar="true" fixed="true" backgroundColor="#2E3B67" color="#ffffff"></uni-nav-bar>
 		<view class="test-over-top">
 			<view class="over-top-li">
@@ -49,7 +49,8 @@
 		
 		<view class="test-over-bottom">
 			<view class="over-bottom-li bottom-li-red" @click="goBackAll">重新测试</view>
-			<view class="over-bottom-li bottom-li-yellow" @click="gotoTest">前往训练</view>
+			<view class="over-bottom-li bottom-li-yellow" @click="gotoTest">结束训练</view>
+			<view class="over-bottom-li bottom-li-green" @click="gotoHome">返回首页</view>
 			<!-- <view class="over-bottom-li bottom-li-green" @click="goBackRead">回看过程</view> -->
 		</view>
 		<view class="test-over-bottom-clone"></view>
@@ -67,6 +68,7 @@
 		data() {
 			return {
 				id: '2c9a29b679c688a20179c6914a1a01e6', // 答案id
+				collectsId: '702aa38151aef50c0151aef50c2600cc',
 				answerInfo:{}
 			};
 		},
@@ -74,6 +76,7 @@
 			if(options.id){
 				// console.log(options.id)
 				this.id = options.id
+				this.collectsId = options.collectsId
 			}
 		},
 		onShow(){
@@ -106,13 +109,19 @@
 			// 前往训练
 			gotoTest(){
 				uni.navigateTo({
-					url: `/pages/train/imageMemory/numImgTest?collectsId=${this.answerInfo.examId}`
+					url: `/pages/train/imageMemory/numImgTest?collectsId=${this.collectsId}`
 				})
 			},
 			// 回看过程
 			goBackRead(){
 				uni.navigateTo({
 					url: '/pages/train/imageMemory/numImgAllRead'
+				})
+			},
+			// 返回首页
+			gotoHome(){
+				uni.switchTab({
+					url:'/pages/myData/myData'
 				})
 			}
 		}

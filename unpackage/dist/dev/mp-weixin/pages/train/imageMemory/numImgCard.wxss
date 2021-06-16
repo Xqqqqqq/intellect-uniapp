@@ -118,8 +118,20 @@ page {
   font-size: 34rpx;
   background-color: #DDDDDD;
   height: 250rpx;
-  line-height: 250rpx;
   position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding: 30rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow-y: scroll;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
 }
 .img-card .img-card-swiper .swiper .swiper-item .item-num-tip {
   position: absolute;
@@ -154,39 +166,38 @@ page {
   width: 200rpx;
   height: 200rpx;
   overflow: hidden;
-  margin-right: 15%;
+  -webkit-border-radius: 10rpx;
+          border-radius: 10rpx;
 }
 .img-card .img-card-swiper .img-card-ul .card-ul-li .card-ul-li-left image {
   width: 100%;
   height: 100%;
 }
 .img-card .img-card-swiper .img-card-ul .card-ul-li .card-ul-li-right {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  height: 200rpx;
   -webkit-justify-content: space-around;
           justify-content: space-around;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
           flex-direction: column;
+  padding-left: 5%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 68%;
 }
 .img-card .img-card-swiper .img-card-ul .card-ul-li .card-ul-li-right .ul-li-right-title {
   font-weight: bold;
   color: #333;
-  font-size: 60rpx;
+  font-size: 50rpx;
 }
 .img-card .img-card-swiper .img-card-ul .card-ul-li .card-ul-li-right .ul-li-right-detail {
   color: #666;
   font-size: 30rpx;
   width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 40rpx;
 }
 .img-card .img-card-swiper .img-card-ul .card-ul-li-choose {
   border: 1rpx solid #2E3B67;

@@ -175,7 +175,7 @@ __webpack_require__.r(__webpack_exports__);
 
       userExamTime: 0, //用户选择的答题时间数
       optionInfo: {
-        collectsId: '402aa38151aef50c0151aef50c2600cc',
+        collectsId: '702aa38151aef50c0151aef50c2600cc',
         time: 0,
         type: 3,
         num: 8 },
@@ -281,14 +281,15 @@ __webpack_require__.r(__webpack_exports__);
         id: this.allData.id }).
       then(function (res) {
         if (res.code == 0) {
-          var id = res.data.id;
+          var id = res.data.examId,
+          collectsId = res.data.collectsId;
           uni.showToast({
             title: '提交成功，正在跳转...',
             icon: 'none' });
 
           setTimeout(function () {
             uni.navigateTo({
-              url: "/pages/train/imageMemory/numImgTestOver?id=".concat(id) });
+              url: "/pages/train/imageMemory/numImgTestOver?id=".concat(id, "&collectsId=").concat(collectsId) });
 
           }, 1000);
         } else {

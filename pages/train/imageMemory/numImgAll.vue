@@ -43,7 +43,7 @@
 				},
 				userExamTime: 0, //用户选择的答题时间数
 				optionInfo:{
-					collectsId: '402aa38151aef50c0151aef50c2600cc',
+					collectsId: '702aa38151aef50c0151aef50c2600cc',
 					time: 0,
 					type: 3,
 					num: 8
@@ -149,14 +149,15 @@
 					id: this.allData.id
 				}).then(res => {
 					if(res.code == 0){
-						let id = res.data.id
+						let id = res.data.examId,
+							collectsId = res.data.collectsId
 						uni.showToast({
 							title: '提交成功，正在跳转...',
 							icon: 'none'
 						})
 						setTimeout(()=>{
 							uni.navigateTo({
-								url:`/pages/train/imageMemory/numImgTestOver?id=${id}`
+								url:`/pages/train/imageMemory/numImgTestOver?id=${id}&collectsId=${collectsId}`
 							})
 						},1000)
 					}else{

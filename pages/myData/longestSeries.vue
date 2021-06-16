@@ -111,7 +111,6 @@
 				}
 			},
 			gotoListDetail(item){
-				// console.log('1',item)
 				uni.navigateTo({
 					url: `/pages/train/imageMemory/numEleEntry?id=${item.id}`
 				})

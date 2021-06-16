@@ -128,7 +128,7 @@ page {
 }
 .img-test .img-test-btn-clone {
   width: 100%;
-  height: 50rpx;
+  height: 100rpx;
 }
 .img-test .img-test-btn {
   width: 100%;

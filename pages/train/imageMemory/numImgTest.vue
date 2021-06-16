@@ -1,5 +1,7 @@
 <template>
 	<view class="img-test">
+		<uni-nav-bar left-icon="back" title="数字元素测试" @clickLeft="gotoTest"
+		statusBar="true" fixed="true" backgroundColor="#2E3B67" color="#ffffff"></uni-nav-bar>
 		<view class="img-test-top">
 			<view class="test-top-li">
 				<view class="test-top-li-title">上次成绩</view>
@@ -56,7 +58,11 @@
 </template>
 
 <script>
+	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
 	export default {
+		components: {
+			uniNavBar
+		},
 		data() {
 			return {
 				secondArr:[{
@@ -102,7 +108,7 @@
 				},],
 				numIndex: 0,
 				optionInfo:{
-					collectsId: '402aa38151aef50c0151aef50c2600cc',
+					collectsId: '702aa38151aef50c0151aef50c2600cc',
 					time: '',
 					type: '',
 					num: ''
@@ -110,6 +116,7 @@
 			};
 		},
 		onLoad(option){
+			console.log(option.collectsId)
 			if(option){
 				this.optionInfo.collectsId = option.collectsId
 			}
@@ -118,6 +125,11 @@
 			this.optionInfo.num = this.numArr[0].id
 		},
 		methods:{
+			gotoTest(){
+				uni.redirectTo({
+					url: `/pages/train/imageMemory/numEleEntry?id=${this.optionInfo.collectsId}`
+				})
+			},
 			bindSecondChange(e){
 				this.secondIndex = e.detail.value
 				this.optionInfo.time = this.secondArr[e.detail.value].id
@@ -131,6 +143,7 @@
 				this.optionInfo.num = this.numArr[e.detail.value].id
 			},
 			gotoUrl(){
+				console.log('点击按钮')
 				// console.log(this.optionInfo)
 				uni.setStorageSync('optionInfo', this.optionInfo)
 				uni.navigateTo({
@@ -232,7 +245,7 @@ page{
 	}
 	.img-test-btn-clone{
 		width: 100%;
-		height: 50rpx;
+		height: 100rpx;
 	}
 	.img-test-btn{
 		width: 100%;
