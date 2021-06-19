@@ -15,7 +15,7 @@
 			</view>
 			<view class="history-li-bottom">购买时间：{{item.createDate}}</view>
 		</view>
-		<no-data v-if="status == 'noMore' && !historyList.length"></no-data>
+		<no-data v-if="!historyList.length"></no-data>
 	</view>
 </template>
 
@@ -25,7 +25,6 @@
 			return {
 				chooseDate:'',
 				historyList:[],
-				status: 'loading',
 			};
 		},
 		mounted(){
@@ -46,9 +45,6 @@
 				this.openid = uni.getStorageSync('openid') ? uni.getStorageSync('openid') : ''
 				this.$Request.get(`/appVipController.do?getBuyVipList&openid=${this.openid}&dateString=${this.chooseDate}`)
 				.then(res => {
-					if(res.data.billList.length <= 0){
-						this.status = 'noMore'
-					}
 					if(res.code == 0){
 						this.historyList = res.data.billList
 					}else{

@@ -8,7 +8,11 @@
 				<view class="box-right-title">{{entryInfo.collectsName}}</view>
 				<view class="box-right-tip">
 					<view>出题：{{entryInfo.collectsAuthor}}</view>
-					<view><image src="../../../static/img/icons/shoucang.png"></image>{{entryInfo.attentionNum}}人收藏</view>
+					<view @click="clickAttention">
+						<image v-if="entryInfo.attentionType == 1" src="../../../static/img/icons/shoucang.png"></image>
+						<image v-if="entryInfo.attentionType == 0" src="../../../static/img/icons/star1.png"></image>
+						{{entryInfo.attentionNum}}人收藏
+					</view>
 				</view>
 				<view class="box-right-line"></view>
 				<view class="box-right-tip">简介：<rich-text style="width: 80%;" :nodes="entryInfo.collectsRemarks"></rich-text></view>
@@ -51,7 +55,7 @@
 			};
 		},
 		onLoad(options){
-			console.log(options.id)
+			// console.log(options.id)
 			this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id
 			if(options.id){
 				this.collectsId = options.id
@@ -74,6 +78,21 @@
 					}
 				})
 			},
+			// 收藏
+			clickAttention(){
+				this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${this.memberId}&collectsId=${this.collectsId}`)
+				.then(res => {
+					if(res.code == 0){
+						this.entryInfo.attentionNum = this.entryInfo.attentionType == 1 ? this.entryInfo.attentionNum - 1 : this.entryInfo.attentionNum + 1
+						this.entryInfo.attentionType = this.entryInfo.attentionType == 1 ? 0 : 1
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
 			gotoUrl(url, type){
 				if(type == 'card'){ // 进入训练
 					uni.navigateTo({
@@ -81,7 +100,7 @@
 					})
 				}else if(type == 'history'){ // 历史测试
 					uni.navigateTo({
-						url: `${url}?title=${this.entryInfo.collectsName}`
+						url: `${url}?title=${this.entryInfo.collectsName}&collectsId=${this.collectsId}`
 					})
 				}else if(type == 'test') { //前往测试
 					uni.navigateTo({

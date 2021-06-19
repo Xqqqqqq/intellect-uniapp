@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "卡券",
-  "usingComponents": {}
+  "usingComponents": {
+    "no-data": "/components/no-data/no-data"
+  }
 }

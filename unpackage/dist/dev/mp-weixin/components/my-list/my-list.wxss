@@ -59,7 +59,7 @@
   color: #333333;
   font-weight: bold;
   font-size: 36rpx;
-  width: 83%;
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "训练中心",
   "enablePullDownRefresh": true,
+  "backgroundColorTop": "#2E3B67",
   "usingComponents": {
     "my-scroll-x": "/components/my-scrollX/my-scrollX",
     "ren-dropdown-filter": "/components/ren-dropdown-filter/ren-dropdown-filter",

@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "武装大脑",
   "enablePullDownRefresh": true,
+  "backgroundColorTop": "#2E3B67",
   "usingComponents": {
     "top-input": "/components/top-input/top-input",
     "my-scroll-x": "/components/my-scrollX/my-scrollX",

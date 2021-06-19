@@ -172,6 +172,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -183,7 +187,7 @@ var _default =
 
   },
   onLoad: function onLoad(options) {
-    console.log(options.id);
+    // console.log(options.id)
     this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
     if (options.id) {
       this.collectsId = options.id;
@@ -206,6 +210,21 @@ var _default =
         }
       });
     },
+    // 收藏
+    clickAttention: function clickAttention() {var _this2 = this;
+      this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(this.memberId, "&collectsId=").concat(this.collectsId)).
+      then(function (res) {
+        if (res.code == 0) {
+          _this2.entryInfo.attentionNum = _this2.entryInfo.attentionType == 1 ? _this2.entryInfo.attentionNum - 1 : _this2.entryInfo.attentionNum + 1;
+          _this2.entryInfo.attentionType = _this2.entryInfo.attentionType == 1 ? 0 : 1;
+        } else {
+          uni.showToast({
+            title: res.info,
+            icon: 'none' });
+
+        }
+      });
+    },
     gotoUrl: function gotoUrl(url, type) {
       if (type == 'card') {// 进入训练
         uni.navigateTo({
@@ -213,7 +232,7 @@ var _default =
 
       } else if (type == 'history') {// 历史测试
         uni.navigateTo({
-          url: "".concat(url, "?title=").concat(this.entryInfo.collectsName) });
+          url: "".concat(url, "?title=").concat(this.entryInfo.collectsName, "&collectsId=").concat(this.collectsId) });
 
       } else if (type == 'test') {//前往测试
         uni.navigateTo({

@@ -12,8 +12,8 @@
 				<view class="box-right-tip">
 					<view>出题：{{item.collectsAuthor}}</view>
 					<view @click.stop="clickAttention(item, index)">
-						<image v-if="item.attentionType ==1" src="../../static/img/icons/shoucang.png"></image>
-						<image v-if="item.attentionType ==0" src="../../static/img/icons/star1.png"></image>
+						<image v-if="item.attentionType == 1" src="../../static/img/icons/shoucang.png"></image>
+						<image v-if="item.attentionType == 0" src="../../static/img/icons/star1.png"></image>
 						{{item.attentionNum}}人收藏
 					</view>
 				</view>
@@ -36,7 +36,6 @@
 		},
 		data() {
 			return {
-				
 			};
 		},
 		methods:{
@@ -78,7 +77,7 @@
 			color: #333333;
 			font-weight: bold;
 			font-size: 36rpx;
-			width: 83%;
+			width: 100%;
 			overflow: hidden;
 			text-overflow:ellipsis;
 			white-space: nowrap;

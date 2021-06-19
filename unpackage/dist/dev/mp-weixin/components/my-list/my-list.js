@@ -153,7 +153,6 @@ var _default =
   data: function data() {
     return {};
 
-
   },
   methods: {
     gotoUrl: function gotoUrl(item) {

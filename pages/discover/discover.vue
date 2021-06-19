@@ -150,8 +150,8 @@
 				this.$Request.get(`/appAttentionController.do?takeArticleAttention&memberId=${memberId}&articleId=${articleId}`)
 				.then(res => {
 					if(res.code == 0){
+						this.articleList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1
 						this.articleList[index].attentionType = item.attentionType == 1 ? 0 : 1
-						this.articleList[index].attentionNum = item.attentionType == 1 ? item.attentionNum + 1 : item.attentionNum - 1
 					}else{
 						uni.showToast({
 							title: res.info,

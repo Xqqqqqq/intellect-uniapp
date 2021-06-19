@@ -4,6 +4,7 @@
   "navigationBarTextStyle": "white",
   "navigationStyle": "custom",
   "enablePullDownRefresh": true,
+  "backgroundColorTop": "#2E3B67",
   "usingComponents": {
     "l-modal": "/components/l-modal/l-modal"
   }

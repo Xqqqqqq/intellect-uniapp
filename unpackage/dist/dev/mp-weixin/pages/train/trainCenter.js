@@ -288,7 +288,6 @@ __webpack_require__.r(__webpack_exports__);
             groupName: '全部' });
 
           _this.scrollTopList = res.data.groupList;
-          console.log(_this.scrollTopList);
           _this.status = 'noMore';
           if (res.code == 0) {
             _this.collectsList = [].concat(_toConsumableArray(_this.collectsList), _toConsumableArray(res.data.collectsList)).map(function (item) {
@@ -348,8 +347,8 @@ __webpack_require__.r(__webpack_exports__);
       this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(memberId, "&collectsId=").concat(collectsId)).
       then(function (res) {
         if (res.code == 0) {
-          _this2.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1;
           _this2.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1;
+          _this2.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1;
         } else {
           uni.showToast({
             title: res.info,

@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "本月训练",
   "enablePullDownRefresh": true,
+  "backgroundColorTop": "#2E3B67",
   "usingComponents": {
     "my-list": "/components/my-list/my-list",
     "no-data": "/components/no-data/no-data",

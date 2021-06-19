@@ -48,10 +48,14 @@
 			};
 		},
 		watch: {
-			page(){
-				this.leftList = this.allData.startGroupVoList[this.page.pageNum].startProblemVoList
-				this.rightList = this.allData.startGroupVoList[this.page.pageNum].startAnsweroList
-			}
+			page: {
+				handler(val, oval) {
+					this.leftList = this.allData.startGroupVoList[val.pageNum].startProblemVoList
+					this.rightList = this.allData.startGroupVoList[val.pageNum].startAnsweroList
+				},
+				immediate: true,
+				deep: true
+			},
 		},
 		mounted(){
 			this.leftList = this.allData.startGroupVoList[this.page.pageNum].startProblemVoList

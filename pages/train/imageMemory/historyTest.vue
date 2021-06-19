@@ -59,12 +59,14 @@
 				},
 				status: 'loading',
 				code:'',
-				title:'数字元素测试'
+				title:'数字元素测试',
+				collectsId: '',
 			};
 		},
 		onLoad(options){
 			if(options.title){
 				this.title = options.title
+				this.collectsId = options.collectsId
 			}
 		},
 		onShow(){
@@ -97,7 +99,8 @@
 					let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
 					this.$Request.get('/appExaminationController.do?getExaminationHistory',{
 						page:this.page,
-						memberId:memberId
+						memberId:memberId,
+						collectsId: this.collectsId
 					}).then(res => {
 						this.code = res.code
 						this.historyInfo = res.data

@@ -13,7 +13,7 @@
 		<picker @change="bindSexChange" :value="sexIndex" :range="sexList" range-key="title">
 			<view class="edit-li">
 				<view class="edit-li-left">性别：</view>
-				<view class="edit-li-right">{{sexList[sexIndex+1].title}} ></view>
+				<view class="edit-li-right">{{sexList[sexIndex].title}} ></view>
 			</view>
 		</picker>
 		<view class="edit-btn">保存信息</view>
@@ -48,6 +48,7 @@
 				this.$Request.get(`/appMemberController.do?getMember&memberId=${this.memberId}`)
 				.then(res => {
 					this.userInfo = res.data.memberVo
+					this.sexIndex = this.sexList.findIndex(item => item.id == res.data.memberVo.memberSex)
 					uni.setStorageSync('userInfo', JSON.stringify(res.data.memberVo))
 					if(res.code == 0 || res.code == 100){
 					}else{

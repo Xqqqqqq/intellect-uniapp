@@ -288,8 +288,8 @@ __webpack_require__.r(__webpack_exports__);
       this.$Request.get("/appAttentionController.do?takeCollectsAttention&memberId=".concat(memberId, "&collectsId=").concat(collectsId)).
       then(function (res) {
         if (res.code == 0) {
-          _this2.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1;
           _this2.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1;
+          _this2.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1;
         } else {
           uni.showToast({
             title: res.info,

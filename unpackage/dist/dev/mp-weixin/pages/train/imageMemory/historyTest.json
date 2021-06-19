@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "历史测试",
   "enablePullDownRefresh": true,
+  "backgroundColorTop": "#2E3B67",
   "usingComponents": {
     "no-data": "/components/no-data/no-data",
     "uni-load-more": "/components/uni-load-more/uni-load-more"

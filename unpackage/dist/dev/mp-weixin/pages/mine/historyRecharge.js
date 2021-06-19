@@ -160,8 +160,7 @@ var _default =
   data: function data() {
     return {
       chooseDate: '',
-      historyList: [],
-      status: 'loading' };
+      historyList: [] };
 
   },
   mounted: function mounted() {
@@ -182,9 +181,6 @@ var _default =
       this.openid = uni.getStorageSync('openid') ? uni.getStorageSync('openid') : '';
       this.$Request.get("/appVipController.do?getBuyVipList&openid=".concat(this.openid, "&dateString=").concat(this.chooseDate)).
       then(function (res) {
-        if (res.data.billList.length <= 0) {
-          _this.status = 'noMore';
-        }
         if (res.code == 0) {
           _this.historyList = res.data.billList;
         } else {

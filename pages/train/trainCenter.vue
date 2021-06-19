@@ -140,7 +140,6 @@
 							groupName: '全部'
 						})
 						this.scrollTopList = res.data.groupList
-						console.log(this.scrollTopList)
 						this.status = 'noMore'
 						if(res.code == 0){
 							this.collectsList =  [...this.collectsList, ...res.data.collectsList].map(item => {
@@ -200,8 +199,8 @@
 				this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${memberId}&collectsId=${collectsId}`)
 				.then(res => {
 					if(res.code == 0){
-						this.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1
 						this.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1
+						this.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1
 					}else{
 						uni.showToast({
 							title: res.info,

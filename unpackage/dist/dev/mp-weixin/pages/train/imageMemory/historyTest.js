@@ -198,12 +198,14 @@ var _default =
 
       status: 'loading',
       code: '',
-      title: '数字元素测试' };
+      title: '数字元素测试',
+      collectsId: '' };
 
   },
   onLoad: function onLoad(options) {
     if (options.title) {
       this.title = options.title;
+      this.collectsId = options.collectsId;
     }
   },
   onShow: function onShow() {
@@ -236,7 +238,8 @@ var _default =
         var memberId = JSON.parse(uni.getStorageSync('userInfo')).id;
         this.$Request.get('/appExaminationController.do?getExaminationHistory', {
           page: this.page,
-          memberId: memberId }).
+          memberId: memberId,
+          collectsId: this.collectsId }).
         then(function (res) {
           _this.code = res.code;
           _this.historyInfo = res.data;

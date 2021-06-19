@@ -138,11 +138,12 @@ export default {
 
 <style lang="scss" scoped>
 page {
-    font-size: 28rpx;
+    font-size: 24rpx;
 }
 .c-flex-align {
     display: flex;
     align-items: center;
+	font-size: 26rpx;
 }
 .c-flex-center {
     display: flex;

@@ -180,6 +180,7 @@ var _default =
       this.$Request.get("/appMemberController.do?getMember&memberId=".concat(this.memberId)).
       then(function (res) {
         _this.userInfo = res.data.memberVo;
+        _this.sexIndex = _this.sexList.findIndex(function (item) {return item.id == res.data.memberVo.memberSex;});
         uni.setStorageSync('userInfo', JSON.stringify(res.data.memberVo));
         if (res.code == 0 || res.code == 100) {
         } else {

@@ -205,10 +205,14 @@ var _default =
 
   },
   watch: {
-    page: function page() {
-      this.leftList = this.allData.startGroupVoList[this.page.pageNum].startProblemVoList;
-      this.rightList = this.allData.startGroupVoList[this.page.pageNum].startAnsweroList;
-    } },
+    page: {
+      handler: function handler(val, oval) {
+        this.leftList = this.allData.startGroupVoList[val.pageNum].startProblemVoList;
+        this.rightList = this.allData.startGroupVoList[val.pageNum].startAnsweroList;
+      },
+      immediate: true,
+      deep: true } },
+
 
   mounted: function mounted() {
     this.leftList = this.allData.startGroupVoList[this.page.pageNum].startProblemVoList;

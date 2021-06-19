@@ -25,6 +25,7 @@
 				</view>
 				<view class="card-ul-li-btn">立即领取</view>
 			</view>
+			<no-data v-if="!cardList.length"></no-data>
 		</view>
 		<view class="card-ul" v-if="currentTab == 1">
 			<view class="card-ul-li" v-for="(item, index) in wasteCardList" :key="index">
@@ -45,6 +46,7 @@
 				</view>
 				<view class="card-ul-li-btn card-ul-li-btn-other">已兑换</view>
 			</view>
+			<no-data v-if="!wasteCardList.length"></no-data>
 		</view>
 	</view>
 </template>
@@ -81,7 +83,7 @@
 				this.$Request.get(`/appCardController.do?getCardList&openid=${this.openid}`)
 				.then(res => {
 					if(res.code == 0){
-						this.cardList = res.data.cardList.map(item => {
+						this.cardList =res.data.cardList.map(item => {
 							return {
 								...item,
 								expiresDate: item.expiresDate && item.expiresDate.substring(0,10)
