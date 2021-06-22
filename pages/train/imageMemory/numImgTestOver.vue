@@ -65,9 +65,7 @@
 			return {
 				id: '2c9a29b679c688a20179c6914a1a01e6', // 答案id
 				collectsId: '702aa38151aef50c0151aef50c2600cc',
-				answerInfo:{
-					score: 0
-				},
+				answerInfo:{},
 				showNoData: false
 			};
 		},
