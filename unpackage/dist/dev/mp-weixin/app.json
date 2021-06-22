@@ -11,8 +11,6 @@
     "pages/loginAll/login",
     "pages/loginAll/useragreement",
     "pages/train/imageMemory/numImgCard",
-    "pages/train/imageMemory/numImgTest",
-    "pages/train/imageMemory/numImgTestOver",
     "pages/mine/superMember",
     "pages/mine/energy",
     "pages/mine/cardVoucher",
@@ -29,6 +27,8 @@
     "pages/mine/activityExchange",
     "pages/mine/feedback",
     "pages/train/trainCenter",
+    "pages/train/imageMemory/numImgTest",
+    "pages/train/imageMemory/numImgTestOver",
     "pages/train/imageMemory/numEleEntry",
     "pages/train/imageMemory/historyTest",
     "pages/loginAll/changePhone",
@@ -80,6 +80,5 @@
     "uni-load-more": "/components/uni-load-more/uni-load-more",
     "uni-popup": "/components/uni-popup/uni-popup",
     "no-data": "/components/no-data/no-data"
-  },
-  "sitemapLocation": "sitemap26.json"
+  }
 }

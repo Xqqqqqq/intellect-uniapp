@@ -1,5 +1,6 @@
 {
-	"pages": [{
+	"pages": [
+		{
             "path" : "pages/myData/loadPage",
             "style" : {
 				"navigationBarTitleText": ""
@@ -79,28 +80,6 @@
             "path" : "pages/train/imageMemory/numImgCard",
             "style" : {
 				"navigationBarTitleText": "数字图像关联训练"
-			}
-        }
-        ,{
-            "path" : "pages/train/imageMemory/numImgTest",
-            "style" : {
-				"navigationBarTitleText": "数字元素测试",
-				"navigationStyle": "custom",
-				"app-plus": {
-					"titleNView": false,
-					"scrollIndicator": "none"
-				}
-			}
-        }
-        ,{
-            "path" : "pages/train/imageMemory/numImgTestOver",
-            "style" : {
-				"navigationBarTitleText": "考试结束",
-				"navigationStyle": "custom",
-				"app-plus": {
-					"titleNView": false,
-					"scrollIndicator": "none"
-				}
 			}
         }
         ,{
@@ -201,6 +180,28 @@
 				"backgroundColorTop":"#2E3B67"
 			}
         }
+		,{
+		    "path" : "pages/train/imageMemory/numImgTest",
+		    "style" : {
+				"navigationBarTitleText": "数字元素测试",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"scrollIndicator": "none"
+				}
+			}
+		}
+		,{
+		    "path" : "pages/train/imageMemory/numImgTestOver",
+		    "style" : {
+				"navigationBarTitleText": "考试结束",
+				"app-plus":{
+					"titleNView": {
+						"autoBackButton": false
+					}
+				}
+			}
+		}
         ,{
             "path" : "pages/train/imageMemory/numEleEntry",
             "style" : {

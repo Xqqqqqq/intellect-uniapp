@@ -1,11 +1,10 @@
 <template>
 	<view class="test-over">
-		<uni-nav-bar title="考试结束"
-		statusBar="true" fixed="true" backgroundColor="#2E3B67" color="#ffffff"></uni-nav-bar>
 		<view class="test-over-top">
 			<view class="over-top-li">
 				<view class="test-over-circle">
-					<cmd-progress type="circle" :percent="answerInfo.score" :stroke-width="10" :width="120"></cmd-progress>
+					<cmd-progress type="circle" :percent="answerInfo.score" 
+					:stroke-width="10" :width="120"></cmd-progress>
 				</view>
 				<view class="over-top-li-right">
 					<view class="over-top-li-box">
@@ -33,7 +32,7 @@
 		
 		<view class="test-over-content">
 			<view class="over-content-title">ERROR <text>错记元素</text></view>
-			<view class="over-content-box" v-if="answerInfo.lostList.length > 0">
+			<view class="over-content-box" v-if="showNoData == false">
 				<view class="content-box-li" v-for="(item, index) in answerInfo.lostList" :key="index">
 					<view class="box-li-left">
 						<image :src='item.answerPic'></image>
@@ -44,7 +43,7 @@
 					<view class="box-li-left">{{item.answerName}}</view>
 				</view>
 			</view>
-			<no-data v-else></no-data>
+			<no-data v-if="showNoData == true"></no-data>
 		</view>
 		
 		<view class="test-over-bottom">
@@ -53,23 +52,23 @@
 			<view class="over-bottom-li bottom-li-green" @click="gotoHome">返回首页</view>
 			<!-- <view class="over-bottom-li bottom-li-green" @click="goBackRead">回看过程</view> -->
 		</view>
-		<view class="test-over-bottom-clone"></view>
 	</view>
 </template>
 
 <script>
 	import cmdProgress from "@/components/cmd-progress/cmd-progress.vue"
-	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
 	export default {
 		components: {
 			cmdProgress,
-			uniNavBar,
 		},
 		data() {
 			return {
 				id: '2c9a29b679c688a20179c6914a1a01e6', // 答案id
 				collectsId: '702aa38151aef50c0151aef50c2600cc',
-				answerInfo:{},
+				answerInfo:{
+					score: 0
+				},
+				showNoData: false
 			};
 		},
 		onLoad(options){
@@ -91,7 +90,12 @@
 					id:this.id
 				}).then(res => {
 					if(res.code == 0){
-						this.answerInfo =  res.data
+						this.answerInfo = res.data
+						if(this.answerInfo.lostList.length <= 0) {
+							this.showNoData = true
+						}else{
+							this.showNoData = false
+						}
 					}else{
 						uni.showToast({
 							title: res.info,
@@ -131,6 +135,8 @@
 <style lang="scss">
 .test-over{
 	width: 100%;
+	padding-bottom: 100rpx;
+	box-sizing: border-box;
 	.test-over-top{
 		width: 100%;
 		background-color: #FFFFFF;
@@ -264,9 +270,9 @@
 			background-color: #ED926E;
 		}
 	}
-	.test-over-bottom-clone{
-		width: 100%;
-		height: 100rpx;
-	}
+	// .test-over-bottom-clone{
+	// 	width: 100%;
+	// 	height: 100rpx;
+	// }
 }
 </style>

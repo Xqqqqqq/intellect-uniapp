@@ -1,8 +1,6 @@
 {
   "navigationBarTitleText": "考试结束",
-  "navigationStyle": "custom",
   "usingComponents": {
-    "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar",
     "cmd-progress": "/components/cmd-progress/cmd-progress",
     "no-data": "/components/no-data/no-data"
   }

@@ -93,9 +93,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
-  uniNavBar: function() {
-    return __webpack_require__.e(/*! import() | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @/components/uni-nav-bar/uni-nav-bar.vue */ 348))
-  },
   cmdProgress: function() {
     return __webpack_require__.e(/*! import() | components/cmd-progress/cmd-progress */ "components/cmd-progress/cmd-progress").then(__webpack_require__.bind(null, /*! @/components/cmd-progress/cmd-progress.vue */ 355))
   },
@@ -140,10 +137,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var cmdProgress = function cmdProgress() {__webpack_require__.e(/*! require.ensure | components/cmd-progress/cmd-progress */ "components/cmd-progress/cmd-progress").then((function () {return resolve(__webpack_require__(/*! @/components/cmd-progress/cmd-progress.vue */ 355));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniNavBar = function uniNavBar() {__webpack_require__.e(/*! require.ensure | components/uni-nav-bar/uni-nav-bar */ "components/uni-nav-bar/uni-nav-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-nav-bar/uni-nav-bar.vue */ 348));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
-
-
-
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var cmdProgress = function cmdProgress() {__webpack_require__.e(/*! require.ensure | components/cmd-progress/cmd-progress */ "components/cmd-progress/cmd-progress").then((function () {return resolve(__webpack_require__(/*! @/components/cmd-progress/cmd-progress.vue */ 355));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -204,14 +198,16 @@ __webpack_require__.r(__webpack_exports__);
 
 {
   components: {
-    cmdProgress: cmdProgress,
-    uniNavBar: uniNavBar },
+    cmdProgress: cmdProgress },
 
   data: function data() {
     return {
       id: '2c9a29b679c688a20179c6914a1a01e6', // 答案id
       collectsId: '702aa38151aef50c0151aef50c2600cc',
-      answerInfo: {} };
+      answerInfo: {
+        score: 0 },
+
+      showNoData: false };
 
   },
   onLoad: function onLoad(options) {
@@ -234,6 +230,11 @@ __webpack_require__.r(__webpack_exports__);
       then(function (res) {
         if (res.code == 0) {
           _this.answerInfo = res.data;
+          if (_this.answerInfo.lostList.length <= 0) {
+            _this.showNoData = true;
+          } else {
+            _this.showNoData = false;
+          }
         } else {
           uni.showToast({
             title: res.info,

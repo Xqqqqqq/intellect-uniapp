@@ -26,6 +26,9 @@
 /* 文章场景相关 */
 .test-over {
   width: 100%;
+  padding-bottom: 100rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .test-over .test-over-top {
   width: 100%;
@@ -177,9 +180,5 @@
 }
 .test-over .test-over-bottom .bottom-li-red {
   background-color: #ED926E;
-}
-.test-over .test-over-bottom-clone {
-  width: 100%;
-  height: 100rpx;
 }
 
