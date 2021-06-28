@@ -3,10 +3,16 @@
 		<view class="img-card" v-if="code == '0'">
 			<view class="card-filter">
 				<picker @change="bindNumChange" :value="numIndex" :range="numList">
-					<text class="card-filter-li">{{numList[numIndex]}}</text>
+					<view class="card-filter-li">
+						{{numList[numIndex]}}
+						<image src='../../../static/img/icons/down-blue.png'></image>
+					</view>
 				</picker>
 				<picker @change="bindOrderChange" :value="orderIndex" :range="orderList" range-key="title">
-					<text class="card-filter-li">{{orderList[orderIndex].title}}</text>
+					<view class="card-filter-li">
+						{{orderList[orderIndex].title}}
+						<image src='../../../static/img/icons/down-blue.png'></image>
+					</view>
 				</picker>
 			</view>
 			<view class="img-card-swiper">
@@ -100,7 +106,6 @@
 				this.$Request.get(`/appOptionController.do?startPractice&memberId=${this.memberId}&collectsId=${this.collectsId}`)
 				.then(res => {
 					this.code = res.code
-					console.log('123434',this.code)
 					if(res.code == 0){
 						for(let i =0; i< res.data.listNum; i++){
 							this.numList.push(`${i+1}/${res.data.listNum}`)
@@ -194,9 +199,13 @@
 			color: $uni-color-primary;
 			box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.3);
 			.card-filter-li{
-				border-bottom: 6rpx solid $uni-color-primary;
-				padding-bottom: 10rpx;
-				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+				image{
+					width: 25rpx;
+					height: 25rpx;
+					margin-left: 10rpx;
+				}
 			}
 		}
 

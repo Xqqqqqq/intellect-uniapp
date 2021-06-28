@@ -78,9 +78,6 @@
 			font-weight: bold;
 			font-size: 36rpx;
 			width: 100%;
-			overflow: hidden;
-			text-overflow:ellipsis;
-			white-space: nowrap;
 			margin-bottom: 20rpx;
 			image{
 				width: 35rpx;

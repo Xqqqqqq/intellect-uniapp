@@ -145,10 +145,7 @@ page{
 				color: #333333;
 				font-weight: bold;
 				font-size: 36rpx;
-				width: 83%;
-				overflow: hidden;
-				text-overflow:ellipsis;
-				white-space: nowrap;
+				width: 100%;
 				margin-bottom: 20rpx;
 			}
 			.box-right-tip{

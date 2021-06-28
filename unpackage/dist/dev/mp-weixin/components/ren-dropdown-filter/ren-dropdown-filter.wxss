@@ -102,7 +102,7 @@ page.data-v-61c13d5f {
   right: 0;
   bottom: 0;
   top: 0;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
   -webkit-transition: background-color 0.15s linear;
   transition: background-color 0.15s linear;
 }

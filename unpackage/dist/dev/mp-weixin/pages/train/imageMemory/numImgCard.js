@@ -109,6 +109,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -157,7 +163,6 @@ var _default =
       this.$Request.get("/appOptionController.do?startPractice&memberId=".concat(this.memberId, "&collectsId=").concat(this.collectsId)).
       then(function (res) {
         _this.code = res.code;
-        console.log('123434', _this.code);
         if (res.code == 0) {
           for (var i = 0; i < res.data.listNum; i++) {
             _this.numList.push("".concat(i + 1, "/").concat(res.data.listNum));

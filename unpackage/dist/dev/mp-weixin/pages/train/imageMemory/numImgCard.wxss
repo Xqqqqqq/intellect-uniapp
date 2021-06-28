@@ -62,10 +62,17 @@ page {
           box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.3);
 }
 .img-card .card-filter .card-filter-li {
-  border-bottom: 6rpx solid #2E3B67;
-  padding-bottom: 10rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.img-card .card-filter .card-filter-li image {
+  width: 25rpx;
+  height: 25rpx;
+  margin-left: 10rpx;
 }
 .img-card .img-card-swiper {
   width: 100%;

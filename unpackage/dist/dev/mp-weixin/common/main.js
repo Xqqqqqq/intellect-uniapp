@@ -108,9 +108,39 @@ var _fun = _interopRequireDefault(__webpack_require__(/*! common/fun.js */ 8));f
   },
   onLaunch: function onLaunch() {
     console.log('App Launch');
+    var vm = this;
+    uni.login({
+      provider: 'weixin',
+      success: function success(loginRes) {
+        if (loginRes.authResult) {
+          uni.setStorageSync('openid', loginRes.authResult.openid);
+          uni.setStorageSync('sessionKey', loginRes.authResult.access_token);
+        } else {
+          vm.$Request.get("/wxController.do?getOpenid&code=".concat(loginRes.code)).then(function (res) {
+            if (res.errmsg) {
+              uni.showToast({
+                title: res.errmsg,
+                icon: 'none' });
+
+            }
+            // console.log(res) //openid
+            if (res) {
+              uni.setStorageSync('openid', res.openid);
+              uni.setStorageSync('sessionKey', res.session_key);
+            }
+          });
+        }
+      },
+      fail: function fail(err) {
+        console.log(err);
+        uni.showToast({
+          title: '授权失败！',
+          icon: 'none' });
+
+      } });
+
   },
   onShow: function onShow() {
-    var vm = this;
     // this.platformName = fun.getPlatform()
     // switch(this.platformName) {
     //      case "MP-WEIXIN":
@@ -123,30 +153,7 @@ var _fun = _interopRequireDefault(__webpack_require__(/*! common/fun.js */ 8));f
     //         	url:'/pages/myData/loadPage'
     //         })
     // }
-    uni.login({
-      provider: 'weixin',
-      success: function success(loginRes) {
-        // console.log(loginRes.code) // code
-        vm.$Request.get("/wxController.do?getOpenid&code=".concat(loginRes.code)).then(function (res) {
-          if (res.errmsg) {
-            uni.showToast({
-              title: res.errmsg,
-              icon: 'none' });
 
-          }
-          // console.log(res) //openid
-          if (res) {
-            uni.setStorageSync('openid', res.openid);
-            uni.setStorageSync('sessionKey', res.session_key);
-          }
-        });
-      },
-      fail: function fail(err) {
-        uni.showToast({
-          title: '授权失败！',
-          icon: 'none' });
-
-      } });
 
   },
   onHide: function onHide() {

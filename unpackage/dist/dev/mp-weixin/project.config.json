@@ -9,7 +9,7 @@
   "compileType": "miniprogram",
   "libVersion": "2.9.2",
   "appid": "wx34bbf246a8e3e2ba",
-  "projectname": "intellect-uniapp",
+  "projectname": "武装大脑",
   "condition": {
     "plugin": {
       "list": []
@@ -23,26 +23,14 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/train/imageMemory/numImgTestOver",
-          "pathName": "pages/train/imageMemory/numImgTestOver",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/train/imageMemory/numImgTestOver",
-          "pathName": "pages/train/imageMemory/numImgTestOver",
+          "name": "pages/mine/superMember",
+          "pathName": "pages/mine/superMember",
           "query": "",
           "scene": null
         },
         {
           "name": "pages/myData/myData",
           "pathName": "pages/myData/myData",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/train/imageMemory/numImgTestOver",
-          "pathName": "pages/train/imageMemory/numImgTestOver",
           "scene": null
         }
       ]

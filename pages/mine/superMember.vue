@@ -116,43 +116,110 @@
 			},
 			// 支付
 			openPay(){
-				if(uni.getStorageSync('openid')){
-					this.$Request.get('/wxPayController.do?wxVipPay',{
-						openid: uni.getStorageSync('openid'),
-						totalMoney: this.scrollInfo.nowPrice,
-						vipValueId: this.scrollInfo.id,
-						cardId: this.discountPrice == 0 ? '' : this.memberInfo.cardList[this.moneyIndex].id
-					}).then(res => {
-						if(res.code == 0){
-							let value = res.data
-							// 微信支付
-							uni.requestPayment({
-							    provider: 'wxpay',
-							    timeStamp: value.timestamp,
-							    nonceStr: value.noncestr,
-							    package: value.package,
-							    signType: 'MD5',
-							    paySign: value.sign,
-							    success: function (res) {
-							        console.log('success:' + JSON.stringify(res));
-							    },
-							    fail: function (err) {
-							        console.log('fail:' + JSON.stringify(err));
-							    }
-							});
-						}else{
-							uni.showToast({
-								title: res.info,
-								icon: 'none'
+				let vm = this
+				uni.getProvider({
+					service: 'payment',
+					success: res=> {
+						if(~res.provider.indexOf('wxpay')){
+							uni.showLoading({title: '正在调起微信支付'})
+							vm.$Request.get('/wxPayController.do?wxVipPay',{
+								openid: uni.getStorageSync('openid'),
+								totalMoney: vm.scrollInfo.nowPrice,
+								vipValueId: vm.scrollInfo.id,
+								cardId: vm.discountPrice == 0 ? '' : vm.memberInfo.cardList[vm.moneyIndex].id
+							}).then(res => {
+								if(res.code == 0){
+									let value = res.data
+									console.log(value)
+									//#ifdef APP-PLUS
+									// 微信 App 支付
+									let payInfo={
+										appid: value.appid,
+										noncestr: value.noncestr,
+										package:"Sign=WXPay",
+										partnerid: value.mch_id,
+										prepayid: value.prepay_id,
+										timestamp: value.timestamp,
+										sign: value.sign,
+									}
+									// 微信支付
+									uni.requestPayment({
+									    provider: 'wxpay',
+									    orderInfo: payInfo,
+									    success: function (res) {
+											uni.hideLoading();
+											uni.showToast({title: '支付成功',icon:'none'})
+											setTimeout(()=>{
+												uni.switchTab({
+													url:'/pages/mine/mine'
+												})
+											},1000)
+									    },
+									    fail: function (err) {
+											uni.hideLoading();
+											uni.showToast({title: '支付失败，请稍后再试',icon:'none'})
+									    }
+									});
+									//#endif
+									
+									//#ifdef MP-WEIXIN
+									if(uni.getStorageSync('openid')){
+										this.$Request.get('/wxPayController.do?wxVipPay',{
+											openid: uni.getStorageSync('openid'),
+											totalMoney: this.scrollInfo.nowPrice,
+											vipValueId: this.scrollInfo.id,
+											cardId: this.discountPrice == 0 ? '' : this.memberInfo.cardList[this.moneyIndex].id
+										}).then(res => {
+											if(res.code == 0){
+												let value = res.data
+												// 微信支付
+												uni.requestPayment({
+												    provider: 'wxpay',
+												    timeStamp: value.timestamp,
+												    nonceStr: value.noncestr,
+												    package: value.package,
+												    signType: 'MD5',
+												    paySign: value.sign,
+												    success: function (res) {
+												        uni.hideLoading();
+												        uni.showToast({title: '支付成功',icon:'none'})
+														setTimeout(()=>{
+															uni.switchTab({
+																url:'/pages/mine/mine'
+															})
+														},1000)
+												    },
+												    fail: function (err) {
+												        uni.hideLoading();
+												        uni.showToast({title: '支付失败，请稍后再试',icon:'none'})
+												    }
+												});
+											}else{
+												uni.showToast({
+													title: res.info,
+													icon: 'none'
+												})
+											}
+										})
+									}else{
+										uni.showToast({
+											title: '未获取到openid',
+											icon: 'none'
+										})
+									}
+									//#endif
+								}else{
+									uni.showToast({
+										title: res.info,
+										icon: 'none'
+									})
+								}
 							})
+						}else {
+							uni.showToast({title: '获取微信通道失败，请检查您的微信是否正常启用',icon:'none'})
 						}
-					})
-				}else{
-					uni.showToast({
-						title: '未获取到openid',
-						icon: 'none'
-					})
-				}
+					}
+				})
 			},
 			gotoHistory(){
 				uni.navigateTo({

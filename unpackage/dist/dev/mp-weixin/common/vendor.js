@@ -757,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1935,274 +1935,18 @@ module.exports = {
 
 /***/ }),
 
-/***/ 14:
-/*!**************************************************!*\
-  !*** F:/项目总文件夹/intellect-uniapp/common/cache.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(uni) {/**
- * 缓存数据优化
- * var cache = require('utils/cache.js');
- * import cache from '../cache'
- * 使用方法 【
- *     一、设置缓存
- *         string    cache.put('k', 'string你好啊');
- *         json      cache.put('k', { "b": "3" }, 2);
- *         array     cache.put('k', [1, 2, 3]);
- *         boolean   cache.put('k', true);
- *     二、读取缓存
- *         默认值    cache.get('k')
- *         string    cache.get('k', '你好')
- *         json      cache.get('k', { "a": "1" })
- *     三、移除/清理  
- *         移除: cache.remove('k');
- *         清理：cache.clear(); 
- * 】
- * @type {String}
- */
-var postfix = '_mallStore'; // 缓存前缀 
-/**
- * 设置缓存 
- * @param  {[type]} k [键名]
- * @param  {[type]} v [键值]
- * @param  {[type]} t [时间、单位秒]
- */
-function put(k, v, t) {
-  uni.setStorageSync(k, v);
-  var seconds = parseInt(t);
-  if (seconds > 0) {
-    var timestamp = Date.parse(new Date());
-    timestamp = timestamp / 1000 + seconds;
-    uni.setStorageSync(k + postfix, timestamp + "");
-  } else {
-    uni.removeStorageSync(k + postfix);
-  }
-}
-
-
-/**
-   * 获取缓存 
-   * @param  {[type]} k   [键名]
-   * @param  {[type]} def [获取为空时默认]
-   */
-function get(k, def) {
-  var deadtime = parseInt(uni.getStorageSync(k + postfix));
-  if (deadtime) {
-    if (parseInt(deadtime) < Date.parse(new Date()) / 1000) {
-      if (def) {
-        return def;
-      } else {
-        return false;
-      }
-    }
-  }
-  var res = uni.getStorageSync(k);
-  if (res) {
-    return res;
-  } else {
-    if (def == undefined || def == "") {
-      def = false;
-    }
-    return def;
-  }
-}
-
-function remove(k) {
-  uni.removeStorageSync(k);
-  uni.removeStorageSync(k + postfix);
-}
-
-/**
-   * 清理所有缓存
-   * @return {[type]} [description]
-   */
-function clear() {
-  uni.clearStorageSync();
-}
-
-
-module.exports = {
-  put: put,
-  get: get,
-  remove: remove,
-  clear: clear };
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 15:
-/*!**************************************************!*\
-  !*** F:/项目总文件夹/intellect-uniapp/common/queue.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(uni) {/**
- * 队列封装
- * @author maxd
- * @date 2019.8.1
- */
-module.exports = {
-
-
-  logout: function logout() {
-    this.remove("token");
-    this.remove("userId");
-    this.remove("mobile");
-    this.remove("openid");
-    this.remove("nickName");
-    this.remove("image_url");
-    this.remove("relation_id");
-  },
-  loginClear: function loginClear() {
-    this.remove("token");
-    this.remove("userId");
-    this.remove("mobile");
-    this.remove("nickName");
-    this.remove("image_url");
-    this.remove("relation_id");
-  },
-  showLoading: function showLoading(title) {
-    uni.showLoading({
-      title: title });
-
-  },
-  showToast: function showToast(title) {
-    uni.showToast({
-      title: title,
-      mask: false,
-      duration: 2000,
-      icon: "none" });
-
-  },
-  getSearchKeys: function getSearchKeys(key) {
-    var list =
-    "hello";
-    return list.match(key);
-  },
-  setJson: function setJson(key, value) {
-    var jsonString = JSON.stringify(value);
-    try {
-      uni.setStorageSync(key, jsonString);
-    } catch (e) {
-      // error
-    }
-  },
-  setData: function setData(key, value) {
-    try {
-      uni.setStorageSync(key, value);
-    } catch (e) {
-      // error
-    }
-  },
-  getData: function getData(key) {
-    try {
-      var value = uni.getStorageSync(key);
-      if (value) {
-        return value;
-      }
-    } catch (e) {
-      // error
-    }
-
-  },
-  getJson: function getJson(key) {
-    try {
-      var value = uni.getStorageSync(key);
-      if (value) {
-        return JSON.parse(value);
-      }
-    } catch (e) {
-      // error
-    }
-
-  },
-  clear: function clear() {
-    uni.clearStorage();
-  },
-  get: function get(key) {//获取队列里面全部的数据
-    var data = this.getJson(key);
-    if (data instanceof Array) {
-      return data;
-    }
-    return [];
-  },
-  insert: function insert(param) {//队列插入数据
-    param.capacityNum = param.capacityNum || 100; //队列容量 默认队列中超过100条数据，自动删除尾部
-    var data = this.getJson(param.key);
-    if (data instanceof Array) {
-      if (data.length > param.capacityNum) {
-        var total = data.length - param.capacityNum;
-        for (var i = 0; i < total; i++) {
-          data.pop();
-        }
-      }
-      data.unshift(param.value);
-    } else {
-      data = [];
-      data.push(param.value);
-    }
-    this.setJson(param.key, data);
-  },
-  removeItem: function removeItem(key, itemIds) {//提供itemIds数组 批量删除队列中的某项数据
-    var data = this.getJson(key);
-    if (data instanceof Array) {
-      for (var i = 0; i < itemIds.length; i++) {
-        for (var p = 0; p < data.length; p++) {
-          if (itemIds[i] === data[p].itemid) {
-            data.splice(p, 1);
-            break;
-          }
-        }
-      }
-      this.setJson(key, data);
-    }
-  },
-  isExist: function isExist(key, itemId) {//检测某条数据在队列中是否存在
-    var data = this.getJson(key);
-    if (data instanceof Array) {
-      for (var p = 0; p < data.length; p++) {
-        if (itemId === data[p].itemid) {
-          return true;
-        }
-      }
-    }
-    return false;
-  },
-  remove: function remove(key) {//删除某条队列
-    try {
-      uni.removeStorageSync(key);
-      //localStorage.removeItem(key)
-    } catch (e) {
-      // error
-    }
-  },
-  getCount: function getCount(key) {//获取队列中全部数据数量
-
-    var data = this.getJson(key);
-    if (data instanceof Array) {
-      return data.length;
-    }
-    return 0;
-  } };
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 151:
+/***/ 135:
 /*!*********************************************************************************************!*\
   !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 152);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 136);
 
 /***/ }),
 
-/***/ 152:
+/***/ 136:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -2233,7 +1977,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 153);
+module.exports = __webpack_require__(/*! ./runtime */ 137);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -2250,7 +1994,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 153:
+/***/ 137:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -2979,6 +2723,262 @@ if (hadRuntime) {
   })() || Function("return this")()
 );
 
+
+/***/ }),
+
+/***/ 14:
+/*!**************************************************!*\
+  !*** F:/项目总文件夹/intellect-uniapp/common/cache.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(uni) {/**
+ * 缓存数据优化
+ * var cache = require('utils/cache.js');
+ * import cache from '../cache'
+ * 使用方法 【
+ *     一、设置缓存
+ *         string    cache.put('k', 'string你好啊');
+ *         json      cache.put('k', { "b": "3" }, 2);
+ *         array     cache.put('k', [1, 2, 3]);
+ *         boolean   cache.put('k', true);
+ *     二、读取缓存
+ *         默认值    cache.get('k')
+ *         string    cache.get('k', '你好')
+ *         json      cache.get('k', { "a": "1" })
+ *     三、移除/清理  
+ *         移除: cache.remove('k');
+ *         清理：cache.clear(); 
+ * 】
+ * @type {String}
+ */
+var postfix = '_mallStore'; // 缓存前缀 
+/**
+ * 设置缓存 
+ * @param  {[type]} k [键名]
+ * @param  {[type]} v [键值]
+ * @param  {[type]} t [时间、单位秒]
+ */
+function put(k, v, t) {
+  uni.setStorageSync(k, v);
+  var seconds = parseInt(t);
+  if (seconds > 0) {
+    var timestamp = Date.parse(new Date());
+    timestamp = timestamp / 1000 + seconds;
+    uni.setStorageSync(k + postfix, timestamp + "");
+  } else {
+    uni.removeStorageSync(k + postfix);
+  }
+}
+
+
+/**
+   * 获取缓存 
+   * @param  {[type]} k   [键名]
+   * @param  {[type]} def [获取为空时默认]
+   */
+function get(k, def) {
+  var deadtime = parseInt(uni.getStorageSync(k + postfix));
+  if (deadtime) {
+    if (parseInt(deadtime) < Date.parse(new Date()) / 1000) {
+      if (def) {
+        return def;
+      } else {
+        return false;
+      }
+    }
+  }
+  var res = uni.getStorageSync(k);
+  if (res) {
+    return res;
+  } else {
+    if (def == undefined || def == "") {
+      def = false;
+    }
+    return def;
+  }
+}
+
+function remove(k) {
+  uni.removeStorageSync(k);
+  uni.removeStorageSync(k + postfix);
+}
+
+/**
+   * 清理所有缓存
+   * @return {[type]} [description]
+   */
+function clear() {
+  uni.clearStorageSync();
+}
+
+
+module.exports = {
+  put: put,
+  get: get,
+  remove: remove,
+  clear: clear };
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 15:
+/*!**************************************************!*\
+  !*** F:/项目总文件夹/intellect-uniapp/common/queue.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(uni) {/**
+ * 队列封装
+ * @author maxd
+ * @date 2019.8.1
+ */
+module.exports = {
+
+
+  logout: function logout() {
+    this.remove("token");
+    this.remove("userId");
+    this.remove("mobile");
+    this.remove("openid");
+    this.remove("nickName");
+    this.remove("image_url");
+    this.remove("relation_id");
+  },
+  loginClear: function loginClear() {
+    this.remove("token");
+    this.remove("userId");
+    this.remove("mobile");
+    this.remove("nickName");
+    this.remove("image_url");
+    this.remove("relation_id");
+  },
+  showLoading: function showLoading(title) {
+    uni.showLoading({
+      title: title });
+
+  },
+  showToast: function showToast(title) {
+    uni.showToast({
+      title: title,
+      mask: false,
+      duration: 2000,
+      icon: "none" });
+
+  },
+  getSearchKeys: function getSearchKeys(key) {
+    var list =
+    "hello";
+    return list.match(key);
+  },
+  setJson: function setJson(key, value) {
+    var jsonString = JSON.stringify(value);
+    try {
+      uni.setStorageSync(key, jsonString);
+    } catch (e) {
+      // error
+    }
+  },
+  setData: function setData(key, value) {
+    try {
+      uni.setStorageSync(key, value);
+    } catch (e) {
+      // error
+    }
+  },
+  getData: function getData(key) {
+    try {
+      var value = uni.getStorageSync(key);
+      if (value) {
+        return value;
+      }
+    } catch (e) {
+      // error
+    }
+
+  },
+  getJson: function getJson(key) {
+    try {
+      var value = uni.getStorageSync(key);
+      if (value) {
+        return JSON.parse(value);
+      }
+    } catch (e) {
+      // error
+    }
+
+  },
+  clear: function clear() {
+    uni.clearStorage();
+  },
+  get: function get(key) {//获取队列里面全部的数据
+    var data = this.getJson(key);
+    if (data instanceof Array) {
+      return data;
+    }
+    return [];
+  },
+  insert: function insert(param) {//队列插入数据
+    param.capacityNum = param.capacityNum || 100; //队列容量 默认队列中超过100条数据，自动删除尾部
+    var data = this.getJson(param.key);
+    if (data instanceof Array) {
+      if (data.length > param.capacityNum) {
+        var total = data.length - param.capacityNum;
+        for (var i = 0; i < total; i++) {
+          data.pop();
+        }
+      }
+      data.unshift(param.value);
+    } else {
+      data = [];
+      data.push(param.value);
+    }
+    this.setJson(param.key, data);
+  },
+  removeItem: function removeItem(key, itemIds) {//提供itemIds数组 批量删除队列中的某项数据
+    var data = this.getJson(key);
+    if (data instanceof Array) {
+      for (var i = 0; i < itemIds.length; i++) {
+        for (var p = 0; p < data.length; p++) {
+          if (itemIds[i] === data[p].itemid) {
+            data.splice(p, 1);
+            break;
+          }
+        }
+      }
+      this.setJson(key, data);
+    }
+  },
+  isExist: function isExist(key, itemId) {//检测某条数据在队列中是否存在
+    var data = this.getJson(key);
+    if (data instanceof Array) {
+      for (var p = 0; p < data.length; p++) {
+        if (itemId === data[p].itemid) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  remove: function remove(key) {//删除某条队列
+    try {
+      uni.removeStorageSync(key);
+      //localStorage.removeItem(key)
+    } catch (e) {
+      // error
+    }
+  },
+  getCount: function getCount(key) {//获取队列中全部数据数量
+
+    var data = this.getJson(key);
+    if (data instanceof Array) {
+      return data.length;
+    }
+    return 0;
+  } };
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -8514,7 +8514,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8535,14 +8535,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8618,7 +8618,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
