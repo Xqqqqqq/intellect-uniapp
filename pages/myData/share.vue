@@ -5,7 +5,7 @@
 		</view>
 		<view class="footer">
 			<view style="height: 106rpx; align-items: center;">
-				<button style="background: transparent; height: 106rpx; line-height: 106rpx;color: #FFFFFF;" @tap="toSaveImage">保存海报并分享</button>
+				<button style="background: transparent; height: 106rpx; line-height: 106rpx;color: #FFFFFF;" @click="toSaveImage">保存海报并分享</button>
 			</view>
 		</view>
 	</view>
@@ -106,7 +106,7 @@
 							icon: 'none',
 							title: '保存海报失败'
 						})
-					}
+					},
 				})
 			},
 			async toDrawCanvas() {
@@ -145,7 +145,7 @@
 						ctx.drawImage(hello.tempFilePath, this.canvasW - padding - av, totalH - padding - av, av, av)
 					}
 				}
-				ctx.draw()
+				ctx.draw(false, (() => {}))
 				this.finished = true
 			},
 			async drawCard(ctx, x, y, w, h) {

@@ -5,7 +5,16 @@
             "style" : {
 				"navigationBarTitleText": ""
 			}
-        }
+        },
+		{
+		    "path" : "pages/myData/sharePainter",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "测试分享",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
 		,{
             "path" : "pages/myData/myData",
             "style": {

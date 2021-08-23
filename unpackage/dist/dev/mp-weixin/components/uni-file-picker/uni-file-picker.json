@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "upload-image": "/components/uni-file-picker/upload-image",
+    "upload-file": "/components/uni-file-picker/upload-file"
+  },
+  "component": true
+}

@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "编辑信息",
-  "usingComponents": {}
+  "usingComponents": {
+    "uni-file-picker": "/components/uni-file-picker/uni-file-picker"
+  }
 }

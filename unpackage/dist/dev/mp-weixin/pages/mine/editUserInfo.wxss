@@ -61,12 +61,6 @@ page {
   font-size: 30rpx;
   color: #666;
 }
-.edit .edit-li .edit-li-right image {
-  width: 150rpx;
-  height: 150rpx;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
-}
 .edit .edit-btn {
   width: 100%;
   height: 100rpx;

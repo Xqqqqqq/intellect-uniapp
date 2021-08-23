@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "测试分享",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "l-painter": "/components/lime-painter/index"
+  }
+}

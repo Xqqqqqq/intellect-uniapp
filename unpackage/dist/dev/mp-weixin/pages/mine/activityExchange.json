@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "奖励兑换",
-  "usingComponents": {}
+  "usingComponents": {
+    "no-data": "/components/no-data/no-data"
+  }
 }

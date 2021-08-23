@@ -9,8 +9,34 @@
 			<view class="activity-top-btn">查询</view>
 		</view>
 		<view class="activity-content">
+			<view class="activity-content-title">* 节日活动优惠 *</view>
+			<view class="card-ul-li" v-for="(item, index) in holidayList" :key="index">
+				<view class="card-ul-li-left">
+					{{item.cardValue}}
+					<text v-if="item.cardType == 2">点能量</text>
+					<text v-if="item.cardType == 1">元</text>
+				</view>
+				<view class="card-ul-li-content">
+					<image src='../../static/img/icons/red.png'></image>
+				</view>
+				<view class="card-ul-li-right">
+					<view class="ul-li-right-title">
+						<image :src="item.cardPic"></image>
+						{{item.holidayName}}
+					</view>
+					<view class="ul-li-right-status">优惠券状态：未使用</view>
+				</view>
+				<view class="card-ul-li-btn" v-if="item.isGet == 0"
+				@click="chooseHoliday(item.id)"
+				>立即领取</view>
+				<view class="card-ul-li-btn" v-if="item.isGet == 1" style="background: #999;">已领取</view>
+			</view>
+			<no-data v-if="!holidayList.length"></no-data>
+		</view>
+		<view class="activity-content">
 			<view class="activity-content-title">* 奖励信息查询 *</view>
-			<view class="card-ul-li">
+			<view style="color: #999; text-align: center;">暂无信息</view>
+			<!-- <view class="card-ul-li">
 				<view class="card-ul-li-left">3<text>点能量</text></view>
 				<view class="card-ul-li-content">
 					<image src='../../static/img/icons/red.png'></image>
@@ -23,7 +49,7 @@
 					<view class="ul-li-right-status">到期时间：2020-10-10</view>
 				</view>
 				<view class="card-ul-li-btn">立即领取</view>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -32,8 +58,41 @@
 	export default {
 		data() {
 			return {
-				
+				holidayList: [], // 卡券节日列表
 			};
+		},
+		mounted(){
+			this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+			this.getHolidayList()
+		},
+		methods: {
+			// 获取所有卡券节日列表
+			getHolidayList(){
+				this.$Request.get(`/appCardController.do?getHolidayList&memberId=${this.memberId}`)
+				.then(res => {
+					if(res.code == 0){
+						this.holidayList = res.data.holidayList
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			chooseHoliday(id){
+				this.$Request.get(`/appCardController.do?getHolidayCard&memberId=${this.memberId}&holidayId=${id}`)
+				.then(res => {
+					if(res.code == 0){
+						this.getHolidayList()
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			}
 		}
 	}
 </script>

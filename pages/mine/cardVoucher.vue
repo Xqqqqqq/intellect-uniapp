@@ -23,7 +23,8 @@
 					</view>
 					<view class="ul-li-right-status">到期时间：{{item.expiresDate}}</view>
 				</view>
-				<view class="card-ul-li-btn">立即领取</view>
+				<view class="card-ul-li-btn" v-if="item.cardType == 2" @click="chooseCard(item)">立即兑换</view>
+				<view class="card-ul-li-btn" v-if="item.cardType == 1" @click="chooseMoney(item)">立即使用</view>
 			</view>
 			<no-data v-if="!cardList.length"></no-data>
 		</view>
@@ -42,7 +43,7 @@
 						<image :src="item.cardPic"></image>
 						{{item.cardName}}
 					</view>
-					<view class="ul-li-right-status">使用时间：{{item.useDate}}</view>
+					<view class="ul-li-right-status">使用时间：{{item.useDate || '暂无'}}</view>
 				</view>
 				<view class="card-ul-li-btn card-ul-li-btn-other">已兑换</view>
 			</view>
@@ -66,6 +67,7 @@
 				showH5: true,
 				cardList:[],//可用卡券
 				wasteCardList: [], //历史卡券
+				memberId: '',
 			};
 		},
 		onShow(){
@@ -74,13 +76,13 @@
 			}else{
 				this.showH5 = false
 			}
+			this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id
 			this.getCardList()
 		},
 		methods:{
 			// 获取当前页面的信息
 			getCardList(){
-				this.openid = uni.getStorageSync('openid') ? uni.getStorageSync('openid') : ''
-				this.$Request.get(`/appCardController.do?getCardList&openid=${this.openid}`)
+				this.$Request.get(`/appCardController.do?getCardList&memberId=${this.memberId}`)
 				.then(res => {
 					if(res.code == 0){
 						this.cardList =res.data.cardList.map(item => {
@@ -105,6 +107,39 @@
 			},
 			clickTab(index){
 				this.currentTab = index
+			},
+			// 立即领取
+			chooseCard(item){
+				let vm = this
+				uni.showModal({
+				    title: '立即兑换',
+				    content: `立即获得${item.cardValue}点能量`,
+					cancelText: '暂不兑换',
+					confirmText: '立即兑换',
+				    success: function (res) {
+				        if (res.confirm) {
+							vm.$Request.get(`/appCardController.do?useEnergyCard&memberId=${vm.memberId}&cardId=${item.id}`)
+							.then(res => {
+								if(res.code == 0){
+									vm.getCardList()
+								}else{
+									uni.showToast({
+										title: res.info,
+										icon: 'none'
+									})
+								}
+							})
+				        } else if (res.cancel) {
+				            console.log('用户点击取消');
+				        }
+				    }
+				});
+			},
+			// 立即使用
+			chooseMoney(item){
+				uni.navigateTo({
+					url:`/pages/mine/superMember?price=${item.cardValue}`
+				})
 			}
 		}
 	}

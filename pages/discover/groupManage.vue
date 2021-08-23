@@ -1,7 +1,7 @@
 <template>
 	<view class="group">
 		<view class="group-top">
-			<view class="group-top-left">我的分类（4）</view>
+			<view class="group-top-left">我的分类（{{classifyList.length}}）</view>
 			<view class="group-top-right" @click="clickOperation('add')">+</view>
 		</view>
 		<view class="group-content">
@@ -9,7 +9,7 @@
 				<view class="content-li-left">
 					<image :src="currentTab == item.id ? '../../static/img/icons/zhiding-blue.png' : '../../static/img/icons/zhiding-gray.png'" 
 					@click="clickTop(item)"></image>
-					{{item.title}}
+					{{item.organizeName}}
 				</view>
 				<view class="content-li-right">
 					<view class="li-right-line"></view>
@@ -44,16 +44,7 @@
 		},
 		data() {
 			return {
-				classifyList:[{
-					id:1,
-					title: '无分类'
-				},{
-					id:2,
-					title: '英语'
-				},{
-					id:3,
-					title: '数学'
-				},],
+				classifyList:[],
 				currentTab:0,
 				isShowModal: false, // 是否展示弹框
 				type: '', // 弹框类型
@@ -63,9 +54,24 @@
 			};
 		},
 		mounted(){
-			this.currentTab = this.classifyList[0].id
+			this.getAttentionOrganize()
 		},
 		methods:{
+			getAttentionOrganize(){
+				let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+				this.$Request.get(`/appAttentionController.do?getAttentionOrganize&type=2&memberId=${memberId}`)
+				.then(res => {
+					if(res.code == 0){
+						this.classifyList = res.data.organizeList
+						this.currentTab = this.classifyList[0].id
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
 			clickTop(item){
 				this.currentTab = item.id
 				let middleValue = item;
@@ -75,13 +81,15 @@
 			clickOperation(type, item){
 				this.isShowModal = true
 				this.type = type
+				this.modalTitle = ''
+				this.chooseItem = {}
+				this.operatName = ''
 				switch(this.type) {
 					case 'add':
 						this.modalTitle = '新增分类'
 						break
 					case 'edit':
 						this.modalTitle = '编辑分类'
-						this.operatName = item.title
 						break
 					case 'delete':
 						this.modalTitle = '提示'
@@ -89,7 +97,47 @@
 				}
 				if(item) {
 					this.chooseItem = item
+					this.operatName = item.organizeName
 				}
+			},
+			addAttentionOrganize(){
+				let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+				this.$Request.get(`/appAttentionController.do?addAttentionOrganize&type=2&memberId=${memberId}&name=${this.operatName}`)
+				.then(res => {
+					if(res.code == 0){
+						this.getAttentionOrganize()
+					}
+					uni.showToast({
+						title: res.info,
+						icon: 'none'
+					})
+				})
+			},
+			updateAttentionOrganize(){
+				let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+				this.$Request.get(`/appAttentionController.do?updateAttentionOrganize&organizeId=${this.chooseItem.id}&memberId=${memberId}&name=${this.operatName}`)
+				.then(res => {
+					if(res.code == 0){
+						this.getAttentionOrganize()
+					}
+					uni.showToast({
+						title: res.info,
+						icon: 'none'
+					})
+				})
+			},
+			delAttentionOrganize(){
+				let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+				this.$Request.get(`/appAttentionController.do?delAttentionOrganize&organizeId=${this.chooseItem.id}&memberId=${memberId}`)
+				.then(res => {
+					if(res.code == 0){
+						this.getAttentionOrganize()
+					}
+					uni.showToast({
+						title: res.info,
+						icon: 'none'
+					})
+				})
 			},
 			cancel(){
 				this.isShowModal = false
@@ -99,7 +147,17 @@
 			},
 			confirm() {
 				this.isShowModal = false
-				console.log(this.operatName)
+				switch(this.type) {
+					case 'add':
+						this.addAttentionOrganize()
+						break
+					case 'edit':
+						this.updateAttentionOrganize()
+						break
+					case 'delete':
+						this.delAttentionOrganize()
+						break
+				}
 			},
 		}
 	}

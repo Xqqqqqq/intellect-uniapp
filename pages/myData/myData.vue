@@ -21,10 +21,10 @@
 		<view class="wrap-bottom">
 			<view class="wrap-bottom-title">
 				<text>我的训练</text>
-				<text v-if="showClassify" @click="gotoUrl('/pages/myData/groupManage')">分组管理 ></text>
+				<text @click="gotoUrl('/pages/myData/groupManage')">分组管理 ></text>
 			</view>
-			<top-input v-if="showClassify" class="top-input" :changeValue="changeValue" :placeholderText="placeholderText" @changeInput="changeInput"></top-input>
-			<my-scrollX v-if="showClassify" 
+			<top-input class="top-input" :changeValue="changeValue" :placeholderText="placeholderText" @changeInput="changeInput"></top-input>
+			<my-scrollX 
 			:scrollList="scrollTopList" :currentTab="currentTopTab"
 			:beforeColor="beforeColor" :afterColor="afterColor" @tabChange="tabChange"></my-scrollX>
 		</view>
