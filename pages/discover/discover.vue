@@ -147,7 +147,7 @@
 			clickAttention(item, index){
 				let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
 				let articleId = item.id
-				this.$Request.get(`/appAttentionController.do?takeArticleAttention&memberId=${memberId}&articleId=${articleId}`)
+				this.$Request.get(`/appAttentionController.do?takeArticleAttention&memberId=${memberId}&articleId=${articleId}&organizeId=${this.typeId}`)
 				.then(res => {
 					if(res.code == 0){
 						this.articleList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1
@@ -173,13 +173,13 @@
 				this.getTrainList()
 			},
 			tabChange(item, index){
-				this.currentTopTab = index
-				this.typeId = item.id
 				this.articleList = []
 				this.scrollTopList = [{
 					typeName: '推荐',
 					id: ''
 				}]
+				this.currentTopTab = index
+				this.typeId = item.id
 				this.page = 1
 				this.getTrainList()
 			},

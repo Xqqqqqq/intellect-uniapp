@@ -16,7 +16,7 @@
 					<view class="li-right-img">
 						<image src='../../static/img/icons/edit.png' @click="clickOperation('edit', item)"></image>
 					</view>
-					<view class="li-right-img">
+					<view class="li-right-img" v-if="item.organizeType != 1 || item.organizeType != 2">
 						<image src='../../static/img/icons/shanchu.png' @click="clickOperation('delete', item)"></image>
 					</view>
 				</view>
@@ -73,10 +73,21 @@
 				})
 			},
 			clickTop(item){
+				let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
 				this.currentTab = item.id
 				let middleValue = item;
 				this.classifyList.splice(this.classifyList.indexOf(item), 1);
 				this.classifyList.unshift(middleValue)
+				this.$Request.get(`/appAttentionController.do?topAttentionOrganize&type=2&organizeId=${item.id}&memberId=${memberId}`)
+				.then(res => {
+					if(res.code == 0){
+						this.getAttentionOrganize()
+					}
+					uni.showToast({
+						title: res.info,
+						icon: 'none'
+					})
+				})
 			},
 			clickOperation(type, item){
 				this.isShowModal = true

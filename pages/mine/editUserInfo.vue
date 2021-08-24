@@ -55,7 +55,11 @@
 				sexIndex:0,
 				userInfo:{},
 				memberId:'',
-				imageValue:{},
+				imageValue:[{
+					url: '',
+					extname: 'png',
+					name: 'shuijiao.png'
+				},],
 				imageStyles: {
 					"height": 80,   // 边框高度
 					"width": 80,    // 边框宽度
@@ -79,10 +83,11 @@
 				// console.log('选择文件：',e)
 				pathToBase64(e.tempFilePaths[0])
 				  .then(base64 => {
-					console.log(base64)
+					// console.log(base64)
+					let pic = base64.replace(/^data:image\/\w+;base64,/, "")
 					vm.$Request.postJson('/appMemberController.do?updateMemberPic',{
 						id: vm.memberId,
-						pic: base64
+						pic: pic
 					}).then(res => {
 						if(res.code == 0){
 						}
@@ -114,7 +119,8 @@
 				.then(res => {
 					this.userInfo = res.data.memberVo
 					this.sexIndex = this.sexList.findIndex(item => item.id == res.data.memberVo.memberSex)
-					this.imageValue.url = res.data.memberPic
+					this.imageValue[0].url = res.data.memberVo.memberPic
+					console.log(this.imageValue)
 					uni.setStorageSync('userInfo', JSON.stringify(res.data.memberVo))
 					if(res.code == 0 || res.code == 100){
 					}else{

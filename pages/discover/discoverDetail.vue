@@ -63,6 +63,7 @@
 				id:'4028d856788109dc0178811031bc000b',
 				memberId: '',
 				code:'',
+				organizeId: '',//分组id
 			};
 		},
 		onLoad(option){
@@ -105,7 +106,7 @@
 			// 收藏训练
 			clickAttention(item, index){
 				let collectsId = item.id
-				this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${this.memberId}&collectsId=${collectsId}`)
+				this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${this.memberId}&collectsId=${collectsId}&organizeId=${this.organizeId}`)
 				.then(res => {
 					if(res.code == 0){
 						this.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1
@@ -130,7 +131,7 @@
 				} 
 			},
 			upArticleCollectsAttention(){
-				this.$Request.get(`/appAttentionController.do?upArticleCollectsAttention&memberId=${this.memberId}&articleId=${this.id}`)
+				this.$Request.get(`/appAttentionController.do?upArticleCollectsAttention&memberId=${this.memberId}&articleId=${this.id}&organizeId=${this.organizeId}`)
 				.then(res => {
 					if(res.code == 0){
 						uni.showToast({
@@ -165,7 +166,7 @@
 			},
 			// 收藏文章
 			clickArtAttention(){
-				this.$Request.get(`/appAttentionController.do?takeArticleAttention&memberId=${this.memberId}&articleId=${this.id}`)
+				this.$Request.get(`/appAttentionController.do?takeArticleAttention&memberId=${this.memberId}&articleId=${this.id}&organizeId=${this.organizeId}`)
 				.then(res => {
 					if(res.code == 0){
 						this.articleVo.attentionType = this.articleVo.attentionType == 1 ? 0 : 1

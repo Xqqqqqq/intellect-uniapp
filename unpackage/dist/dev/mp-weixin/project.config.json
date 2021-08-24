@@ -4,40 +4,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": true,
-    "es6": true,
-    "enhance": false,
-    "postcss": true,
-    "preloadBackgroundData": false,
-    "minified": true,
-    "newFeature": false,
-    "coverView": true,
-    "nodeModules": false,
-    "autoAudits": false,
-    "showShadowRootInWxmlPanel": true,
-    "scopeDataCheck": false,
-    "uglifyFileName": false,
-    "checkInvalidKey": true,
-    "checkSiteMap": true,
-    "uploadWithSourceMap": true,
-    "compileHotReLoad": false,
-    "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": true,
-    "babelSetting": {
-      "ignore": [],
-      "disablePlugins": [],
-      "outputPath": ""
-    },
-    "enableEngineNative": false,
-    "bundle": false,
-    "useIsolateContext": true,
-    "useCompilerModule": true,
-    "userConfirmedUseCompilerModuleSwitch": false,
-    "userConfirmedBundleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
-    "minifyWXSS": true
+    "urlCheck": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.9.2",
@@ -56,32 +23,14 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/mine/editUserInfo",
-          "pathName": "pages/mine/editUserInfo",
+          "name": "pages/discover/discover",
+          "pathName": "pages/discover/discover",
           "query": "",
           "scene": null
         },
         {
-          "name": "pages/myData/myData",
-          "pathName": "pages/myData/myData",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/myData/groupManage",
-          "pathName": "pages/myData/groupManage",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/discover/groupManage",
-          "pathName": "pages/discover/groupManage",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/loginAll/login",
-          "pathName": "pages/loginAll/login",
+          "name": "pages/train/trainCenter",
+          "pathName": "pages/train/trainCenter",
           "scene": null
         }
       ]

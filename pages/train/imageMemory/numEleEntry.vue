@@ -52,6 +52,7 @@
 				entryInfo:{},
 				collectsId: '',
 				memberId: '',
+				organizeId: '',//分组id
 			};
 		},
 		onLoad(options){
@@ -80,7 +81,7 @@
 			},
 			// 收藏
 			clickAttention(){
-				this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${this.memberId}&collectsId=${this.collectsId}`)
+				this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${this.memberId}&collectsId=${this.collectsId}&organizeId=${this.organizeId}`)
 				.then(res => {
 					if(res.code == 0){
 						this.entryInfo.attentionNum = this.entryInfo.attentionType == 1 ? this.entryInfo.attentionNum - 1 : this.entryInfo.attentionNum + 1
