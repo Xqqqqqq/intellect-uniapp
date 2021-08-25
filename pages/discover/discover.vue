@@ -82,6 +82,7 @@
 				typeName: '推荐',
 				id: ''
 			}]
+			this.articleName = ''
 			uni.showLoading({
 				title: '加载中'
 			});
@@ -101,11 +102,13 @@
 		},
 		onShow(){
 			this.page = 1;
+			this.currentTopTab = 0
 			this.articleList = []
 			this.scrollTopList = [{
 				typeName: '推荐',
 				id: ''
 			}]
+			this.articleName = ''
 			this.getTrainList()
 		},
 		methods:{
@@ -161,13 +164,21 @@
 				})
 			},
 			bindNameInput(e){
+				this.scrollTopList = [{
+					typeName: '推荐',
+					id: ''
+				}]
 				this.articleName = e.target.value
-				console.log(e.target.value)
+				// console.log(e.target.value)
 				this.articleList = []
 				this.page = 1
 				this.getTrainList()
 			},
 			clickSearch(){
+				this.scrollTopList = [{
+					typeName: '推荐',
+					id: ''
+				}]
 				this.articleList = []
 				this.page = 1
 				this.getTrainList()

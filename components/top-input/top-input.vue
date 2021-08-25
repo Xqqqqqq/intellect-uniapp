@@ -4,7 +4,7 @@
 			<icon type="search" size="16" class="iconsousuo"/>
 			<input class="top-box-input" :placeholder="placeholderText" type="text"
 			placeholder-class="input-box-placeholder" v-model="changeValue" 
-			confirm-type="search" @confirm="confirmInput" @blur="confirmInput"/>
+			confirm-type="search" @confirm="confirmInput" @input="confirmInput"/>
 		</view>
 	</view>
 </template>

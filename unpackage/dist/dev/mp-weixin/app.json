@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/myData/loadPage",
     "pages/myData/sharePainter",
+    "pages/myData/loadPage",
     "pages/myData/myData",
     "pages/discover/discover",
     "pages/discover/discoverDetail",

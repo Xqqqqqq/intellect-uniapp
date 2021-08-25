@@ -1,0 +1,1 @@
+<view data-event-opts="{{[['tap',[['changeIfShow',['$event']]]]]}}" hidden="{{!(ifShow)}}" class="content" bindtap="__e"><canvas class="canvas-img" canvas-id="firstCanvas" id="firstCanvas" data-event-opts="{{[['longpress',[['canvasGet',['$event']]]]]}}" bindlongpress="__e"></canvas></view>

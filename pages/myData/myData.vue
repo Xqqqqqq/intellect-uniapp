@@ -23,7 +23,13 @@
 				<text>我的训练</text>
 				<text @click="gotoUrl('/pages/myData/groupManage')">分组管理 ></text>
 			</view>
-			<top-input class="top-input" :changeValue="changeValue" :placeholderText="placeholderText" @changeInput="changeInput"></top-input>
+			<view class="wrap-select">
+			  <input @input="bindNameInput" v-model="changeValue" 
+			  type="text" placeholder="请输入搜索内容" placeholder-class="input-placeholder" class="input-length"/>
+			  <view class="search-icon" @click="clickSearch">
+			    <image src="../../static/img/icons/search.png"></image>
+			  </view>
+			</view>
 			<my-scrollX 
 			:scrollList="scrollTopList" :currentTab="currentTopTab"
 			:beforeColor="beforeColor" :afterColor="afterColor" @tabChange="tabChange"></my-scrollX>
@@ -39,17 +45,14 @@
 
 <script>
 	import myScrollX from '@/components/my-scrollX/my-scrollX.vue'
-	import TopInput from '@/components/top-input/top-input.vue'
 	import MyList from '@/components/my-list/my-list.vue'
 	export default {
 		components: {
 			myScrollX,
-			TopInput,
 			MyList,
 		},
 		data() {
 			return {
-				showClassify: false, // 是否展示分组
 				scrollTopList:[],
 				currentTopTab: 0,
 				beforeColor: '#666666',
@@ -73,6 +76,7 @@
 			this.page = 1;
 			this.trainInfo = {};
 			this.collectsList = []
+			this.changeValue = ''
 			uni.showLoading({
 				title: '加载中'
 			});
@@ -90,6 +94,9 @@
 			this.page = 1;
 			this.trainInfo = {};
 			this.collectsList = []
+			this.currentTopTab = 0
+			this.changeValue = ''
+			this.organizeId = ''
 			this.getTrainList()
 		},
 		methods:{
@@ -97,9 +104,22 @@
 			getTrainList(){
 				if(uni.getStorageSync('userInfo')){
 					let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
-					this.$Request.get(`/appCollectsController.do?getTrainList&memberId=${memberId}&page=${this.page}&type=1&groupId`).then(res => {
+					this.$Request.get(`/appCollectsController.do?getTrainList&memberId=${memberId}&page=${this.page}&type=1&collectsName=${this.changeValue}&organizeId=${this.organizeId}`)
+					.then(res => {
 						this.code = res.code
 						this.trainInfo = res.data
+						let scrollTopList = []
+						res.data.organizeList.forEach(item => {
+							scrollTopList.push({
+								id: item.id,
+								groupName:item.organizeName
+							})
+						})
+						scrollTopList.unshift({
+							id: '',
+							groupName:'全部'
+						})
+						this.scrollTopList = scrollTopList
 						this.status = 'noMore'
 						if(res.code == 0){
 							this.collectsList =  [...this.collectsList, ...res.data.collectsList].map(item => {
@@ -157,13 +177,25 @@
 				})
 			},
 			tabChange(item, index){
+				this.page = 1;
+				this.trainInfo = {};
+				this.collectsList = []
 				this.currentTopTab = index
 				this.organizeId = item.id
-				console.log(item, index)
+				this.getTrainList()
 			},
-			changeInput(value){
-				console.log(value)
-				this.changeValue = value
+			bindNameInput(e){
+				this.changeValue = e.target.value
+				this.trainInfo = {};
+				this.collectsList = []
+				this.page = 1;
+				this.getTrainList()
+			},
+			clickSearch(){
+				this.trainInfo = {};
+				this.collectsList = []
+				this.page = 1;
+				this.getTrainList()
 			},
 		}
 	}
@@ -224,9 +256,43 @@ page{
 		// padding-bottom: 0rpx;
 		box-sizing: border-box;
 		box-shadow:0px 2px 10px 0px rgba(108,143,197,0.14);
-		.top-input{
-			margin-bottom: 40rpx;
-			border: 1px solid $uni-border-color;
+		.wrap-select{
+		  width: 100%;
+		  height:70rpx;
+		  line-height: 70rpx;
+		  background:rgba(245,245,245,1);
+		  border-radius:34rpx;
+		  position: relative;
+		  padding: 0 37rpx;
+		  box-sizing: border-box;
+		  margin-bottom: 20rpx;
+		  margin-top: 20rpx;
+		  .input-length{
+		    width: 90%;
+		    height: 100%;
+		    line-height: 70rpx;
+		    font-size: 28rpx;
+		  }
+		  .input-placeholder{
+		    font-size: 26rpx;
+		    color: #A1A1A1;
+		  }
+		  .search-icon{
+		    width: 35rpx;
+		    height: 35rpx;
+		    position: absolute;
+		    top: 50%;
+		    right: 34rpx;
+		    transform: translateY(-50%);
+		    text-align: center;
+		    z-index: 999;
+		  }
+		  .search-icon image{
+		    width: 90%;
+		    height: 90%;
+		    margin: auto;
+		    display: inline;
+		  }
 		}
 		.wrap-bottom-title{
 			width: 100%;

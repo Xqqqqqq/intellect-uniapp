@@ -1,20 +1,17 @@
 {
 	"pages": [
 		{
+		    "path" : "pages/myData/sharePainter",
+		    "style" : {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
             "path" : "pages/myData/loadPage",
             "style" : {
 				"navigationBarTitleText": ""
 			}
-        },
-		{
-		    "path" : "pages/myData/sharePainter",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "测试分享",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		}
+        }
 		,{
             "path" : "pages/myData/myData",
             "style": {
@@ -148,7 +145,8 @@
         ,{
             "path" : "pages/mine/collect",
             "style" : {
-				"navigationBarTitleText": "收藏"
+				"navigationBarTitleText": "收藏",
+				"enablePullDownRefresh": true
 			}
         }
 		,{

@@ -3,7 +3,6 @@
   "enablePullDownRefresh": true,
   "backgroundColorTop": "#2E3B67",
   "usingComponents": {
-    "top-input": "/components/top-input/top-input",
     "my-scroll-x": "/components/my-scrollX/my-scrollX",
     "my-list": "/components/my-list/my-list",
     "no-data": "/components/no-data/no-data",

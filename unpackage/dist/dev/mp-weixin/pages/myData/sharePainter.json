@@ -1,7 +1,6 @@
 {
-  "navigationBarTitleText": "测试分享",
-  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "",
   "usingComponents": {
-    "l-painter": "/components/lime-painter/index"
+    "yz-canvas-poster": "/components/yz-canvas-poster/yz-canvas-poster"
   }
 }
