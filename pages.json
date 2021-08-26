@@ -1,17 +1,11 @@
 {
 	"pages": [
 		{
-		    "path" : "pages/myData/sharePainter",
+		    "path" : "pages/myData/loadPage",
 		    "style" : {
 				"navigationBarTitleText": ""
 			}
-		},
-		{
-            "path" : "pages/myData/loadPage",
-            "style" : {
-				"navigationBarTitleText": ""
-			}
-        }
+		}
 		,{
             "path" : "pages/myData/myData",
             "style": {
@@ -112,6 +106,12 @@
 				"navigationBarTitleText": "分享"
 			}
         }
+		,{
+		    "path" : "pages/myData/sharePainter",
+		    "style" : {
+				"navigationBarTitleText": ""
+			}
+		}
         ,{
             "path" : "pages/myData/groupManage",
             "style" : {

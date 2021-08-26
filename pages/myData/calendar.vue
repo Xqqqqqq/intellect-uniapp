@@ -29,7 +29,7 @@
 				<view class="calcendar-rule-text">1.就腐蚀雕刻路径飞升渡劫飞升渡劫副教授副教授的假分数带分数考虑到金粉世家风尚大奖</view>
 				<view class="calcendar-rule-text">1.就腐蚀雕刻路径飞升渡劫飞升渡劫副教授副教授的假分数带分数考虑到金粉世家风尚大奖</view>
 			</view>
-			<view class="calcendar-pos animated" @click="gotoUrl('/pages/myData/share')">
+			<view class="calcendar-pos animated" @click="gotoUrl('/pages/myData/sharePainter')">
 				<image src="../../static/img/icons/zhongjiang.png"></image>
 				<view>分享获能量</view>
 			</view>

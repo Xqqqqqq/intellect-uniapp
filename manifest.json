@@ -10,7 +10,6 @@
         "compilerVersion" : 3,
         "modules" : {
             "Payment" : {},
-            "Share" : {},
             "Contacts" : {},
             "OAuth" : {}
         },

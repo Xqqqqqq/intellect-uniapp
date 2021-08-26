@@ -1,6 +1,4 @@
 {
   "navigationBarTitleText": "",
-  "usingComponents": {
-    "yz-canvas-poster": "/components/yz-canvas-poster/yz-canvas-poster"
-  }
+  "usingComponents": {}
 }

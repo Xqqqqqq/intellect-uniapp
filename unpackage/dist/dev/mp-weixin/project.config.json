@@ -11,21 +11,35 @@
   "appid": "wx34bbf246a8e3e2ba",
   "projectname": "武装大脑",
   "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
+    "plugin": {
       "list": []
     },
     "game": {
-      "current": -1,
+      "list": []
+    },
+    "gamePlugin": {
       "list": []
     },
     "miniprogram": {
-      "current": -1,
-      "list": []
+      "list": [
+        {
+          "name": "pages/myData/sharePainter",
+          "pathName": "pages/myData/sharePainter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/myData/myData",
+          "pathName": "pages/myData/myData",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/loginAll/login",
+          "pathName": "pages/loginAll/login",
+          "scene": null
+        }
+      ]
     }
   }
 }

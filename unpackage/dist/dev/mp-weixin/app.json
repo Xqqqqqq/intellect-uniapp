@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/myData/sharePainter",
     "pages/myData/loadPage",
     "pages/myData/myData",
     "pages/discover/discover",
@@ -16,6 +15,7 @@
     "pages/mine/energy",
     "pages/mine/cardVoucher",
     "pages/myData/share",
+    "pages/myData/sharePainter",
     "pages/myData/groupManage",
     "pages/mine/editUserInfo",
     "pages/mine/editNickname",

@@ -13,17 +13,17 @@
 			<view class="login-midbtn" @click="clickLogin">登录</view>
 		</view>
 		<!-- 用户同意协议 且 未授权 -->
-		<button class="login-down" open-type="getPhoneNumber" @getphonenumber="onGetPhoneNumber" v-if="checked == true && weChatPhone == ''">
+		<!-- <button class="login-down" open-type="getPhoneNumber" @getphonenumber="onGetPhoneNumber" v-if="checked == true && weChatPhone == ''">
 			<image src='../../static/img/icons/weixin.jpg'></image>
-		</button>
+		</button> -->
 		<!-- 用户同意协议 且 已授权 -->
-		<button class="login-down" v-if="checked == true && weChatPhone != ''" @click="clickWechatLogin">
+		<!-- <button class="login-down" v-if="checked == true && weChatPhone != ''" @click="clickWechatLogin">
 			<image src='../../static/img/icons/weixin.jpg'></image>
-		</button>
+		</button> -->
 		<!-- 用户未同意协议 -->
-		<button class="login-down" v-if="checked == false" @click="openProvider">
+		<!-- <button class="login-down" v-if="checked == false" @click="openProvider">
 			<image src='../../static/img/icons/weixin.jpg'></image>
-		</button>
+		</button> -->
 		<!-- <button class="login-down" open-type="getUserInfo" lang="zh_CN" @getuserinfo="loginForProvider" v-if="checked == true">
 			<image src='../../static/img/icons/weixin.jpg'></image>
 		</button> -->
