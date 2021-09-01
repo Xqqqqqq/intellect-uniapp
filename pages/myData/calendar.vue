@@ -12,7 +12,7 @@
 				/>
 			</view>
 			<view class="all-calendar-btn">
-				<view class="calendar-btn-li btn-li-red">累计{{trainInfo.energyNum}}格能量</view>
+				<view class="calendar-btn-li btn-li-red">累计{{trainInfo.energyNum || 0}}格能量</view>
 				<view class="calendar-btn-li btn-li-olive" v-if="trainInfo.ifSign == 0" @click="onSignInBtn">今日签到</view>
 				<view class="calendar-btn-li btn-li-grey" v-if="trainInfo.ifSign == 1" @click="onSignInBtn">已签到</view>
 			</view>
@@ -52,25 +52,41 @@
 			};
 		},
 		mounted(){
-			this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+			this.memberId = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).id : ''
 			this.getMemberSignRecord()
 		},
 		methods: {
 			// 获取签到记录
 			getMemberSignRecord(){
-				this.$Request.postT('/appSignController.do?getMemberSignRecord',{
-					memberId: this.memberId
-				}).then(res => {
-					if(res.code == 0){
-						this.trainInfo = res.data
-						this.checks = res.data.signList
-					}else{
-						uni.showToast({
-							title: res.info,
-							icon: 'none'
-						})
-					}
-				})
+				if(uni.getStorageSync('userInfo')){
+					this.$Request.postT('/appSignController.do?getMemberSignRecord',{
+						memberId: this.memberId
+					}).then(res => {
+						if(res.code == 0){
+							this.trainInfo = res.data
+							this.checks = res.data.signList
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
 			},
 			gotoUrl(url){
 				uni.navigateTo({

@@ -23,8 +23,32 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/myData/sharePainter",
-          "pathName": "pages/myData/sharePainter",
+          "name": "pages/discover/groupManage",
+          "pathName": "pages/discover/groupManage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/discover/discoverDetail",
+          "pathName": "pages/discover/discoverDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/discover/discover",
+          "pathName": "pages/discover/discover",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/mine",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/myData/train",
+          "pathName": "pages/myData/train",
           "query": "",
           "scene": null
         },
@@ -35,8 +59,38 @@
           "scene": null
         },
         {
-          "name": "pages/loginAll/login",
-          "pathName": "pages/loginAll/login",
+          "name": "pages/myData/longestSeries",
+          "pathName": "pages/myData/longestSeries",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/myData/calendar",
+          "pathName": "pages/myData/calendar",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/train/imageMemory/numImgAllRead",
+          "pathName": "pages/train/imageMemory/numImgAllRead",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/train/imageMemory/numImgAllRead",
+          "pathName": "pages/train/imageMemory/numImgAllRead",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/train/imageMemory/numImgCard",
+          "pathName": "pages/train/imageMemory/numImgCard",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/train/trainCenter",
+          "pathName": "pages/train/trainCenter",
           "scene": null
         }
       ]

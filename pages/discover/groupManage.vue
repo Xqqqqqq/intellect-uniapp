@@ -22,6 +22,7 @@
 				</view>
 			</view>
 		</view>
+		<no-data v-if="!classifyList.length"></no-data>
 		<l-modal :isShowModal="isShowModal" :modalTitle="modalTitle" @onClickCancel="cancel" @onClickConfirm="confirm">
 			<view class="modal-input" v-if="type == 'add'">
 				<input placeholder="请输入分类名称" v-model="operatName"/>
@@ -58,19 +59,35 @@
 		},
 		methods:{
 			getAttentionOrganize(){
-				let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
-				this.$Request.get(`/appAttentionController.do?getAttentionOrganize&type=2&memberId=${memberId}`)
-				.then(res => {
-					if(res.code == 0){
-						this.classifyList = res.data.organizeList
-						this.currentTab = this.classifyList[0].id
-					}else{
-						uni.showToast({
-							title: res.info,
-							icon: 'none'
-						})
-					}
-				})
+				if(uni.getStorageSync('userInfo')){
+					let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+					this.$Request.get(`/appAttentionController.do?getAttentionOrganize&type=2&memberId=${memberId}`)
+					.then(res => {
+						if(res.code == 0){
+							this.classifyList = res.data.organizeList
+							this.currentTab = this.classifyList[0].id
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
 			},
 			clickTop(item){
 				let memberId = JSON.parse(uni.getStorageSync('userInfo')).id

@@ -37,20 +37,20 @@
 		<view class="mine-content">
 			<view class="mine-content-li" @click="gotoUrl('/pages/mine/energy')">
 				<view class="content-li-title">我的能量</view>
-				<view class="content-li-num">{{userInfo.memberScore}}</view>
+				<view class="content-li-num">{{userInfo.memberScore || 0}}</view>
 			</view>
 			<view class="mine-content-li" @click="gotoUrl('/pages/mine/cardVoucher')">
 				<view class="content-li-title">我的卡券</view>
-				<view class="content-li-num">{{userInfo.couponNum}}</view>
+				<view class="content-li-num">{{userInfo.couponNum || 0}}</view>
 			</view>
 			<view class="mine-content-li" @click="gotoUrl('/pages/mine/collect')">
 				<view class="content-li-title">我的收藏</view>
-				<view class="content-li-num">{{userInfo.articleNum}}</view>
+				<view class="content-li-num">{{userInfo.articleNum || 0}}</view>
 			</view>
 		</view>
 		<view class="mine-bottom">
 			<view class="mine-bottom-li" @click="gotoTab('/pages/myData/myData')">
-				<view class="bottom-li-left">我的训练({{userInfo.collectsNum}})</view>
+				<view class="bottom-li-left">我的训练({{userInfo.collectsNum || 0}})</view>
 				<view class="bottom-li-right">></view>
 			</view>
 			<view class="mine-bottom-li" @click="gotoUrl('/pages/mine/activityExchange')">
@@ -118,10 +118,10 @@
 				this.$Request.get(`/appMemberController.do?getMember&memberId=${this.memberId}`)
 				.then(res => {
 					this.code = res.code
-					this.userInfo = res.data.memberVo
-					uni.setStorageSync('userInfo', JSON.stringify(res.data.memberVo))
+					this.userInfo = res.data.memberVo ? res.data.memberVo : ''
 					if(res.code == 0){
 						this.userLogin = true
+						uni.setStorageSync('userInfo', JSON.stringify(res.data.memberVo))
 					}else if(res.code == '100'){
 						this.userLogin = false
 					}else{

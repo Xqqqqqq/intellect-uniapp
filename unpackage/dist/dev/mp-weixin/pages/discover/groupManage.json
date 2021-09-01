@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "分类管理",
   "usingComponents": {
+    "no-data": "/components/no-data/no-data",
     "l-modal": "/components/l-modal/l-modal"
   }
 }

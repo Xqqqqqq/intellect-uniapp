@@ -117,15 +117,19 @@
 						}
 					})
 				}else{
-					uni.showToast({
-						title: '您尚未登录，正在跳往登录页面。。。',
-						icon: 'none'
-					})
-					setTimeout(() => {
-						uni.navigateTo({
-							url:'/pages/loginAll/login'
-						})
-					}, 1000)
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
 				}
 			},
 		}

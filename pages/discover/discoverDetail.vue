@@ -6,10 +6,12 @@
 				<view>作者：{{articleVo.articleAuthor || '未知'}}</view>
 				<view>{{articleVo.createDate}}</view>
 			</view>
-			<!-- <view class="detail-top-picker">
-				<view>当前分组：无分组</view>
-				<picker>更多 ></picker>
-			</view> -->
+			<picker v-if="attentionOrganize.isAttention == 1" @change="bindClassifyChange" :value="classifyIndex" :range="classifyList" range-key="organizeName">
+				<view class="detail-top-picker">
+					<view>当前分组：{{classifyList[classifyIndex].organizeName}}</view>
+					<view>更多 ></view>
+				</view>
+			</picker>
 		</view>
 		<view class="detail-content">
 			<image :src="articleVo.articleImg"></image>
@@ -60,6 +62,9 @@
 				nodes: '',
 				articleVo:{},
 				collectsList:[],
+				classifyList: [], // 分组数组
+				attentionOrganize: {}, // 分组信息
+				classifyIndex: 0,
 				id:'4028d856788109dc0178811031bc000b',
 				memberId: '',
 				code:'',
@@ -71,7 +76,7 @@
 				this.id = option.id
 			}
 			this.memberId = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).id : ''
-			this.getArticleDetail()
+			this.getAttentionOrganize()
 		},
 		methods:{
 			// 获取文章细节
@@ -80,6 +85,10 @@
 				.then(res => {
 					this.code = res.code
 					this.articleVo = res.data.articleVo
+					this.articleVo.content = res.data.articleVo.content.replace(/\<img/gi, '<img style="max-width:100%;height:auto" ')
+					this.attentionOrganize = res.data.attentionOrganize
+					this.classifyIndex = this.classifyList && this.classifyList.findIndex(item => item.id == res.data.attentionOrganize.organizeId)
+					this.organizeId = this.attentionOrganize.isAttention == 1 ? res.data.attentionOrganize.organizeId : ''
 					if(res.code == 0){
 						this.collectsList =  res.data.collectsList.map(item => {
 							return {
@@ -97,6 +106,56 @@
 					}
 				})
 			},
+			// 分组
+			getAttentionOrganize(){
+				this.$Request.get(`/appAttentionController.do?getAttentionOrganize&type=2&memberId=${this.memberId}`)
+				.then(res => {
+					if(res.code == 0){
+						this.classifyList = res.data.organizeList
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+					this.getArticleDetail()
+				})
+			},
+			bindClassifyChange(e){
+				if(uni.getStorageSync('userInfo')){
+					this.classifyIndex = e.detail.value
+					this.organizeId = this.classifyList[e.detail.value].id
+					this.$Request.get('/appAttentionController.do?changeAttentionOrganize',{
+						memberId: this.memberId,
+						id: this.id,
+						type: 2,
+						organizeId: this.organizeId
+					}).then(res => {
+						if(res.code == 0){
+							this.getArticleDetail()
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
+			},
 			// 训练跳转详情
 			gotoListDetail(item){
 				uni.navigateTo({
@@ -105,30 +164,62 @@
 			},
 			// 收藏训练
 			clickAttention(item, index){
-				let collectsId = item.id
-				this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${this.memberId}&collectsId=${collectsId}&organizeId=${this.organizeId}`)
-				.then(res => {
-					if(res.code == 0){
-						this.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1
-						this.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1
-					}else{
-						uni.showToast({
-							title: res.info,
-							icon: 'none'
-						})
-					}
-				})
+				if(uni.getStorageSync('userInfo')){
+					let collectsId = item.id
+					this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${this.memberId}&collectsId=${collectsId}&organizeId=`)
+					.then(res => {
+						if(res.code == 0){
+							this.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1
+							this.collectsList[index].attentionType = item.attentionType == 1 ? 0 : 1
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
 			},
 			// 点击收藏、取消收藏训练按钮
 			clickButton(type){
-				switch(type) {
-				 case 'up':
-					this.upArticleCollectsAttention()
-					break;
-				 case 'drop':
-					this.dropArticleCollectsAttention()
-					break;
-				} 
+				if(uni.getStorageSync('userInfo')){
+					switch(type) {
+					 case 'up':
+						this.upArticleCollectsAttention()
+						break;
+					 case 'drop':
+						this.dropArticleCollectsAttention()
+						break;
+					} 
+				}else{
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
 			},
 			upArticleCollectsAttention(){
 				this.$Request.get(`/appAttentionController.do?upArticleCollectsAttention&memberId=${this.memberId}&articleId=${this.id}&organizeId=${this.organizeId}`)
@@ -166,29 +257,61 @@
 			},
 			// 收藏文章
 			clickArtAttention(){
-				this.$Request.get(`/appAttentionController.do?takeArticleAttention&memberId=${this.memberId}&articleId=${this.id}&organizeId=${this.organizeId}`)
-				.then(res => {
-					if(res.code == 0){
-						this.articleVo.attentionType = this.articleVo.attentionType == 1 ? 0 : 1
-						this.articleVo.attentionNum = this.articleVo.attentionType == 1 ? this.articleVo.attentionNum + 1 : this.articleVo.attentionNum - 1
-					}else{
-						uni.showToast({
-							title: res.info,
-							icon: 'none'
-						})
-					}
-				})
+				if(uni.getStorageSync('userInfo')){
+					this.$Request.get(`/appAttentionController.do?takeArticleAttention&memberId=${this.memberId}&articleId=${this.id}&organizeId=${this.organizeId}`)
+					.then(res => {
+						if(res.code == 0){
+							this.articleVo.attentionType = this.articleVo.attentionType == 1 ? 0 : 1
+							this.articleVo.attentionNum = this.articleVo.attentionType == 1 ? this.articleVo.attentionNum + 1 : this.articleVo.attentionNum - 1
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
 			},
 			// 点击有用、无用
 			clickUsefulness(type){
-				switch(type) {
-				 case 'use':
-					this.usefulArticleThumbs()
-					break;
-				 case 'unUse':
-					this.uselessArticleThumbs()
-					break;
-				} 
+				if(uni.getStorageSync('userInfo')){
+					switch(type) {
+					 case 'use':
+						this.usefulArticleThumbs()
+						break;
+					 case 'unUse':
+						this.uselessArticleThumbs()
+						break;
+					} 
+				}else{
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
 			},
 			usefulArticleThumbs(){
 				this.$Request.get(`/appAttentionController.do?usefulArticleThumbs&memberId=${this.memberId}&articleId=${this.id}`)
@@ -274,6 +397,9 @@ page{
 		border-bottom: 1rpx solid rgba(211,211,211,0.5);
 		padding-bottom: 20rpx;
 		box-sizing: border-box;
+		image{
+			width: 100%;
+		}
 	}
 	.detail-bottom{
 		width: 100%;

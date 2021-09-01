@@ -19,10 +19,12 @@
 				<view class="box-right-tip"><text>上次使用：{{entryInfo.studyDate || '暂无'}}</text><text>{{entryInfo.studyMonth}}次/本月</text></view>
 			</view>
 		</view>
-		<!-- <view class="detail-top-picker">
-			<view>当前分组：无分组</view>
-			<picker>更多 ></picker>
-		</view> -->
+		<picker v-if="attentionOrganize.isAttention == 1" @change="bindClassifyChange" :value="classifyIndex" :range="classifyList" range-key="organizeName">
+			<view class="detail-top-picker">
+				<view>当前分组：{{classifyList[classifyIndex].organizeName}}</view>
+				<view>更多 ></view>
+			</view>
+		</picker>
 		<view class="ele-content">
 			<view class="ele-content-title">内容详述</view>
 			<rich-text :nodes="entryInfo.collectsContent"></rich-text>
@@ -50,17 +52,20 @@
 			return {
 				nodes:'',
 				entryInfo:{},
+				attentionOrganize: {}, // 是否显示分组
 				collectsId: '',
 				memberId: '',
 				organizeId: '',//分组id
+				classifyList: [], // 分组数组
+				classifyIndex: 0,
 			};
 		},
 		onLoad(options){
 			// console.log(options.id)
-			this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+			this.memberId = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).id : ''
 			if(options.id){
 				this.collectsId = options.id
-				this.getCollects()
+				this.getAttentionOrganize()
 			}
 		},
 		methods:{
@@ -69,8 +74,11 @@
 				this.$Request.get(`/appCollectsController.do?getCollects&memberId=${this.memberId}&collectsId=${this.collectsId}`)
 				.then(res => {
 					if(res.code == 0){
-						this.entryInfo = res.data
-						this.entryInfo.studyDate = res.data.studyDate.substring(0,10)
+						this.entryInfo = res.data.collectsVo
+						this.entryInfo.studyDate = res.data.collectsVo.studyDate ? res.data.collectsVo.studyDate.substring(0,10) : ''
+						this.attentionOrganize = res.data.attentionOrganize
+						this.classifyIndex = this.classifyList.findIndex(item => item.id == res.data.attentionOrganize.organizeId)
+						this.organizeId = this.attentionOrganize.isAttention == 1 ? res.data.attentionOrganize.organizeId : ''
 					}else{
 						uni.showToast({
 							title: res.info,
@@ -79,20 +87,86 @@
 					}
 				})
 			},
-			// 收藏
-			clickAttention(){
-				this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${this.memberId}&collectsId=${this.collectsId}&organizeId=${this.organizeId}`)
+			// 分组
+			getAttentionOrganize(){
+				this.$Request.get(`/appAttentionController.do?getAttentionOrganize&type=1&memberId=${this.memberId}`)
 				.then(res => {
 					if(res.code == 0){
-						this.entryInfo.attentionNum = this.entryInfo.attentionType == 1 ? this.entryInfo.attentionNum - 1 : this.entryInfo.attentionNum + 1
-						this.entryInfo.attentionType = this.entryInfo.attentionType == 1 ? 0 : 1
+						this.classifyList = res.data.organizeList
 					}else{
 						uni.showToast({
 							title: res.info,
 							icon: 'none'
 						})
 					}
+					this.getCollects()
 				})
+			},
+			// 收藏
+			clickAttention(){
+				if(uni.getStorageSync('userInfo')){
+					this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${this.memberId}&collectsId=${this.collectsId}&organizeId=`)
+					.then(res => {
+						if(res.code == 0){
+							this.entryInfo.attentionNum = this.entryInfo.attentionType == 1 ? this.entryInfo.attentionNum - 1 : this.entryInfo.attentionNum + 1
+							this.entryInfo.attentionType = this.entryInfo.attentionType == 1 ? 0 : 1
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
+			},
+			bindClassifyChange(e){
+				if(uni.getStorageSync('userInfo')){
+					this.classifyIndex = e.detail.value
+					this.organizeId = this.classifyList[e.detail.value].id
+					this.$Request.get('/appAttentionController.do?changeAttentionOrganize',{
+						memberId: this.memberId,
+						id: this.collectsId,
+						type: 1,
+						organizeId: this.organizeId
+					}).then(res => {
+						if(res.code == 0){
+							this.getCollects()
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
 			},
 			gotoUrl(url, type){
 				if(type == 'card'){ // 进入训练

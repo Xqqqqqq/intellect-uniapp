@@ -148,20 +148,36 @@
 			},
 			// 收藏
 			clickAttention(item, index){
-				let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
-				let articleId = item.id
-				this.$Request.get(`/appAttentionController.do?takeArticleAttention&memberId=${memberId}&articleId=${articleId}&organizeId=${this.typeId}`)
-				.then(res => {
-					if(res.code == 0){
-						this.articleList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1
-						this.articleList[index].attentionType = item.attentionType == 1 ? 0 : 1
-					}else{
-						uni.showToast({
-							title: res.info,
-							icon: 'none'
-						})
-					}
-				})
+				if(uni.getStorageSync('userInfo')){
+					let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+					let articleId = item.id
+					this.$Request.get(`/appAttentionController.do?takeArticleAttention&memberId=${memberId}&articleId=${articleId}&organizeId=${this.typeId}`)
+					.then(res => {
+						if(res.code == 0){
+							this.articleList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1
+							this.articleList[index].attentionType = item.attentionType == 1 ? 0 : 1
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
 			},
 			bindNameInput(e){
 				this.scrollTopList = [{

@@ -59,7 +59,7 @@
 		},
 		onShow() {
 			_self = this;
-			this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+			this.memberId = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).id : ''
 			this.cWidth=uni.upx2px(750);
 			this.cHeight=uni.upx2px(500);
 			this.page = 1;
@@ -146,7 +146,7 @@
 			// 收藏
 			clickAttention(item, index){
 				let collectsId = item.id
-				this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${this.memberId}&collectsId=${collectsId}&organizeId=${this.organizeId}`)
+				this.$Request.get(`/appAttentionController.do?takeCollectsAttention&memberId=${this.memberId}&collectsId=${collectsId}&organizeId=`)
 				.then(res => {
 					if(res.code == 0){
 						this.collectsList[index].attentionNum = item.attentionType == 1 ? item.attentionNum - 1 : item.attentionNum + 1

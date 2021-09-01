@@ -95,11 +95,27 @@
 		},
 		onLoad(options) {
 			console.log(options)
-			this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id
-			if(options.collectsId){
-				this.collectsId = options.collectsId
+			if(uni.getStorageSync('userInfo')){
+				this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+				if(options.collectsId){
+					this.collectsId = options.collectsId
+				}
+				this.startPractice()
+			}else{
+				uni.showModal({
+					title: '提示',
+					content: '您尚未登录，是否去登录？',
+					success: function (res) {
+						if (res.confirm) {
+							uni.navigateTo({
+								url:'/pages/loginAll/login'
+							})
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+				});
 			}
-			this.startPractice()
 		},
 		methods: {
 			startPractice(){

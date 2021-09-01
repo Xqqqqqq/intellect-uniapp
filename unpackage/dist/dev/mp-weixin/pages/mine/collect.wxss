@@ -131,7 +131,8 @@ page {
   right: 0;
   background-color: #f0ad4e;
   color: #FFFFFF;
-  font-size: 16rpx;
+  font-size: 32rpx;
+  font-weight: bold;
   text-align: center;
   height: 45rpx;
   line-height: 45rpx;

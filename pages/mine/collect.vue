@@ -311,7 +311,8 @@ page{
 					right: 0;
 					background-color: $uni-color-warning;
 					color: #FFFFFF;
-					font-size: 16rpx;
+					font-size: 32rpx;
+					font-weight: bold;
 					text-align: center;
 					height: 45rpx;
 					line-height: 45rpx;
