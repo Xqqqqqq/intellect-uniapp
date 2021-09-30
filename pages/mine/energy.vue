@@ -8,11 +8,13 @@
 			<view class="energy-content-title">消耗记录</view>
 			<view class="history-li" v-for="(item, index) in historyList" :key="index" @click="gotoDetail(item)">
 				<view class="history-li-top">
-					<view class="li-top-left">{{item.title}}</view>
-					<view class="li-top-right">能量+{{item.money}}</view>
+					<view class="li-top-left">{{item.historyName}}</view>
+					<view class="li-top-right">能量{{item.scoreValue}}</view>
 				</view>
-				<view class="history-li-bottom">使用时间：{{item.time}}</view>
+				<view class="history-li-bottom">时间：{{item.createDate}}</view>
 			</view>
+			<no-data v-if="status == 'noMore' && !historyList.length"></no-data>
+			<uni-load-more class="no-data-more" v-else iconType="circle" :color="'#CCCCCC'" :contentText="contentText" :status="status" />
 		</view>
 	</view>
 </template>
@@ -21,8 +23,83 @@
 	export default {
 		data() {
 			return {
-				historyList:[]
+				historyList:[],
+				historyInfo: {},
+				page:1,
+				contentText: {
+					contentdown: '查看更多',
+					contentrefresh: '加载中',
+					contentnomore: '- 暂时没有新内容了呢 -'
+				},
+				status: 'loading',
+				code:'',
 			};
+		},
+		onPullDownRefresh() {
+			this.page = 1;
+			this.historyInfo = {};
+			this.historyList = []
+			uni.showLoading({
+				title: '加载中'
+			});
+			this.getList()
+			uni.hideLoading();
+			uni.stopPullDownRefresh()
+		},
+		onReachBottom(){
+			if (this.code != '-116') {
+				this.page = this.page + 1;
+				this.getList();
+			}
+		},
+		onShow(){
+			this.page = 1;
+			this.historyInfo = {};
+			this.historyList = []
+			this.getList()
+		},
+		methods:{
+			getList(){
+				if(uni.getStorageSync('userInfo')){
+					let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+					this.$Request.get(`/appScoreController.do?getScoreHistory&memberId=${memberId}&page=${this.page}`)
+					.then(res => {
+						this.code = res.code
+						this.historyInfo = res.data
+						this.status = 'noMore'
+						if(res.code == 0){
+							this.historyList =  [...this.historyList, ...res.data.historyList].map(item => {
+								return {
+									...item,
+									createDate: item.createDate && item.createDate.substring(0,10)
+								}
+							})
+						}else if(res.code == '-118' || res.code == '-116'){
+							this.status = 'noMore'
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					this.status = 'noMore'
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
+			},
 		}
 	}
 </script>

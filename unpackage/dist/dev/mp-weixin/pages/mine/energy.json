@@ -1,4 +1,9 @@
 {
   "navigationBarTitleText": "能量",
-  "usingComponents": {}
+  "enablePullDownRefresh": true,
+  "backgroundColorTop": "#2E3B67",
+  "usingComponents": {
+    "no-data": "/components/no-data/no-data",
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
+  }
 }

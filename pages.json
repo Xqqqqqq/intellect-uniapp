@@ -91,7 +91,9 @@
         ,{
             "path" : "pages/mine/energy",
             "style" : {
-				"navigationBarTitleText": "能量"
+				"navigationBarTitleText": "能量",
+				"enablePullDownRefresh": true,
+				"backgroundColorTop":"#2E3B67"
 			}
         }
         ,{

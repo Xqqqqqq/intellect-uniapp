@@ -5,15 +5,15 @@
 		<view class="img-test-top">
 			<view class="test-top-li">
 				<view class="test-top-li-title">上次成绩</view>
-				<view class="test-top-li-num">0</view>
+				<view class="test-top-li-num">{{historyInfo.lastScore || 0}}</view>
 			</view>
 			<view class="test-top-li">
 				<view class="test-top-li-title">参与次数</view>
-				<view class="test-top-li-num">0</view>
+				<view class="test-top-li-num">{{historyInfo.examTimes || 0}}</view>
 			</view>
 			<view class="test-top-li">
 				<view class="test-top-li-title">最好成绩</view>
-				<view class="test-top-li-num">0</view>
+				<view class="test-top-li-num">{{historyInfo.bestScore || 0}}</view>
 			</view>
 		</view>
 		<view class="img-test-box">
@@ -113,6 +113,7 @@
 					type: '',
 					num: ''
 				},// 所有从前一个页面传过来的数据（需要传给后台的数据）
+				historyInfo:{},
 			};
 		},
 		onLoad(option){
@@ -123,8 +124,36 @@
 			this.optionInfo.time = this.secondArr[0].id
 			this.optionInfo.type = this.typeArr[0].id
 			this.optionInfo.num = this.numArr[0].id
+			this.getExaminationHistory()
 		},
 		methods:{
+			// 获取历史训练数据
+			getExaminationHistory(){
+				if(uni.getStorageSync('userInfo')){
+					let memberId = JSON.parse(uni.getStorageSync('userInfo')).id
+					this.$Request.get('/appExaminationController.do?getExaminationHistory',{
+						page:1,
+						memberId:memberId,
+						collectsId: this.optionInfo.collectsId
+					}).then(res => {
+						this.historyInfo = res.data
+					})
+				}else{
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
+			},
 			gotoTest(){
 				uni.redirectTo({
 					url: `/pages/train/imageMemory/numEleEntry?id=${this.optionInfo.collectsId}`
