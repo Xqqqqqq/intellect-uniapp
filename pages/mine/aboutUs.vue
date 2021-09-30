@@ -1,7 +1,7 @@
 <template>
 	<view class="about">
 		<view class="about-title">武装大脑</view>
-		<view class="about-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget.</view>
+		<rich-text :nodes="info" class="about-content"></rich-text>
 	</view>
 </template>
 
@@ -9,8 +9,23 @@
 	export default {
 		data() {
 			return {
-				
+				info:'',
 			};
+		},
+		methods:{
+			aboutUs(){
+				this.$Request.get(`/appSystemController.do?aboutUs`)
+				.then(res => {
+					if(res.code == 0 || res.code == 150){
+						this.info = res.data.aboutUs.replace(/\<img/gi, '<img style="max-width:100%;height:auto" ')
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			}
 		}
 	}
 </script>

@@ -63,6 +63,38 @@
 			};
 		},
 		methods:{
+			getMemberSignRecord(){
+				let memberId = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).id : ''
+				if(uni.getStorageSync('userInfo')){
+					this.$Request.postT('/appSignController.do?getMemberSignRecord',{
+						memberId: this.memberId
+					}).then(res => {
+						if(res.code == 0){
+							this.trainInfo = res.data
+							this.checks = res.data.signList
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}else{
+					uni.showModal({
+					    title: '提示',
+					    content: '您尚未登录，是否去登录？',
+					    success: function (res) {
+					        if (res.confirm) {
+					            uni.navigateTo({
+					            	url:'/pages/loginAll/login'
+					            })
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}
+			},
 			clickTab(item, index){
 				this.currentTab = index
 			},
