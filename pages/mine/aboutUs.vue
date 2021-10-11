@@ -12,6 +12,9 @@
 				info:'',
 			};
 		},
+		onLoad(){
+			this.aboutUs()
+		},
 		methods:{
 			aboutUs(){
 				this.$Request.get(`/appSystemController.do?aboutUs`)

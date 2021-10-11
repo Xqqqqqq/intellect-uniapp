@@ -1,7 +1,7 @@
 <template>
 	<view class="energy">
 		<view class="energy-top">
-			<view class="energy-top-num">0<text>点</text></view>
+			<view class="energy-top-num">{{historyInfo.memberScore || 0}}<text>点</text></view>
 			<view class="energy-top-title">我的能量</view>
 		</view>
 		<view class="energy-content">

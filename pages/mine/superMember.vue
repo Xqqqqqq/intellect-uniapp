@@ -73,7 +73,9 @@
 		},
 		onLoad(options){
 			console.log(options)
-			this.discountPrice = options.price
+			if(options && options.price){
+				this.discountPrice = options.price
+			}
 		},
 		onShow(){
 			this.getVipPage()
