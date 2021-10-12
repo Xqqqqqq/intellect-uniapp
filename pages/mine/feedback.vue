@@ -8,28 +8,44 @@
 		<view class="feed-content">
 			<view class="feed-content-title">问题描述</view>
 			<view class="feed-content-text">
-				<textarea placeholder="请输入问题描述..."></textarea>
+				<textarea v-model="informContent" placeholder="请输入问题描述..."></textarea>
 			</view>
 		</view>
 		<view class="feed-bottom">
 			<view class="feed-content-title">上传图片</view>
-			<htz-image-upload :max="9" name="file" :chooseNum="9" v-model="imageData" @chooseSuccess="ceshiChooseSuccess"></htz-image-upload>
+			<uni-file-picker
+			    v-model="imageValue" 
+			    fileMediatype="image" 
+			    mode="grid" 
+				:del-icon="true"
+				return-type="array"
+				:image-styles="imageStyles"
+				:limit="4"
+			    @select="select" 
+			    @progress="progress" 
+			    @success="success" 
+			    @fail="fail"
+				@delete="deleteImg"
+			></uni-file-picker>
 			<!-- view class="feed-content-ul">
 				<image v-for="(item, index) in urls" :key="index" :src="item" @click="clickUrl(index)"></image>
 				<image  src='../../static/img/icons/add.png' @click="clickUrl(-1)"></image>
 			</view> -->
 		</view>
-		<view class="feed-btn">提交信息</view>
+		<view class="feed-btn" @click="submitInfo">提交信息</view>
 	</view>
 </template>
 
 <script>
 	import avatar from "@/components/yq-avatar/yq-avatar.vue";
 	import htzImageUpload from '@/components/htz-image-upload/htz-image-upload.vue'
+	import uniFilePicker from "@/components/uni-file-picker/uni-file-picker.vue";
+	import { pathToBase64, base64ToPath } from 'image-tools'
 	export default {
 		components: {
 			avatar,
 			htzImageUpload,
+			uniFilePicker,
 		},
 		data() {
 			return {
@@ -60,7 +76,24 @@
 				urlImgIndex: 0,
 				showAvatar: false,
 				imageData: [],
+				imageValue:[],
+				imageStyles: {
+					"height": 115,   // 边框高度
+					"width": 115,    // 边框宽度
+					"border":{ // 如果为 Boolean 值，可以控制边框显示与否
+						"color":"#eee",     // 边框颜色
+						"width":"1px",      // 边框宽度
+						"style":"solid",    // 边框样式
+						"radius":"10px"      // 边框圆角，支持百分比
+					}
+				},
+				memberId: '',
+				informType: '',
+				informContent: ''
 			};
+		},
+		onLoad(){
+			this.memberId = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).id : ''
 		},
 		methods:{
 			getMemberSignRecord(){
@@ -97,14 +130,77 @@
 			},
 			clickTab(item, index){
 				this.currentTab = index
+				this.informType = item.id
 			},
-			ceshiChooseSuccess(tempFilePaths) { //选择图片返回
-				console.log('ceshiChooseSuccess', tempFilePaths);
-				/****************
-				以下代码是自定义上传逻辑，仅供参考
-				***************/
-				this.imgUpload(tempFilePaths);
-				/*******************************/
+			// 获取上传状态
+			select(e){
+				let vm = this
+				// console.log('选择文件：',e)
+				pathToBase64(e.tempFilePaths[0])
+				  .then(base64 => {
+					// console.log(base64)
+					let pic = base64.replace(/^data:image\/\w+;base64,/, "")
+					vm.imageData.push({
+						pic,
+						tempFilePath: e.tempFilePaths[0]
+					})
+				  })
+				  .catch(error => {
+					console.error(error)
+				  })
+			},
+			// 获取上传进度
+			progress(e){
+				console.log('上传进度：',e)
+			},
+			// 上传成功
+			success(e){
+				console.log('上传成功',e)
+			},
+			// 上传失败
+			fail(e){
+				console.log('上传失败：',e)
+			},
+			// 文件从列表移除时触发
+			deleteImg(e){
+				// console.log('移除：',e.tempFilePath)
+				this.imageData.splice(this.imageData.findIndex(item => item.tempFilePath == e.tempFilePath), 1)
+			},
+			submitInfo(){
+				console.log(this.imageData)
+				if(this.informType == ''){
+					uni.showToast({
+						title: '请选择问题类型后提交！',
+						icon: 'none'
+					})
+				}else{
+					this.$Request.postJson('/appSystemController.do?takeInform',{
+						memberId: this.memberId,
+						informContent: this.informContent,
+						informType: this.informType,
+						picOne: this.imageData[0] ? this.imageData[0].pic : '',
+						picTwo: this.imageData[1] ? this.imageData[1].pic : '',
+						picThree: this.imageData[2] ? this.imageData[2].pic : '',
+						picFour: this.imageData[3] ? this.imageData[3].pic : '',
+					}).then(res => {
+						if(res.code == 0){
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+							setTimeout(()=>{
+								uni.switchTab({
+									url:'/pages/mine/mine'
+								})
+							},1000)
+						}else{
+							uni.showToast({
+								title: res.info,
+								icon: 'none'
+							})
+						}
+					})
+				}
 			},
 		}
 	}

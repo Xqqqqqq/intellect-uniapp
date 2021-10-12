@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "奖励兑换",
+  "navigationBarTitleText": "活动兑换",
   "usingComponents": {
     "no-data": "/components/no-data/no-data"
   }

@@ -26,8 +26,6 @@
 /* 文章场景相关 */
 .img-pair-box {
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
 }
 .img-pair-box .pair-box-left {
@@ -49,19 +47,11 @@
   color: #333333;
   font-weight: bold;
   font-size: 70rpx;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  justify-content: center;
+  flex-direction: column;
   border-bottom: 1px solid #D3D3D3;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .img-pair-box .pair-box-left .box-left-li image {
   width: 100%;
@@ -94,18 +84,10 @@
   color: #333333;
   font-weight: bold;
   font-size: 70rpx;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  justify-content: center;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 .img-pair-box .pair-box-right .box-right-li image {
   width: 100%;

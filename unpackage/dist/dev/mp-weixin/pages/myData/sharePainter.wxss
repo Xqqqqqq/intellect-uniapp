@@ -31,21 +31,12 @@ page {
 .share {
   width: 100%;
   height: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
   padding: 10% 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .share .share-bg {
   position: fixed;
@@ -58,11 +49,9 @@ page {
 .share .share-box {
   background-color: rgba(255, 255, 255, 0.5);
   width: 85%;
-  -webkit-border-radius: 10rpx;
-          border-radius: 10rpx;
+  border-radius: 10rpx;
   padding: 60rpx 20rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .share .share-box .share-box-title {
   text-shadow: 2px 2px 2px grey;
@@ -76,8 +65,7 @@ page {
   width: 300rpx;
   height: 300rpx;
   margin: auto;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   overflow: hidden;
 }
 .share .share-box .share-box-code image {
@@ -99,8 +87,7 @@ page {
 }
 .share .btn {
   width: 85%;
-  -webkit-border-radius: 20rpx;
-          border-radius: 20rpx;
+  border-radius: 20rpx;
   text-align: center;
   line-height: 88rpx;
   color: #FFFFFF;

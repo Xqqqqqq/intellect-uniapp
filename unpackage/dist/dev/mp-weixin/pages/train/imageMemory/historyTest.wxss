@@ -32,8 +32,7 @@
   background-color: #2E3B67;
   text-align: center;
   padding-top: 50rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .history .history-top .history-top-title {
   font-size: 34rpx;
@@ -41,15 +40,11 @@
   color: #FFFFFF;
 }
 .history .history-top .img-test-top {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
+  justify-content: space-around;
   width: 100%;
   padding: 60rpx 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .history .history-top .img-test-top .test-top-li {
   text-align: center;
@@ -65,48 +60,35 @@
   background-color: #FFFFFF;
   line-height: 80rpx;
   padding: 0 24rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   font-size: 28rpx;
   color: #2E3B67;
-  -webkit-box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
-          box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
+  box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
 }
 .history .history-content {
   width: 100%;
   padding: 0 24rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin-top: 30rpx;
 }
 .history .history-content .history-content-li {
   background-color: #FFFFFF;
-  -webkit-border-radius: 15rpx;
-          border-radius: 15rpx;
-  -webkit-box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
-          box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
+  border-radius: 15rpx;
+  box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
   padding: 24rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
+  box-sizing: border-box;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  justify-content: space-between;
   margin-bottom: 20rpx;
   width: 100%;
 }
 .history .history-content .history-content-li .content-li-left {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
+  flex: 1;
   font-size: 28rpx;
   color: #666666;
   padding: 10rpx;
   padding-right: 20rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .history .history-content .history-content-li .content-li-left .li-left-title {
   font-size: 30rpx;
@@ -116,12 +98,8 @@
 }
 .history .history-content .history-content-li .content-li-left .li-left-detail {
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  justify-content: space-between;
   margin-bottom: 8rpx;
 }
 .history .history-content .history-content-li .content-li-line {
@@ -132,21 +110,14 @@
   margin-left: 10rpx;
 }
 .history .history-content .history-content-li .content-li-right {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  justify-content: space-around;
+  flex-direction: column;
   color: #dd524d;
   font-weight: bold;
   font-size: 36rpx;
   padding: 45rpx 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   text-align: center;
   width: 25%;
 }

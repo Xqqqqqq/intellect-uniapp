@@ -36,20 +36,17 @@ page {
   background-color: #2E3B67;
   padding: 40rpx 24rpx;
   padding-bottom: 24rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .discover .discover-top .wrap-select {
   width: 100%;
   height: 70rpx;
   line-height: 70rpx;
   background: whitesmoke;
-  -webkit-border-radius: 34rpx;
-          border-radius: 34rpx;
+  border-radius: 34rpx;
   position: relative;
   padding: 0 37rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin-bottom: 40rpx;
 }
 .discover .discover-top .wrap-select .input-length {
@@ -82,26 +79,21 @@ page {
 .discover .discover-ul {
   width: 100%;
   padding: 24rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .discover .discover-ul .discover-ul-li {
-  -webkit-box-shadow: 1px 2px 6px 0px rgba(108, 143, 197, 0.3);
-          box-shadow: 1px 2px 6px 0px rgba(108, 143, 197, 0.3);
+  box-shadow: 1px 2px 6px 0px rgba(108, 143, 197, 0.3);
   width: 100%;
   background: #FFFFFF;
-  -webkit-border-radius: 15rpx;
-          border-radius: 15rpx;
+  border-radius: 15rpx;
   padding: 25rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin-bottom: 20rpx;
 }
 .discover .discover-ul .discover-ul-li .ul-li-left {
   width: 100%;
   height: 240rpx;
-  -webkit-border-radius: 10rpx;
-          border-radius: 10rpx;
+  border-radius: 10rpx;
   overflow: hidden;
   position: relative;
   margin-bottom: 20rpx;
@@ -113,8 +105,7 @@ page {
 }
 .discover .discover-ul .discover-ul-li .ul-li-left .ul-li-left-pos {
   position: absolute;
-  -webkit-border-radius: 0rpx 0 0 30rpx;
-          border-radius: 0rpx 0 0 30rpx;
+  border-radius: 0rpx 0 0 30rpx;
   top: 0;
   right: 0;
   background-color: #f0ad4e;
@@ -125,23 +116,13 @@ page {
   height: 45rpx;
   line-height: 45rpx;
   padding: 0 25rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .discover .discover-ul .discover-ul-li .ul-li-right {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
-  display: -webkit-box;
-  display: -webkit-flex;
+  flex: 1;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  justify-content: space-between;
+  flex-direction: column;
 }
 .discover .discover-ul .discover-ul-li .ul-li-right .li-right-title {
   font-weight: bold;
@@ -155,24 +136,16 @@ page {
   margin-bottom: 25rpx;
 }
 .discover .discover-ul .discover-ul-li .ul-li-right .li-right-bottom {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  justify-content: space-between;
   font-size: 24rpx;
   color: #999;
 }
 .discover .discover-ul .discover-ul-li .ul-li-right .li-right-bottom .right-bottom-display {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
 }
 .discover .discover-ul .discover-ul-li .ul-li-right .li-right-bottom .right-bottom-display .right-bottom-watch {
   color: #999999;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   line-height: 40rpx;
   margin-right: 30rpx;

@@ -172,7 +172,7 @@
         ,{
             "path" : "pages/mine/activityExchange",
             "style" : {
-				"navigationBarTitleText": "奖励兑换"
+				"navigationBarTitleText": "活动兑换"
 			}
         }
         ,{

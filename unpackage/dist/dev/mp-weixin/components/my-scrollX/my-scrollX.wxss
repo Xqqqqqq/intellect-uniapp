@@ -34,8 +34,7 @@
   font-size: 30rpx;
   margin-right: 45rpx;
   padding-bottom: 10rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .my-scroll .my-scroll-li-active {
   font-weight: bold;

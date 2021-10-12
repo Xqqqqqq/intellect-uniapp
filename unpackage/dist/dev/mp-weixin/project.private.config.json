@@ -1,42 +1,72 @@
 {
-  "setting": {},
-  "condition": {
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
-    "miniprogram": {
-      "list": [
-        {
-          "name": "pages/discover/discoverDetail",
-          "pathName": "pages/discover/discoverDetail",
-          "query": "",
-          "scene": null
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
         },
-        {
-          "name": "pages/myData/myData",
-          "pathName": "pages/myData/myData",
-          "query": "",
-          "scene": null
+        "game": {
+            "list": []
         },
-        {
-          "name": "pages/train/imageMemory/numEleEntry",
-          "pathName": "pages/train/imageMemory/numEleEntry",
-          "query": "id=2c9a29b67a1e424d017a5557cec014b4",
-          "scene": null
+        "gamePlugin": {
+            "list": []
         },
-        {
-          "name": "pages/discover/groupManage",
-          "pathName": "pages/discover/groupManage",
-          "query": "",
-          "scene": null
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "pages/discover/discoverDetail",
+                    "pathName": "pages/discover/discoverDetail",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/myData/myData",
+                    "pathName": "pages/myData/myData",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/train/imageMemory/numEleEntry",
+                    "pathName": "pages/train/imageMemory/numEleEntry",
+                    "query": "id=2c9a29b67a1e424d017a5557cec014b4",
+                    "scene": null
+                },
+                {
+                    "name": "pages/discover/groupManage",
+                    "pathName": "pages/discover/groupManage",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/myData/sharePainter",
+                    "pathName": "pages/myData/sharePainter",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/mine/editUserInfo",
+                    "pathName": "pages/mine/editUserInfo",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/mine/feedback",
+                    "pathName": "pages/mine/feedback",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/mine/activityExchange",
+                    "pathName": "pages/mine/activityExchange",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/mine/activityExchange",
+                    "pathName": "pages/mine/activityExchange",
+                    "query": "",
+                    "scene": null
+                }
+            ]
         }
-      ]
     }
-  }
 }

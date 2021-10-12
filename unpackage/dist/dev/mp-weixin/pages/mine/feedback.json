@@ -1,7 +1,8 @@
 {
   "navigationBarTitleText": "意见建议",
   "usingComponents": {
-    "htz-image-upload": "/components/htz-image-upload/htz-image-upload",
-    "avatar": "/components/yq-avatar/yq-avatar"
+    "uni-file-picker": "/components/uni-file-picker/uni-file-picker",
+    "avatar": "/components/yq-avatar/yq-avatar",
+    "htz-image-upload": "/components/htz-image-upload/htz-image-upload"
   }
 }

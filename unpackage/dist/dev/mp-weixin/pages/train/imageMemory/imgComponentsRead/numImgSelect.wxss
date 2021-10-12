@@ -36,47 +36,31 @@
   color: #333333;
   text-align: center;
   font-weight: bolder;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  justify-content: space-around;
+  flex-direction: column;
 }
 .img-select-box .select-box-top image {
   width: 350rpx;
   margin: auto;
 }
 .img-select-box .select-box-title {
-  -webkit-box-shadow: 1px 2px 6px 0px rgba(108, 143, 197, 0.3);
-          box-shadow: 1px 2px 6px 0px rgba(108, 143, 197, 0.3);
+  box-shadow: 1px 2px 6px 0px rgba(108, 143, 197, 0.3);
   background-color: #FFFFFF;
   height: 80rpx;
   line-height: 80rpx;
   padding: 0 24rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   font-size: 26rpx;
   color: #333333;
   margin-bottom: 20rpx;
 }
 .img-select-box .select-box-content {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
-  -webkit-flex-flow: wrap;
-          flex-flow: wrap;
-  -webkit-align-content: flex-start;
-          align-content: flex-start;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-          align-items: flex-start;
+  justify-content: space-between;
+  flex-flow: wrap;
+  align-content: flex-start;
+  align-items: flex-start;
 }
 .img-select-box .select-box-content .box-content-li {
   width: 33%;
@@ -85,15 +69,9 @@
   text-align: center;
   margin-bottom: 0.5%;
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  justify-content: space-around;
+  flex-direction: column;
   font-size: 50rpx;
   font-weight: bold;
 }

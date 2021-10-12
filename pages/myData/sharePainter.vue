@@ -5,17 +5,17 @@
 			<view class="share-box-title">
 				<text>邀请好友\n获能量兑换券</text>
 			</view>
-			<view class="share-box-code-tip">邀请兑奖码：JDJKFSKLDJFS</view>
+			<view class="share-box-code-tip">邀请兑奖码：{{codeInfo.inviteCode || '暂无'}}</view>
 			<view class="share-box-code">
-				<image src="https://img1.baidu.com/it/u=1078861629,3747050294&fm=26&fmt=auto&gp=0.jpg"></image>
+				<image :src="codeInfo.invitePic"></image>
 			</view>
-			<view class="share-box-detail">邀请与被邀请双方，各获得一张<text>3</text>点能量券</view>
+			<view class="share-box-detail">邀请与被邀请双方，各获得一张<text>{{codeInfo.energy || '0'}}</text>点能量券</view>
 		</view>
 		<!-- #ifdef APP-PLUS -->
-		<button class="btn" type="default" @click="savePhoto('https://img1.baidu.com/it/u=1078861629,3747050294&fm=26&fmt=auto&gp=0.jpg')">保存二维码</button>
+		<button class="btn" type="default" @click="savePhoto(codeInfo.invitePic)">保存二维码</button>
 		<!-- #endif -->
 		<!-- #ifdef MP-WEIXIN -->
-		<button class="btn" type="default" @click="savePosterPath('https://img1.baidu.com/it/u=1078861629,3747050294&fm=26&fmt=auto&gp=0.jpg')">保存二维码</button>
+		<button class="btn" type="default" @click="savePosterPath(codeInfo.invitePic)">保存二维码</button>
 		<!-- #endif -->
 		<!-- .sync修饰符:当一个子组件改变了一个 prop 的值时，这个变化也会同步到父组件中所绑定。 -->
 		<!-- <yz-canvas-poster :ifShow.sync="ifShow" :imageBg="imageBg" :imageHead="imageHead" :imageBody="imageBody"
@@ -33,6 +33,11 @@
 		},
 		data() {
 			return {
+				codeInfo:{
+					inviteCode:null,
+					energy:null,
+					invitePic: null,
+				},
 				// ifShow: false,
 				// imageBg: '../../static/img/icons/bg.jpg',
 				// imageHead: ['../../static/img/icons/zhongjiang.png', 50, 20, 40, 40],
@@ -40,7 +45,26 @@
 				// textHead:  ['myCanvas', 100, 40, '#ffffff', '20']
 			}
 		},
+		onLoad(){
+			this.newerEnergy()
+		},
 		methods: {
+			// 获取新人能量默认值
+			newerEnergy(){
+				this.$Request.get(`/appSystemController.do?newerEnergy`)
+				.then(res => {
+					if(res.code == 0){
+						this.codeInfo.inviteCode = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).inviteCode : ''
+						this.codeInfo.invitePic = uni.getStorageSync('userInfo') ? JSON.parse(uni.getStorageSync('userInfo')).invitePic : ''
+						this.codeInfo.energy = res.data.newerEnergy
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
 			// 小程序
 			savePosterPath(url){
 				uni.downloadFile({

@@ -66,30 +66,22 @@ page {
   opacity: 0.4;
   -webkit-transform-origin: 0 0;
           transform-origin: 0 0;
-  -webkit-border-radius: inherit;
-          border-radius: inherit;
+  border-radius: inherit;
   -webkit-transform: scale(1, 1);
           transform: scale(1, 1);
 }
 .mine .title-box {
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   margin-top: 25px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  justify-content: space-between;
   padding: 14rpx 24rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   position: fixed;
   height: 82rpx;
   z-index: 999;
   top: 0;
   left: 0;
-  background: -webkit-gradient(linear, left top, right top, from(#5e5cd8), to(#2E3B67));
-  background: -webkit-linear-gradient(left, #5e5cd8, #2E3B67);
   background: linear-gradient(to right, #5e5cd8, #2E3B67);
 }
 .mine .title-box .title-box-name {
@@ -104,22 +96,16 @@ page {
 .mine .mine-top {
   width: 100%;
   padding: 150rpx 50rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  background: -webkit-gradient(linear, left top, right top, from(#5e5cd8), to(#2E3B67));
-  background: -webkit-linear-gradient(left, #5e5cd8, #2E3B67);
+  box-sizing: border-box;
   background: linear-gradient(to right, #5e5cd8, #2E3B67);
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   color: #FFFFFF;
 }
 .mine .mine-top .mine-top-left {
   width: 150rpx;
   height: 150rpx;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   overflow: hidden;
   border: 4rpx solid #FFFFFF;
   margin-right: 30rpx;
@@ -130,15 +116,9 @@ page {
 }
 .mine .mine-top .mine-top-right {
   height: 150rpx;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  justify-content: space-around;
+  flex-direction: column;
 }
 .mine .mine-top .mine-top-right .top-right-name {
   font-weight: bold;
@@ -158,10 +138,8 @@ page {
   height: 45rpx;
   line-height: 45rpx;
   padding: 0 20rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-border-radius: 50rpx;
-          border-radius: 50rpx;
+  box-sizing: border-box;
+  border-radius: 50rpx;
   font-size: 24rpx;
   background-color: #e54d42;
   color: #fff;
@@ -171,18 +149,15 @@ page {
   height: 45rpx;
   line-height: 45rpx;
   padding: 0 20rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-border-radius: 50rpx;
-          border-radius: 50rpx;
+  box-sizing: border-box;
+  border-radius: 50rpx;
   font-size: 24rpx;
   color: #8799a3;
   background-color: #e7ebed;
   width: 180rpx;
 }
 .mine .mine-top .mine-top-pos {
-  -webkit-border-radius: 50rpx 0 0 50rpx;
-          border-radius: 50rpx 0 0 50rpx;
+  border-radius: 50rpx 0 0 50rpx;
   position: absolute;
   top: 48%;
   -webkit-transform: translateY(-50%);
@@ -194,8 +169,6 @@ page {
   height: 55rpx;
   line-height: 55rpx;
   color: #f0ad4e;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   font-weight: bold;
   font-size: 26rpx;
@@ -208,25 +181,20 @@ page {
   margin-right: 10rpx;
 }
 .mine .mine-content {
-  -webkit-border-radius: 25rpx;
-          border-radius: 25rpx;
+  border-radius: 25rpx;
   background-color: #FFFFFF;
   margin: auto;
   margin-top: -13%;
   width: 95%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
+  justify-content: space-around;
   z-index: 99;
   position: relative;
 }
 .mine .mine-content .mine-content-li {
   text-align: center;
   padding: 40rpx 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .mine .mine-content .mine-content-li .content-li-title {
   font-size: 26rpx;
@@ -243,23 +211,17 @@ page {
   margin: auto;
   background-color: #FFFFFF;
   margin-top: 30rpx;
-  -webkit-border-radius: 15rpx;
-          border-radius: 15rpx;
+  border-radius: 15rpx;
 }
 .mine .mine-bottom .mine-bottom-li {
   height: 90rpx;
   line-height: 90rpx;
   width: 100%;
   border-bottom: 1px solid #F0F0F0;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  justify-content: space-between;
   padding: 0 30rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .mine .mine-bottom .mine-bottom-li .bottom-li-left {
   font-size: 30rpx;

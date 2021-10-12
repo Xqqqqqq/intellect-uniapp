@@ -3,10 +3,10 @@
 		<view class="activity-top">
 			<view class="activity-top-title">输入活动码查询兑换</view>
 			<view class="activity-top-input">
-				<input placeholder="请输入活动码"/>
-				<view class="top-input-btn">扫描二维码</view>
+				<input v-model="inviteCode" placeholder="请输入活动码"/>
+				<view class="top-input-btn" @click="clickExchange">兑换奖励</view>
 			</view>
-			<view class="activity-top-btn">查询</view>
+			<!-- <view class="activity-top-btn">查询</view> -->
 		</view>
 		<view class="activity-content">
 			<view class="activity-content-title">* 节日活动优惠 *</view>
@@ -59,9 +59,14 @@
 		data() {
 			return {
 				holidayList: [], // 卡券节日列表
+				inviteCode: '',
 			};
 		},
-		mounted(){
+		onLoad(options){
+			console.log(options)
+			if(options){
+				this.inviteCode = options.scene
+			}
 			this.memberId = JSON.parse(uni.getStorageSync('userInfo')).id
 			this.getHolidayList()
 		},
@@ -85,6 +90,27 @@
 				.then(res => {
 					if(res.code == 0){
 						this.getHolidayList()
+					}else{
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+					}
+				})
+			},
+			clickExchange(){
+				this.$Request.get(`/appScoreController.do?getInviteEnergy&memberId=${this.memberId}&inviteCode=${this.inviteCode}`)
+				.then(res => {
+					if(res.code == 0){
+						uni.showToast({
+							title: res.info,
+							icon: 'none'
+						})
+						setTimeout(()=>{
+							uni.navigateTo({
+								url:'/pages/mine/energy'
+							})
+						},1000)
 					}else{
 						uni.showToast({
 							title: res.info,

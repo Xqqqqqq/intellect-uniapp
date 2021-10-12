@@ -34,11 +34,8 @@
 .change .change-form .change-form-li {
   padding-left: 24rpx;
   padding-right: 24rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   line-height: 100rpx;
   height: 100rpx;
@@ -54,14 +51,11 @@
   font-weight: bold;
 }
 .change .change-form .change-form-li .form-li-input {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
+  flex: 1;
   line-height: 100rpx;
   height: 100rpx;
   padding: 0 24rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   font-size: 30rpx;
 }
 .change .change-form .change-form-li .form-li-code {

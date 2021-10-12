@@ -29,8 +29,7 @@
   width: 100%;
   left: 0;
   bottom: 0;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   background-color: #f0ad4e;
   opacity: 0.9;
   font-weight: bold;

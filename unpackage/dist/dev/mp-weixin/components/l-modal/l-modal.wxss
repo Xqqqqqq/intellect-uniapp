@@ -1,5 +1,5 @@
 
-.masking.data-v-d9cdde1a {
+.masking.data-v-18c5c41e {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -7,21 +7,19 @@
 	right: 0;
 	z-index: 9999;
 }
-.model-wraper.data-v-d9cdde1a {
+.model-wraper.data-v-18c5c41e {
 	width: 600rpx;
 	background-color: #fff;
-	-webkit-border-radius: 16rpx;
-	        border-radius: 16rpx;
+	border-radius: 16rpx;
 	position: absolute;
 	z-index: 10000;
 	top: 40%;
 	left: 50%;
 	-webkit-transform: translate(-50%, -50%);
 	        transform: translate(-50%, -50%);
-	-webkit-box-shadow: #dcdcdc 0px 0px 20rpx;
-	        box-shadow: #dcdcdc 0px 0px 20rpx;
+	box-shadow: #dcdcdc 0px 0px 20rpx;
 }
-.modal-title.data-v-d9cdde1a {
+.modal-title.data-v-18c5c41e {
 	height: 90rpx;
 	line-height: 90rpx;
 	width: 100%;
@@ -29,12 +27,11 @@
 	font-size: 32rpx;
 	color: #666;
 }
-.modal-body.data-v-d9cdde1a {
+.modal-body.data-v-18c5c41e {
 	padding: 0 30rpx 30rpx 30rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 }
-.btn.data-v-d9cdde1a {
+.btn.data-v-18c5c41e {
 	width: 300rpx;
 	height: 90rpx;
 	text-align: center;
@@ -43,7 +40,7 @@
 	float: left;
 	border-top: 1rpx solid #ddd;
 }
-.btn.cancel.data-v-d9cdde1a {
+.btn.cancel.data-v-18c5c41e {
 	width: 299rpx;
 	border-right: 1rpx solid #dcdcdc;
 }

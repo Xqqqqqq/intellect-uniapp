@@ -27,26 +27,20 @@
 .test-over {
   width: 100%;
   padding-bottom: 100rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .test-over .test-over-top {
   width: 100%;
   background-color: #FFFFFF;
   padding-top: 40rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .test-over .test-over-top .over-top-li {
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
+  justify-content: space-around;
   padding: 0 50rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .test-over .test-over-top .over-top-li .over-top-li-right {
   margin-bottom: 30rpx;
@@ -113,24 +107,18 @@
 .test-over .test-over-content .over-content-box {
   width: 100%;
   padding: 30rpx 40rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .test-over .test-over-content .over-content-box .content-box-li {
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  justify-content: space-between;
   margin-bottom: 30rpx;
 }
 .test-over .test-over-content .over-content-box .content-box-li .box-li-left {
   background-color: #FFFFFF;
   width: 280rpx;
-  -webkit-border-radius: 15rpx;
-          border-radius: 15rpx;
+  border-radius: 15rpx;
   overflow: hidden;
   text-align: center;
   height: 280rpx;
@@ -153,12 +141,8 @@
 }
 .test-over .test-over-bottom {
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  justify-content: space-between;
   background-color: #FFFFFF;
   height: 100rpx;
   position: fixed;

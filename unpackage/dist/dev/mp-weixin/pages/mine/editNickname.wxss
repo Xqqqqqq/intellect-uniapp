@@ -30,8 +30,7 @@ page {
 .nickname {
   width: 100%;
   padding-top: 40%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .nickname .nickname-box {
   text-align: center;
@@ -43,16 +42,11 @@ page {
 }
 .nickname .nickname-box .nickname-input {
   width: 80%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  justify-content: space-between;
   height: 80rpx;
   margin: auto;
-  -webkit-border-radius: 15rpx;
-          border-radius: 15rpx;
+  border-radius: 15rpx;
   overflow: hidden;
   margin-bottom: 60rpx;
 }
@@ -65,13 +59,10 @@ page {
   font-size: 26rpx;
 }
 .nickname .nickname-box .nickname-input input {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
+  flex: 1;
   font-size: 26rpx;
   padding-left: 10rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   background-color: #FFFFFF;
   line-height: 80rpx;
   height: 80rpx;

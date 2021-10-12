@@ -35,20 +35,15 @@ page {
   width: 100%;
   background-color: #2E3B67;
   padding: 30rpx 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin-top: -10rpx;
 }
 .wrap .wrap-top .wrap-top-box {
   padding: 40rpx 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
+  justify-content: space-around;
   margin-bottom: 10rpx;
 }
 .wrap .wrap-top .wrap-top-box .top-box-li {
@@ -69,37 +64,31 @@ page {
   -webkit-animation: flash 3s infinite;
           animation: flash 3s infinite;
   padding-bottom: 30rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   font-size: 30rpx;
   font-weight: bold;
 }
 .wrap .wrap-content {
   width: 100%;
   padding: 0 24rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin-top: 30rpx;
 }
 .wrap .wrap-bottom {
   background-color: #fff;
   padding: 30rpx 24rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
-          box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
+  box-sizing: border-box;
+  box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
 }
 .wrap .wrap-bottom .wrap-select {
   width: 100%;
   height: 70rpx;
   line-height: 70rpx;
   background: whitesmoke;
-  -webkit-border-radius: 34rpx;
-          border-radius: 34rpx;
+  border-radius: 34rpx;
   position: relative;
   padding: 0 37rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin-bottom: 20rpx;
   margin-top: 20rpx;
 }
@@ -132,12 +121,8 @@ page {
 }
 .wrap .wrap-bottom .wrap-bottom-title {
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  justify-content: space-between;
   color: #333;
   font-size: 30rpx;
   font-weight: bold;

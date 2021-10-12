@@ -30,8 +30,7 @@
 .activity .activity-top {
   background-color: pink;
   padding: 80rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   text-align: center;
 }
 .activity .activity-top .activity-top-title {
@@ -41,24 +40,17 @@
 }
 .activity .activity-top .activity-top-input {
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  justify-content: space-between;
   background-color: #FFFFFF;
   line-height: 80rpx;
   height: 80rpx;
   margin-bottom: 40rpx;
-  -webkit-border-radius: 15rpx;
-          border-radius: 15rpx;
+  border-radius: 15rpx;
   overflow: hidden;
 }
 .activity .activity-top .activity-top-input input {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
+  flex: 1;
   font-size: 26rpx;
   padding-left: 20rpx;
   height: 100%;
@@ -81,15 +73,13 @@
   background-color: #f0ad4e;
   color: #FFFFFF;
   font-size: 28rpx;
-  -webkit-border-radius: 15rpx;
-          border-radius: 15rpx;
+  border-radius: 15rpx;
   overflow: hidden;
 }
 .activity .activity-content {
   width: 100%;
   padding: 30rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .activity .activity-content .activity-content-title {
   font-size: 32rpx;
@@ -99,21 +89,16 @@
   width: 100%;
 }
 .activity .activity-content .activity-content-li {
-  -webkit-box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
-          box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
+  box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
   background-color: #FFFFFF;
 }
 .activity .activity-content .card-ul-li {
   width: 100%;
-  -webkit-box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
-          box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
+  box-shadow: 0px 2px 10px 0px rgba(108, 143, 197, 0.14);
   margin-bottom: 20rpx;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   border: 2rpx solid #dd524d;
-  -webkit-border-radius: 10rpx;
-          border-radius: 10rpx;
+  border-radius: 10rpx;
   background-color: #FFFFFF;
   height: 180rpx;
   position: relative;
@@ -140,28 +125,17 @@
   height: 100%;
 }
 .activity .activity-content .card-ul-li .card-ul-li-right {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
+  flex: 1;
   padding: 15rpx 30rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
+  box-sizing: border-box;
   display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  justify-content: space-around;
+  flex-direction: column;
 }
 .activity .activity-content .card-ul-li .card-ul-li-right .ul-li-right-title {
   color: #333333;
   font-size: 32rpx;
   font-weight: bold;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
 }
 .activity .activity-content .card-ul-li .card-ul-li-right .ul-li-right-title image {
@@ -177,8 +151,7 @@
   width: 140rpx;
   height: 60rpx;
   background: #dd524d;
-  -webkit-border-radius: 10rpx;
-          border-radius: 10rpx;
+  border-radius: 10rpx;
   line-height: 60rpx;
   color: #FFFFFF;
   text-align: center;
